@@ -41,6 +41,10 @@ function WrapperForHookFormProps({ children }) {
     resolver: yupResolver(validationSchema),
   });
 
+  function submitFormData(data) {
+    console.log(data);
+  }
+
   const HOOK_FORM_PROPS = {
     control,
     errors,
@@ -50,10 +54,8 @@ function WrapperForHookFormProps({ children }) {
     getValues,
     reset,
     resetField,
-  };
-
-  const submitFormData = (data) => {
-    console.log(data);
+    submitFormData,
+    handleSubmit,
   };
 
   const childrenWithProps = React.Children.map(children, (child) => {
@@ -63,9 +65,7 @@ function WrapperForHookFormProps({ children }) {
     return child;
   });
 
-  return (
-    <form onSubmit={handleSubmit(submitFormData)}>{childrenWithProps}</form>
-  );
+  return <form>{childrenWithProps}</form>;
 }
 
 export default WrapperForHookFormProps;

@@ -27,6 +27,8 @@ const CnicVerification = ({
   resumecontent,
   control,
   errors,
+  handleSubmit,
+  submitFormData,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -49,11 +51,12 @@ const CnicVerification = ({
   };
 
   const handleProceedButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (isResumeApplication) {
       dispatch(setIsVerification(true));
     }
-    navigate('/customer-onboarding/mobile-verification')
+    handleSubmit(submitFormData)();
+    navigate("/customer-onboarding/mobile-verification");
   };
 
   const onCaptchaChange = (value) => {

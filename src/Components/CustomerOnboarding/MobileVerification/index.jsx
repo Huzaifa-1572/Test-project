@@ -25,6 +25,8 @@ const MobileVerification = ({
   getValues,
   errors,
   watch,
+  handleSubmit,
+  submitFormData
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,6 +48,7 @@ const MobileVerification = ({
     setMobileNum(customerMobileNumber);
 
     if (showVerification) {
+      handleSubmit(submitFormData)();
       dispatch(setIsMobileOtpVerification(true));
       navigate("/customer-onboarding/email-verification");
       return;

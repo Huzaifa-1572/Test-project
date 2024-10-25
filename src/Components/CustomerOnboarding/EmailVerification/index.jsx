@@ -25,6 +25,8 @@ const EmailVerification = ({
   getValues,
   errors,
   watch,
+  handleSubmit,
+  submitFormData,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ const EmailVerification = ({
     setEmail(customerEmail);
 
     if (showVerification) {
+      handleSubmit(submitFormData)();
       dispatch(setIsEmailOtpVerification(true));
       navigate("/");
       return;
