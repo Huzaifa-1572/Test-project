@@ -1,0 +1,10 @@
+.Phoneinputstyles {
+  display: flex;
+  justify-content: center; // Default for all screen sizes
+
+  // Media queries for responsive design
+  @media (min-width: 600px) {
+    // Assuming "sm" is 600px
+    justify-content: flex-start;
+  }
+}

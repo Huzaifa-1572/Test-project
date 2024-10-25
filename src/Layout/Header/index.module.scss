@@ -1,0 +1,31 @@
+// Drawer Styles
+.drawer {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  width: 150px;
+}
+
+// Toolbar SM Styles
+.toolbarSM {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Toolbar SM Box Styles
+.toolbarSMBox {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  width: 150px;
+}
+
+// Toolbar LS Styles
+.toolbarLS {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  width: 170px;
+}
