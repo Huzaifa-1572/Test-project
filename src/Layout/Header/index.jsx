@@ -65,13 +65,16 @@ function Header(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box className={styles.drawer}>
-        <Link to={"/"}>
-          <img
-            src={Logo}
-            alt="National Savings Logo"
-            height={"100%"}
-            width={"100%"}
-          />
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          <h1
+            style={{
+              fontSize: "28px",
+              color: "#5093e0",
+              textTransform: "uppercase",
+            }}
+          >
+            Cerisma
+          </h1>
         </Link>
       </Box>
       <Divider />
@@ -108,16 +111,17 @@ function Header(props) {
           {/* FOR SMALLER SCREENS */}
           <Box sx={{ mr: 2, width: "100%", display: { md: "none" } }}>
             <Box className={styles.toolbarSM}>
-              <Box className={styles.toolbarSMBox}>
-                <Link to={"/"}>
-                  <img
-                    src={Logo}
-                    alt="National Savings Logo"
-                    height={"100%"}
-                    width={"100%"}
-                  />
-                </Link>
-              </Box>
+              <Link to={"/"} style={{ textDecoration: "none" }}>
+                <h1
+                  style={{
+                    fontSize: "28px",
+                    color: "#5093e0",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Cerisma
+                </h1>
+              </Link>
 
               <IconButton
                 aria-label="open drawer"
@@ -137,17 +141,20 @@ function Header(props) {
             sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
           >
             <Box className={styles.toolbarLS}>
-              <Link to={"/"}>
-                <img
-                  src={Logo}
-                  alt="National Savings Logo"
-                  height={"100%"}
-                  width={"100%"}
-                />
+              <Link to={"/"} style={{ textDecoration: "none" }}>
+                <h1
+                  style={{
+                    fontSize: "28px",
+                    color: "#5093e0",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Cerisma
+                </h1>
               </Link>
             </Box>
           </Typography>
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
+          {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
             {navItems.map((item) => (
               <Button
                 variant="contained"
@@ -164,7 +171,7 @@ function Header(props) {
                 {item?.value}
               </Button>
             ))}
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
 

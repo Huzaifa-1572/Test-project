@@ -1,3 +1,5 @@
+@use "../../styles/_variables" as *;
+
 .container {
   min-height: 100vh;
   background: url("src/Assets/images/bgimg.jpeg") center/cover;
@@ -11,7 +13,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to right, #ffffff, #7fd120);
+  background: linear-gradient(to right, #ffffff, $theme-primary);
   opacity: 0.9;
 }
 

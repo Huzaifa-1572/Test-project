@@ -18,7 +18,7 @@ const LandingPage = () => {
   const handleNewAccount = () => {
     dispatch(setIsWelcome(true));
     dispatch(setIsResumeApplication(false));
-    navigate("/customer-onboarding/age-confirmation");
+    navigate("/customer-onboarding/cnic-verification");
   };
 
   const handleResumeApplication = () => {
@@ -37,7 +37,7 @@ const LandingPage = () => {
               <Box className={styles.mainHeading}>
                 Welcome To{" "}
                 <span className={styles.mainHeadingSpan}>
-                  National Savings{" "}
+                  Cerisma{" "}
                 </span>{" "}
                 Digital Onboarding
               </Box>
@@ -55,10 +55,9 @@ const LandingPage = () => {
             <Box
               className={`${styles.description} ${styles.Descriptionstyles}`}
             >
-              National Savings, Your Nation's Bank, Introduces Convenient
-              Digital Account Opening. Unlock the Power to Open National
-              Savings, Digital Savings, and Sarwa Islamic Savings Accounts, All
-              from the Comfort of Your Home. No Need to Visit National Savings
+              Cerisma, Your Nation's Bank, Introduces Convenient
+              Digital Account Opening. Unlock the Power to Open Cerisma, Digital wallet, All
+              from the Comfort of Your Home. No Need to Visit Cerisma
               Centers.{" "}
             </Box>
 

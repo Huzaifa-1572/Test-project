@@ -1,0 +1,19 @@
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  align-items: center;
+  margin-top: 20px;
+
+  .checkboxWrapper {
+    color: #178a4d;
+    font-size: 50px;
+    margin-left: clamp(0px, 2vw, 8px);
+  }
+
+  .checkboxLabel {
+    // font-family: "ArticulatCF-Regular";
+    font-size: clamp(15px, 2vw, 16px);
+    color: gray;
+    cursor: pointer;
+  }
+}

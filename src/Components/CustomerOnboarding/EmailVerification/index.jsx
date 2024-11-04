@@ -49,7 +49,7 @@ const EmailVerification = ({
     if (showVerification) {
       handleSubmit(submitFormData)();
       dispatch(setIsEmailOtpVerification(true));
-      navigate("/");
+      navigate("/customer-onboarding/personal-information");
       return;
     }
 

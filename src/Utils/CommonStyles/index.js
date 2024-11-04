@@ -3,11 +3,11 @@ export const Contentstyles = {
   color: "#363d42",
   margin: "15px 0px",
   fontWeight: "500",
-  fontSize: "clamp(12px,4vw,30px)",
+  fontSize: "clamp(12px,4vw,25px)",
 };
 
 export const Roundediconstyles = {
-  background: "#37a862",
+  background: "#5093e0",
   color: "white",
   borderRadius: "50%",
   height: "150px",
@@ -30,7 +30,7 @@ export const Iconstyles = {
 };
 
 export const InfoIconstyles = {
-  color: "#37a862",
+  color: "#5093e0",
   marginRight: "15px",
   fontSize: "30px",
 };

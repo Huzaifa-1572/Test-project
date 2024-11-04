@@ -7,16 +7,16 @@ const VerificationButtonStyles = {
   border: "5px",
   marginTop: "20px",
   textAlign: "center",
-  background: "#37a862",
+  background: "#5093e0",
   color: "white", // Default color for the button
   "&:hover": {
     backgroundColor: "white",
-    border: "2px solid #37a862",
-    color: "#37a862",
+    border: "2px solid #5093e0",
+    color: "#5093e0",
   },
   "&.Mui-disabled": {
     opacity: 0.7,
-    background: "#37a862",
+    background: "#5093e0",
     color: "white", // Default color for the button
   },
 };

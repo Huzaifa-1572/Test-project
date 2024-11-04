@@ -35,7 +35,7 @@ const Dialogstyles = {
   textAlign: "center",
   fontWeight: "bolder",
   fontSize: "clamp(12px,3vw,22px)",
-  color: "#37a862",
+  color: "#5093e0",
 };
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

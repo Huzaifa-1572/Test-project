@@ -12,7 +12,7 @@ export function maskEmail(email = "") {
 }
 
 export const maskNumber = (mobileNum) => {
-  let number = mobileNum.replace(/-/g, '');
+  let number = mobileNum.replace(/-/g, "");
   if (mobileNum.startsWith("92")) {
     number = `0${mobileNum.slice(2)}`;
   }
@@ -20,9 +20,9 @@ export const maskNumber = (mobileNum) => {
   return `${number.slice(0, 4)}*****${number.slice(9, 11)}`;
 };
 
-export const retrieveMobileNumber = (mobileNum) =>{
-  return mobileNum.replace(/[-_]/g, '');
-}
+export const retrieveMobileNumber = (mobileNum) => {
+  return mobileNum.replace(/[-_]/g, "");
+};
 
 //handle file size of img
 export const validateFileSize = (file) => {
@@ -45,4 +45,9 @@ export const Verificationcondition = (isVerification, resumeApplication) => {
   } else {
     return "Proceed";
   }
+};
+
+export const tempUser = {
+  userId: 1,
+  name: "daniyal",
 };

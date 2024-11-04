@@ -8,12 +8,12 @@ const timerbtnstyles = {
   backgroundColor: "white",
   border: "1px solid green",
   padding: "1em 1em",
-  color: "#37a862",
+  color: "#5093e0",
   fontWeight: "bold",
 };
 
 const timerdivstyles = {
-  color: "#37a862",
+  color: "#5093e0",
   fontWeight: "bold",
   paddingLeft: "0.7em",
 };

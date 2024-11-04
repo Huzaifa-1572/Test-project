@@ -22,7 +22,7 @@ export const RQ_DEVTOOL_CONFIG = {
 // MUI THEMING
 export const THEME = createTheme({
   palette: {
-    primary: { main: "#37a862" },
+    primary: { main: "#5093e0" },
     secondary: { main: "#f2cc0e" },
   },
   components: {

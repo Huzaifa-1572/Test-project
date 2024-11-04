@@ -14,7 +14,7 @@ const GoBack = () => {
       size="small"
       variant="contained"
       onClick={handleBack}
-      sx={{ fontSize: "12px", height: "40px" }}
+      sx={{ fontSize: "12px", height: "40px", backgroundColor: "#5093e0" }}
     >
       Go Back
     </Button>

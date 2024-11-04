@@ -25,6 +25,7 @@ import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { defaultGetOptionLabel, validateFileSize } from "src/Utils/Helpers";
 import UploadIcon from "src/assets/svgs/uploadIcon.svg";
 import Tick from "src/assets/svgs/tick_white.svg";
+import { LuUpload } from "react-icons/lu";
 
 const PatternFormatRef = React.forwardRef((props, ref) => (
   <PatternFormat {...props} getInputRef={ref} />
@@ -295,7 +296,7 @@ export const CustomInputField = ({
       InputProps: {
         disableUnderline: true,
         sx: {
-          border: "1px solid silver", // Correctly apply the border here
+          border: "2px solid silver", // Correctly apply the border here
           borderRadius: "7px",
           fontSize: "1.25rem",
           height: "70px",
@@ -465,7 +466,10 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
       render={({ field }) => {
         return (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker"]}>
+            <DemoContainer
+              sx={{ paddingTop: "0px" }}
+              components={["DatePicker"]}
+            >
               <DatePicker
                 {...field}
                 variant="filled"
@@ -478,7 +482,24 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                     InputProps: {
                       disableUnderline: true,
                       style: {
-                        backgroundColor: "white",
+                        border: "2px solid silver", // Correctly apply the border here
+                        borderRadius: "7px",
+                        fontSize: "1.25rem",
+                        height: "70px",
+                        backgroundColor: "white", // Background color applied to input
+                        "&:hover": {
+                          backgroundColor: "white", // Keep white on hover
+                        },
+                        "&.Mui-focused": {
+                          backgroundColor: "white", // Keep white on focus
+                        },
+                      },
+                    },
+                    InputLabelProps: {
+                      style: {
+                        fontSize: "1.25rem",
+                        color: "#666666",
+                        marginTop: "5px",
                       },
                     },
                     style: { backgroundColor: "white" },
@@ -488,7 +509,7 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                 sx={{
                   backgroundColor: "white",
                   border: "none",
-                  borderRadius: "1px",
+                  borderRadius: "7px",
                   maxWidth: "500px",
                   width: "100%",
                   fontSize: "1.25rem",
@@ -505,8 +526,9 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                     backgroundColor: "white",
                     marginTop: "5px",
                     fontSize: "1.20rem",
+                    borderRadius: "7px",
                   },
-                  svg: { marginTop: "10px" },
+                  svg: { marginTop: "4px" },
                 }}
                 onChange={(newValue) => {
                   const date = dayjs(newValue).toDate();
@@ -579,11 +601,11 @@ export const SelectField = ({
           InputProps={{
             disableUnderline: true,
             sx: {
-              border: "1px solid silver", // Correctly apply the border here
+              border: "2px solid silver", // Correctly apply the border here
               borderRadius: "7px",
               fontSize: "1.25rem",
               height: "70px",
-              maxWidth:"500px",
+              maxWidth: "500px",
               width: "100%",
               backgroundColor: "white", // Background color applied to input
               "&:hover": {
@@ -606,7 +628,7 @@ export const SelectField = ({
           {options.map((option) => (
             <MenuItem
               key={option.value}
-              value={`${option.value}*${option.label}`}
+              value={`${option.value}`}
             >
               {option.label}
             </MenuItem>
@@ -883,24 +905,25 @@ export const UploadImage = ({
     backgroundColor: "#ffffff",
     minHeight: "212px",
     height: "auto",
-    maxWidth: "480px",
+    maxWidth: "500px",
     padding: "20px",
-    marginBottom: "20px",
     cursor: "pointer",
   };
   const previewImgStyle = {
     padding: "10px",
-    background: "#ccebdc",
+    background: "#619de3",
     borderRadius: "50%",
     width: "60px",
     height: "60px",
     margin: "0 0 10px",
     cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   };
   const imgStyle = {
-    display: "block",
-    margin: "auto",
-    marginTop: "6px",
+    color: "white",
+    fontSize: "24px",
   };
   const handleFileChange = (e, name) => {
     const file = e.target.files[0];
@@ -927,10 +950,10 @@ export const UploadImage = ({
     handleFileChange(e, name);
   };
   const mainContainerUPLOADED = {
-    maxWidth: "480px",
+    maxWidth: "500px",
     minHeight: "312px",
     height: "auto",
-    backgroundColor: "#ccebdc",
+    backgroundColor: "#619de3",
     padding: "0 0 14px 0",
     borderRadius: "8px",
     boxShadow: "none",
@@ -942,7 +965,7 @@ export const UploadImage = ({
     overflow: "hidden",
     borderTopLeftRadius: "0.4rem",
     borderTopRightRadius: "0.4rem",
-    background: "#ccebdc",
+    background: "#619de3",
     marginBottom: "10px",
   };
   const changeButtonStyles = {
@@ -961,7 +984,7 @@ export const UploadImage = ({
     fontWeight: "500",
   };
   const tickContainer = {
-    background: "#66c297",
+    background: "#b9d3f2",
     borderRadius: "50%",
     margin: "10px 10px 10px 26px",
     width: "60px",
@@ -979,6 +1002,7 @@ export const UploadImage = ({
     fontFamily: "ArticulatCF-Bold",
     fontSize: "20px",
     margin: "0 0 0 26px",
+    color: "white",
   };
   const subLabelStyles = {
     fontFamily: "ArticulatCF-Regular",
@@ -995,7 +1019,7 @@ export const UploadImage = ({
       control={control}
       defaultValue=""
       render={({ field }) => (
-        <Box>
+        <Box sx={{ border: "2px solid silver", borderRadius: "8px" }}>
           {field.value ? (
             <Box sx={mainContainerUPLOADED}>
               <Box sx={imageContainer}>
@@ -1027,7 +1051,7 @@ export const UploadImage = ({
             <label htmlFor="file-input">
               <Box sx={mainContainer}>
                 <Box sx={previewImgStyle}>
-                  <img style={imgStyle} src={UploadIcon} />
+                  <LuUpload style={imgStyle} />
                 </Box>
                 <input
                   id="file-input"
