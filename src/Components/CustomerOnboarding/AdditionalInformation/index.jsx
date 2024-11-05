@@ -10,11 +10,11 @@ import {
   Iconstyles,
   Roundediconstyles,
 } from "src/Utils/CommonStyles";
-import { FaUser } from "react-icons/fa";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { LIST_OF_CITIES } from "src/Utils/Constants";
 
-const PersonalInformation = ({
+const AdditionalInformation = ({
   title,
   content,
   control,
@@ -29,14 +29,14 @@ const PersonalInformation = ({
 
   const handleProceedButton = (e) => {
     e.preventDefault();
-    navigate("/customer-onboarding/additional-information");
+    navigate("/customer-onboarding/address-detail");
   };
 
   return (
     <>
       {/* ICON */}
       <Box sx={Iconstyles}>
-        <FaUser style={Roundediconstyles} />
+        <IoMdInformationCircleOutline style={Roundediconstyles} />
       </Box>
 
       {/* MAIN HEADING */}
@@ -53,27 +53,29 @@ const PersonalInformation = ({
         <Grid container sx={{ gap: "24px" }}>
           <Grid item xs={12} md={6} lg={4}>
             <Box>
-              <TextInputField
-                name={"customerFirstName"}
+              <SelectField
+                name={"customerBOC"}
                 control={control}
-                label="First Name"
-                type="text"
+                label={"City/Place of Birth"}
+                options={LIST_OF_CITIES}
               />
-              {errors?.customerFirstName ? (
-                <ValidationError message={errors?.customerFirstName?.message} />
+              {errors?.customerBOC ? (
+                <ValidationError message={errors?.customerBOC?.message} />
               ) : null}
             </Box>
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <Box>
               <TextInputField
-                name={"customerLastName"}
+                name={"customerMotherName"}
                 control={control}
-                label="Last Name"
+                label="Mother Name"
                 type="text"
               />
-              {errors?.customerLastName ? (
-                <ValidationError message={errors?.customerLastName?.message} />
+              {errors?.customerMotherName ? (
+                <ValidationError
+                  message={errors?.customerMotherName?.message}
+                />
               ) : null}
             </Box>
           </Grid>
@@ -85,4 +87,4 @@ const PersonalInformation = ({
   );
 };
 
-export default PersonalInformation;
+export default AdditionalInformation;

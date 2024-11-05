@@ -47,6 +47,29 @@ export const Verificationcondition = (isVerification, resumeApplication) => {
   }
 };
 
+// check camera access
+export function checkCameraPermission() {
+  return new Promise((resolve, reject) => {
+    // Check if the browser supports navigator.mediaDevices
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      reject("getUserMedia is not supported in this browser");
+    }
+
+    // Check camera permission
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        // Camera permission granted
+        stream.getTracks().forEach((track) => track.stop()); // Stop the stream
+        resolve("Camera permission granted");
+      })
+      .catch((error) => {
+        // Camera permission denied or error
+        reject("Camera permission denied or error: " + error);
+      });
+  });
+}
+
 export const tempUser = {
   userId: 1,
   name: "daniyal",

@@ -1,0 +1,68 @@
+// styles.module.scss
+
+.wrapperContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 5px 0px 10px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px 0px;
+  border-radius: 15px;
+  background-color: white;
+  min-height: 28rem;
+  height: auto;
+}
+
+.camIconStyle {
+  width: 80px;
+  height: 60px;
+  margin: auto;
+}
+
+.cameraWrapper {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6f5ee;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.permissionText {
+  margin-top: 20px;
+  text-align: center;
+  font-family: "ArticulatCF-Regular";
+  font-size: 20px;
+}
+
+.uploadedSelfie {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.webcamStyles {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.captureButton {
+  border-radius: 50px !important;
+  width: 150px;
+  height: 50px;
+  background-color: #000000 !important;
+  color: #cfd1d3 !important;
+  border: #000000 solid 2px !important;
+  &:hover {
+    color: black !important;
+    background: white !important;
+    border: black solid 2px !important;
+  }
+}

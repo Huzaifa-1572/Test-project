@@ -36,10 +36,8 @@ const LandingPage = () => {
             <Grow in={true} timeout={800}>
               <Box className={styles.mainHeading}>
                 Welcome To{" "}
-                <span className={styles.mainHeadingSpan}>
-                  Cerisma{" "}
-                </span>{" "}
-                Digital Onboarding
+                <span className={styles.mainHeadingSpan}>Cerisma </span> Digital
+                Onboarding
               </Box>
             </Grow>
 
@@ -55,10 +53,9 @@ const LandingPage = () => {
             <Box
               className={`${styles.description} ${styles.Descriptionstyles}`}
             >
-              Cerisma, Your Nation's Bank, Introduces Convenient
-              Digital Account Opening. Unlock the Power to Open Cerisma, Digital wallet, All
-              from the Comfort of Your Home. No Need to Visit Cerisma
-              Centers.{" "}
+              Cerisma, Your Nation's Bank, Introduces Convenient Digital Account
+              Opening. Unlock the Power to Open Cerisma, Digital wallet, All
+              from the Comfort of Your Home. No Need to Visit Cerisma Centers.{" "}
             </Box>
 
             <div className={styles.buttonContainer}>

@@ -34,8 +34,20 @@ const EmailVerification = lazy(() =>
 const PersonalInformation = lazy(() =>
   import("src/Pages/CustomerOnboarding/PersonalInformation")
 );
+const AdditionalInformation = lazy(() =>
+  import("src/Pages/CustomerOnboarding/AdditionalInformation")
+);
 const AddressDetail = lazy(() =>
   import("src/Pages/CustomerOnboarding/AddressDetail")
+);
+const SelectProvince = lazy(() =>
+  import("src/Pages/CustomerOnboarding/SelectProvince")
+);
+const SelectCity = lazy(() =>
+  import("src/Pages/CustomerOnboarding/SelectCity")
+);
+const LivePhotoCapture = lazy(() =>
+  import("src/Pages/CustomerOnboarding/LivePhotoCapture")
 );
 const CnicFront = lazy(() => import("src/Pages/CustomerOnboarding/CnicFront"));
 const CnicBack = lazy(() => import("src/Pages/CustomerOnboarding/CnicBack"));
@@ -85,8 +97,15 @@ const App = () => {
                     element={<PersonalInformation />}
                   />
                   <Route
-                    path="address-detail"
-                    element={<AddressDetail />}
+                    path="additional-information"
+                    element={<AdditionalInformation />}
+                  />
+                  <Route path="address-detail" element={<AddressDetail />} />
+                  <Route path="select-province" element={<SelectProvince />} />
+                  <Route path="select-city" element={<SelectCity />} />
+                  <Route
+                    path="live-photo-capture"
+                    element={<LivePhotoCapture />}
                   />
                   <Route path="upload-cnic-front" element={<CnicFront />} />
                   <Route path="upload-cnic-back" element={<CnicBack />} />

@@ -26,6 +26,8 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import GOOGLE_MAP_IMG from "src/Assets/images/google_map_img.jpg";
 import styles from "./index.module.scss";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+const API_KEY = "AIzaSyAXQuFFo_bQ_RU42-1NtDLPIA9EXsOLDsQ";
 
 const AddressDetail = ({
   title,
@@ -37,6 +39,17 @@ const AddressDetail = ({
   handleSubmit,
   submitFormData,
 }) => {
+  const latitude = 37.7749; // Example latitude (e.g., San Francisco)
+  const longitude = -122.4194; //
+  const mapStyles = {
+    height: "400px",
+    width: "100%",
+  };
+
+  const defaultCenter = {
+    lat: latitude,
+    lng: longitude,
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -56,7 +69,7 @@ const AddressDetail = ({
       handleClose();
       return;
     }
-    navigate("/customer-onboarding/upload-cnic-front");
+    navigate("/customer-onboarding/select-province");
   };
 
   return (
@@ -77,62 +90,31 @@ const AddressDetail = ({
       </Fade>
 
       <Grid container sx={{ gap: "24px" }}>
-        <Grid container sx={{ gap: "24px" }}>
-          <Grid item xs={12} md={6} lg={4}>
-            <Box>
-              <TextInputField
-                name={"customerAddress"}
-                control={control}
-                label="Address"
-                type="text"
-              />
-              {errors?.customerAddress ? (
-                <ValidationError message={errors?.customerAddress?.message} />
-              ) : null}
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <Box>
-              <TextInputField
-                name={"customerLandmark"}
-                control={control}
-                label="Landmark"
-                type="text"
-              />
-              {errors?.customerLandmark ? (
-                <ValidationError message={errors?.customerLandmark?.message} />
-              ) : null}
-            </Box>
-          </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          <Box>
+            <TextInputField
+              name={"customerAddress"}
+              control={control}
+              label="Address"
+              type="text"
+            />
+            {errors?.customerAddress ? (
+              <ValidationError message={errors?.customerAddress?.message} />
+            ) : null}
+          </Box>
         </Grid>
-
-        <Grid container sx={{ gap: "24px" }}>
-          <Grid item xs={12} md={6} lg={4}>
-            <Box>
-              <SelectField
-                name={"customerProvince"}
-                control={control}
-                label={"Current Province"}
-                options={LIST_OF_PROVINCES}
-              />
-              {errors?.customerProvince ? (
-                <ValidationError message={errors?.customerProvince?.message} />
-              ) : null}
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <Box>
-              <SelectField
-                name={"customerCity"}
-                control={control}
-                label={"Current City"}
-                options={LIST_OF_CITIES}
-              />
-              {errors?.customerCity ? (
-                <ValidationError message={errors?.customerCity?.message} />
-              ) : null}
-            </Box>
-          </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          <Box>
+            <TextInputField
+              name={"customerLandmark"}
+              control={control}
+              label="Landmark"
+              type="text"
+            />
+            {errors?.customerLandmark ? (
+              <ValidationError message={errors?.customerLandmark?.message} />
+            ) : null}
+          </Box>
         </Grid>
       </Grid>
 
@@ -140,18 +122,37 @@ const AddressDetail = ({
 
       {/* GOOGLE MAP DIALOG */}
       <>
-        <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+        <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            sx: {
+              width: "100%",
+              maxWidth: "600px",
+            },
+          }}
+        >
           <DialogTitle
             sx={{ color: "#5093e0", fontWeight: 700, textAlign: "center" }}
           >
             {"Confirm Your Location!"}
           </DialogTitle>
-          <DialogContent>
-            <img
+          <DialogContent sx={{ width: "100%", maxWidth: "600px" }}>
+            {/* <img
               src={GOOGLE_MAP_IMG}
               className={styles.google_map_img}
               alt="GOOGLE_MAP_IMG"
-            />
+            /> */}
+            <LoadScript googleMapsApiKey={API_KEY}>
+              <GoogleMap
+                mapContainerStyle={mapStyles}
+                zoom={13}
+                center={defaultCenter}
+              >
+                <Marker position={defaultCenter} />
+              </GoogleMap>
+            </LoadScript>
           </DialogContent>
           <DialogActions>
             <Button
