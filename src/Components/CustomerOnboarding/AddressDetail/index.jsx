@@ -59,17 +59,13 @@ const AddressDetail = ({
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  useEffect(() => {
-    handleOpen();
-  }, []);
-
   const handleProceedButton = (e) => {
     e.preventDefault();
     if (open) {
       handleClose();
       return;
     }
-    navigate("/customer-onboarding/select-province");
+    navigate("/customer-onboarding/live-photo-capture");
   };
 
   return (
@@ -90,31 +86,62 @@ const AddressDetail = ({
       </Fade>
 
       <Grid container sx={{ gap: "24px" }}>
-        <Grid item xs={12} md={6} lg={4}>
-          <Box>
-            <TextInputField
-              name={"customerAddress"}
-              control={control}
-              label="Address"
-              type="text"
-            />
-            {errors?.customerAddress ? (
-              <ValidationError message={errors?.customerAddress?.message} />
-            ) : null}
-          </Box>
+        <Grid container sx={{ gap: "24px" }}>
+          <Grid item xs={12} md={6} lg={4}>
+            <Box>
+              <TextInputField
+                name={"customerAddress"}
+                control={control}
+                label="Address"
+                type="text"
+              />
+              {errors?.customerAddress ? (
+                <ValidationError message={errors?.customerAddress?.message} />
+              ) : null}
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Box>
+              <TextInputField
+                name={"customerLandmark"}
+                control={control}
+                label="Landmark"
+                type="text"
+              />
+              {errors?.customerLandmark ? (
+                <ValidationError message={errors?.customerLandmark?.message} />
+              ) : null}
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <Box>
-            <TextInputField
-              name={"customerLandmark"}
-              control={control}
-              label="Landmark"
-              type="text"
-            />
-            {errors?.customerLandmark ? (
-              <ValidationError message={errors?.customerLandmark?.message} />
-            ) : null}
-          </Box>
+
+        <Grid container sx={{ gap: "24px" }}>
+          <Grid item xs={12} md={6} lg={4}>
+            <Box>
+              <SelectField
+                name={"customerProvince"}
+                control={control}
+                label={"Current Province"}
+                options={LIST_OF_PROVINCES}
+              />
+              {errors?.customerProvince ? (
+                <ValidationError message={errors?.customerProvince?.message} />
+              ) : null}
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <Box>
+              <SelectField
+                name={"customerCity"}
+                control={control}
+                label={"Current City"}
+                options={LIST_OF_CITIES}
+              />
+              {errors?.customerCity ? (
+                <ValidationError message={errors?.customerCity?.message} />
+              ) : null}
+            </Box>
+          </Grid>
         </Grid>
       </Grid>
 

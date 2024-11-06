@@ -14,6 +14,7 @@ export const INITIAL_VALUES = {
   isVerification: false,
   isMobileOtpVerification: false,
   isEmailOtpVerification: false,
+  UserGeoCoordinates: "",
 };
 
 export const PATHS = {

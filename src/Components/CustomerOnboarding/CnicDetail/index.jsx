@@ -1,5 +1,5 @@
 import { Box, Fade, Grid } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import VerificationButton from "src/Common/VerificationButton/VerificationButton";
 import {
@@ -32,16 +32,10 @@ const CnicDetail = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [openSuccessModal, setOpenSuccessModal] = useState(false);
-  const handleSuccessModalClose = () => {
-    setOpenSuccessModal(false);
-    navigate("/");
-  };
-  const handleSuccessModalOpen = () => setOpenSuccessModal(true);
 
   const handleProceedButton = (e) => {
     e.preventDefault();
-    handleSuccessModalOpen();
+    navigate("/customer-onboarding/term-condition");
   };
 
   return (
@@ -169,13 +163,6 @@ const CnicDetail = ({
       </div>
 
       <VerificationButton onClick={handleProceedButton} label={"Proceed"} />
-
-      {openSuccessModal && (
-        <AccountOpeningSuccessModal
-          open={openSuccessModal}
-          handleClose={handleSuccessModalClose}
-        />
-      )}
     </>
   );
 };

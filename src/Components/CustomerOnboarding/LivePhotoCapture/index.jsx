@@ -31,7 +31,7 @@ const LivePhotoCapture = ({
 
   const handleProceedButton = (e) => {
     e.preventDefault();
-    navigate("/customer-onboarding/upload-cnic-front");
+    navigate("/customer-onboarding/upload-cnic");
   };
 
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);

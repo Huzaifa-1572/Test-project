@@ -37,6 +37,9 @@ const PersonalInformation = lazy(() =>
 const AdditionalInformation = lazy(() =>
   import("src/Pages/CustomerOnboarding/AdditionalInformation")
 );
+const DeviceLocation = lazy(() =>
+  import("src/Pages/CustomerOnboarding/DeviceLocation")
+);
 const AddressDetail = lazy(() =>
   import("src/Pages/CustomerOnboarding/AddressDetail")
 );
@@ -49,10 +52,16 @@ const SelectCity = lazy(() =>
 const LivePhotoCapture = lazy(() =>
   import("src/Pages/CustomerOnboarding/LivePhotoCapture")
 );
+const UploadCnic = lazy(() =>
+  import("src/Pages/CustomerOnboarding/UploadCnic")
+);
 const CnicFront = lazy(() => import("src/Pages/CustomerOnboarding/CnicFront"));
 const CnicBack = lazy(() => import("src/Pages/CustomerOnboarding/CnicBack"));
 const CnicDetail = lazy(() =>
   import("src/Pages/CustomerOnboarding/CnicDetail")
+);
+const TermAndCondition = lazy(() =>
+  import("src/Pages/CustomerOnboarding/TermAndCondition")
 );
 
 const App = () => {
@@ -100,6 +109,7 @@ const App = () => {
                     path="additional-information"
                     element={<AdditionalInformation />}
                   />
+                  <Route path="device-location" element={<DeviceLocation />} />
                   <Route path="address-detail" element={<AddressDetail />} />
                   <Route path="select-province" element={<SelectProvince />} />
                   <Route path="select-city" element={<SelectCity />} />
@@ -107,9 +117,11 @@ const App = () => {
                     path="live-photo-capture"
                     element={<LivePhotoCapture />}
                   />
+                  <Route path="upload-cnic" element={<UploadCnic />} />
                   <Route path="upload-cnic-front" element={<CnicFront />} />
                   <Route path="upload-cnic-back" element={<CnicBack />} />
                   <Route path="cnic-detail" element={<CnicDetail />} />
+                  <Route path="term-condition" element={<TermAndCondition />} />
                 </Route>
                 {/* Catch-all route for undefined paths */}
                 {/* <Route path="*" element={<Navigate to="/" />} /> */}

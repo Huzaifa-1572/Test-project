@@ -2,7 +2,7 @@ import { Box, Fade, Grid } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import VerificationButton from "src/Common/VerificationButton/VerificationButton";
-import { SelectField, TextInputField } from "src/Components/FormFields";
+import { UploadImage } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import {
   Contentstyles,
@@ -10,16 +10,16 @@ import {
   Iconstyles,
   Roundediconstyles,
 } from "src/Utils/CommonStyles";
-import { IoMdInformationCircleOutline } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { LIST_OF_CITIES } from "src/Utils/Constants";
+import { HiIdentification } from "react-icons/hi2";
 
-const AdditionalInformation = ({
+const UploadCnic = ({
   title,
   content,
   control,
   getValues,
   errors,
+  setValue,
   watch,
   handleSubmit,
   submitFormData,
@@ -29,14 +29,14 @@ const AdditionalInformation = ({
 
   const handleProceedButton = (e) => {
     e.preventDefault();
-    navigate("/customer-onboarding/device-location");
+    navigate("/customer-onboarding/cnic-detail");
   };
 
   return (
     <>
       {/* ICON */}
       <Box sx={Iconstyles}>
-        <IoMdInformationCircleOutline style={Roundediconstyles} />
+        <HiIdentification style={Roundediconstyles} />
       </Box>
 
       {/* MAIN HEADING */}
@@ -45,34 +45,38 @@ const AdditionalInformation = ({
       </Fade>
 
       {/* CONTENT */}
-      <Fade in={true} timeout={800}>
-        <Box sx={Contentstyles}>{content?.description}</Box>
-      </Fade>
+      {content.description && (
+        <Fade in={true} timeout={800}>
+          <Box sx={Contentstyles}>{content?.description}</Box>
+        </Fade>
+      )}
 
       <Grid container sx={{ gap: "24px" }}>
         <Grid item xs={12} md={6} lg={4}>
           <Box>
-            <SelectField
-              name={"customerBOC"}
+            <UploadImage
+              name={"customerCnicFront"}
               control={control}
-              label={"City/Place of Birth"}
-              options={LIST_OF_CITIES}
+              label={"CNIC Front"}
+              getValues={getValues}
+              setValue={setValue}
             />
-            {errors?.customerBOC ? (
-              <ValidationError message={errors?.customerBOC?.message} />
+            {errors?.customerCnicFront ? (
+              <ValidationError message={errors?.customerCnicFront?.message} />
             ) : null}
           </Box>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <Box>
-            <TextInputField
-              name={"customerMotherName"}
+            <UploadImage
+              name={"customerCnicBack"}
               control={control}
-              label="Mother Name"
-              type="text"
+              label={"CNIC Back"}
+              getValues={getValues}
+              setValue={setValue}
             />
-            {errors?.customerMotherName ? (
-              <ValidationError message={errors?.customerMotherName?.message} />
+            {errors?.customerCnicBack ? (
+              <ValidationError message={errors?.customerCnicBack?.message} />
             ) : null}
           </Box>
         </Grid>
@@ -83,4 +87,4 @@ const AdditionalInformation = ({
   );
 };
 
-export default AdditionalInformation;
+export default UploadCnic;
