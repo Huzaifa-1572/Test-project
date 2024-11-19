@@ -10,21 +10,22 @@ import {
   setIsWelcome,
 } from "src/Redux/Reducers/CustomerState";
 import { useDispatch } from "react-redux";
+import { updateScreen } from "src/Redux/Reducers/ScreenState";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleNewAccount = () => {
+    const NEW_SCREEN = "scr_customerCnic";
     dispatch(setIsWelcome(true));
-    dispatch(setIsResumeApplication(false));
-    navigate("/customer-onboarding/cnic-verification");
+    dispatch(updateScreen(NEW_SCREEN));
+    navigate("/customer-onboarding");
   };
 
   const handleResumeApplication = () => {
-    dispatch(setIsWelcome(false));
     dispatch(setIsResumeApplication(true));
-    navigate("/customer-onboarding/cnic-verification");
+    navigate("/customer-onboarding");
   };
 
   return (

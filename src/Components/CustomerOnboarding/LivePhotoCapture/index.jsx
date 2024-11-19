@@ -15,9 +15,12 @@ import {
 import CameraSvg from "src/Assets/svgs/camera.svg";
 import { checkCameraPermission } from "src/Utils/Helpers";
 
+const title = "Live Photo Capture";
+const content = {
+  description: "Kindly upload a clear live photo.",
+};
+
 const LivePhotoCapture = ({
-  title,
-  content,
   control,
   getValues,
   errors,
@@ -89,7 +92,11 @@ const LivePhotoCapture = ({
         {!isCameraAccessAllowed && (
           <>
             <Box className={styles.cameraWrapper}>
-              <img className={styles.camIconStyle} src={CameraSvg} alt="Uploaded Selfie" />
+              <img
+                className={styles.camIconStyle}
+                src={CameraSvg}
+                alt="Uploaded Selfie"
+              />
             </Box>
 
             <Box className={styles.permissionText}>

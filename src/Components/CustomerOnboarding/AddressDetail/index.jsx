@@ -29,9 +29,12 @@ import styles from "./index.module.scss";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 const API_KEY = "AIzaSyAXQuFFo_bQ_RU42-1NtDLPIA9EXsOLDsQ";
 
+const title = "Address Detail";
+const content = {
+  description: "Please fill in the required information below",
+};
+
 const AddressDetail = ({
-  title,
-  content,
   control,
   getValues,
   errors,

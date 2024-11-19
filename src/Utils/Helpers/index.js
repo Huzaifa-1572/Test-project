@@ -116,3 +116,9 @@ export const setupResponseInterceptor = () => {
   );
 };
 
+
+// GET SCREEN
+export const getScreen = (data) => {
+  const screen = data?.next_screen?.screenViewObj?.screen_kuid || data?.next_screen?.screen_kuid || ''
+  return screen
+}

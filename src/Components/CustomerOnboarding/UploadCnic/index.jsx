@@ -13,9 +13,12 @@ import {
 import { useDispatch } from "react-redux";
 import { HiIdentification } from "react-icons/hi2";
 
+const title = "Upload CNIC";
+const content = {
+  description: "Kindly upload a clear image of your CNIC to proceed.",
+};
+
 const UploadCnic = ({
-  title,
-  content,
   control,
   getValues,
   errors,

@@ -3,9 +3,8 @@ import { Box, Container } from "@mui/material";
 import GoBack from "src/Common/Goback";
 import styles from "./index.module.scss";
 import Header from "src/Layout/Header";
-import { Outlet } from "react-router-dom";
 
-function CustomerOnboardingLayout() {
+function CustomerOnboardingLayout({ children }) {
   return (
     <>
       <Header />
@@ -14,7 +13,7 @@ function CustomerOnboardingLayout() {
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <GoBack />
           </Box>
-          <Outlet />
+          {children}
         </Container>
       </Box>
     </>

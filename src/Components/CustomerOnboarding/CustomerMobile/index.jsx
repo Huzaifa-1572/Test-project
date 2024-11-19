@@ -19,15 +19,20 @@ import { setIsMobileOtpVerification } from "src/Redux/Reducers/CustomerState";
 import { OPERATOR_OPTION } from "src/Utils/Constants";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 
-const MobileVerification = ({
-  title,
-  content,
+const title = "Mobile Verification";
+const content = {
+  enterMobileNumber: "Please enter Your mobile number",
+  verification:
+    "Please enter the one time passcode which is sent to your mobile number",
+};
+
+const CustomerMobile = ({
   control,
   getValues,
   errors,
   watch,
   handleSubmit,
-  submitFormData
+  submitFormData,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,8 +42,10 @@ const MobileVerification = ({
   const [showVerification, setShowVerification] = useState(false); // for sms otp send
   const currentMobileValue = watch("customerMobile");
 
-  const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
-
+  const { mutate } = usePostDataToServer({
+    onPostReqSuccess: onSuccessfullFormDataSubmission,
+    dispatch,
+  });
 
   useEffect(() => {
     const number = retrieveMobileNumber(currentMobileValue);
@@ -59,21 +66,20 @@ const MobileVerification = ({
     // }
 
     // setShowVerification(true);
-    const API_URL = 'http://192.168.20.101:8080/api/dao/v1/otp/sendsms'
+    const API_URL = "http://192.168.20.101:8080/api/dao/v1/otp/sendsms";
     const BODY = {
-      mobileNumber: '03459872343',
+      mobileNumber: "03459872343",
       isResumeApplication: false,
-      custIdentityKey: '011',
-      custIdentityValue: '1398765412345',
-      channelCode: '09'
-    }
+      custIdentityKey: "011",
+      custIdentityValue: "1398765412345",
+      channelCode: "09",
+    };
 
-    mutate({ BODY, API_URL })
-
+    mutate({ BODY, API_URL });
   };
 
   function onSuccessfullFormDataSubmission(response) {
-    console.log(response)
+    console.log(response);
   }
 
   return (
@@ -153,4 +159,4 @@ const MobileVerification = ({
   );
 };
 
-export default MobileVerification;
+export default CustomerMobile;

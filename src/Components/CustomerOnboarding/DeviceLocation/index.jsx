@@ -15,9 +15,12 @@ import { MdLocationOn } from "react-icons/md";
 import Loader from "src/Common/Loader";
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
 
+const title = "Device Location";
+const content = {
+  description: "Please enable your device location to proceed further.",
+};
+
 const DeviceLocation = ({
-  title,
-  content,
   control,
   getValues,
   errors,

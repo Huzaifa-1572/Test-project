@@ -14,9 +14,12 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { LIST_OF_CITIES } from "src/Utils/Constants";
 
+const title = "Additional Information";
+const content = {
+  description: "Please fill in the required information below",
+};
+
 const AdditionalInformation = ({
-  title,
-  content,
   control,
   getValues,
   errors,

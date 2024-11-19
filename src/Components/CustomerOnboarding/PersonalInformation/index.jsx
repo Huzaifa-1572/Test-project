@@ -14,9 +14,12 @@ import { FaUser } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { LIST_OF_CITIES } from "src/Utils/Constants";
 
+const title = "Personal Information";
+const content = {
+  description: "Please fill in the required information below",
+};
+
 const PersonalInformation = ({
-  title,
-  content,
   control,
   getValues,
   errors,

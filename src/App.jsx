@@ -1,93 +1,28 @@
 import { lazy, Suspense, useEffect } from "react";
-// import { QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from "@mui/material/styles";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { useSelector } from "react-redux";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "@mui/material/styles";
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { QUERY_CLIENT, THEME } from "./Utils/Settings";
 import {
-  Route,
-  BrowserRouter as Router,
-  Routes
-} from "react-router-dom";
-import { THEME } from "./Utils/Settings";
-import { setupRequestInterceptor, setupResponseInterceptor } from "./Utils/Helpers";
-
+  setupRequestInterceptor,
+  setupResponseInterceptor,
+} from "./Utils/Helpers";
 
 // Lazy load components
 const Loader = lazy(() => import("src/Common/Loader"));
-const ProtectedRoute = lazy(() => import("src/HOC/ProtectedRoute"));
 const LandingLayout = lazy(() => import("src/Layout/LandingLayout"));
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));
-const DashboardLayout = lazy(() => import("src/Layout/DashboardLayout/index"));
-
-const CustomerOnboardingLayout = lazy(() =>
-  import("src/Layout/CustomerOnboardingLayout/index")
-);
-
-// Customer Onboarding Screens
-const CnicVerification = lazy(() =>
-  import("src/Pages/CustomerOnboarding/CnicVerification")
-);
-const MobileVerification = lazy(() =>
-  import("src/Pages/CustomerOnboarding/MobileVerification")
-);
-const EmailVerification = lazy(() =>
-  import("src/Pages/CustomerOnboarding/EmailVerification")
-);
-const PersonalInformation = lazy(() =>
-  import("src/Pages/CustomerOnboarding/PersonalInformation")
-);
-const AdditionalInformation = lazy(() =>
-  import("src/Pages/CustomerOnboarding/AdditionalInformation")
-);
-const DeviceLocation = lazy(() =>
-  import("src/Pages/CustomerOnboarding/DeviceLocation")
-);
-const AddressDetail = lazy(() =>
-  import("src/Pages/CustomerOnboarding/AddressDetail")
-);
-const SelectProvince = lazy(() =>
-  import("src/Pages/CustomerOnboarding/SelectProvince")
-);
-const SelectCity = lazy(() =>
-  import("src/Pages/CustomerOnboarding/SelectCity")
-);
-const LivePhotoCapture = lazy(() =>
-  import("src/Pages/CustomerOnboarding/LivePhotoCapture")
-);
-const UploadCnic = lazy(() =>
-  import("src/Pages/CustomerOnboarding/UploadCnic")
-);
-const CnicFront = lazy(() => import("src/Pages/CustomerOnboarding/CnicFront"));
-const CnicBack = lazy(() => import("src/Pages/CustomerOnboarding/CnicBack"));
-const CnicDetail = lazy(() =>
-  import("src/Pages/CustomerOnboarding/CnicDetail")
-);
-const TermAndCondition = lazy(() =>
-  import("src/Pages/CustomerOnboarding/TermAndCondition")
-);
+const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
+const CustomerOnboardingLayout = lazy(() => import("src/Layout/CustomerOnboardingLayout/index"));
 
 const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
 
-
-
-  // REACT QUERY SETTINGS
-  const QUERY_CLIENT = new QueryClient({
-    defaultOptions: {
-      queries: {
-        cacheTime: 300000,
-        refetchOnWindowFocus: false,
-        staleTime: 0,
-        retry: 3,
-
-      },
-    },
-  })
-
   useEffect(() => {
-    setupRequestInterceptor()
-    setupResponseInterceptor()
-  }, [])
+    setupRequestInterceptor();
+    setupResponseInterceptor();
+  }, []);
 
   return (
     <>
@@ -96,7 +31,6 @@ const App = () => {
           <ThemeProvider theme={THEME}>
             <Router>
               <Routes>
-                {/* Public route */}
                 <Route
                   path="/"
                   element={
@@ -105,48 +39,16 @@ const App = () => {
                     </LandingLayout>
                   }
                 />
-
-                {/* Customer Onboarding */}
                 <Route
                   path="/customer-onboarding"
-                  element={<CustomerOnboardingLayout />}
-                >
-                  <Route
-                    path="cnic-verification"
-                    element={<CnicVerification />}
-                  />
-                  <Route
-                    path="mobile-verification"
-                    element={<MobileVerification />}
-                  />
-                  <Route
-                    path="email-verification"
-                    element={<EmailVerification />}
-                  />
-                  <Route
-                    path="personal-information"
-                    element={<PersonalInformation />}
-                  />
-                  <Route
-                    path="additional-information"
-                    element={<AdditionalInformation />}
-                  />
-                  <Route path="device-location" element={<DeviceLocation />} />
-                  <Route path="address-detail" element={<AddressDetail />} />
-                  <Route path="select-province" element={<SelectProvince />} />
-                  <Route path="select-city" element={<SelectCity />} />
-                  <Route
-                    path="live-photo-capture"
-                    element={<LivePhotoCapture />}
-                  />
-                  <Route path="upload-cnic" element={<UploadCnic />} />
-                  <Route path="upload-cnic-front" element={<CnicFront />} />
-                  <Route path="upload-cnic-back" element={<CnicBack />} />
-                  <Route path="cnic-detail" element={<CnicDetail />} />
-                  <Route path="term-condition" element={<TermAndCondition />} />
-                </Route>
+                  element={
+                    <CustomerOnboardingLayout>
+                      <CustomerOnboarding />
+                    </CustomerOnboardingLayout>
+                  }
+                />
                 {/* Catch-all route for undefined paths */}
-                {/* <Route path="*" element={<Navigate to="/" />} /> */}
+                <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             </Router>
           </ThemeProvider>

@@ -11,26 +11,32 @@ import VerificationButton from "src/Common/VerificationButton/VerificationButton
 import { CustomInputField } from "src/Components/FormFields";
 import UserInformationModal from "src/Components/Modal/UserInformationModal";
 import ValidationError from "src/Components/ValidationError";
-import usePostDataToServer from 'src/Hooks/usePostdataToServer';
+import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import {
   Contentstyles,
   Headingstyles,
   Iconstyles,
   Roundediconstyles,
 } from "src/Utils/CommonStyles";
-import { setupRequestInterceptor, setupResponseInterceptor, Verificationcondition } from "src/Utils/Helpers";
+import {
+  setupRequestInterceptor,
+  setupResponseInterceptor,
+  Verificationcondition,
+} from "src/Utils/Helpers";
 import styles from "./index.module.scss";
 
+const title = "CNIC Verification";
+const content = {
+  enterNicNumber: "Please enter your CNIC to start your online application",
+  verification: "Please enter the OTP which is sent to your mobile number",
+};
 
-const CnicVerification = ({
-  title,
-  content,
-  resumecontent,
-  control,
-  errors,
-  handleSubmit,
-  submitFormData,
-}) => {
+const resumecontent = {
+  enterNicNumber: "Please enter your CNIC to resume your online application",
+  verification: "Please enter the OTP which is sent to your mobile number",
+};
+
+const CustomerCnic = ({ control, errors }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isResumeApplication, isVerification } = useSelector(
@@ -48,10 +54,7 @@ const CnicVerification = ({
   const recaptchaRef = React.createRef();
 
   const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
-
   const { mutate: handleCustomerExist } = usePostDataToServer({ onPostReqSuccess: successful, dispatch });
-
-
 
   const handleProceedButton = (e) => {
     e.preventDefault();
@@ -63,19 +66,15 @@ const CnicVerification = ({
 
     // const API_URL = http://192.168.20.101:8080/api/dao/v1/authenticate
     const BODY = {
-      reCaptchaToken: '1234',
-      custIdentityKey: '011',
-      custIdentityValue: '1398765412345',
-      channelCode: '09'
-    }
+      reCaptchaToken: "1234",
+      custIdentityKey: "011",
+      custIdentityValue: "1398765412345",
+      channelCode: "09",
+    };
 
-    const API_URL = 'http://192.168.20.101:8080/api/dao/v1/authenticate'
+    const API_URL = "http://192.168.20.101:8080/api/dao/v1/authenticate";
 
-
-
-    mutate({ BODY, API_URL })
-
-
+    mutate({ BODY, API_URL });
   };
 
   // const handleResendClick = () => {
@@ -99,36 +98,29 @@ const CnicVerification = ({
 
     //   mutate({ BODY, API_URL, dispatch })
 
-    console.log('response', response?.data?.data?.token)
-    localStorage.setItem('token', response?.data?.data?.token)
+    console.log("response", response?.data?.data?.token);
+    localStorage.setItem("token", response?.data?.data?.token);
 
-
-
-    const API_URL = 'http://192.168.20.101:8080/api/dao/v1/customer/isExist'
+    const API_URL = "http://192.168.20.101:8080/api/dao/v1/customer/isExist";
 
     const BODY = {
-      custIdentityKey: '011',
-      custIdentityValue: '1398765412345',
-      channelCode: '09'
-    }
+      custIdentityKey: "011",
+      custIdentityValue: "1398765412345",
+      channelCode: "09",
+    };
 
-    handleCustomerExist({ BODY, API_URL })
+    handleCustomerExist({ BODY, API_URL });
   }
-
 
   function successful(response) {
-    console.log('response', response)
+    console.log("response", response);
 
     navigate("/customer-onboarding/mobile-verification");
-
   }
-
 
   const handleModalClose = () => {
     setdescrepantModal(false);
   };
-
-
 
   const onCaptchaChange = (value) => {
     recaptchaValue.current = value;
@@ -261,4 +253,4 @@ const CnicVerification = ({
   );
 };
 
-export default CnicVerification;
+export default CustomerCnic;

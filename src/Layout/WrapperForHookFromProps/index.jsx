@@ -16,6 +16,9 @@ function WrapperForHookFormProps({ children }) {
     (state) => state.customerState
   );
 
+  console.log(isWelcome);
+  
+
   useEffect(() => {
     if (!isWelcome && !isResumeApplication) {
       navigate("/");

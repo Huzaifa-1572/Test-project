@@ -20,9 +20,9 @@ import { useDispatch } from "react-redux";
 import styles from "./index.module.scss";
 import AccountOpeningSuccessModal from "src/Components/Modal/AccountOpeningSuccessModal";
 
+const title = "Cnic Detail";
+
 const CnicDetail = ({
-  title,
-  content,
   control,
   getValues,
   errors,
@@ -49,13 +49,6 @@ const CnicDetail = ({
       <Fade in={true} timeout={800}>
         <Box sx={Headingstyles}>{title}</Box>
       </Fade>
-
-      {/* CONTENT */}
-      {content?.description && (
-        <Fade in={true} timeout={800}>
-          <Box sx={Contentstyles}>{content?.description}</Box>
-        </Fade>
-      )}
 
       <Grid container sx={{ gap: "24px" }}>
         <Grid container sx={{ gap: "24px" }}>
