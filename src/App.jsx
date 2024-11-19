@@ -1,15 +1,16 @@
-import React, { lazy, Suspense } from "react";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
-import { QUERY_CLIENT, THEME } from "./Utils/Settings";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+// import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@mui/material/styles";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { useSelector } from "react-redux";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes
+} from "react-router-dom";
+import { THEME } from "./Utils/Settings";
+import { setupRequestInterceptor, setupResponseInterceptor } from "./Utils/Helpers";
+
 
 // Lazy load components
 const Loader = lazy(() => import("src/Common/Loader"));
@@ -17,6 +18,7 @@ const ProtectedRoute = lazy(() => import("src/HOC/ProtectedRoute"));
 const LandingLayout = lazy(() => import("src/Layout/LandingLayout"));
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));
 const DashboardLayout = lazy(() => import("src/Layout/DashboardLayout/index"));
+
 const CustomerOnboardingLayout = lazy(() =>
   import("src/Layout/CustomerOnboardingLayout/index")
 );
@@ -66,6 +68,26 @@ const TermAndCondition = lazy(() =>
 
 const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
+
+
+
+  // REACT QUERY SETTINGS
+  const QUERY_CLIENT = new QueryClient({
+    defaultOptions: {
+      queries: {
+        cacheTime: 300000,
+        refetchOnWindowFocus: false,
+        staleTime: 0,
+        retry: 3,
+
+      },
+    },
+  })
+
+  useEffect(() => {
+    setupRequestInterceptor()
+    setupResponseInterceptor()
+  }, [])
 
   return (
     <>

@@ -1,3 +1,5 @@
+import Axios from "axios";
+
 export function maskEmail(email = "") {
   const parts = email.split("@");
   const username = parts[0];
@@ -74,3 +76,43 @@ export const tempUser = {
   userId: 1,
   name: "daniyal",
 };
+
+
+// SETUP REQUEST INTERCEPTOR
+export const setupRequestInterceptor = () => {
+  Axios.interceptors.request.use(
+    function (config) {
+      const token = localStorage.getItem("token");
+      if (!!token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    function (error) {
+      console.error('Request Interceptor Error:', error);
+      return Promise.reject(error);
+    }
+  );
+};
+
+// SETUP RESPONSE INTERCEPTOR
+export const setupResponseInterceptor = () => {
+  Axios.interceptors.response.use(
+    function (response) {
+      const authorizationHeader = response?.config?.headers?.Authorization;
+      if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
+        // Remove the 'Bearer ' prefix from the token
+        const token = authorizationHeader.replace('Bearer ', '');
+        localStorage.setItem('token', token);
+        console.log('Token without Bearer:', token);
+      }
+      return response; // Always return the response or modify it
+    },
+    function (error) {
+      console.error('Response Interceptor Error:', error);
+      // You can add additional error-handling logic here
+      return Promise.reject(error);
+    }
+  );
+};
+

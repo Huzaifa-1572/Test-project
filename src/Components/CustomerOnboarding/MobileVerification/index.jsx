@@ -17,6 +17,7 @@ import { FaUserShield as HowToRegRoundedIcon } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { setIsMobileOtpVerification } from "src/Redux/Reducers/CustomerState";
 import { OPERATOR_OPTION } from "src/Utils/Constants";
+import usePostDataToServer from "src/Hooks/usePostdataToServer";
 
 const MobileVerification = ({
   title,
@@ -36,6 +37,9 @@ const MobileVerification = ({
   const [showVerification, setShowVerification] = useState(false); // for sms otp send
   const currentMobileValue = watch("customerMobile");
 
+  const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
+
+
   useEffect(() => {
     const number = retrieveMobileNumber(currentMobileValue);
     const isValid = number.length === 11 && number.startsWith("03");
@@ -44,18 +48,33 @@ const MobileVerification = ({
 
   const handleProceedButton = (e) => {
     e.preventDefault();
-    const customerMobileNumber = getValues("customerMobile");
-    setMobileNum(customerMobileNumber);
+    // const customerMobileNumber = getValues("customerMobile");
+    // setMobileNum(customerMobileNumber);
 
-    if (showVerification) {
-      handleSubmit(submitFormData)();
-      dispatch(setIsMobileOtpVerification(true));
-      navigate("/customer-onboarding/email-verification");
-      return;
+    // if (showVerification) {
+    //   handleSubmit(submitFormData)();
+    //   dispatch(setIsMobileOtpVerification(true));
+    //   navigate("/customer-onboarding/email-verification");
+    //   return;
+    // }
+
+    // setShowVerification(true);
+    const API_URL = 'http://192.168.20.101:8080/api/dao/v1/otp/sendsms'
+    const BODY = {
+      mobileNumber: '03459872343',
+      isResumeApplication: false,
+      custIdentityKey: '011',
+      custIdentityValue: '1398765412345',
+      channelCode: '09'
     }
 
-    setShowVerification(true);
+    mutate({ BODY, API_URL })
+
   };
+
+  function onSuccessfullFormDataSubmission(response) {
+    console.log(response)
+  }
 
   return (
     <>
