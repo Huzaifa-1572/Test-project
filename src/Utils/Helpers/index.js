@@ -1,4 +1,5 @@
 import Axios from "axios";
+import Dexie from "dexie";
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -77,7 +78,6 @@ export const tempUser = {
   name: "daniyal",
 };
 
-
 // SETUP REQUEST INTERCEPTOR
 export const setupRequestInterceptor = () => {
   Axios.interceptors.request.use(
@@ -89,7 +89,7 @@ export const setupRequestInterceptor = () => {
       return config;
     },
     function (error) {
-      console.error('Request Interceptor Error:', error);
+      console.error("Request Interceptor Error:", error);
       return Promise.reject(error);
     }
   );
@@ -100,25 +100,71 @@ export const setupResponseInterceptor = () => {
   Axios.interceptors.response.use(
     function (response) {
       const authorizationHeader = response?.config?.headers?.Authorization;
-      if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
+      if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
         // Remove the 'Bearer ' prefix from the token
-        const token = authorizationHeader.replace('Bearer ', '');
-        localStorage.setItem('token', token);
-        console.log('Token without Bearer:', token);
+        const token = authorizationHeader.replace("Bearer ", "");
+        localStorage.setItem("token", token);
+        console.log("Token without Bearer:", token);
       }
       return response; // Always return the response or modify it
     },
     function (error) {
-      console.error('Response Interceptor Error:', error);
+      console.error("Response Interceptor Error:", error);
       // You can add additional error-handling logic here
       return Promise.reject(error);
     }
   );
 };
 
+const db = new Dexie("store");
+db.version(1).stores({
+  data: "id, currentScreen",
+  tokens: "id, token",
+});
+
+// Function to store initial data
+export async function storeDataToIndexDb(data) {
+  await db.data.put({ id: 1, currentScreen: data });
+}
+
+// Function to update data on beforeunload
+export async function updateIndexDbData(data) {
+  await db.data.update(1, { currentScreen: data });
+}
+
+// Function to retrieve stored data
+export async function getDataFromIndexDb() {
+  const storedData = await db.data.get(1);
+  return storedData || {}; // Return default value if no data found
+}
+
+// Function to store token
+export async function storeTokenToIndexDb(data) {
+  await db.tokens.put({ id: 1, token: data });
+}
+
+// Function to update token on beforeunload
+export async function updateIndexDbToken(data) {
+  await db.tokens.update(1, { token: data });
+}
+
+// Function to retrieve stored token
+export async function getTokenFromIndexDb() {
+  const storedData = await db.tokens.get(1);
+  return storedData || {};
+}
+
+// Function to clear all data from the IndexedDB table
+export async function clearIndexDb() {
+  await db.data.clear();
+  await db.tokens.clear();
+}
 
 // GET SCREEN
 export const getScreen = (data) => {
-  const screen = data?.next_screen?.screenViewObj?.screen_kuid || data?.next_screen?.screen_kuid || ''
-  return screen
-}
+  const screen =
+    data?.next_screen?.screenViewObj?.screen_kuid ||
+    data?.next_screen?.screen_kuid ||
+    "";
+  return screen;
+};

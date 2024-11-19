@@ -12,19 +12,6 @@ function WrapperForHookFormProps({ children }) {
   const navigate = useNavigate();
   const CURRENT_SCREEN = location.pathname.split("/")[2];
 
-  const { isWelcome, isResumeApplication } = useSelector(
-    (state) => state.customerState
-  );
-
-  console.log(isWelcome);
-  
-
-  useEffect(() => {
-    if (!isWelcome && !isResumeApplication) {
-      navigate("/");
-    }
-  }, [isWelcome, isResumeApplication]);
-
   const yupSchema = shape[CURRENT_SCREEN];
   const validationSchema = yup.object().shape(yupSchema);
 

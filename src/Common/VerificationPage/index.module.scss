@@ -1,5 +1,5 @@
-@import "../../Utils/variables";
-@import "../../Utils/mixins";
+@use '../../styles/_variables' as *;
+@use '../../styles/_mixins' as *;
 
 .paperContainer {
   padding: clamp(40px, 5%, 80px);

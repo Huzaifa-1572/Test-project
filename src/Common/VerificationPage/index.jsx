@@ -5,30 +5,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import usePostDataToServer from 'src/Hooks/usePostdataToServer';
 import Header from 'src/Layout/Header';
 // import { COFormSubmission } from "src/Utils/CommonFunctions/COFormSubmission";
-import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
+// import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 import GoBack from 'src/Common/GoBack';
 import styles from './index.module.scss';
 import useGetGeoCoordinates from 'src/Hooks/useGetGeoCoordinates';
-
+import useGetCurrentScreen from 'src/Hooks/useGetCurrentScreen';
 
 const ORIGINAL_SCREEN_FOR_VERIFICATION = {
     scr_mobileVerification: 'scr_mobileVerification',
     scr_emailVerification: 'scr_emailVerification',
 }
 
-
 function VerificationPage({ icon, title, content, setValue, getValues }) {
     const [otp, setOtp] = useState('');
     const [resendOTP, setResendOTP] = useState(30);
     const dispatch = useDispatch()
-    const SCREEN = useSelector((state) => state?.screenState)
+    const token = localStorage.getItem('tokenMobile')
+    const SCREEN = useGetCurrentScreen()
     const IS_RESUME_FLOW = localStorage.getItem('isResume')
 
     // setting geo co ordinates value
     useGetGeoCoordinates({ setValue, getValues })
 
-
-    const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
+    const { mutate: handleOtpVerification } = usePostDataToServer({ onPostReqSuccess: onSuccessfullOtpVerification, dispatch });
 
 
     useEffect(() => {
@@ -52,6 +51,17 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
 
     const handleVerify = (selectedOption) => {
         setValue('e__otp', selectedOption)
+        console.log('dshjcvjdhsc', token)
+        const BODY = {
+            otp: "123456",
+            mobileNumber: "03459872345",
+            token: token,
+            custIdentityValue: "1398765412345",
+            custIdentityKey: "0001",
+            channelCode: "0013"
+        }
+        const API_URL = "http://192.168.20.101:8080/api/dao/v1/otp/validate-sms-otp";
+        handleOtpVerification({ BODY, API_URL });
     }
 
     // Function to format the countdown string
@@ -76,19 +86,12 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
         // }
     };
 
-    // when form is submitted successfully below function is called or if any error happen then onError function Defined in usePostDataToTransfer Will Be Called
-    function onSuccessfullFormDataSubmission(response) {
+    function onSuccessfullOtpVerification(response) {
         postRequestSuccess({ response, dispatch })
     }
 
-
-
     return (
         <Box sx={{ backgroundColor: '#F4F4F4' }}>
-            {/* <Navbar /> */}
-            {/* <Box sx={{ marginTop: '30px', marginBottom: '30px', marginRight: '15px' }}>
-                <GoBack />
-            </Box> */}
             <Container maxWidth="lg" className={styles.paperContainer} sx={{ borderRadius: { sm: '0px', md: '0px', lg: '10px', xl: '10px' } }} >
                 <div className={styles.iconStyle}>
                     <img className={styles.iconSize} src={icon} alt="mobileOtpLogo" />

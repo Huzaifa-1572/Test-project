@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { useSelector } from "react-redux";
+import useGetCurrentScreen from "src/Hooks/useGetCurrentScreen";
 const WrapperForHookFormProps = lazy(() =>
   import("src/Layout/WrapperForHookFromProps")
 );
@@ -37,7 +37,8 @@ const showScreen = {
 };
 
 const CustomerOnboarding = () => {
-  const CURRENT_SCREEN = useSelector((state) => state.screenState);
+  const CURRENT_SCREEN = useGetCurrentScreen()
+
   return (
     <WrapperForHookFormProps>
       {showScreen[CURRENT_SCREEN]}

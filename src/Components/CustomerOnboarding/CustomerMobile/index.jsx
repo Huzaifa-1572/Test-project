@@ -11,7 +11,7 @@ import {
   Iconstyles,
   Roundediconstyles,
 } from "src/Utils/CommonStyles";
-import { maskNumber, retrieveMobileNumber } from "src/Utils/Helpers";
+import { maskNumber, retrieveMobileNumber, storeTokenToIndexDb, updateIndexDbData } from "src/Utils/Helpers";
 import { TbDeviceMobile as MobileVerificationIcon } from "react-icons/tb";
 import { FaUserShield as HowToRegRoundedIcon } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -28,24 +28,15 @@ const content = {
 
 const CustomerMobile = ({
   control,
-  getValues,
   errors,
   watch,
-  handleSubmit,
-  submitFormData,
 }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [mobileNum, setMobileNum] = useState("");
-  const [mobileOtp, setMobileOtp] = useState();
   const [isValidNumber, setIsValidNumber] = useState(false);
-  const [showVerification, setShowVerification] = useState(false); // for sms otp send
+  const [showVerification, setShowVerification] = useState(false);
   const currentMobileValue = watch("customerMobile");
 
-  const { mutate } = usePostDataToServer({
-    onPostReqSuccess: onSuccessfullFormDataSubmission,
-    dispatch,
-  });
+  const { mutate: handleCustomerMobile } = usePostDataToServer({ onPostReqSuccess: onSuccessfullCustomerMobile, dispatch });
 
   useEffect(() => {
     const number = retrieveMobileNumber(currentMobileValue);
@@ -55,42 +46,31 @@ const CustomerMobile = ({
 
   const handleProceedButton = (e) => {
     e.preventDefault();
-    // const customerMobileNumber = getValues("customerMobile");
-    // setMobileNum(customerMobileNumber);
-
-    // if (showVerification) {
-    //   handleSubmit(submitFormData)();
-    //   dispatch(setIsMobileOtpVerification(true));
-    //   navigate("/customer-onboarding/email-verification");
-    //   return;
-    // }
-
-    // setShowVerification(true);
     const API_URL = "http://192.168.20.101:8080/api/dao/v1/otp/sendsms";
     const BODY = {
-      mobileNumber: "03459872343",
+      mobileNumber: "03459872345",
       isResumeApplication: false,
       custIdentityKey: "011",
       custIdentityValue: "1398765412345",
       channelCode: "09",
     };
 
-    mutate({ BODY, API_URL });
+    handleCustomerMobile({ BODY, API_URL });
   };
 
-  function onSuccessfullFormDataSubmission(response) {
-    console.log(response);
+  async function onSuccessfullCustomerMobile(response) {
+    console.log('jhbchjsdbhcjd', response.data.data.token);
+    await updateIndexDbData('scr_mobileVerification')
+    localStorage.setItem('tokenMobile',response?.data?.data?.token)
+    // await storeTokenToIndexDb(response?.data?.data?.token);
+    location.reload();
   }
 
   return (
     <>
       {/* ICON */}
       <Box sx={Iconstyles}>
-        {showVerification ? (
-          <HowToRegRoundedIcon style={Roundediconstyles} />
-        ) : (
-          <MobileVerificationIcon style={Roundediconstyles} />
-        )}
+        <MobileVerificationIcon style={Roundediconstyles} />
       </Box>
 
       {/* MAIN HEADING */}
@@ -102,58 +82,49 @@ const CustomerMobile = ({
       <Box sx={{ margin: "15px 0px" }}>
         <Fade in={true} timeout={800}>
           <Box sx={Contentstyles}>
-            {showVerification
-              ? `${content.verification} ${maskNumber(mobileNum)}`
-              : content.enterMobileNumber}
+            {content.enterMobileNumber}
           </Box>
         </Fade>
 
         {/* PHONE INPUT */}
-        {!showVerification && (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: { xs: "center", sm: "start" },
-              gap: "20px",
-              margin: "20px 0px",
-            }}
-          >
-            <CustomInputField
-              name={"customerMobile"}
-              control={control}
-              format={"####-#######"}
-              label="Mobile Number"
-              placeholder="03xx-xxxxxxx"
-              inputMode="numeric"
-            />
-            {errors?.customerMobile ? (
-              <ValidationError message={errors?.customerMobile?.message} />
-            ) : null}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: { xs: "center", sm: "start" },
+            gap: "20px",
+            margin: "20px 0px",
+          }}
+        >
+          <CustomInputField
+            name={"customerMobile"}
+            control={control}
+            format={"####-#######"}
+            label="Mobile Number"
+            placeholder="03xx-xxxxxxx"
+            inputMode="numeric"
+          />
+          {errors?.customerMobile ? (
+            <ValidationError message={errors?.customerMobile?.message} />
+          ) : null}
 
-            <SelectField
-              name={"customerOperator"}
-              control={control}
-              label={"Operator"}
-              placeholder="Select Operator"
-              options={OPERATOR_OPTION}
-            />
-            {errors?.customerOperator ? (
-              <ValidationError message={errors?.customerOperator?.message} />
-            ) : null}
-          </Box>
-        )}
+          <SelectField
+            name={"customerOperator"}
+            control={control}
+            label={"Operator"}
+            placeholder="Select Operator"
+            options={OPERATOR_OPTION}
+          />
+          {errors?.customerOperator ? (
+            <ValidationError message={errors?.customerOperator?.message} />
+          ) : null}
+        </Box>
       </Box>
-
-      {/* OTP INPUT */}
-      {showVerification && (
-        <OtpInputComponent value={mobileOtp} setMobileOtp={setMobileOtp} />
-      )}
 
       <VerificationButton
         onClick={handleProceedButton}
-        disabled={showVerification ? mobileOtp?.length !== 6 : !isValidNumber}
-        label={showVerification ? "Verify" : "Proceed"}
+        disabled={!isValidNumber}
+        label={"Proceed"}
       />
     </>
   );

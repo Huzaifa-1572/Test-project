@@ -11,6 +11,7 @@ import {
 } from "src/Redux/Reducers/CustomerState";
 import { useDispatch } from "react-redux";
 import { updateScreen } from "src/Redux/Reducers/ScreenState";
+import { storeDataToIndexDb } from "src/Utils/Helpers";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const LandingPage = () => {
     const NEW_SCREEN = "scr_customerCnic";
     dispatch(setIsWelcome(true));
     dispatch(updateScreen(NEW_SCREEN));
+    storeDataToIndexDb(NEW_SCREEN)
     navigate("/customer-onboarding");
   };
 
