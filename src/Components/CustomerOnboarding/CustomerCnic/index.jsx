@@ -1,11 +1,9 @@
 import { Box } from "@mui/material";
-import React from "react";
 import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
-import styles from "./index.module.scss";
 import WizardLayout from "src/Layout/WizardLayout";
+import styles from "./index.module.scss";
 
 const CustomerCnic = ({ control, errors }) => {
   return (
@@ -22,13 +20,12 @@ const CustomerCnic = ({ control, errors }) => {
           label="CNIC"
           placeholder="xxxxx-xxxxxxx-x"
           inputMode="numeric"
+          autoFocus={true}
         />
         {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
       </Box>
 
-      <CustomButton
-        label="verify"
-      />
+      <CustomButton label="verify" />
 
       <Box className={styles.robotStyles}>
         <Box sx={{ width: "100%", maxWidth: "400px" }}>

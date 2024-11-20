@@ -17,7 +17,7 @@ export const INITIAL_VALUES = {
   isMobileOtpVerification: false,
   isEmailOtpVerification: false,
   UserGeoCoordinates: "",
-  verificationToken: "",
+  OTP_VERIFICATION_TOKEN: "",
 };
 
 export const PATHS = {

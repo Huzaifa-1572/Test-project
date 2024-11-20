@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
+import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
 import { CNICEXIST_HANDLER, COFormSubmission } from "src/Utils/CommonFunctions/COFormSubmission";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { INITIAL_VALUES } from "src/Utils/Constants";
 import { shape } from "src/Utils/ValidationSchema";
 import * as yup from "yup";
-import CustomerOnboardingLayout from "../CustomerOnboardingLayout";
 
 function WrapperForHookFormProps({ children }) {
   const dispatch = useDispatch()
@@ -24,7 +24,6 @@ function WrapperForHookFormProps({ children }) {
     resolver: yupResolver(validationSchema),
   });
 
-  // react query
   const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
   function submitFormData(data) {
@@ -34,23 +33,18 @@ function WrapperForHookFormProps({ children }) {
   }
 
   function onSuccessfullFormDataSubmission(response) {
+    // BECAUSE scr_customerCnic HAS DEPENDENT API CALL (CNICEXIST_HANDLER DEPENDS ON AUTHENTICATION_HANDLER)
+    // -------------------START
     const TOKEN = response?.data?.data?.token;
-
-    if (CURRENT_SCREEN === "scr_customerCnic" && TOKEN) {
+    if (CURRENT_SCREEN === "scr_customerCnic" && !!TOKEN) {
       localStorage.setItem("referenceKey", TOKEN);
-      const { BODY, API_URL } = CNICEXIST_HANDLER({
-        CURRENT_SCREEN,
-        getValues,
-        dispatch,
-      });
+      const customerCnic = getValues("customerCnic");
+      const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, customerCnic, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }
+    // --------------------END
 
-    if (CURRENT_SCREEN === 'scr_customerMobile' || CURRENT_SCREEN === 'scr_customerEmail') {
-      setValue('verificationToken', response?.data?.data?.payload?.token)
-    }
-
-    postRequestSuccess({ response, dispatch, navigate })
+    postRequestSuccess({ response, dispatch, navigate, setValue })
   }
 
   const HOOK_FORM_PROPS = { control, errors, watch, setValue, trigger, getValues, reset, resetField, submitFormData, handleSubmit };

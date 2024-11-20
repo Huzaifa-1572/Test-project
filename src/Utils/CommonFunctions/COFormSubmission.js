@@ -1,12 +1,12 @@
-import { BASE_URL, ENDPOINTS } from "../config";
-import { PAYLOAD_KEYS } from "../Constants";
-import { retrieveCNIC, retrieveMobileNumber } from "../Helpers";
+import { BASE_URL, ENDPOINTS } from "src/Utils/config";
+import { PAYLOAD_KEYS } from "src/Utils/Constants";
+import { retrieveCNIC, retrieveMobileNumber } from "src/Utils/Helpers";
 
 export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    reCaptchaToken: data.googleCaptcha,
+    reCaptchaToken: data?.googleCaptcha,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
   };
@@ -17,8 +17,7 @@ export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, getValues }) => {
-  const customerCnic = getValues("customerCnic");
+export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
@@ -55,7 +54,7 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     custIdentityValue: retrieveCNIC(data.customerCnic),
     mobileNumber: retrieveMobileNumber(data.customerMobile),
     screenKuid: CURRENT_SCREEN,
-    token: data.verificationToken,
+    token: data.OTP_VERIFICATION_TOKEN,
     otp: data.customerOTP,
   };
 
@@ -88,7 +87,7 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     custIdentityValue: retrieveCNIC(data.customerCnic),
     email: data.customerEmail,
     screenKuid: CURRENT_SCREEN,
-    token: data.verificationToken,
+    token: data.OTP_VERIFICATION_TOKEN,
     otp: data.customerOTP,
   };
 
@@ -97,6 +96,8 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     BODY,
   };
 };
+
+
 
 export const COFormSubmission = {
   scr_customerCnic: ({ CURRENT_SCREEN, data }) => {

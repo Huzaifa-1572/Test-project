@@ -61,10 +61,6 @@ export function checkCameraPermission() {
   });
 }
 
-export const tempUser = {
-  userId: 1,
-  name: "daniyal",
-};
 
 // SETUP REQUEST INTERCEPTOR
 export const setupRequestInterceptor = () => {
@@ -150,6 +146,6 @@ export async function clearIndexDb() {
 
 // GET SCREEN
 export const getScreen = (data) => {
-  const screen = data?.data?.nextScreenPayload?.screen_kuid || "";
+  const screen = data?.nextScreenPayload?.screen_kuid || "No Screen Found";
   return screen;
 };

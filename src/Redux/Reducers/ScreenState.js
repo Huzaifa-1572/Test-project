@@ -9,10 +9,13 @@ export const SCREEN_STATE = createSlice({
     updateScreen: (state, action) => {
       return action.payload;
     },
+    ClearScreen: () => {
+      return ''
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateScreen } = SCREEN_STATE.actions;
+export const { updateScreen, ClearScreen } = SCREEN_STATE.actions;
 
 export default SCREEN_STATE.reducer;

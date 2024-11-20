@@ -4,15 +4,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styles from './index.module.scss';
 
-const ORIGINAL_SCREEN_FOR_VERIFICATION = {
-    scr_mobileVerification: 'scr_mobileVerification',
-    scr_emailVerification: 'scr_emailVerification',
-}
-
 function VerificationPage({ icon, title, content, setValue, getValues }) {
     const [otp, setOtp] = useState('');
     const [resendOTP, setResendOTP] = useState(30);
-    const dispatch = useDispatch()
 
     useEffect(() => {
         if (resendOTP > 0) {
@@ -75,15 +69,15 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
                 </div>
 
                 <div>
-                    <div className={styles.resendOTP} >
+                    {/* <div className={styles.resendOTP} >
                         {resendOTP === 0 ? (
-                            <button type='button' className={styles.countdownStyle} onClick={handleResendClick}>
-                                Resend OTP
-                            </button>
+                            // <button type='button' className={styles.countdownStyle} onClick={handleResendClick}>
+                            //     Resend OTP
+                            // </button>
                         ) : (
                             formatCountdownString()
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </Container >
         </Box >
