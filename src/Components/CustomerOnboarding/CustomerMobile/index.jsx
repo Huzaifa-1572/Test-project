@@ -1,30 +1,12 @@
-import { Box, Fade } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import OtpInputComponent from "src/Common/OtpInputComponent/OtpInputComponent";
-import VerificationButton from "src/Common/VerificationButton/VerificationButton";
 import { CustomInputField, SelectField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import {
-  Contentstyles,
-  Headingstyles,
-  Iconstyles,
-  Roundediconstyles,
-} from "src/Utils/CommonStyles";
-import { maskNumber, retrieveMobileNumber, storeTokenToIndexDb, updateIndexDbData } from "src/Utils/Helpers";
-import { TbDeviceMobile as MobileVerificationIcon } from "react-icons/tb";
-import { FaUserShield as HowToRegRoundedIcon } from "react-icons/fa6";
+import { retrieveMobileNumber, storeTokenToIndexDb, updateIndexDbData } from "src/Utils/Helpers";
 import { useDispatch } from "react-redux";
-import { setIsMobileOtpVerification } from "src/Redux/Reducers/CustomerState";
 import { OPERATOR_OPTION } from "src/Utils/Constants";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
-
-const title = "Mobile Verification";
-const content = {
-  enterMobileNumber: "Please enter Your mobile number",
-  verification:
-    "Please enter the one time passcode which is sent to your mobile number",
-};
+import CustomButton from "src/Common/CustomButton";
 
 const CustomerMobile = ({
   control,
@@ -33,7 +15,6 @@ const CustomerMobile = ({
 }) => {
   const dispatch = useDispatch();
   const [isValidNumber, setIsValidNumber] = useState(false);
-  const [showVerification, setShowVerification] = useState(false);
   const currentMobileValue = watch("customerMobile");
 
   const { mutate: handleCustomerMobile } = usePostDataToServer({ onPostReqSuccess: onSuccessfullCustomerMobile, dispatch });
@@ -67,25 +48,13 @@ const CustomerMobile = ({
   }
 
   return (
-    <>
-      {/* ICON */}
-      <Box sx={Iconstyles}>
-        <MobileVerificationIcon style={Roundediconstyles} />
-      </Box>
-
-      {/* MAIN HEADING */}
-      <Fade in={true} timeout={800}>
-        <Box sx={Headingstyles}>{showVerification ? title : null}</Box>
-      </Fade>
-
+    <CustomerOnboardingLayout
+      icon={'TbDeviceMobile'}
+      title={"Mobile Verification"}
+      description={'Please enter your mobile number.'}
+    >
       {/* TEXT */}
       <Box sx={{ margin: "15px 0px" }}>
-        <Fade in={true} timeout={800}>
-          <Box sx={Contentstyles}>
-            {content.enterMobileNumber}
-          </Box>
-        </Fade>
-
         {/* PHONE INPUT */}
         <Box
           sx={{
@@ -121,12 +90,12 @@ const CustomerMobile = ({
         </Box>
       </Box>
 
-      <VerificationButton
+      <CustomButton
         onClick={handleProceedButton}
         disabled={!isValidNumber}
         label={"Proceed"}
       />
-    </>
+    </CustomerOnboardingLayout>
   );
 };
 

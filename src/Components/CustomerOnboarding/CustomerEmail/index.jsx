@@ -2,7 +2,7 @@ import { Box, Fade } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OtpInputComponent from "src/Common/OtpInputComponent/OtpInputComponent";
-import VerificationButton from "src/Common/VerificationButton/VerificationButton";
+import VerificationButton from "src/Common/CustomButton";
 import { TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import {

@@ -1,9 +1,8 @@
-import { updateScreen } from "src/Reducers/screenState";
 import {
-  getDecodedApiResponse,
+  clearIndexDb,
   getScreen,
 } from "src/Utils/Helpers";
-import { clearIndexDb } from "src/Utils/CommonFunctions/helper";
+import { updateScreen } from "src/Redux/Reducers/ScreenState";
 
 const postRequestSuccess = ({ response, dispatch, NAVIGATE_TO, setValue }) => {
   const DATA = response?.data;

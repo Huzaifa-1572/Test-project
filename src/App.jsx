@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { setupRequestInterceptor, setupResponseInterceptor } from "./Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "./Utils/Settings";
+import ErrorModal from "./Common/ErrorModal";
 
 // LAZY LOADING
 const Loader = lazy(() => import("src/Common/Loader"));
@@ -13,6 +14,7 @@ const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
 
 const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
+  const { errorCode, errorMessage, isError } = useSelector((state) => state?.errorState);
 
   useEffect(() => {
     setupRequestInterceptor();
@@ -30,6 +32,7 @@ const App = () => {
                 <Route path="/customer-onboarding" element={<CustomerOnboarding />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
+              {!!isError && <ErrorModal errorCode={errorCode} errorMessage={errorMessage} isError={isError} />}
             </Router>
           </ThemeProvider>
         </QueryClientProvider>

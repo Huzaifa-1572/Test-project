@@ -5,7 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { CheckboxField } from "src/Components/FormFields";
 import styles from "./index.module.scss";
 import React, { useState } from "react";
-import VerificationButton from "src/Common/VerificationButton/VerificationButton";
+import VerificationButton from "src/Common/CustomButton";
 import AccountOpeningSuccessModal from "src/Components/Modal/AccountOpeningSuccessModal";
 import { useNavigate } from "react-router-dom";
 

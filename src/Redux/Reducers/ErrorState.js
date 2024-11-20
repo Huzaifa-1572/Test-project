@@ -1,24 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    errorBody: '',
-    showErrorModal: false
-}
+  errorCode: null,
+  errorMessage: "",
+  isError: false,
+};
 
 export const ERROR_STATE = createSlice({
-    name: 'ERROR_STATE',
-    initialState,
-    reducers: {
-        showErrorModal: (state, action) => {
-            return action.payload
-        },
-        closeErrorModal: (state, action) => {
-            return action.payload
-        },
-    }
-})
+  name: "ERROR_STATE",
+  initialState,
+  reducers: {
+    showErrorModal: (state, action) => {
+      state.errorCode = action.payload.errorCode;
+      state.errorMessage = action.payload.errorMessage;
+      state.isError = action.payload.isError;
+    },
+    closeErrorModal: (state) => {
+      state.errorCode = null;
+      state.errorMessage = "";
+      state.isError = false;
+    },
+  },
+});
 
-// Action creators are generated for each case reducer function
-export const { showErrorModal, closeErrorModal } = ERROR_STATE.actions
+export const { showErrorModal, closeErrorModal } = ERROR_STATE.actions;
 
-export default ERROR_STATE.reducer
+export default ERROR_STATE.reducer;
