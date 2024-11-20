@@ -1,37 +1,30 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Box, Container, Grid, Button, Grow } from "@mui/material";
+import { Box, Button, Container, Grid, Grow } from "@mui/material";
 import { IoPlay as PlayArrowIcon } from "react-icons/io5";
 import { MdOutlineOpenInBrowser as OpenInBrowserIcon } from "react-icons/md";
-import HeroImage from "src/Assets/images/hero.png";
-import styles from "./index.module.scss";
-import {
-  setIsResumeApplication,
-  setIsWelcome,
-} from "src/Redux/Reducers/CustomerState";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import HeroImage from "src/Assets/images/hero.png";
+import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateScreen } from "src/Redux/Reducers/ScreenState";
-import { storeDataToIndexDb } from "src/Utils/Helpers";
+import styles from "./index.module.scss";
+
 
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleNewAccount = () => {
-    const NEW_SCREEN = "scr_customerCnic";
-    dispatch(setIsWelcome(true));
-    dispatch(updateScreen(NEW_SCREEN));
-    storeDataToIndexDb(NEW_SCREEN)
+    const NEXT_SCREEN = "scr_customerCnic";
+    dispatch(updateScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");
   };
 
   const handleResumeApplication = () => {
-    dispatch(setIsResumeApplication(true));
     navigate("/customer-onboarding");
   };
 
   return (
-    <>
+    <HomePageLayout>
       <Container maxWidth="xl">
         <Grid container spacing={2}>
           {/* COLUMN 1 */}
@@ -119,7 +112,7 @@ const LandingPage = () => {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </HomePageLayout>
   );
 };
 

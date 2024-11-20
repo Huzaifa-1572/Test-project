@@ -1,15 +1,6 @@
-import {
-  Autocomplete,
-  Box,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  Switch,
-} from "@mui/material";
+import { Autocomplete, Box, FormControlLabel, Switch } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -17,15 +8,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import React from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-import { Controller, useController } from "react-hook-form";
+import { Controller } from "react-hook-form";
+import { LuUpload } from "react-icons/lu";
 import { NumericFormat, PatternFormat } from "react-number-format";
 import { useDispatch } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
-import { defaultGetOptionLabel, validateFileSize } from "src/Utils/Helpers";
-import UploadIcon from "src/assets/svgs/uploadIcon.svg";
+import { validateFileSize } from "src/Utils/Helpers";
 import Tick from "src/assets/svgs/tick_white.svg";
-import { LuUpload } from "react-icons/lu";
 
 const PatternFormatRef = React.forwardRef((props, ref) => (
   <PatternFormat {...props} getInputRef={ref} />
@@ -195,19 +184,11 @@ export const AlphaNumericInputField = ({
   );
 };
 
-// TextArea Field
-export const MultiLineTextInputField = ({
-  name,
-  label,
-  control,
-  placeholder,
-  maxLength,
-  rows,
-}) => (
+// TEXTAREA FIELD
+export const MultiLineTextInputField = ({ name, label, control, placeholder, maxLength, rows }) => (
   <Controller
     name={name}
     control={control}
-    shouldUnregister={false}
     render={({ field }) => (
       <TextField
         {...field}
@@ -219,31 +200,36 @@ export const MultiLineTextInputField = ({
         multiline
         rows={rows}
         placeholder={placeholder}
-        InputProps={{
-          disableUnderline: true,
-          style: {
-            background: "white",
-            border: "1px solid #eaeaea",
-            borderRadius: "3px",
-            maxWidth: "500px",
-            width: "100%",
-            fontSize: "1.25rem",
-            lineHeight: "15px",
-            marginTop: "10px",
-          },
-          inputProps: {
-            maxLength: maxLength,
-            style: {
-              paddingBottom: "5px",
-            },
+        sx={{
+          '& .MuiFilledInput-root': {
+            backgroundColor: 'white',
           },
         }}
-        InputLabelProps={{
-          style: {
-            fontSize: "1.25rem",
-            color: "#666666",
-            marginTop: "5px",
-            fontFamily: "ArticulatCF-Regular",
+        slotProps={{
+          input: {
+            disableUnderline: true,
+            sx: {
+              background: 'white',
+              border: '1px solid #eaeaea',
+              borderRadius: '7px',
+              // maxWidth: '500px',
+              width: '100%',
+              fontSize: '1.25rem',
+              lineHeight: '15px',
+              marginTop: '20px',
+              paddingBottom: '5px',
+            },
+            inputProps: {
+              maxLength: maxLength,
+            },
+          },
+          inputLabel: {
+            sx: {
+              fontSize: '1.25rem',
+              color: '#666666',
+              marginTop: '15px',
+              fontFamily: `'Roboto', 'Arial', sans-serif`,
+            },
           },
         }}
       />
@@ -347,20 +333,20 @@ export const CustomInputField = ({
           isAllowed={
             isMobileNumberFormat
               ? (values) => {
-                  const { value } = values;
-                  if (value[0] === undefined) {
-                    return true;
-                  }
-                  if (value[0] !== "0") {
+                const { value } = values;
+                if (value[0] === undefined) {
+                  return true;
+                }
+                if (value[0] !== "0") {
+                  return false;
+                }
+                if (value[1] !== undefined) {
+                  if (value[1] !== "3") {
                     return false;
                   }
-                  if (value[1] !== undefined) {
-                    if (value[1] !== "3") {
-                      return false;
-                    }
-                  }
-                  return true; // Disallow input in all other cases
                 }
+                return true; // Disallow input in all other cases
+              }
               : undefined
           }
           customInput={TextField}
@@ -594,9 +580,9 @@ export const SelectField = ({
               background: "white",
             },
             "& .MuiSelect-select.MuiInputBase-input.MuiFilledInput-input:focus":
-              {
-                backgroundColor: "white",
-              },
+            {
+              backgroundColor: "white",
+            },
           }}
           InputProps={{
             disableUnderline: true,
@@ -639,254 +625,64 @@ export const SelectField = ({
   );
 };
 
-//SelectField With Search
-export const AutoCompleteField = ({
-  name,
-  control,
-  placeholder,
-  label,
-  options,
-  defaultValue,
-  disabled = false,
-  getOptionLabel = defaultGetOptionLabel,
-}) => {
-  const defaultProps = {
-    options: options,
-    getOptionLabel: getOptionLabel,
-  };
-
+// SELECT FIELD (for selected value=object)
+export const AutocompleteSelectField = ({ name, label, control, options, disabled }) => {
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => {
-        // Set field value to null if it's an empty string
-        const value = field.value == [] ? null : field.value;
-        return (
-          <Autocomplete
-            {...field}
-            {...defaultProps}
-            id={name}
-            disabled={disabled}
-            defaultValue={defaultValue}
-            multiple={false}
-            isOptionEqualToValue={(option, value) =>
-              option.value === value.value
-            }
-            onChange={(event, selectedValue) => {
-              if (selectedValue) {
-                if (name === "e__NBPBranchCode") {
-                  const formattedValue =
-                    name === "e__NBPBranchCode"
-                      ? `${selectedValue.value}*${selectedValue.label} (${selectedValue.value})`
-                      : `${selectedValue.value}*${selectedValue.label}`;
-                  field.onChange(formattedValue);
-                } else {
-                  field.onChange(
-                    `${selectedValue.value}*${selectedValue.label}`
-                  );
-                }
-              }
-            }}
-            clearIcon={null}
-            sx={{
-              background: "white",
-              border: "1px solid #eaeaea",
-              borderRadius: "3px",
-              maxWidth: "500px",
-              width: "100%",
-              fontSize: "1.25rem",
-              lineHeight: "15px",
-              height: "70px",
-            }}
-            value={value}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                sx={{ background: "white" }}
-                placeholder={placeholder}
-                label={label}
-                variant="filled"
-                InputProps={{
-                  ...params.InputProps,
-                  disableUnderline: true,
-                  style: {
-                    background: "white",
-                    border: "1px solid #eaeaea",
-                    borderRadius: "3px",
-                    maxWidth: "500px",
-                    width: "100%",
-                    fontSize: "1.25rem",
-                    lineHeight: "15px",
-                    height: "70px",
-                  },
-                }}
-                InputLabelProps={{
-                  style: {
-                    fontSize: "1.25rem",
-                    color: "#666666",
-                    // marginTop: '5px',
-                    fontFamily: "ArticulatCF-Regular",
-                  },
-                }}
-              />
-            )}
-            renderOption={(props, option, { selected }) => (
-              <li {...props}>
-                <span
-                  style={{
-                    marginLeft: "4px",
-                    letterSpacing: "0.2px",
-                    paddingTop: "4px",
-                    paddingBottom: "4px",
-                    fontSize: "14px",
-                  }}
-                >
-                  {name === "e__NBPBranchCode"
-                    ? `${option?.label} (${option?.value})`
-                    : option?.label}
-                </span>
-              </li>
-            )}
-          />
-        );
-      }}
-    />
-  );
-};
-
-//MultiSelect Field
-export const MultiSelect = ({
-  name,
-  control,
-  options,
-  placeholder,
-  defaultValue,
-  label,
-}) => {
-  return (
-    <Controller
-      name={name}
-      control={control}
-      defaultValue={defaultValue || []}
-      render={({ field }) => (
-        <>
-          <FormControl
-            variant="filled"
-            sx={{
-              maxWidth: "500px",
-              width: "100%",
-            }}
-          >
-            <InputLabel
-              sx={{
-                fontSize: "1.25rem",
-                color: "#666666",
-                marginTop: "10px",
-                fontFamily: "ArticulatCF-Regular",
-                top: "-7px",
-              }}
-              id="multiselect-label"
-            >
-              {placeholder}
-            </InputLabel>
-            <Select
-              labelId="multiselect-label"
-              id={`custom-multi-select`}
-              displayEmpty
-              multiple
+      render={({ field: { onChange, value } }) => (
+        <Autocomplete
+          options={options}
+          getOptionLabel={(option) => option.label} // Set the label displayed
+          isOptionEqualToValue={(option, value) => option.value === value.value} // Match options to selected value
+          value={value || null} // Ensure `value` is an object or `null`
+          onChange={(event, newValue) => {
+            onChange(newValue); // Pass the full object as the value
+          }}
+          disableClearable
+          disabled={disabled}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={label}
               variant="filled"
-              disableUnderline
-              MenuProps={{
-                anchorOrigin: {
-                  vertical: "top",
-                  horizontal: "left",
-                },
-                transformOrigin: {
-                  vertical: "top",
-                  horizontal: "left",
-                },
-                PaperProps: {
-                  style: {
-                    maxHeight: "280px",
-                  },
-                },
-              }}
-              value={field.value || []}
-              onChange={(e) => {
-                field.onChange(e.target.value);
-              }}
-              renderValue={(selected) => {
-                if (
-                  selected?.length === 0 ||
-                  (selected?.length === 1 && selected[0] === "")
-                ) {
-                  // return <em style={{ fontFamily: "ArticulatCF-Regular", fontSize: '1.25rem', color: '#666666', fontStyle: 'normal' }}>{placeholder}</em>
-                } else {
-                  if (selected[0] === "") {
-                    let formatArray = selected.slice(1, selected.length);
-                    return formatArray
-                      .map((item) => item.split("*")[1])
-                      .join(", ");
-                  } else {
-                    return selected
-                      ?.map((item) => item.split("*")[1])
-                      .join(", ");
-                  }
-                }
-              }}
-              style={{
-                background: "white",
-                border: "1px solid #eaeaea",
-                borderRadius: "3px",
-                maxWidth: "500px",
-                width: "100%",
-                fontSize: "1.25rem",
-                lineHeight: "15px",
-                height: "70px",
-                paddingTop: "11px",
+              fullWidth
+              disabled={disabled}
+              InputProps={{
+                ...params.InputProps,
+                disableUnderline: true, // Disables underline
               }}
               sx={{
-                "& .MuiSelect-select.MuiInputBase-input.MuiFilledInput-input:focus":
-                  {
-                    backgroundColor: "white",
-                  },
-                "& .MuiSelect-select.MuiInputBase-input.MuiFilledInput-input": {
-                  whiteSpace: name === "e__ModeofTrx" ? "normal" : "nowrap",
+                '& .MuiFilledInput-root': {
+                  backgroundColor: 'white',
+                },
+                '& .MuiInputBase-root': {
+                  background: 'white',
+                  borderRadius: '7px',
+                  border: '1px solid #eaeaea',
+                  maxWidth: '500px',
+                  width: '100%',
+                  fontSize: '1.25rem',
+                  height: '70px',
+                  boxShadow: 'none',
+                },
+                '& .MuiInputLabel-root': {
+                  fontSize: '1.25rem',
+                  color: '#666666',
+                  marginTop: '10px',
+                  fontFamily: `'Roboto', 'Arial', sans-serif`,
+                  top: '-5px',
                 },
               }}
-            >
-              {/* Options */}
-              {options.map((option) => (
-                <MenuItem
-                  sx={{ height: "45px" }}
-                  key={option.value}
-                  value={`${option.value}*${option.label}`}
-                >
-                  <Checkbox
-                    checked={
-                      defaultValue
-                        ? field.value.indexOf(
-                            `${option.value}*${option.label}`
-                          ) > -1 ||
-                          defaultValue.indexOf(
-                            `${option.value}*${option.label}`
-                          ) > -1
-                        : field.value.indexOf(
-                            `${option.value}*${option.label}`
-                          ) > -1
-                    }
-                  />
-                  <ListItemText primary={option.label} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </>
+            />
+          )}
+        />
       )}
     />
   );
 };
+
 
 // Upload Image
 export const UploadImage = ({
@@ -1087,10 +883,7 @@ export const UploadImage = ({
 //Checkbox Component
 export const CheckboxField = ({ name, control, label }) => {
   const styles = {
-    "& .MuiSvgIcon-root": {
-      fontSize: "clamp(18px, 26px, 26px)",
-      marginRight: "0",
-    },
+    '& .MuiSvgIcon-root': { fontSize: 'clamp(18px, 26px, 26px)', marginRight: '0' }
   };
 
   return (
@@ -1100,38 +893,17 @@ export const CheckboxField = ({ name, control, label }) => {
       render={({ field }) => (
         <FormControlLabel
           control={
-            <Checkbox id={name} checked={field.value} {...field} sx={styles} />
+            <Checkbox
+              id={name}
+              checked={field.value}
+              {...field}
+              sx={styles}
+            />
           }
           label={label}
         />
       )}
     />
-  );
-};
-
-// RECAPTCHA FIELD
-export const CaptchaField = ({ name, control, onChange, siteKey, style }) => {
-  //using a hidden input field to fix the elm.focus issue of
-  const {
-    field: { ref, ...field },
-  } = useController({
-    name,
-    control,
-    rules: { required: true },
-  });
-  return (
-    <div>
-      <input ref={ref} type="hidden" />
-      <ReCAPTCHA
-        {...field}
-        sitekey={siteKey}
-        style={style}
-        onChange={(value) => {
-          field.onChange(value);
-          if (onChange) onChange(value);
-        }}
-      />
-    </div>
   );
 };
 

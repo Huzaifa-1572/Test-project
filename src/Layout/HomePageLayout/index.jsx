@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import Header from "src/Layout/Header";
 
-const LandingLayout = ({ children }) => {
+const HomePageLayout = ({ children }) => {
   return (
     <>
       <div className={styles.container}>
@@ -16,4 +16,4 @@ const LandingLayout = ({ children }) => {
   );
 };
 
-export default LandingLayout;
+export default HomePageLayout;

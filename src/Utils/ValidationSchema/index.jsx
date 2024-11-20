@@ -6,6 +6,8 @@ export const shape = {
       .string()
       .required("This field is required")
       .matches(/^\d{5}-\d{7}-\d{1}$/, "A valid CNIC is required"),
+    googleCaptcha: yup.string().required("Captcha is required"),
+
   },
   "mobile-verification": {
     customerMobile: yup

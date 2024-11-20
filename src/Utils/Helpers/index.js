@@ -34,22 +34,6 @@ export const validateFileSize = (file) => {
   return fileSizeInMB <= sizeLimit;
 };
 
-//Default get option label for AutoComplete
-export const defaultGetOptionLabel = (option) => {
-  if (Array.isArray(option) && option.length === 0) return ""; // Handle empty array
-  return option?.label ? option?.label : option?.split("*")[1];
-};
-
-export const Verificationcondition = (isVerification, resumeApplication) => {
-  if (isVerification) {
-    return "Verify OTP";
-  } else if (resumeApplication) {
-    return "Resume";
-  } else {
-    return "Proceed";
-  }
-};
-
 // check camera access
 export function checkCameraPermission() {
   return new Promise((resolve, reject) => {

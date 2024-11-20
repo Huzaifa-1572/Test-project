@@ -1,8 +1,6 @@
-import React, { lazy } from "react";
-import useGetCurrentScreen from "src/Hooks/useGetCurrentScreen";
-const WrapperForHookFormProps = lazy(() =>
-  import("src/Layout/WrapperForHookFromProps")
-);
+import { lazy } from "react";
+import { useSelector } from "react-redux";
+const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
 
 // Customer Onboarding Screens
 const CustomerCnic = lazy(() => import("src/Components/CustomerOnboarding/CustomerCnic"));
@@ -37,7 +35,7 @@ const showScreen = {
 };
 
 const CustomerOnboarding = () => {
-  const CURRENT_SCREEN = useGetCurrentScreen()
+  const CURRENT_SCREEN = useSelector(state => state?.screenState)
 
   return (
     <WrapperForHookFormProps>
