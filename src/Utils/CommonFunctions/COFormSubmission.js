@@ -1,74 +1,131 @@
-// import { BASE_URL, ENDPOINTS } from "src/Utils/Config";
+import { BASE_URL, ENDPOINTS } from "../config";
+import { PAYLOAD_KEYS } from "../Constants";
+import { retrieveCNIC, retrieveMobileNumber } from "../Helpers";
 
-const GENERIC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-  let fields;
-  if (Array.isArray(kuid)) {
-    fields = kuid.map((kuid) => ({
-      kuid,
-      userValue: data[kuid],
-    }));
-  } else {
-    fields =
-      CURRENT_SCREEN != "scr119_requiredDocuments"
-        ? [
-            {
-              kuid: kuid,
-              userValue: data[kuid],
-            },
-          ]
-        : [];
-  }
-
-  if (CURRENT_SCREEN == "scr118.1_studentFundsource") {
-    fields = [
-      {
-        kuid: "e__SourceofFunds",
-        userValue: data["e__StudentSourceofFund"],
-      },
-    ];
-  }
-
-  if (CURRENT_SCREEN == "scr129_mailingAddress") {
-    if (fields[3]?.userValue == "Same as Mailing") {
-      fields.splice(-3);
-    }
-  }
-
-  const ENCRYPTED_BODY = encryptText({
-    token: localStorage.getItem("token"),
+export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    reCaptchaToken: data.googleCaptcha,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
-    fields,
-  });
-
-  const BODY = { payload: ENCRYPTED_BODY };
+  };
 
   return {
-    API_URL: `${BASE_URL}${ENDPOINTS.GENERIC_HANDLER}`,
+    API_URL: `${BASE_URL}${ENDPOINTS.AUTHENTICATION}`,
     BODY,
   };
 };
 
-const CNIC_HANDLER = ({ CURRENT_SCREEN, data }) => {
+export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, getValues }) => {
+  const customerCnic = getValues("customerCnic");
   const BODY = {
-    token: localStorage.getItem("token"),
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(customerCnic),
     screenKuid: CURRENT_SCREEN,
-    fields: [
-      {
-        kuid: kuid,
-        userValue: data[kuid],
-      },
-    ],
   };
 
   return {
-    API_URL: ``,
+    API_URL: `${BASE_URL}${ENDPOINTS.IS_CUSTOMER_EXIST}`,
+    BODY,
+  };
+};
+
+export const CUSTMOBILE_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    mobileNumber: retrieveMobileNumber(data.customerMobile),
+    screenKuid: CURRENT_SCREEN,
+    isResumeApplication: false,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.SEND_SMS}`,
+    BODY,
+  };
+};
+
+export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    mobileNumber: retrieveMobileNumber(data.customerMobile),
+    screenKuid: CURRENT_SCREEN,
+    token: data.verificationToken,
+    otp: data.customerOTP,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.VALIDATE_SMS_OTP}`,
+    BODY,
+  };
+};
+
+export const CUSTEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    email: data.customerEmail,
+    screenKuid: CURRENT_SCREEN,
+    isResumeApplication: false,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.SEND_EMAIL}`,
+    BODY,
+  };
+};
+
+export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    email: data.customerEmail,
+    screenKuid: CURRENT_SCREEN,
+    token: data.verificationToken,
+    otp: data.customerOTP,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.VALIDATE_EMAIL_OTP}`,
     BODY,
   };
 };
 
 export const COFormSubmission = {
   scr_customerCnic: ({ CURRENT_SCREEN, data }) => {
-    return CNIC_HANDLER({
+    return AUTHENTICATION_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+
+  scr_customerMobile: ({ CURRENT_SCREEN, data }) => {
+    return CUSTMOBILE_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_mobileVerification: ({ CURRENT_SCREEN, data }) => {
+    return CUSTMOBILE_VERIFICATION_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_customerEmail: ({ CURRENT_SCREEN, data }) => {
+    return CUSTEMAIL_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_emailVerification: ({ CURRENT_SCREEN, data }) => {
+    return CUSTEMAIL_VERIFICATION_HANDLER({
       CURRENT_SCREEN,
       data,
     });

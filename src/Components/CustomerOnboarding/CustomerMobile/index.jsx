@@ -2,22 +2,18 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { CustomInputField, SelectField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import { retrieveMobileNumber, storeTokenToIndexDb, updateIndexDbData } from "src/Utils/Helpers";
-import { useDispatch } from "react-redux";
+import { retrieveMobileNumber } from "src/Utils/Helpers";
 import { OPERATOR_OPTION } from "src/Utils/Constants";
-import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomButton from "src/Common/CustomButton";
+import WizardLayout from "src/Layout/WizardLayout";
 
 const CustomerMobile = ({
   control,
   errors,
   watch,
 }) => {
-  const dispatch = useDispatch();
-  const [isValidNumber, setIsValidNumber] = useState(false);
   const currentMobileValue = watch("customerMobile");
-
-  const { mutate: handleCustomerMobile } = usePostDataToServer({ onPostReqSuccess: onSuccessfullCustomerMobile, dispatch });
+  const [isValidNumber, setIsValidNumber] = useState(false);
 
   useEffect(() => {
     const number = retrieveMobileNumber(currentMobileValue);
@@ -25,30 +21,8 @@ const CustomerMobile = ({
     setIsValidNumber(isValid);
   }, [currentMobileValue]);
 
-  const handleProceedButton = (e) => {
-    e.preventDefault();
-    const API_URL = "http://192.168.20.101:8080/api/dao/v1/otp/sendsms";
-    const BODY = {
-      mobileNumber: "03459872345",
-      isResumeApplication: false,
-      custIdentityKey: "011",
-      custIdentityValue: "1398765412345",
-      channelCode: "09",
-    };
-
-    handleCustomerMobile({ BODY, API_URL });
-  };
-
-  async function onSuccessfullCustomerMobile(response) {
-    console.log('jhbchjsdbhcjd', response.data.data.token);
-    await updateIndexDbData('scr_mobileVerification')
-    localStorage.setItem('tokenMobile',response?.data?.data?.token)
-    // await storeTokenToIndexDb(response?.data?.data?.token);
-    location.reload();
-  }
-
   return (
-    <CustomerOnboardingLayout
+    <WizardLayout
       icon={'TbDeviceMobile'}
       title={"Mobile Verification"}
       description={'Please enter your mobile number.'}
@@ -91,11 +65,10 @@ const CustomerMobile = ({
       </Box>
 
       <CustomButton
-        onClick={handleProceedButton}
         disabled={!isValidNumber}
         label={"Proceed"}
       />
-    </CustomerOnboardingLayout>
+    </WizardLayout>
   );
 };
 

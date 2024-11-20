@@ -9,6 +9,7 @@ export const INITIAL_VALUES = {
   googleCaptcha: "",
   customerEmail: "",
   customerMobile: "",
+  customerOTP: "",
   customerOperator: "",
   isWelcome: false,
   isResumeApplication: false,
@@ -16,6 +17,7 @@ export const INITIAL_VALUES = {
   isMobileOtpVerification: false,
   isEmailOtpVerification: false,
   UserGeoCoordinates: "",
+  verificationToken: "",
 };
 
 export const PATHS = {
@@ -400,3 +402,8 @@ export const LIST_OF_CITIES = [
   { label: "Neelam", value: "333" },
   { label: "Judba", value: "334" },
 ];
+
+export const PAYLOAD_KEYS = {
+  CUST_IDENTIFICATION_KEY: "0001",
+  CHANNEL_CODE: "0013",
+};

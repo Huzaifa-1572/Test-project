@@ -27,6 +27,10 @@ export const retrieveMobileNumber = (mobileNum) => {
   return mobileNum.replace(/[-_]/g, "");
 };
 
+export function retrieveCNIC(cnic) {
+  return cnic.replace(/[-\s]/g, "");
+}
+
 //handle file size of img
 export const validateFileSize = (file) => {
   const fileSizeInMB = file.size / (1024 * 1024);
@@ -66,7 +70,7 @@ export const tempUser = {
 export const setupRequestInterceptor = () => {
   Axios.interceptors.request.use(
     function (config) {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("referenceKey");
       if (!!token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -87,7 +91,7 @@ export const setupResponseInterceptor = () => {
       if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
         // Remove the 'Bearer ' prefix from the token
         const token = authorizationHeader.replace("Bearer ", "");
-        localStorage.setItem("token", token);
+        localStorage.setItem("referenceKey", token);
         console.log("Token without Bearer:", token);
       }
       return response; // Always return the response or modify it
@@ -146,9 +150,6 @@ export async function clearIndexDb() {
 
 // GET SCREEN
 export const getScreen = (data) => {
-  const screen =
-    data?.next_screen?.screenViewObj?.screen_kuid ||
-    data?.next_screen?.screen_kuid ||
-    "";
+  const screen = data?.data?.nextScreenPayload?.screen_kuid || "";
   return screen;
 };
