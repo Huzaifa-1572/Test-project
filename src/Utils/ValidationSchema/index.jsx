@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 export const shape = {
-  "cnic-verification": {
+  "scr_customerCnic": {
     customerCnic: yup
       .string()
       .required("This field is required")

@@ -6,6 +6,7 @@ import { IoDocumentText } from "react-icons/io5";
 
 export const INITIAL_VALUES = {
   customerCnic: "",
+  googleCaptcha: "",
   customerEmail: "",
   customerMobile: "",
   customerOperator: "",

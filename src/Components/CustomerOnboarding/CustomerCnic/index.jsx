@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import MutedText from "src/Common/MutedText";
 import VerificationButton from "src/Common/VerificationButton/VerificationButton";
-import { CustomInputField } from "src/Components/FormFields";
+import { CustomInputField, CaptchaField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
@@ -55,7 +55,7 @@ const CustomerCnic = ({ control, errors }) => {
       reCaptchaToken: "1234",
       custIdentityValue: "1398765412345",
     };
-    const API_URL = "http://10.6.60.6:8089/api/dao/v1/authenticate";
+    const API_URL = "http://192.168.20.101:8080/api/dao/v1/authenticate";
     handleCustomerAuthenticate({ BODY, API_URL });
   };
 
@@ -111,21 +111,16 @@ const CustomerCnic = ({ control, errors }) => {
           placeholder="xxxxx-xxxxxxx-x"
           inputMode="numeric"
         />
-        {errors?.customerCnic ? (
-          <ValidationError message={errors?.customerCnic?.message} />
-        ) : null}
+        {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
       </Box>
 
 
       {/* BUTTON */}
       <VerificationButton
-        onClick={handleProceedButton}
-        disabled={!recaptchaValue.current}
+        // onClick={handleProceedButton}
+        type='submit'
+        // disabled={!recaptchaValue.current}
         label='verify'
-      />
-      <MutedText
-        customText="CNIC & Recaptcha Are Required Fields!"
-        textColor={"red"}
       />
 
       {/* RECAPTCHA */}
@@ -133,11 +128,17 @@ const CustomerCnic = ({ control, errors }) => {
 
 
         <Box sx={{ width: "100%", maxWidth: "400px" }}>
-          <ReCAPTCHA
+          {/* <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
             onChange={onCaptchaChange}
-          />
+          /> */}
+
+          {console.log('errors', errors)}
+
+          <CaptchaField name={'googleCaptcha'} control={control}
+            siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY} />
+          {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
         </Box>
       </Box>
     </>

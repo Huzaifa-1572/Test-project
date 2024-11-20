@@ -8,7 +8,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import React from "react";
-import { Controller } from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
+import { Controller, useController } from "react-hook-form";
 import { LuUpload } from "react-icons/lu";
 import { NumericFormat, PatternFormat } from "react-number-format";
 import { useDispatch } from "react-redux";
@@ -966,3 +967,28 @@ export const CurrencyInputField = ({
     />
   );
 };
+
+
+// RECAPTCHA FIELD
+export const CaptchaField = ({ name, control, onChange, siteKey, style }) => {
+  //using a hidden input field to fix the elm.focus issue of
+  const { field: { ref, ...field } } = useController({
+    name,
+    control,
+    rules: { required: true },
+  });
+  return (
+    <div>
+      <input ref={ref} type="hidden" />
+      <ReCAPTCHA
+        {...field}
+        sitekey={siteKey}
+        style={style}
+        onChange={(value) => {
+          field.onChange(value);
+          if (onChange) onChange(value);
+        }}
+      />
+    </div>
+  );
+}
