@@ -1,7 +1,7 @@
 import { Box, Fade, Grid } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import VerificationButton from "src/Common/VerificationButton/VerificationButton";
+import VerificationButton from "src/Common/CustomButton";
 import {
   CheckboxField,
   CustomInputField,

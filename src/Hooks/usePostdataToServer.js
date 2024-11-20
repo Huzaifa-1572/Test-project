@@ -1,5 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { showErrorModal } from "src/Redux/Reducers/ErrorState";
+import { closeLoader } from "src/Redux/Reducers/LoaderState";
 
 const POST_REQUEST = async ({ BODY, API_URL, HEADERS }) => {
     console.log("Request BODY:", BODY);
@@ -15,16 +17,16 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
         onError: (error) => {
             console.error(error);
             const code =
-                error?.response?.data?.res?.["error-code"] || "Error";
+            error?.response?.data?.res?.["error-code"] || "Error";
             const message =
-                error?.response?.data?.res?.["error-message"] ||
-                "Something went wrong, try again later.";
+            error?.response?.data?.res?.["error-message"] ||
+            "Something went wrong, try again later.";
             // Optionally dispatch an error modal
-            // dispatch(showErrorModal({ errorCode: code, errorMessage: message, isError: true }));
+            dispatch(showErrorModal({ errorCode: code, errorMessage: message, isError: true }));
         },
         onSettled: () => {
             // Optionally close a loader
-            // dispatch(closeLoader());
+            dispatch(closeLoader());
         },
     });
 };

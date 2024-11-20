@@ -1,7 +1,7 @@
 import { Box, Button, Fade } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import VerificationButton from "src/Common/VerificationButton/VerificationButton";
+import VerificationButton from "src/Common/CustomButton";
 import { useDispatch } from "react-redux";
 import { TbCameraPlus } from "react-icons/tb";
 import styles from "./index.module.scss";
