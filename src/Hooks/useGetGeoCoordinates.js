@@ -9,10 +9,10 @@ const useGetGeoCoordinates = ({ setValue, getValues }) => {
   useEffect(() => {
     const successCallback = (position) => {
       const coords = {
-        Longitude: position.coords.longitude,
-        Latitude: position.coords.latitude,
+        KEY_LONGITUDE: position.coords.longitude,
+        KEY_LATITUDE: position.coords.latitude,
       };
-      setValue("UserGeoCoordinates", JSON.stringify(coords));
+      setValue("KEY_GEO_COORDINATES", coords);
       setLocationStatus("success"); // Location status successfully retrieved
     };
 

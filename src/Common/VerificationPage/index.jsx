@@ -1,7 +1,6 @@
 import OtpInput from 'react-otp-input';
 import { Box, Container } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styles from './index.module.scss';
 
 function VerificationPage({ icon, title, content, setValue, getValues }) {

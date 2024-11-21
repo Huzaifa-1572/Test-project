@@ -1,5 +1,6 @@
 import Axios from "axios";
 import Dexie from "dexie";
+import { useSelector } from "react-redux";
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -60,7 +61,6 @@ export function checkCameraPermission() {
       });
   });
 }
-
 
 // SETUP REQUEST INTERCEPTOR
 export const setupRequestInterceptor = () => {
@@ -148,4 +148,28 @@ export async function clearIndexDb() {
 export const getScreen = (data) => {
   const screen = data?.nextScreenPayload?.screen_kuid || "No Screen Found";
   return screen;
+};
+
+// GET SCREEN DATA FOR DASHBOARD
+export const getScreenData = () => {
+  const SCREEN_DATA = useSelector((state) => state.screenDataState) || {};
+  const [{ title, description, fields }] = SCREEN_DATA?.content_group || [];
+
+  return {
+    TITLE: title || "",
+    DESCRIPTION: description || "",
+    FIELDS: fields || [],
+  };
+};
+
+// GET CITIES BY PROVINCE
+export const getCitiesByProvince = (LOVS, provinceId) => {
+  const province = LOVS.find((item) => Object.keys(item)[0] === provinceId);
+
+  if (!province) {
+    return [];
+  }
+
+  const cities = province[Object.keys(province)[0]];
+  return Array.isArray(cities) ? cities : [];
 };

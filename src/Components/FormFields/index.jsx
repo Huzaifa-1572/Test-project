@@ -27,7 +27,6 @@ export const TextInputField = ({
   label,
   control,
   placeholder = "",
-  maxLength,
   input_type,
   type = "text",
 }) => {
