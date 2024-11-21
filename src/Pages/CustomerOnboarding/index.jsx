@@ -1,5 +1,6 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { getDataFromIndexDb, storeDataToIndexDb } from "src/Utils/Helpers";
 const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
 
 // Customer Onboarding Screens
@@ -36,6 +37,41 @@ const showScreen = {
 
 const CustomerOnboarding = () => {
   const CURRENT_SCREEN = useSelector(state => state?.screenState)
+
+  // PERSISTING VALUES WHEN PAGE IS REFRESHED
+  useEffect(() => {
+
+    getDataFromIndexDb().then(data => {
+
+      console.log('datadsdsdata', data)
+      // if (data && data.formFields) {
+      //   const SavedData = data.formFields
+      //   reset(SavedData)
+      // }
+      // else {
+      //   console.log('No stored data found.');
+      // }
+    });
+    console.log('whopsss i am back')
+
+
+    // Update data on beforeunload
+    const beforeUnloadHandler = async () => {
+      const DATA_TO_STORE = {
+        // CURRENT_SCREEN: CURRENT_SCREEN,
+        // FORMFIELDS: getValues(),
+        TOKEN: '123456'
+      }
+      await storeDataToIndexDb(DATA_TO_STORE);
+    };
+    window.addEventListener('beforeunload', beforeUnloadHandler);
+
+    // Remove event listener when component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', beforeUnloadHandler);
+    };
+  }, []);
+
 
   return (
     <WrapperForHookFormProps>

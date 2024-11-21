@@ -100,52 +100,36 @@ export const setupResponseInterceptor = () => {
   );
 };
 
-const db = new Dexie("store");
-db.version(1).stores({
-  data: "id, currentScreen",
-  tokens: "id, token",
-});
-
-// Function to store initial data
-export async function storeDataToIndexDb(data) {
-  await db.data.put({ id: 1, currentScreen: data });
-}
-
-// Function to update data on beforeunload
-export async function updateIndexDbData(data) {
-  await db.data.update(1, { currentScreen: data });
-}
-
-// Function to retrieve stored data
-export async function getDataFromIndexDb() {
-  const storedData = await db.data.get(1);
-  return storedData || {}; // Return default value if no data found
-}
-
-// Function to store token
-export async function storeTokenToIndexDb(data) {
-  await db.tokens.put({ id: 1, token: data });
-}
-
-// Function to update token on beforeunload
-export async function updateIndexDbToken(data) {
-  await db.tokens.update(1, { token: data });
-}
-
-// Function to retrieve stored token
-export async function getTokenFromIndexDb() {
-  const storedData = await db.tokens.get(1);
-  return storedData || {};
-}
-
-// Function to clear all data from the IndexedDB table
-export async function clearIndexDb() {
-  await db.data.clear();
-  await db.tokens.clear();
-}
-
 // GET SCREEN
 export const getScreen = (data) => {
   const screen = data?.nextScreenPayload?.screen_kuid || "No Screen Found";
   return screen;
 };
+
+
+// INDEX DB SETUP
+const db = new Dexie("store");
+db.version(1).stores({
+  data: 'id, formFields',
+});
+
+// Function to store initial data
+export async function storeDataToIndexDb(data) {
+  await db.data.put({ id: 1, formFields: data });
+}
+
+// Function to update data on beforeunload
+export async function updateIndexDbData(data) {
+  await db.data.update(1, { formFields: data });
+}
+
+// Function to retrieve stored data
+export async function getDataFromIndexDb() {
+  const storedData = await db.data.get(1);
+  return storedData
+}
+
+// Function to clear all data from the IndexedDB table
+export async function clearIndexDb() {
+  await db.data.clear();
+}

@@ -15,13 +15,9 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
             onPostReqSuccess(data);
         },
         onError: (error) => {
-            console.error(error);
-            const code =
-            error?.response?.data?.res?.["error-code"] || "Error";
-            const message =
-            error?.response?.data?.res?.["error-message"] ||
-            "Something went wrong, try again later.";
-            // Optionally dispatch an error modal
+            console.error('error?.response', error?.response);
+            const code = error?.response?.data?.code && `Error-${error?.response?.data?.code}` || "Error";
+            const message = error?.response?.data?.message || "Something went wrong, try again later.";
             dispatch(showErrorModal({ errorCode: code, errorMessage: message, isError: true }));
         },
         onSettled: () => {
