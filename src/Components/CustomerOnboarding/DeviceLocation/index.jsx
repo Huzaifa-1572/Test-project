@@ -1,65 +1,27 @@
-import { Box, Fade, Grid } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import VerificationButton from "src/Common/CustomButton";
-import { UploadImage } from "src/Components/FormFields";
-import ValidationError from "src/Components/ValidationError";
-import {
-  Contentstyles,
-  Headingstyles,
-  Iconstyles,
-  Roundediconstyles,
-} from "src/Utils/CommonStyles";
-import { useDispatch } from "react-redux";
-import { MdLocationOn } from "react-icons/md";
 import Loader from "src/Common/Loader";
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
-
-const title = "Device Location";
-const content = {
-  description: "Please enable your device location to proceed further.",
-};
+import CustomButton from "src/Common/CustomButton";
+import WizardLayout from "src/Layout/WizardLayout";
+import { getScreenData } from "src/Utils/Helpers";
 
 const DeviceLocation = ({
-  control,
   getValues,
-  errors,
   setValue,
-  watch,
-  handleSubmit,
-  submitFormData,
 }) => {
+  const { TITLE, DESCRIPTION } = getScreenData()
   const locationStatus = useGetGeoCoordinates({ setValue, getValues });
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleProceedButton = (e) => {
-    e.preventDefault();
-    navigate("/customer-onboarding/address-detail");
-  };
 
   return (
     <>
       {locationStatus === "loading" && <Loader />}
-      {/* ICON */}
-      <Box sx={Iconstyles}>
-        <MdLocationOn style={Roundediconstyles} />
-      </Box>
-
-      {/* MAIN HEADING */}
-      <Fade in={true} timeout={800}>
-        <Box sx={Headingstyles}>{title}</Box>
-      </Fade>
-
-      {/* CONTENT */}
-      {content.description && (
-        <Fade in={true} timeout={800}>
-          <Box sx={Contentstyles}>{content?.description}</Box>
-        </Fade>
-      )}
-
-      <VerificationButton onClick={handleProceedButton} label={"Proceed"} />
+      <WizardLayout
+        icon={"MdLocationOn"}
+        title={TITLE}
+        description={DESCRIPTION}
+      >
+        <CustomButton label={"Proceed"} />
+      </WizardLayout>
     </>
   );
 };

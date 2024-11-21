@@ -1,44 +1,22 @@
-import { Box, Button, Fade } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import VerificationButton from "src/Common/CustomButton";
 import { useDispatch } from "react-redux";
-import { TbCameraPlus } from "react-icons/tb";
 import styles from "./index.module.scss";
 import Webcam from "react-webcam";
-import {
-  Contentstyles,
-  Headingstyles,
-  Iconstyles,
-  Roundediconstyles,
-} from "src/Utils/CommonStyles";
 import CameraSvg from "src/Assets/svgs/camera.svg";
-import { checkCameraPermission } from "src/Utils/Helpers";
-
-const title = "Live Photo Capture";
-const content = {
-  description: "Kindly upload a clear live photo.",
-};
+import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
+import CustomButton from "src/Common/CustomButton";
+import WizardLayout from "src/Layout/WizardLayout";
 
 const LivePhotoCapture = ({
-  control,
-  getValues,
   errors,
   setValue,
   watch,
-  handleSubmit,
-  submitFormData,
 }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleProceedButton = (e) => {
-    e.preventDefault();
-    navigate("/customer-onboarding/upload-cnic");
-  };
-
-  const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const webcamRef = useRef(null);
+  const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
+  const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
 
   // To check whether the camera access permission is allowed or not
   useEffect(() => {
@@ -70,23 +48,11 @@ const LivePhotoCapture = ({
   const livePhoto = watch("LivePhoto");
 
   return (
-    <>
-      {/* ICON */}
-      <Box sx={Iconstyles}>
-        <TbCameraPlus style={Roundediconstyles} />
-      </Box>
-
-      {/* MAIN HEADING */}
-      <Fade in={true} timeout={800}>
-        <Box sx={Headingstyles}>{title}</Box>
-      </Fade>
-
-      {/* CONTENT */}
-      {content.description && (
-        <Fade in={true} timeout={800}>
-          <Box sx={Contentstyles}>{content?.description}</Box>
-        </Fade>
-      )}
+    <WizardLayout
+      icon={"TbCameraPlus"}
+      title={TITLE}
+      description={DESCRIPTION}
+    >
 
       <Box className={styles.wrapperContainer}>
         {!isCameraAccessAllowed && (
@@ -152,8 +118,8 @@ const LivePhotoCapture = ({
         </Box>
       </Box>
 
-      <VerificationButton onClick={handleProceedButton} label={"Proceed"} />
-    </>
+      <CustomButton label={"Proceed"} />
+    </WizardLayout>
   );
 };
 

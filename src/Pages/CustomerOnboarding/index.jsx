@@ -7,6 +7,7 @@ const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFrom
 const CustomerCnic = lazy(() => import("src/Components/CustomerOnboarding/CustomerCnic"));
 const CustomerMobile = lazy(() => import("src/Components/CustomerOnboarding/CustomerMobile"));
 const MobileVerification = lazy(() => import("src/Components/CustomerOnboarding/MobileVerfication"));
+const HasValidEmail = lazy(() => import("src/Components/CustomerOnboarding/HasValidEmail"));
 const CustomerEmail = lazy(() => import("src/Components/CustomerOnboarding/CustomerEmail"));
 const EmailVerification = lazy(() => import("src/Components/CustomerOnboarding/EmailVerification"));
 const PersonalInformation = lazy(() => import("src/Components/CustomerOnboarding/PersonalInformation"));
@@ -23,6 +24,7 @@ const showScreen = {
   scr_customerCnic: <CustomerCnic />,
   scr_customerMobile: <CustomerMobile />,
   scr_mobileVerification: <MobileVerification />,
+  scr_hasValidEmail: <HasValidEmail />,
   scr_customerEmail: <CustomerEmail />,
   scr_emailVerification: <EmailVerification />,
   scr_personalInformation: <PersonalInformation />,
