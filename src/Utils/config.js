@@ -9,10 +9,11 @@ export const ENDPOINTS = {
   IS_CUSTOMER_EXIST: "api/dao/v1/customer/isExist",
   SEND_SMS: "api/dao/v1/otp/sendsms",
   VALIDATE_SMS_OTP: "api/dao/v1/otp/validate-sms-otp",
-  GENERIC_HANDLER: "api/dao/v1/generic-handler/",
   SEND_EMAIL: "api/dao/v1/otp/sendemail",
   VALIDATE_EMAIL_OTP: "api/dao/v1/otp/validate-email-otp",
   CUSTOMER_INFORMATION: "api/dao/v1/customer/updateCustomerInfo",
+  GENERIC_HANDLER: "api/dao/v1/generic-handler/",
+  DOCUMENT_HANDLER: "api/dao/v1/document/upload",
 };
 
 

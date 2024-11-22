@@ -14,7 +14,8 @@ const AdditionalInformation = lazy(() => import("src/Components/CustomerOnboardi
 const DeviceLocation = lazy(() => import("src/Components/CustomerOnboarding/DeviceLocation"));
 const AddressDetail = lazy(() => import("src/Components/CustomerOnboarding/AddressDetail"));
 const LivePhotoCapture = lazy(() => import("src/Components/CustomerOnboarding/LivePhotoCapture"));
-const UploadCnic = lazy(() => import("src/Components/CustomerOnboarding/UploadCnic"));
+const CnicFront = lazy(() => import("src/Components/CustomerOnboarding/CnicFront"));
+const CnicBack = lazy(() => import("src/Components/CustomerOnboarding/CnicBack"));
 const CnicDetail = lazy(() => import("src/Components/CustomerOnboarding/CnicDetail"));
 const TermAndCondition = lazy(() => import("src/Components/CustomerOnboarding/TermAndCondition"));
 
@@ -31,7 +32,8 @@ const showScreen = {
   scr_deviceLocation: <DeviceLocation />,
   scr_addressDetail: <AddressDetail />,
   scr_livePhotoCapture: <LivePhotoCapture />,
-  scr_uploadCnic: <UploadCnic />,
+  scr_uploadCnicFront: <CnicFront />,
+  scr_uploadCnicBack: <CnicBack />,
   scr_cnicDetail: <CnicDetail />,
   scr_termAndCondition: <TermAndCondition />,
 };

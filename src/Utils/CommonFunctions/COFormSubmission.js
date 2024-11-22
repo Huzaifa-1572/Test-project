@@ -37,6 +37,7 @@ export const CUSTMOBILE_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     mobileNumber: retrieveMobileNumber(data.customerMobile),
+    mobileOperator: data.customerOperator, 
     screenKuid: CURRENT_SCREEN,
     isResumeApplication: false,
   };
@@ -115,7 +116,6 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 };
 
 export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-
   let fields = [];
 
   if (Array.isArray(kuid)) {
@@ -125,7 +125,6 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     }));
   }
 
-
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
@@ -133,7 +132,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     screenKuid: CURRENT_SCREEN,
     content: {
       kycs: fields,
-    }
+    },
   };
 
   return {
@@ -160,6 +159,39 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
+export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = new FormData();
+  const documentScreens = [
+    "scr_livePhotoCapture",
+    "scr_uploadCnicFront",
+    "scr_uploadCnicBack",
+  ];
+
+  if (documentScreens.includes(CURRENT_SCREEN)) {
+    BODY.append("file", data.KEY_LIVE_PHOTO);
+  }
+
+  BODY.append(
+    "data",
+    new Blob(
+      [
+        JSON.stringify({
+          documentType: PAYLOAD_KEYS.DOCUMENT_TYPE,
+          custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+          channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+          custIdentityValue: retrieveCNIC(data.customerCnic),
+          screenKuid: CURRENT_SCREEN,
+        }),
+      ],
+      { type: "application/json" }
+    )
+  );
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.DOCUMENT_HANDLER}`,
+    BODY,
+  };
+};
 
 export const COFormSubmission = {
   scr_customerCnic: ({ CURRENT_SCREEN, data }) => {
@@ -228,6 +260,39 @@ export const COFormSubmission = {
         "KEY_CITY_CODE",
         "KEY_PROVINCE",
         "KEY_LANDMARK",
+      ],
+    });
+  },
+  scr_livePhotoCapture: ({ CURRENT_SCREEN, data }) => {
+    return DOCUMENT_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_uploadCnicFront: ({ CURRENT_SCREEN, data }) => {
+    return DOCUMENT_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_uploadCnicBack: ({ CURRENT_SCREEN, data }) => {
+    return DOCUMENT_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_cnicDetail: ({ CURRENT_SCREEN, data }) => {
+    return MULTIPLE_KYC_HANDLER({
+      CURRENT_SCREEN,
+      data,
+      kuid: [
+        "KEY_NAME",
+        "KEY_PARANTAGE",
+        "KEY_CNIC",
+        "KEY_DOB",
+        "KEY_CNIC_ISSUANCE_DATE",
+        "KEY_CNIC_EXPIRY_DATE",
+        "KEY_CNIC_LIFETIME",
       ],
     });
   },
