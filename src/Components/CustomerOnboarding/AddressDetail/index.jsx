@@ -5,6 +5,8 @@ import CustomButton from "src/Common/CustomButton";
 import { getScreenData } from "src/Utils/Helpers";
 import { FormBuilder } from "src/Components/FormBuilder";
 import { LIST_OF_CITIES, LIST_OF_PROVINCES } from "src/Utils/Constants";
+import { BiBuildingHouse } from "react-icons/bi";
+
 
 const AddressDetail = ({
   control,
@@ -15,7 +17,7 @@ const AddressDetail = ({
 
   return (
     <WizardLayout
-      icon={"BiBuildingHouse"}
+      Icon={BiBuildingHouse}
       title={TITLE}
       description={DESCRIPTION}
     >

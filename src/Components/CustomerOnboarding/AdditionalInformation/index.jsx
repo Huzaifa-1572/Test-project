@@ -3,6 +3,8 @@ import CustomButton from "src/Common/CustomButton";
 import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
+import { IoMdInformationCircleOutline } from "react-icons/io";
+
 
 const AdditionalInformation = ({
   control,
@@ -12,7 +14,7 @@ const AdditionalInformation = ({
 
   return (
     <WizardLayout
-      icon={"IoMdInformationCircleOutline"}
+      Icon={IoMdInformationCircleOutline}
       title={TITLE}
       description={DESCRIPTION}
     >

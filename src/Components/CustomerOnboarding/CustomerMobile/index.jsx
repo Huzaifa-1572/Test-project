@@ -4,12 +4,14 @@ import { CustomInputField, SelectField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { OPERATOR_OPTION } from "src/Utils/Constants";
+import { TbDeviceMobile } from "react-icons/tb";
+
 
 const CustomerMobile = ({ control, errors }) => {
 
   return (
     <WizardLayout
-      icon={'TbDeviceMobile'}
+      Icon={TbDeviceMobile}
       title={"Mobile Verification"}
       description={'Please enter your mobile number.'}
     >

@@ -4,11 +4,13 @@ import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import styles from "./index.module.scss";
+import { MdCreditCard } from "react-icons/md";
+
 
 const CustomerCnic = ({ control, errors }) => {
   return (
     <WizardLayout
-      icon={"MdCreditCard"}
+      Icon={MdCreditCard}
       title={"CNIC Verification"}
       description={"Please enter your CNIC to start your online application."}
     >

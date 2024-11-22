@@ -2,6 +2,9 @@ import { Grid } from '@mui/material';
 import React from 'react'
 import CustomButton from 'src/Common/CustomButton';
 import WizardLayout from 'src/Layout/WizardLayout'
+import { MdCreditCard } from "react-icons/md";
+
+
 
 const HasValidEmail = ({ setValue }) => {
 
@@ -15,7 +18,7 @@ const HasValidEmail = ({ setValue }) => {
 
     return (
         <WizardLayout
-            icon={"MdCreditCard"}
+            Icon={MdCreditCard}
             title={"Email Validation Check"}
             description={"Confirm if you have a valid email by selecting 'Yes' or 'No' below."}
         >

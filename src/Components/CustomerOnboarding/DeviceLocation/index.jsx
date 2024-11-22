@@ -4,6 +4,8 @@ import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
 import CustomButton from "src/Common/CustomButton";
 import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
+import { MdLocationOn } from "react-icons/md";
+
 
 const DeviceLocation = ({
   getValues,
@@ -16,7 +18,7 @@ const DeviceLocation = ({
     <>
       {locationStatus === "loading" && <Loader />}
       <WizardLayout
-        icon={"MdLocationOn"}
+        Icon={MdLocationOn}
         title={TITLE}
         description={DESCRIPTION}
       >

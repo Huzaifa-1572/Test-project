@@ -4,6 +4,8 @@ import { TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import CustomButton from "src/Common/CustomButton";
+import { MdOutlineMail } from "react-icons/md";
+
 
 const CustomerEmail = ({
   control,
@@ -11,7 +13,7 @@ const CustomerEmail = ({
 }) => {
   return (
     <WizardLayout
-      icon={'MdOutlineMail'}
+      Icon={MdOutlineMail}
       title={"Email Verification"}
       description={'Please enter Your email address.'}
     >

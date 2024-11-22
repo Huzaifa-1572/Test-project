@@ -5,7 +5,7 @@ import mobileOtpLogo from "src/Assets/svgs/mobileotp.svg";
 const EmailVerification = ({ setValue, getValues }) => {
     return (
         <VerificationPage
-            icon={mobileOtpLogo}
+            Icon={mobileOtpLogo}
             title={'Email Verification'}
             content={"Please enter the one time passcode which was sent to your email address"}
             setValue={setValue}

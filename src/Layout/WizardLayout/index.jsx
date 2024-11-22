@@ -1,13 +1,11 @@
-import React from 'react'
-import { GetIcon } from "src/Common/GetIcon";
-import styles from "./index.module.scss";
 import { Box, Fade } from '@mui/material';
+import styles from "./index.module.scss";
 
-const WizardLayout = ({ icon, title, description, children }) => {
+const WizardLayout = ({ Icon, title, description, children }) => {
     return (
         <>
             <Box className={styles.iconBox}>
-                <GetIcon icon={icon} className={styles.icon} />
+                <Icon className={styles.icon} size={32} />
             </Box>
             <Fade in={true} timeout={800}>
                 <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>

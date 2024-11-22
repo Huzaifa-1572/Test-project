@@ -4,13 +4,15 @@ import WizardLayout from "src/Layout/WizardLayout";
 import CustomButton from "src/Common/CustomButton";
 import { getScreenData } from "src/Utils/Helpers";
 import { FormBuilder } from "src/Components/FormBuilder";
+import { FaUser } from "react-icons/fa";
+
 
 const PersonalInformation = ({ control, errors }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
 
   return (
     <WizardLayout
-      icon={"FaUser"}
+      Icon={FaUser}
       title={TITLE}
       description={DESCRIPTION}
     >

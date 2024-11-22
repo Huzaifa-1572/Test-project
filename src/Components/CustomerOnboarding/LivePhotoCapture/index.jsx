@@ -8,6 +8,8 @@ import CameraSvg from "src/Assets/svgs/camera.svg";
 import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
 import CustomButton from "src/Common/CustomButton";
 import WizardLayout from "src/Layout/WizardLayout";
+import { TbCameraPlus } from "react-icons/tb";
+
 
 const LivePhotoCapture = ({
   errors,
@@ -49,7 +51,7 @@ const LivePhotoCapture = ({
 
   return (
     <WizardLayout
-      icon={"TbCameraPlus"}
+      Icon={TbCameraPlus}
       title={TITLE}
       description={DESCRIPTION}
     >
