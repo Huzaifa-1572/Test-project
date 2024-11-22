@@ -279,6 +279,7 @@ export const CustomInputField = ({
       variant: "filled",
       placeholder: placeholder,
       fullWidth: true,
+      autoFocus: true,
       InputProps: {
         disableUnderline: true,
         sx: {
@@ -444,7 +445,7 @@ export const NumberInputField = ({
 };
 
 //Date Field
-export const DateInputField = ({ name, label, control, maxDate }) => {
+export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
   return (
     <Controller
       name={name}
@@ -461,6 +462,7 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                 variant="filled"
                 value={field.value ? dayjs(field.value) : null}
                 maxDate={maxDate ? dayjs() : undefined}
+                disabled={disabled}
                 slotProps={{
                   textField: {
                     variant: "filled",
@@ -468,51 +470,40 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                     InputProps: {
                       disableUnderline: true,
                       style: {
-                        border: "2px solid silver", // Correctly apply the border here
+                        border: "2px solid silver",
                         borderRadius: "7px",
                         fontSize: "1.25rem",
                         height: "70px",
-                        backgroundColor: "white", // Background color applied to input
-                        "&:hover": {
-                          backgroundColor: "white", // Keep white on hover
-                        },
-                        "&.Mui-focused": {
-                          backgroundColor: "white", // Keep white on focus
-                        },
+                        backgroundColor: disabled ? "#f0f0f0" : "white", // Conditional background color
+                        cursor: disabled ? "not-allowed" : "text", // Show not-allowed cursor when disabled
                       },
                     },
                     InputLabelProps: {
                       style: {
                         fontSize: "1.25rem",
-                        color: "#666666",
+                        color: disabled ? "#aaaaaa" : "#666666", // Dim the label color when disabled
                         marginTop: "5px",
+                        backgroundColor: "transparent",
                       },
                     },
-                    style: { backgroundColor: "white" },
                   },
                 }}
                 label={label}
                 sx={{
-                  backgroundColor: "white",
+                  backgroundColor: disabled ? "#f0f0f0" : "white", // Conditional background for the picker
                   border: "none",
                   borderRadius: "7px",
                   maxWidth: "500px",
                   width: "100%",
                   fontSize: "1.25rem",
-                  lineHeight: "15px",
                   height: "70px",
                   "& .MuiIconButton-root": {
-                    // Target the icon button inside the DateRangePicker
-                    backgroundColor: "white", // Set background color to white
+                    backgroundColor: disabled ? "#f0f0f0" : "white", // Icon button matches background
+                    pointerEvents: disabled ? "none" : "auto", // Disable interactions on the icon button
                   },
                   "& .MuiInputLabel-root": {
-                    fontSize: "1.25rem", //Change the label font
-                  },
-                  input: {
-                    backgroundColor: "white",
-                    marginTop: "5px",
-                    fontSize: "1.20rem",
-                    borderRadius: "7px",
+                    fontSize: "1.25rem",
+                    color: disabled ? "#aaaaaa" : "#666666", // Label styling for disabled state
                   },
                   svg: { marginTop: "4px" },
                 }}
@@ -521,8 +512,7 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                   if (date instanceof Date && !isNaN(date)) {
                     field.onChange(date);
                   } else {
-                    // Show an error message or set the date to a default value
-                    field.onChange(new Date());
+                    field.onChange(null); // Clear or handle invalid date
                   }
                 }}
                 renderInput={(params) => (
@@ -535,7 +525,7 @@ export const DateInputField = ({ name, label, control, maxDate }) => {
                     InputLabelProps={{
                       style: {
                         fontSize: "1.25rem",
-                        color: "#666666",
+                        color: disabled ? "#aaaaaa" : "#666666", // Dim the placeholder color when disabled
                         marginTop: "5px",
                         fontFamily: "ArticulatCF-Regular",
                       },
@@ -577,11 +567,11 @@ export const SelectField = ({
           placeholder={placeholder}
           sx={{
             "& .MuiFilledInput-root": {
-              background: "white",
+              background: !disabled && "white",
             },
             "& .MuiSelect-select.MuiInputBase-input.MuiFilledInput-input:focus":
             {
-              backgroundColor: "white",
+              backgroundColor: !disabled && "white",
             },
           }}
           InputProps={{
@@ -593,12 +583,12 @@ export const SelectField = ({
               height: "70px",
               maxWidth: "500px",
               width: "100%",
-              backgroundColor: "white", // Background color applied to input
+              backgroundColor: !disabled && "white",
               "&:hover": {
-                backgroundColor: "white", // Keep white on hover
+                backgroundColor: !disabled && "white",
               },
               "&.Mui-focused": {
-                backgroundColor: "white", // Keep white on focus
+                backgroundColor: !disabled && "white",
               },
             },
           }}
@@ -901,6 +891,11 @@ export const CheckboxField = ({ name, control, label }) => {
             />
           }
           label={label}
+          sx={{
+            '& .MuiFormControlLabel-label': {
+              color: "gray"
+            },
+          }}
         />
       )}
     />

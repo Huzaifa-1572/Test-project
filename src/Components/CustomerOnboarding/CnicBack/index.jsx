@@ -1,14 +1,15 @@
-import { Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import WizardLayout from "src/Layout/WizardLayout";
 import CustomButton from "src/Common/CustomButton";
+import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
 import { FormBuilder } from "src/Components/FormBuilder";
 
-const AddressDetail = ({
+const CnicBack = ({
   control,
+  getValues,
   errors,
-  watch
+  setValue,
 }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
 
@@ -18,18 +19,16 @@ const AddressDetail = ({
       title={TITLE}
       description={DESCRIPTION}
     >
-      <Grid container sx={{ gap: "24px" }}>
-        {
-          FIELDS?.map(field => (
-            <Grid key={field?.kuid} item xs={12} md={6} lg={4}>
-              <FormBuilder field={field} control={control} errors={errors} watch={watch} />
-            </Grid>
-          ))
-        }
-      </Grid>
+      {
+        FIELDS?.map(field => (
+          <Box key={field?.kuid} sx={{ maxWidth: "500px", width: "100%" }}>
+            <FormBuilder field={field} control={control} errors={errors} setValue={setValue} getValues={getValues} />
+          </Box>
+        ))
+      }
       <CustomButton label={"Proceed"} />
     </WizardLayout>
   );
 };
 
-export default AddressDetail;
+export default CnicBack;

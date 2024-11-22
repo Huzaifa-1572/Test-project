@@ -1,8 +1,9 @@
-import { SelectField, TextInputField } from "src/Components/FormFields";
+import { CheckboxField, CustomInputField, DateInputField, SelectField, TextInputField, UploadImage } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import { FIELD_MANIFEST, LIST_OF_CITIES, LIST_OF_POB, LIST_OF_PROVINCES } from "src/Utils/Constants";
+import { FIELD_MANIFEST } from "src/Utils/Constants";
+import { LIST_OF_CITIES, LIST_OF_POB, LIST_OF_PROVINCES } from "src/Utils/Lovs";
 
-export const FormBuilder = ({ field, control, errors, watch, options }) => {
+export const FormBuilder = ({ field, control, errors, watch, setValue, getValues, options }) => {
     const FIELD_MANIFEST_TYPE = field?.field_manifest;
 
     switch (FIELD_MANIFEST_TYPE) {
@@ -64,6 +65,58 @@ export const FormBuilder = ({ field, control, errors, watch, options }) => {
                         label={field?.label}
                         disabled={!watch('KEY_PROVINCE')}
                         options={LIST_OF_CITIES[watch('KEY_PROVINCE')] || []}
+                    />
+                    {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
+                </>
+            );
+        case FIELD_MANIFEST.UPLOAD_DOCUMENT:
+            return (
+                <>
+                    <UploadImage
+                        name={field?.kuid}
+                        control={control}
+                        label={field?.label}
+                        getValues={getValues}
+                        setValue={setValue}
+                    />
+                    {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
+                </>
+            );
+        case FIELD_MANIFEST.CNIC:
+            return (
+                <>
+                    <CustomInputField
+                        name={field?.kuid}
+                        control={control}
+                        format={"#####-#######-#"}
+                        label={field?.label}
+                        placeholder="xxxxx-xxxxxxx-x"
+                        inputMode="numeric"
+                    />
+                    {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
+                </>
+            );
+        case FIELD_MANIFEST.DATE_PICKER:
+            const isExpiryDate = field?.kuid === "KEY_CNIC_EXPIRY_DATE";
+            const isCnicLifeTime = !!watch("KEY_CNIC_LIFETIME");
+            return (
+                <>
+                    <DateInputField
+                        name={field?.kuid}
+                        control={control}
+                        label={field?.label}
+                        disabled={isExpiryDate && isCnicLifeTime}
+                    />
+                    {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
+                </>
+            );
+        case FIELD_MANIFEST.CHECKBOX:
+            return (
+                <>
+                    <CheckboxField
+                        name={field?.kuid}
+                        control={control}
+                        label={field?.label}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>

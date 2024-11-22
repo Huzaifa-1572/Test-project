@@ -15,8 +15,9 @@ const LivePhotoCapture = ({
   watch,
 }) => {
   const webcamRef = useRef(null);
+  const [livePhoto, setLivePhoto] = useState();
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
-  const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
+  const { TITLE, DESCRIPTION } = getScreenData()
 
   // To check whether the camera access permission is allowed or not
   useEffect(() => {
@@ -31,21 +32,27 @@ const LivePhotoCapture = ({
       });
   }, []);
 
-  const capturePhoto = useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setValue("LivePhoto", imageSrc);
+  const capturePhoto = useCallback(async () => {
+    const canvas = webcamRef.current.getCanvas();
+    if (canvas) {
+      const blob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, "image/jpeg")
+      );
+      setLivePhoto(blob)
+      // Create a File object to mimic file upload
+      const file = new File([blob], "photo.jpg", { type: "image/jpeg" });
+
+      setValue("KEY_LIVE_PHOTO", file); // Store the File in the form state
+    }
   }, [webcamRef, setValue]);
 
   const retake = () => {
-    setValue("LivePhoto", null);
+    setValue("KEY_LIVE_PHOTO", null);
   };
 
   const handleInitError = (error) => {
     console.error("Webcam initialization error:", error);
   };
-
-  // Get the LivePhoto value directly from watch
-  const livePhoto = watch("LivePhoto");
 
   return (
     <WizardLayout
@@ -76,7 +83,7 @@ const LivePhotoCapture = ({
             {!!livePhoto ? (
               <img
                 className={styles.uploadedSelfie}
-                src={livePhoto}
+                src={URL.createObjectURL(livePhoto)}
                 alt="Uploaded Selfie"
               />
             ) : (

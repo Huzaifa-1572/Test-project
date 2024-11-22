@@ -54,6 +54,7 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
                         renderSeparator={<span>-</span>}
                         renderInput={(props) => <input {...props} />}
                         inputStyle={styles.inputStyle}
+                        shouldAutoFocus={true}
                     />
                 </div>
 
