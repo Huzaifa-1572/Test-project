@@ -24,7 +24,7 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
 
     const handleOtpChange = (otpValue) => {
         setOtp(otpValue);
-        setValue('customerOTP', otpValue)
+        setValue('CUSTOMER_OTP', otpValue)
     };
 
     // Function to format the countdown string

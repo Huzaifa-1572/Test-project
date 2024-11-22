@@ -1,9 +1,7 @@
 import { Grid } from "@mui/material";
-import React from "react";
 import CustomButton from "src/Common/CustomButton";
 import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
-import { LIST_OF_POB } from "src/Utils/Constants";
 import { getScreenData } from "src/Utils/Helpers";
 
 const AdditionalInformation = ({

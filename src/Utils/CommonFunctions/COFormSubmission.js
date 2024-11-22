@@ -55,7 +55,7 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     mobileNumber: retrieveMobileNumber(data.customerMobile),
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
-    otp: data.customerOTP,
+    otp: data.CUSTOMER_OTP,
   };
 
   return {
@@ -76,7 +76,7 @@ export const CUST_HASVALIDEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 
   return {
-    API_URL: `${BASE_URL}${ENDPOINTS.HAS_VALID_EMAIL}`,
+    API_URL: `${BASE_URL}${ENDPOINTS.GENERIC_HANDLER}`,
     BODY,
   };
 };
@@ -105,7 +105,7 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     email: data.customerEmail,
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
-    otp: data.customerOTP,
+    otp: data.CUSTOMER_OTP,
   };
 
   return {
@@ -114,12 +114,9 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const PERSONAL_INFORMATION_HANDLER = ({
-  CURRENT_SCREEN,
-  data,
-  kuid,
-}) => {
-  let fields;
+export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
+
+  let fields = [];
 
   if (Array.isArray(kuid)) {
     fields = kuid.map((kuid) => ({
@@ -128,35 +125,6 @@ export const PERSONAL_INFORMATION_HANDLER = ({
     }));
   }
 
-  const BODY = {
-    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
-    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: CURRENT_SCREEN,
-    content: {
-      kycs: fields,
-    },
-  };
-
-  return {
-    API_URL: `${BASE_URL}${ENDPOINTS.CUSTOMER_INFORMATION}`,
-    BODY,
-  };
-};
-
-export const ADDITIONAL_INFORMATION_HANDLER = ({
-  CURRENT_SCREEN,
-  data,
-  kuid,
-}) => {
-  let fields;
-
-  if (Array.isArray(kuid)) {
-    fields = kuid.map((kuid) => ({
-      attributeName: kuid,
-      attributeValue: data[kuid],
-    }));
-  }
 
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
@@ -165,7 +133,7 @@ export const ADDITIONAL_INFORMATION_HANDLER = ({
     screenKuid: CURRENT_SCREEN,
     content: {
       kycs: fields,
-    },
+    }
   };
 
   return {
@@ -187,36 +155,11 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 
   return {
-    API_URL: `${BASE_URL}${ENDPOINTS.DEVICE_LOCATION}`,
+    API_URL: `${BASE_URL}${ENDPOINTS.GENERIC_HANDLER}`,
     BODY,
   };
 };
 
-export const ADDRESS_DETAIL_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-  let fields;
-
-  if (Array.isArray(kuid)) {
-    fields = kuid.map((kuid) => ({
-      attributeName: kuid,
-      attributeValue: data[kuid],
-    }));
-  }
-
-  const BODY = {
-    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
-    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: CURRENT_SCREEN,
-    content: {
-      kycs: fields,
-    },
-  };
-
-  return {
-    API_URL: `${BASE_URL}${ENDPOINTS.CUSTOMER_INFORMATION}`,
-    BODY,
-  };
-};
 
 export const COFormSubmission = {
   scr_customerCnic: ({ CURRENT_SCREEN, data }) => {
@@ -257,14 +200,14 @@ export const COFormSubmission = {
     });
   },
   scr_personalInformation: ({ CURRENT_SCREEN, data }) => {
-    return PERSONAL_INFORMATION_HANDLER({
+    return MULTIPLE_KYC_HANDLER({
       CURRENT_SCREEN,
       data,
       kuid: ["KEY_FIRST_NAME", "KEY_LAST_NAME"],
     });
   },
   scr_additionalInformation: ({ CURRENT_SCREEN, data }) => {
-    return ADDITIONAL_INFORMATION_HANDLER({
+    return MULTIPLE_KYC_HANDLER({
       CURRENT_SCREEN,
       data,
       kuid: ["KEY_PLACE_OF_BIRTH", "KEY_MOTHER_MAIDEN_NAME"],
@@ -277,7 +220,7 @@ export const COFormSubmission = {
     });
   },
   scr_addressDetail: ({ CURRENT_SCREEN, data }) => {
-    return ADDRESS_DETAIL_HANDLER({
+    return MULTIPLE_KYC_HANDLER({
       CURRENT_SCREEN,
       data,
       kuid: [

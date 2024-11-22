@@ -144,15 +144,3 @@ export const getScreenData = () => {
     FIELDS: fields || [],
   };
 };
-
-// GET CITIES BY PROVINCE
-export const getCitiesByProvince = (LOVS, provinceId) => {
-  const province = LOVS.find((item) => Object.keys(item)[0] === provinceId);
-
-  if (!province) {
-    return [];
-  }
-
-  const cities = province[Object.keys(province)[0]];
-  return Array.isArray(cities) ? cities : [];
-};
