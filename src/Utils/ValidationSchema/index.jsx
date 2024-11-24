@@ -1,6 +1,5 @@
 import * as yup from "yup";
 import { retrieveMobileNumber } from "src/Utils/Helpers";
-import { format } from "date-fns"
 
 const currentDate = new Date();
 const minDate = new Date(1900, 0, 1);
@@ -13,6 +12,7 @@ export const shape = {
       .matches(/^\d{5}-\d{7}-\d{1}$/, "A valid CNIC is required"),
     googleCaptcha: yup.string().required("Captcha is required"),
   },
+
   "scr_customerMobile": {
     customerMobile: yup.string().test('e__NokMobile', 'A valid mobile number is required.', function (value) {
       if (value.length === 11) {
@@ -24,6 +24,7 @@ export const shape = {
       .string()
       .required("This field is required")
   },
+
   "scr_customerEmail": {
     customerEmail: yup
       .string()
@@ -35,6 +36,7 @@ export const shape = {
       .email("A valid email address is required.")
       .max(40, "Must be at most 40 characters"),
   },
+
   "scr_personalInformation": {
     KEY_FIRST_NAME: yup
       .string()
@@ -43,6 +45,7 @@ export const shape = {
       .string()
       .required("This field is required")
   },
+
   "scr_additionalInformation": {
     KEY_MOTHER_MAIDEN_NAME: yup.string().required('This field is required')
       .min(3, 'Must be at least 3 characters')
@@ -51,6 +54,7 @@ export const shape = {
       .string()
       .required("This field is required")
   },
+
   "scr_addressDetail": {
     KEY_ADDRESS_LINE_1: yup.string().required('This field is required')
       .min(4, 'Must be at least 4 characters'),
@@ -60,6 +64,7 @@ export const shape = {
     KEY_PROVINCE: yup.string().required('This field is required'),
     KEY_CITY_CODE: yup.string().required('This field is required')
   },
+
   "scr_cnicDetail": {
     KEY_NAME: yup.string().required('This field is required')
       .min(4, 'Must be at least 4 characters'),
@@ -75,9 +80,9 @@ export const shape = {
         }
         const parsedDate = Date.parse(originalValue);
         return isNaN(parsedDate) ? new Date('') : new Date(parsedDate);
-      })
-      .min(minDate, `Date of birth must be later than ${format(minDate, 'dd/MM/yyyy')}`)
-      .max(currentDate, `Date of birth must be earlier than ${format(currentDate, 'dd/MM/yyyy')}`),
+      }),
+    // .min(minDate, `Date of birth must be later than ${format(minDate, 'dd/MM/yyyy')}`)
+    // .max(currentDate, `Date of birth must be earlier than ${format(currentDate, 'dd/MM/yyyy')}`),
     KEY_CNIC_ISSUANCE_DATE: yup.date().required('This field is required')
       .transform((value, originalValue) => {
         if (!originalValue) {
@@ -85,8 +90,8 @@ export const shape = {
         }
         const parsedDate = Date.parse(originalValue);
         return isNaN(parsedDate) ? new Date('') : new Date(parsedDate);
-      })
-      .min(minDate, `Date of birth must be later than ${format(minDate, 'dd/MM/yyyy')}`),
+      }),
+    // .min(minDate, `Date of birth must be later than ${format(minDate, 'dd/MM/yyyy')}`),
     KEY_CNIC_EXPIRY_DATE: yup.date()
       .nullable()
       .when('KEY_CNIC_LIFETIME', {
@@ -99,8 +104,8 @@ export const shape = {
             }
             const parsedDate = Date.parse(originalValue);
             return isNaN(parsedDate) ? new Date('') : new Date(parsedDate);
-          })
-          .min(minDate, `Expiry date must be later than ${format(minDate, 'dd/MM/yyyy')}`),
+          }),
+        // .min(minDate, `Expiry date must be later than ${format(minDate, 'dd/MM/yyyy')}`),
         otherwise: () => yup.string().nullable(), // Not required if lifetime is checked
       }),
     KEY_CNIC_LIFETIME: yup.boolean().required('This field is required'),

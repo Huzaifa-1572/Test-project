@@ -41,6 +41,8 @@ const showScreen = {
 const CustomerOnboarding = () => {
   const CURRENT_SCREEN = useSelector(state => state?.screenState)
 
+  console.log('CURRENT_SCREEN', CURRENT_SCREEN)
+
   return (
     <WrapperForHookFormProps>
       {showScreen[CURRENT_SCREEN]}

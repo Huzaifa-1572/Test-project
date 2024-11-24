@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
-import { setAuthToken } from "src/Redux/Reducers/AuthTokenState";
 import { CNICEXIST_HANDLER, COFormSubmission } from "src/Utils/CommonFunctions/COFormSubmission";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { INITIAL_VALUES } from "src/Utils/Constants";
@@ -41,7 +40,6 @@ function WrapperForHookFormProps({ children }) {
     // -------------------START
     const TOKEN = response?.data?.data?.token;
     if (CURRENT_SCREEN === "scr_customerCnic" && !!TOKEN) {
-      dispatch(setAuthToken(TOKEN))
       const customerCnic = getValues("customerCnic");
       const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, customerCnic, dispatch });
       mutate({ BODY, API_URL, dispatch });
@@ -62,37 +60,37 @@ function WrapperForHookFormProps({ children }) {
 
 
   // PERSISTING VALUES WHEN PAGE IS REFRESHED
-  useEffect(() => {
+  // useEffect(() => {
 
-    getDataFromIndexDb().then(data => {
+  //   getDataFromIndexDb().then(data => {
 
-      console.log('datadsdsdata', data)
-      // if (data && data.formFields) {
-      //   const SavedData = data.formFields
-      //   reset(SavedData)
-      // }
-      // else {
-      //   console.log('No stored data found.');
-      // }
-    });
+  //     console.log('datadsdsdata', data)
+  //     // if (data && data.formFields) {
+  //     //   const SavedData = data.formFields
+  //     //   reset(SavedData)
+  //     // }
+  //     // else {
+  //     //   console.log('No stored data found.');
+  //     // }
+  //   });
 
 
-    // Update data on beforeunload
-    const beforeUnloadHandler = async () => {
-      const DATA_TO_STORE = {
-        CURRENT_SCREEN: CURRENT_SCREEN,
-        FORMFIELDS: getValues(),
-        TOKEN: '123456'
-      }
-      await storeDataToIndexDb(DATA_TO_STORE);
-    };
-    window.addEventListener('beforeunload', beforeUnloadHandler);
+  //   // Update data on beforeunload
+  //   const beforeUnloadHandler = async () => {
+  //     const DATA_TO_STORE = {
+  //       CURRENT_SCREEN: CURRENT_SCREEN,
+  //       FORMFIELDS: getValues(),
+  //       TOKEN: '123456'
+  //     }
+  //     await storeDataToIndexDb(DATA_TO_STORE);
+  //   };
+  //   window.addEventListener('beforeunload', beforeUnloadHandler);
 
-    // Remove event listener when component unmounts
-    return () => {
-      window.removeEventListener('beforeunload', beforeUnloadHandler);
-    };
-  }, []);
+  //   // Remove event listener when component unmounts
+  //   return () => {
+  //     window.removeEventListener('beforeunload', beforeUnloadHandler);
+  //   };
+  // }, []);
 
   return (
     <form onSubmit={handleSubmit(submitFormData)}>

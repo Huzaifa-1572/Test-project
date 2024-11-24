@@ -1,11 +1,9 @@
 import { Grid } from "@mui/material";
-import React from "react";
-import WizardLayout from "src/Layout/WizardLayout";
-import CustomButton from "src/Common/CustomButton";
-import { getScreenData } from "src/Utils/Helpers";
-import { FormBuilder } from "src/Components/FormBuilder";
-import { LIST_OF_CITIES, LIST_OF_PROVINCES } from "src/Utils/Constants";
 import { BiBuildingHouse } from "react-icons/bi";
+import CustomButton from "src/Common/CustomButton";
+import { FormBuilder } from "src/Components/FormBuilder";
+import WizardLayout from "src/Layout/WizardLayout";
+import { getScreenData } from "src/Utils/Helpers";
 
 
 const AddressDetail = ({

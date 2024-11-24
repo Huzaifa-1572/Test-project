@@ -1,5 +1,6 @@
 import { Dialog, IconButton } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CloseIcon from 'src/Assets/images/closeicon.png';
 import ErrorOutlineIcon from 'src/Assets/svgs/error-modal-icon.svg';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
@@ -7,9 +8,13 @@ import styles from './index.module.scss';
 
 const ErrorModal = ({ errorCode, errorMessage, isError }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleClose = () => {
     dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }))
+    if (errorCode === "Access Denied-403") {
+      navigate('/')
+    }
   }
 
   return (

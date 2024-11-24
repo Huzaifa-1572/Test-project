@@ -67,6 +67,7 @@ export const setupRequestInterceptor = () => {
   Axios.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("referenceKey");
+      console.log('sdksdksdkdj', token)
       if (!!token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
