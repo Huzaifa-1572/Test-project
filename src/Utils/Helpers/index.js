@@ -89,7 +89,6 @@ export const setupResponseInterceptor = () => {
         // Remove the 'Bearer ' prefix from the token
         const token = authorizationHeader.replace("Bearer ", "");
         localStorage.setItem("referenceKey", token);
-        console.log("Token without Bearer:", token);
       }
       return response; // Always return the response or modify it
     },
@@ -107,21 +106,38 @@ export const getScreen = (data) => {
   return screen;
 };
 
+// GET SCREEN DATA FOR DASHBOARD
+export const getScreenData = () => {
+  const SCREEN_DATA = useSelector((state) => state.screenDataState);
+  const [{ title, description, fields }] = SCREEN_DATA?.content_group || [{}];
+
+  return {
+    TITLE: title || "",
+    DESCRIPTION: description || "",
+    FIELDS: fields || [],
+  };
+};
+
+export const clearAppData = () => {
+  localStorage.clear()
+  clearIndexDb()
+}
+
 
 // INDEX DB SETUP
 const db = new Dexie("store");
 db.version(1).stores({
-  data: 'id, formFields',
+  data: 'id, appData',
 });
 
 // Function to store initial data
 export async function storeDataToIndexDb(data) {
-  await db.data.put({ id: 1, formFields: data });
+  await db.data.put({ id: 1, appData: data });
 }
 
 // Function to update data on beforeunload
 export async function updateIndexDbData(data) {
-  await db.data.update(1, { formFields: data });
+  await db.data.update(1, { appData: data });
 }
 
 // Function to retrieve stored data
@@ -134,14 +150,3 @@ export async function getDataFromIndexDb() {
 export async function clearIndexDb() {
   await db.data.clear();
 }
-// GET SCREEN DATA FOR DASHBOARD
-export const getScreenData = () => {
-  const SCREEN_DATA = useSelector((state) => state.screenDataState);
-  const [{ title, description, fields }] = SCREEN_DATA?.content_group || [{}];
-
-  return {
-    TITLE: title || "",
-    DESCRIPTION: description || "",
-    FIELDS: fields || [],
-  };
-};

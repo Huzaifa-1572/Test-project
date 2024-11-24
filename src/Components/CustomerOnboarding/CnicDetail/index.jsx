@@ -4,6 +4,8 @@ import CustomButton from "src/Common/CustomButton";
 import { FormBuilder } from "src/Components/FormBuilder";
 import { getScreenData } from "src/Utils/Helpers";
 import WizardLayout from "src/Layout/WizardLayout";
+import { BiSolidUserDetail } from "react-icons/bi";
+
 
 const CnicDetail = ({
   control,
@@ -14,7 +16,7 @@ const CnicDetail = ({
 
   return (
     <WizardLayout
-      icon={"BiSolidUserDetail"}
+      Icon={BiSolidUserDetail}
       title={TITLE}
       description={DESCRIPTION}
     >

@@ -7,11 +7,17 @@ import HeroImage from "src/Assets/images/hero.png";
 import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateScreen } from "src/Redux/Reducers/ScreenState";
 import styles from "./index.module.scss";
+import { useEffect } from "react";
+import { clearAppData } from "src/Utils/Helpers";
 
 
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    clearAppData()
+  }, [])
 
   const handleNewAccount = () => {
     const NEXT_SCREEN = "scr_customerCnic";

@@ -4,6 +4,8 @@ import CustomButton from "src/Common/CustomButton";
 import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
 import { FormBuilder } from "src/Components/FormBuilder";
+import { BiBuildingHouse } from "react-icons/bi";
+
 
 const CnicBack = ({
   control,
@@ -15,7 +17,7 @@ const CnicBack = ({
 
   return (
     <WizardLayout
-      icon={"BiBuildingHouse"}
+      Icon={BiBuildingHouse}
       title={TITLE}
       description={DESCRIPTION}
     >
