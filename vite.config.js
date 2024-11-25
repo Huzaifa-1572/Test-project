@@ -12,4 +12,7 @@ export default defineConfig({
     minify: 'terser',
     assetsInlineLimit: 0
   },
+  optimizeDeps: {
+    force: true,
+  },
 })

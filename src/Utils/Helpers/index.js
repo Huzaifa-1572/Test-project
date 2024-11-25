@@ -1,6 +1,9 @@
 import Axios from "axios";
 import Dexie from "dexie";
+import { v4 as uuidv4 } from "uuid";
+import DOMPurify from 'dompurify';
 import { useSelector } from "react-redux";
+import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -67,7 +70,7 @@ export const setupRequestInterceptor = () => {
   Axios.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("referenceKey");
-      console.log('sdksdksdkdj', token)
+      console.log("sdksdksdkdj", token);
       if (!!token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -100,6 +103,16 @@ export const setupResponseInterceptor = () => {
   );
 };
 
+// UUID
+export const getUUID = () => {
+  return uuidv4();
+};
+
+// FOR PREVENTING XSS ATTACKS
+export const sanitizer = (htmlElement) => {
+  return DOMPurify.sanitize(htmlElement)
+}
+
 // GET SCREEN
 export const getScreen = (data) => {
   const screen = data?.nextScreenPayload?.screen_kuid || "No Screen Found";
@@ -118,16 +131,53 @@ export const getScreenData = () => {
   };
 };
 
-export const clearAppData = () => {
-  localStorage.clear()
-  clearIndexDb()
+export const getProvince = (value) =>{
+  const province = LIST_OF_PROVINCES.find((province)=> province?.value == value)
+  return province?.label || 'N/A'
 }
 
+export const getCity = (value) =>{
+  const city = LIST_OF_POB.find((city)=> city?.value == value)
+  return city?.label || 'N/A'
+}
+
+export const getReviewApplicationData = () => {
+  const SCREEN_DATA = useSelector((state) => state.screenDataState);
+  const { title, description, sections } = SCREEN_DATA
+  return  {
+    TITLE: title || "",
+    DESCRIPTION: description || "",
+    SECTIONS: sections || [],
+  };
+};
+
+export const generateFieldValue = (field) => {
+  if (field['value-type'] === 'cnic') {
+      return `${field?.value?.slice(0, 5)}-${field?.value?.slice(5, 12)}-${field?.value?.slice(12)}`
+  }
+  else if (field['value-type'] === 'date') {
+      return field?.value?.split?.('T')?.[0] || 'N/A'
+  }
+  else if (field["kuid"] === "KEY_PROVINCE"){
+      return getProvince(field?.value)
+  }
+  else if (field["kuid"] === "KEY_PLACE_OF_BIRTH" || field["kuid"] === "KEY_CITY_CODE" ){
+    return getCity(field?.value)
+}
+  else {
+      return field?.value || 'N/A'
+  }
+}
+
+export const clearAppData = () => {
+  localStorage.clear();
+  clearIndexDb();
+};
 
 // INDEX DB SETUP
 const db = new Dexie("store");
 db.version(1).stores({
-  data: 'id, appData',
+  data: "id, appData",
 });
 
 // Function to store initial data
@@ -143,7 +193,7 @@ export async function updateIndexDbData(data) {
 // Function to retrieve stored data
 export async function getDataFromIndexDb() {
   const storedData = await db.data.get(1);
-  return storedData
+  return storedData;
 }
 
 // Function to clear all data from the IndexedDB table

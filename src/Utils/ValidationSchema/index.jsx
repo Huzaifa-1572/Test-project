@@ -110,4 +110,8 @@ export const shape = {
       }),
     KEY_CNIC_LIFETIME: yup.boolean().required('This field is required'),
   },
+  "scr_reviewApplication":{
+    isAccepted: yup.boolean().oneOf([true], 'You must accept the terms').required('This field is required'),
+    googleCaptchaReviewApplication: yup.string().required("Captcha is required"),
+  }
 };

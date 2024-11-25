@@ -17,7 +17,8 @@ const LivePhotoCapture = lazy(() => import("src/Components/CustomerOnboarding/Li
 const CnicFront = lazy(() => import("src/Components/CustomerOnboarding/CnicFront"));
 const CnicBack = lazy(() => import("src/Components/CustomerOnboarding/CnicBack"));
 const CnicDetail = lazy(() => import("src/Components/CustomerOnboarding/CnicDetail"));
-const TermAndCondition = lazy(() => import("src/Components/CustomerOnboarding/TermAndCondition"));
+const ReviewApplication = lazy(() => import("src/Components/CustomerOnboarding/ReviewApplication"));
+const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding/ApplicationComplete"));
 
 const showScreen = {
   // CUSTOMER ONBOARDING SCREENS
@@ -35,7 +36,8 @@ const showScreen = {
   scr_uploadCnicFront: <CnicFront />,
   scr_uploadCnicBack: <CnicBack />,
   scr_cnicDetail: <CnicDetail />,
-  scr_termAndCondition: <TermAndCondition />,
+  scr_reviewApplication: <ReviewApplication />,
+  scr_applicationComplete: <ApplicationComplete />,
 };
 
 const CustomerOnboarding = () => {

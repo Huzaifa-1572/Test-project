@@ -17,7 +17,6 @@ const LivePhotoCapture = ({
   watch,
 }) => {
   const webcamRef = useRef(null);
-  const [livePhoto, setLivePhoto] = useState();
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const { TITLE, DESCRIPTION } = getScreenData()
 
@@ -35,16 +34,9 @@ const LivePhotoCapture = ({
   }, []);
 
   const capturePhoto = useCallback(async () => {
-    const canvas = webcamRef.current.getCanvas();
-    if (canvas) {
-      const blob = await new Promise((resolve) =>
-        canvas.toBlob(resolve, "image/jpeg")
-      );
-      setLivePhoto(blob)
-      // Create a File object to mimic file upload
-      const file = new File([blob], "photo.jpg", { type: "image/jpeg" });
-
-      setValue("KEY_LIVE_PHOTO", file); // Store the File in the form state
+    const imageSrc = webcamRef.current.getScreenshot();
+    if (imageSrc) {
+      setValue("KEY_LIVE_PHOTO", imageSrc); 
     }
   }, [webcamRef, setValue]);
 
@@ -55,6 +47,8 @@ const LivePhotoCapture = ({
   const handleInitError = (error) => {
     console.error("Webcam initialization error:", error);
   };
+
+  const livePhoto = watch("KEY_LIVE_PHOTO");
 
   return (
     <WizardLayout
@@ -85,7 +79,7 @@ const LivePhotoCapture = ({
             {!!livePhoto ? (
               <img
                 className={styles.uploadedSelfie}
-                src={URL.createObjectURL(livePhoto)}
+                src={livePhoto}
                 alt="Uploaded Selfie"
               />
             ) : (

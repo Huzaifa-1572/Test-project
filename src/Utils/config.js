@@ -1,8 +1,8 @@
 // LOCAL
-// export const BASE_URL = "http://192.168.20.101:8080/";
+export const BASE_URL = "http://192.168.20.101:8080/";
 
 // UAT
-export const BASE_URL = "http://10.6.60.6:8089/";
+// export const BASE_URL = "http://10.6.60.6:8089/";
 
 export const ENDPOINTS = {
   AUTHENTICATION: "api/dao/v1/authenticate",
@@ -13,7 +13,8 @@ export const ENDPOINTS = {
   VALIDATE_EMAIL_OTP: "api/dao/v1/otp/validate-email-otp",
   CUSTOMER_INFORMATION: "api/dao/v1/customer/updateCustomerInfo",
   GENERIC_HANDLER: "api/dao/v1/generic-handler/",
-  DOCUMENT_HANDLER: "api/dao/v1/document/upload",
+  DOCUMENT_HANDLER: "api/dao/v1/document/uploadImageBase64",
+  APPLICATION_COMPLETE: "api/dao/v1/customer/submitCustomerInfo",
 };
 
 

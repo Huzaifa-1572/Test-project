@@ -159,36 +159,32 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data }) => {
-  const BODY = new FormData();
-  const documentScreens = [
-    "scr_livePhotoCapture",
-    "scr_uploadCnicFront",
-    "scr_uploadCnicBack",
-  ];
-
-  if (documentScreens.includes(CURRENT_SCREEN)) {
-    BODY.append("file", data.KEY_LIVE_PHOTO);
+export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
+  const BODY = {
+    documentType: PAYLOAD_KEYS[CURRENT_SCREEN],
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    screenKuid: CURRENT_SCREEN,
+    imageBase64: data[kuid]
   }
-
-  BODY.append(
-    "data",
-    new Blob(
-      [
-        JSON.stringify({
-          documentType: PAYLOAD_KEYS.DOCUMENT_TYPE,
-          custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
-          channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-          custIdentityValue: retrieveCNIC(data.customerCnic),
-          screenKuid: CURRENT_SCREEN,
-        }),
-      ],
-      { type: "application/json" }
-    )
-  );
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.DOCUMENT_HANDLER}`,
+    BODY,
+  };
+};
+
+export const APPLICATION_COMPLETE_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    screenKuid: CURRENT_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.APPLICATION_COMPLETE}`,
     BODY,
   };
 };
@@ -267,18 +263,21 @@ export const COFormSubmission = {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
+      kuid: "KEY_LIVE_PHOTO"
     });
   },
   scr_uploadCnicFront: ({ CURRENT_SCREEN, data }) => {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
+      kuid: "KEY_CNIC_FRONT"
     });
   },
   scr_uploadCnicBack: ({ CURRENT_SCREEN, data }) => {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
+      kuid: "KEY_CNIC_BACK"
     });
   },
   scr_cnicDetail: ({ CURRENT_SCREEN, data }) => {
@@ -294,6 +293,12 @@ export const COFormSubmission = {
         "KEY_CNIC_EXPIRY_DATE",
         "KEY_CNIC_LIFETIME",
       ],
+    });
+  },
+  scr_reviewApplication: ({ CURRENT_SCREEN, data }) => {
+    return APPLICATION_COMPLETE_HANDLER({
+      CURRENT_SCREEN,
+      data,
     });
   },
 };

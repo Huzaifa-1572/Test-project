@@ -26,6 +26,8 @@ export const INITIAL_VALUES = {
   KEY_CNIC_ISSUANCE_DATE: "",
   KEY_CNIC_EXPIRY_DATE: "",
   KEY_CNIC_LIFETIME: false,
+  isAccepted: false,
+  googleCaptchaReviewApplication: "",
 };
 
 export const OPERATOR_OPTION = [
@@ -38,7 +40,9 @@ export const OPERATOR_OPTION = [
 export const PAYLOAD_KEYS = {
   CUST_IDENTIFICATION_KEY: "0001",
   CHANNEL_CODE: "0013",
-  DOCUMENT_TYPE: "1",
+  scr_livePhotoCapture: "0046",
+  scr_uploadCnicFront: "0032",
+  scr_uploadCnicBack: "0033",
 };
 
 export const FIELD_MANIFEST = {
