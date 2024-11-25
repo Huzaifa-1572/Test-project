@@ -5,8 +5,9 @@ import styles from './index.module.scss'
 import CustomButton from 'src/Common/CustomButton'
 import { CaptchaField, CheckboxField } from 'src/Components/FormFields'
 import { MdFactCheck } from 'react-icons/md'
+import ValidationError from 'src/Components/ValidationError'
 
-const ReviewApplication = ({ control }) => {
+const ReviewApplication = ({ control, errors }) => {
     const { TITLE, DESCRIPTION, SECTIONS } = getReviewApplicationData()
 
     const handleDailogOpen = (e, field) => { }
@@ -140,6 +141,7 @@ const ReviewApplication = ({ control }) => {
                             <h1 className={styles.topHeading}> Declaration and Acceptance</h1>
                         </div>
                         <CheckboxField name={"isAccepted"} label={"I hereby undertake and confirm that:"} control={control} />
+                        {errors?.isAccepted && (<ValidationError message={errors?.isAccepted?.message} />)}
                         <ol
                             style={{
                                 fontSize: "16px",
@@ -172,6 +174,7 @@ const ReviewApplication = ({ control }) => {
                                     control={control}
                                     siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
                                 />
+                                {errors?.googleCaptchaReviewApplication && (<ValidationError message={errors?.googleCaptchaReviewApplication?.message} />)}
                             </Box>
                         </Box>
 
