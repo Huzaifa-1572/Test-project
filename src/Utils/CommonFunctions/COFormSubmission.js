@@ -37,7 +37,7 @@ export const CUSTMOBILE_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     mobileNumber: retrieveMobileNumber(data.customerMobile),
-    mobileOperator: data.customerOperator, 
+    mobileOperator: data.customerOperator,
     screenKuid: CURRENT_SCREEN,
     isResumeApplication: false,
   };
@@ -161,13 +161,13 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 
 export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
   const BODY = {
-    documentType: PAYLOAD_KEYS[CURRENT_SCREEN],
+    documentType: PAYLOAD_KEYS[kuid],
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
-    imageBase64: data[kuid]
-  }
+    imageBase64: data[kuid],
+  };
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.DOCUMENT_HANDLER}`,
@@ -185,6 +185,21 @@ export const APPLICATION_COMPLETE_HANDLER = ({ CURRENT_SCREEN, data }) => {
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.APPLICATION_COMPLETE}`,
+    BODY,
+  };
+};
+
+export const GET_IMAGE_HANDLER = ({ CURRENT_SCREEN, customerCnic, kuid }) => {
+  const BODY = {
+    documentType: PAYLOAD_KEYS[kuid],
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(customerCnic),
+    screenKuid: CURRENT_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.GET_IMAGE_HANDLER}`,
     BODY,
   };
 };
@@ -263,21 +278,21 @@ export const COFormSubmission = {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
-      kuid: "KEY_LIVE_PHOTO"
+      kuid: "KEY_LIVE_PHOTO",
     });
   },
   scr_uploadCnicFront: ({ CURRENT_SCREEN, data }) => {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
-      kuid: "KEY_CNIC_FRONT"
+      kuid: "KEY_CNIC_FRONT",
     });
   },
   scr_uploadCnicBack: ({ CURRENT_SCREEN, data }) => {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
-      kuid: "KEY_CNIC_BACK"
+      kuid: "KEY_CNIC_BACK",
     });
   },
   scr_cnicDetail: ({ CURRENT_SCREEN, data }) => {

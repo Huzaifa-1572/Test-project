@@ -40,9 +40,9 @@ export const OPERATOR_OPTION = [
 export const PAYLOAD_KEYS = {
   CUST_IDENTIFICATION_KEY: "0001",
   CHANNEL_CODE: "0013",
-  scr_livePhotoCapture: "0046",
-  scr_uploadCnicFront: "0032",
-  scr_uploadCnicBack: "0033",
+  KEY_LIVE_PHOTO: "0046",
+  KEY_CNIC_FRONT: "0032",
+  KEY_CNIC_BACK: "0033",
 };
 
 export const FIELD_MANIFEST = {

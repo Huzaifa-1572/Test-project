@@ -1,16 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Grid } from '@mui/material'
+import { CaptchaField, CheckboxField } from 'src/Components/FormFields'
 import { generateFieldValue, getReviewApplicationData, getUUID, sanitizer } from 'src/Utils/Helpers'
 import styles from './index.module.scss'
 import CustomButton from 'src/Common/CustomButton'
-import { CaptchaField, CheckboxField } from 'src/Components/FormFields'
-import { MdFactCheck } from 'react-icons/md'
+import AttachmentIcon from 'src/Assets/images/attach-icon.png';
 import ValidationError from 'src/Components/ValidationError'
+import ImageDailog from 'src/Common/ImageDialog'
+import { GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission'
+import { useDispatch, useSelector } from 'react-redux'
+import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 
-const ReviewApplication = ({ control, errors }) => {
+const ReviewApplication = ({ control, getValues, errors }) => {
+    const dispatch = useDispatch()
+    const CURRENT_SCREEN = useSelector((state) => state?.screenState);
+    const [openDailog, setopenDailog] = useState(false)
+    const [fieldData, setFieldData] = useState({})
     const { TITLE, DESCRIPTION, SECTIONS } = getReviewApplicationData()
+    const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullSubmission, dispatch });
 
-    const handleDailogOpen = (e, field) => { }
+    const handleDailogOpen = (e, field) => {
+        const customerCnic = getValues("customerCnic");
+        const kuid = field?.kuid;
+        const { BODY, API_URL } = GET_IMAGE_HANDLER({ CURRENT_SCREEN, customerCnic, kuid, dispatch });
+        mutate({ BODY, API_URL, dispatch });
+        setFieldData(field);
+        setopenDailog(true);
+    }
+
+    const handleDailogClose = () => {
+        setopenDailog(false)
+    }
+
+    function onSuccessfullSubmission(response) {
+        const IMAGE = response?.data?.data?.imageBase64;
+        setFieldData(prev => ({
+            ...prev,
+            imageBase64: IMAGE
+        }));
+    }
 
     return (
         <div className={styles.topWrapper}>
@@ -67,10 +95,7 @@ const ReviewApplication = ({ control, errors }) => {
                                                 field['value-type'] === 'image' && (
                                                     <Grid item sm={6} xs={6} lg={6} className={`${styles.value} ${styles.clickable}`}>
                                                         {
-                                                            field.value !== 'Attached' && field.value
-                                                        }
-                                                        {
-                                                            field.value === '' && (
+                                                            field.value === 'Y' && (
                                                                 <span className={styles.previewButton} onClick={(e) => handleDailogOpen(e, field)}>
                                                                     <img src={AttachmentIcon} alt="Preview Icon" />
                                                                     Preview
@@ -181,6 +206,14 @@ const ReviewApplication = ({ control, errors }) => {
                         <CustomButton label={"Submit"} />
                     </Box>
                 </Box>
+                {/* POP UP FOR IMAGE PREVIEW */}
+                <ImageDailog
+                    openDailog={openDailog}
+                    handleDailogClose={handleDailogClose}
+                    title={fieldData?.label}
+                    key={fieldData?.kuid}
+                    documentImg={fieldData?.imageBase64}
+                />
             </div>
 
         </div>
