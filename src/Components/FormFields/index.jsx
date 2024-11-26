@@ -62,7 +62,7 @@ export const TextInputField = ({
             InputProps={{
               disableUnderline: true, // Remove underline like in NicInput
               sx: {
-                border: "2px solid silver",
+                border: "1px solid silver",
                 borderRadius: "7px",
                 fontSize: "1.25rem",
                 height: "70px",
@@ -283,16 +283,16 @@ export const CustomInputField = ({
       InputProps: {
         disableUnderline: true,
         sx: {
-          border: "2px solid silver", // Correctly apply the border here
+          border: "1px solid silver",
           borderRadius: "7px",
           fontSize: "1.25rem",
           height: "70px",
-          backgroundColor: "white", // Background color applied to input
+          backgroundColor: "white",
           "&:hover": {
-            backgroundColor: "white", // Keep white on hover
+            backgroundColor: "white",
           },
           "&.Mui-focused": {
-            backgroundColor: "white", // Keep white on focus
+            backgroundColor: "white",
           },
         },
       },
@@ -470,7 +470,7 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                     InputProps: {
                       disableUnderline: true,
                       style: {
-                        border: "2px solid silver",
+                        border: "1px solid silver",
                         borderRadius: "7px",
                         fontSize: "1.25rem",
                         height: "70px",
@@ -577,7 +577,7 @@ export const SelectField = ({
           InputProps={{
             disableUnderline: true,
             sx: {
-              border: "2px solid silver", // Correctly apply the border here
+              border: "1px solid silver", // Correctly apply the border here
               borderRadius: "7px",
               fontSize: "1.25rem",
               height: "70px",
@@ -615,7 +615,7 @@ export const SelectField = ({
   );
 };
 
-// SELECT FIELD (for selected value=object)
+// SELECT FIELD
 export const AutocompleteSelectField = ({ name, label, control, options, disabled }) => {
   return (
     <Controller
@@ -624,11 +624,11 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
       render={({ field: { onChange, value } }) => (
         <Autocomplete
           options={options}
-          getOptionLabel={(option) => option.label} // Set the label displayed
-          isOptionEqualToValue={(option, value) => option.value === value.value} // Match options to selected value
-          value={value || null} // Ensure `value` is an object or `null`
+          getOptionLabel={(option) => option.label}
+          isOptionEqualToValue={(option, value) => option.value === value}
+          value={options.find((option) => option.value === value) || null}
           onChange={(event, newValue) => {
-            onChange(newValue); // Pass the full object as the value
+            onChange(newValue ? newValue.value : ''); // Set value as string
           }}
           disableClearable
           disabled={disabled}
@@ -641,7 +641,7 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
               disabled={disabled}
               InputProps={{
                 ...params.InputProps,
-                disableUnderline: true, // Disables underline
+                disableUnderline: true,
               }}
               sx={{
                 '& .MuiFilledInput-root': {
@@ -650,12 +650,15 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
                 '& .MuiInputBase-root': {
                   background: 'white',
                   borderRadius: '7px',
-                  border: '1px solid #eaeaea',
+                  border: '1px solid silver',
                   maxWidth: '500px',
                   width: '100%',
                   fontSize: '1.25rem',
                   height: '70px',
                   boxShadow: 'none',
+                  '&:hover': {
+                    backgroundColor: 'white',
+                  },
                 },
                 '& .MuiInputLabel-root': {
                   fontSize: '1.25rem',
@@ -672,6 +675,8 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
     />
   );
 };
+
+
 
 
 // Upload Image
@@ -805,7 +810,7 @@ export const UploadImage = ({
       control={control}
       defaultValue=""
       render={({ field }) => (
-        <Box sx={{ border: "2px solid silver", borderRadius: "8px" }}>
+        <Box sx={{ border: "1px solid silver", borderRadius: "8px" }}>
           {field.value ? (
             <Box sx={mainContainerUPLOADED}>
               <Box sx={imageContainer}>

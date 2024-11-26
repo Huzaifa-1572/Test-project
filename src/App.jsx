@@ -3,9 +3,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import ErrorModal from "./Common/ErrorModal";
 import { setupRequestInterceptor, setupResponseInterceptor } from "./Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "./Utils/Settings";
-import ErrorModal from "./Common/ErrorModal";
 
 // LAZY LOADING
 const Loader = lazy(() => import("src/Common/Loader"));

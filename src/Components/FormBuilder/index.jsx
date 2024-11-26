@@ -1,10 +1,12 @@
-import { CheckboxField, CustomInputField, DateInputField, SelectField, TextInputField, UploadImage } from "src/Components/FormFields";
+import { useMemo } from "react";
+import { AutocompleteSelectField, CheckboxField, CustomInputField, DateInputField, SelectField, TextInputField, UploadImage } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import { FIELD_MANIFEST } from "src/Utils/Constants";
 import { LIST_OF_CITIES, LIST_OF_POB, LIST_OF_PROVINCES } from "src/Utils/Lovs";
 
 export const FormBuilder = ({ field, control, errors, watch, setValue, getValues, options }) => {
     const FIELD_MANIFEST_TYPE = field?.field_manifest;
+    const PLACE_OF_BIRTH_OPTIONS = useMemo(() => LIST_OF_POB, [])
 
     switch (FIELD_MANIFEST_TYPE) {
         case FIELD_MANIFEST.TEXTBOX:
@@ -35,11 +37,11 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
         case FIELD_MANIFEST.LOV_POB:
             return (
                 <>
-                    <SelectField
+                    <AutocompleteSelectField
                         name={field?.kuid}
                         control={control}
                         label={field?.label}
-                        options={LIST_OF_POB}
+                        options={PLACE_OF_BIRTH_OPTIONS}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>

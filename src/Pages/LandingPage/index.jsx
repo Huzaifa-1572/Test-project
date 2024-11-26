@@ -1,4 +1,5 @@
 import { Box, Button, Container, Grid, Grow } from "@mui/material";
+import { useEffect } from "react";
 import { IoPlay as PlayArrowIcon } from "react-icons/io5";
 import { MdOutlineOpenInBrowser as OpenInBrowserIcon } from "react-icons/md";
 import { useDispatch } from "react-redux";
@@ -6,9 +7,8 @@ import { useNavigate } from "react-router-dom";
 import HeroImage from "src/Assets/images/hero.png";
 import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateScreen } from "src/Redux/Reducers/ScreenState";
-import styles from "./index.module.scss";
-import { useEffect } from "react";
 import { clearAppData } from "src/Utils/Helpers";
+import styles from "./index.module.scss";
 
 
 const LandingPage = () => {
