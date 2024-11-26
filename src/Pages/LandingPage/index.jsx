@@ -26,6 +26,8 @@ const LandingPage = () => {
   };
 
   const handleResumeApplication = () => {
+    const NEXT_SCREEN = "scr_customerCnic";
+    dispatch(updateScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");
   };
 

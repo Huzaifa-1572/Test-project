@@ -18,6 +18,7 @@ const CnicFront = lazy(() => import("src/Components/CustomerOnboarding/CnicFront
 const CnicBack = lazy(() => import("src/Components/CustomerOnboarding/CnicBack"));
 const CnicDetail = lazy(() => import("src/Components/CustomerOnboarding/CnicDetail"));
 const ReviewApplication = lazy(() => import("src/Components/CustomerOnboarding/ReviewApplication"));
+const TermAndCondition = lazy(() => import("src/Components/CustomerOnboarding/TermAndCondition"));
 const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding/ApplicationComplete"));
 
 const showScreen = {
@@ -37,13 +38,12 @@ const showScreen = {
   scr_uploadCnicBack: <CnicBack />,
   scr_cnicDetail: <CnicDetail />,
   scr_reviewApplication: <ReviewApplication />,
+  scr_termsAndConditions: <TermAndCondition />,
   scr_applicationComplete: <ApplicationComplete />,
 };
 
 const CustomerOnboarding = () => {
   const CURRENT_SCREEN = useSelector(state => state?.screenState)
-
-  console.log('CURRENT_SCREEN', CURRENT_SCREEN)
 
   return (
     <WrapperForHookFormProps>

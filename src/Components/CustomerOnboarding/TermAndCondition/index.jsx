@@ -1,76 +1,20 @@
-import { HiTerminal } from "react-icons/hi";
-import { MdFactCheck } from "react-icons/md";
 import { Box } from "@mui/material";
-import ReCAPTCHA from "react-google-recaptcha";
-import { CheckboxField } from "src/Components/FormFields";
+import { CaptchaField, CheckboxField } from "src/Components/FormFields";
+import React from "react";
+import CustomButton from "src/Common/CustomButton";
+import ValidationError from "src/Components/ValidationError";
 import styles from "./index.module.scss";
-import React, { useState } from "react";
-import VerificationButton from "src/Common/CustomButton";
-import AccountOpeningSuccessModal from "src/Components/Modal/AccountOpeningSuccessModal";
-import { useNavigate } from "react-router-dom";
-
-const robotStyles = {
-  marginTop: "3px",
-  maxWidth: "400px",
-  height: "120px",
-  display: "flex",
-};
 
 const TermAndCondition = ({
-  title,
-  content,
   control,
-  getValues,
   errors,
-  setValue,
-  watch,
-  handleSubmit,
-  submitFormData,
 }) => {
-  const navigate = useNavigate();
-  const recaptchaRef = React.createRef();
-  const [openSuccessModal, setOpenSuccessModal] = useState(false);
-
-  const onCaptchaChange = (value) => {
-    recaptchaValue.current = value;
-    if (value) {
-      setIsBot(false);
-    } else {
-      setIsBot(true);
-    }
-  };
-
-  const handleSuccessModalClose = () => {
-    setOpenSuccessModal(false);
-    navigate("/");
-  };
-
-  const handleSuccessModalOpen = () => setOpenSuccessModal(true);
-
-  const handleProceedButton = (e) => {
-    e.preventDefault();
-    handleSuccessModalOpen();
-  };
-
   return (
-    <>
+    <Box sx={{ paddingTop: "16px" }}>
       <Box>
-        <Box
-          sx={{ display: "flex", alignItems: "center", marginBottom: "12px" }}
-        >
-          <MdFactCheck
-            style={{ color: "#5093e0", marginRight: "15px", fontSize: "32px" }}
-          />
-          <Box
-            sx={{
-              fontSize: "clamp(16px,4vw,36px)",
-              textTransform: "capitalize",
-              color: "#484e53",
-            }}
-          >
-            Terms And Conditions
-          </Box>
-        </Box>
+        <div>
+          <h1 className={styles.topHeading}>Terms And Conditions</h1>
+        </div>
         <Box
           sx={{
             display: "flex",
@@ -111,30 +55,11 @@ const TermAndCondition = ({
         </Box>
       </Box>
       <Box>
-        <Box
-          sx={{ display: "flex", alignItems: "center", marginBottom: "12px" }}
-        >
-          <MdFactCheck
-            style={{ color: "#5093e0", marginRight: "15px", fontSize: "32px" }}
-          />
-          <Box
-            sx={{
-              fontSize: "clamp(16px,4vw,36px)",
-              textTransform: "capitalize",
-              color: "#484e53",
-            }}
-          >
-            Declaration and Acceptance
-          </Box>
-        </Box>
-
-        <div className={styles.checkboxContainer}>
-          <CheckboxField name={"customerCnicLTE"} control={control} />
-          <label htmlFor={"customerCnicLTE"} className={styles.checkboxLabel}>
-            I hereby undertake and confirm that:
-          </label>
+        <div>
+          <h1 className={styles.topHeading}> Declaration and Acceptance</h1>
         </div>
-
+        <CheckboxField name={"isAccepted"} label={"I hereby undertake and confirm that:"} control={control} />
+        {errors?.isAccepted && (<ValidationError message={errors?.isAccepted?.message} />)}
         <ol
           style={{
             fontSize: "16px",
@@ -162,24 +87,18 @@ const TermAndCondition = ({
 
         <Box className={styles.robotStyles}>
           <Box sx={{ width: "100%", maxWidth: "400px" }}>
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              sitekey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
-              onChange={onCaptchaChange}
+            <CaptchaField
+              name={'googleCaptchaReviewApplication'}
+              control={control}
+              siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
             />
+            {errors?.googleCaptchaReviewApplication && (<ValidationError message={errors?.googleCaptchaReviewApplication?.message} />)}
           </Box>
         </Box>
 
-        <VerificationButton onClick={handleProceedButton} label={"Submit"} />
-
-        {openSuccessModal && (
-          <AccountOpeningSuccessModal
-            open={openSuccessModal}
-            handleClose={handleSuccessModalClose}
-          />
-        )}
+        <CustomButton label={"Submit"} />
       </Box>
-    </>
+    </Box>
   );
 };
 

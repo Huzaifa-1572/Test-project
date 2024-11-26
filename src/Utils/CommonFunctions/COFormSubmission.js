@@ -17,11 +17,11 @@ export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
+export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(customerCnic),
+    custIdentityValue: retrieveCNIC(CUSTOMER_CNIC),
     screenKuid: CURRENT_SCREEN,
   };
 
@@ -31,15 +31,19 @@ export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
   };
 };
 
-export const CUSTMOBILE_HANDLER = ({ CURRENT_SCREEN, data }) => {
+export const CUSTMOBILE_HANDLER = ({
+  CURRENT_SCREEN,
+  data,
+  isResumeApplication,
+}) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     mobileNumber: retrieveMobileNumber(data.customerMobile),
-    mobileOperator: data.customerOperator, 
+    mobileOperator: data.customerOperator,
     screenKuid: CURRENT_SCREEN,
-    isResumeApplication: false,
+    isResumeApplication: isResumeApplication,
   };
 
   return {
@@ -161,16 +165,30 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 
 export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
   const BODY = {
-    documentType: PAYLOAD_KEYS[CURRENT_SCREEN],
+    documentType: PAYLOAD_KEYS[kuid],
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
-    imageBase64: data[kuid]
-  }
+    imageBase64: data[kuid],
+  };
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.DOCUMENT_HANDLER}`,
+    BODY,
+  };
+};
+
+export const REVIEW_APPLICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    screenKuid: CURRENT_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.REVIEW_APPLICATION}`,
     BODY,
   };
 };
@@ -189,6 +207,21 @@ export const APPLICATION_COMPLETE_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
+export const GET_IMAGE_HANDLER = ({ CURRENT_SCREEN, customerCnic, kuid }) => {
+  const BODY = {
+    documentType: PAYLOAD_KEYS[kuid],
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(customerCnic),
+    screenKuid: CURRENT_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.GET_IMAGE_HANDLER}`,
+    BODY,
+  };
+};
+
 export const COFormSubmission = {
   scr_customerCnic: ({ CURRENT_SCREEN, data }) => {
     return AUTHENTICATION_HANDLER({
@@ -201,6 +234,7 @@ export const COFormSubmission = {
     return CUSTMOBILE_HANDLER({
       CURRENT_SCREEN,
       data,
+      isResumeApplication: false,
     });
   },
   scr_mobileVerification: ({ CURRENT_SCREEN, data }) => {
@@ -263,21 +297,21 @@ export const COFormSubmission = {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
-      kuid: "KEY_LIVE_PHOTO"
+      kuid: "KEY_LIVE_PHOTO",
     });
   },
   scr_uploadCnicFront: ({ CURRENT_SCREEN, data }) => {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
-      kuid: "KEY_CNIC_FRONT"
+      kuid: "KEY_CNIC_FRONT",
     });
   },
   scr_uploadCnicBack: ({ CURRENT_SCREEN, data }) => {
     return DOCUMENT_HANDLER({
       CURRENT_SCREEN,
       data,
-      kuid: "KEY_CNIC_BACK"
+      kuid: "KEY_CNIC_BACK",
     });
   },
   scr_cnicDetail: ({ CURRENT_SCREEN, data }) => {
@@ -296,6 +330,12 @@ export const COFormSubmission = {
     });
   },
   scr_reviewApplication: ({ CURRENT_SCREEN, data }) => {
+    return REVIEW_APPLICATION_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_termsAndConditions: ({ CURRENT_SCREEN, data }) => {
     return APPLICATION_COMPLETE_HANDLER({
       CURRENT_SCREEN,
       data,
