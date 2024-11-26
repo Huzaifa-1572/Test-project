@@ -25,22 +25,6 @@ export const LIST_OF_CITIES = {
       value: "012",
     },
     {
-      label: "KARACHI",
-      value: "1001",
-    },
-    {
-      label: "SUKKUR",
-      value: "1011",
-    },
-    {
-      label: "HYDERABAD",
-      value: "1012",
-    },
-    {
-      label: "QUETTA",
-      value: "1013",
-    },
-    {
       label: "CHUHARHARPAL",
       value: "1304",
     },
@@ -69,24 +53,8 @@ export const LIST_OF_CITIES = {
       value: "1329",
     },
     {
-      label: "SOHAWA",
-      value: "1332",
-    },
-    {
-      label: "TALAGANG",
-      value: "1333",
-    },
-    {
-      label: "TAXILA",
-      value: "1335",
-    },
-    {
       label: "WAHCANTT",
       value: "1338",
-    },
-    {
-      label: "OKARA",
-      value: "2025",
     },
     {
       label: "KHAIRPUR",
@@ -201,18 +169,6 @@ export const LIST_OF_CITIES = {
       value: "5026",
     },
     {
-      label: "KANDHKOT",
-      value: "7001",
-    },
-    {
-      label: "RATODERO",
-      value: "7003",
-    },
-    {
-      label: "GAMBAT",
-      value: "7004",
-    },
-    {
       label: "AWARAN",
       value: "7009",
     },
@@ -223,10 +179,6 @@ export const LIST_OF_CITIES = {
     {
       label: "BARKHAN",
       value: "7011",
-    },
-    {
-      label: "DUKI",
-      value: "7012",
     },
     {
       label: "HARNAI",
@@ -299,10 +251,6 @@ export const LIST_OF_CITIES = {
     {
       label: "MUSLIMBAGH",
       value: "7033",
-    },
-    {
-      label: "BHAG",
-      value: "7035",
     },
     {
       label: "SOHBATPUR",
@@ -449,16 +397,8 @@ export const LIST_OF_CITIES = {
       value: "7185",
     },
     {
-      label: "MORO",
-      value: "7186",
-    },
-    {
       label: "SAKRAND",
       value: "7187",
-    },
-    {
-      label: "NAWABSHAH",
-      value: "7188",
     },
     {
       label: "SINJHORO",
@@ -473,36 +413,12 @@ export const LIST_OF_CITIES = {
       value: "7191",
     },
     {
-      label: "KANDIARO",
-      value: "7192",
-    },
-    {
-      label: "JAMNAWAZALI",
-      value: "7193",
-    },
-    {
-      label: "KHIPRO",
-      value: "7194",
-    },
-    {
-      label: "SINJHORO",
-      value: "7195",
-    },
-    {
-      label: "TANDOADAMKHAN",
-      value: "7196",
-    },
-    {
       label: "LAKHIGHULAMSHAH",
       value: "7197",
     },
     {
       label: "GARHIYASIN",
       value: "7198",
-    },
-    {
-      label: "KHANPUR",
-      value: "7199",
     },
     {
       label: "DOKRI",
@@ -593,12 +509,7 @@ export const LIST_OF_CITIES = {
       value: "7221",
     },
   ],
-
   2: [
-    {
-      label: "Muzaffarabad",
-      value: "0016",
-    },
     {
       label: "LAHORE",
       value: "002",
@@ -632,38 +543,6 @@ export const LIST_OF_CITIES = {
       value: "048",
     },
     {
-      label: "LAHORE",
-      value: "1002",
-    },
-    {
-      label: "FAISALABAD",
-      value: "1003",
-    },
-    {
-      label: "ISLAMABAD",
-      value: "1004",
-    },
-    {
-      label: "MULTAN",
-      value: "1006",
-    },
-    {
-      label: "ABBOTTABAD",
-      value: "1008",
-    },
-    {
-      label: "GUJRANWALA",
-      value: "1009",
-    },
-    {
-      label: "BAHAWALPUR",
-      value: "1010",
-    },
-    {
-      label: "PESHAWAR",
-      value: "1091",
-    },
-    {
       label: "CHAKWAL",
       value: "1303",
     },
@@ -688,10 +567,6 @@ export const LIST_OF_CITIES = {
       value: "1324",
     },
     {
-      label: "AHMADPUREAST",
-      value: "5027",
-    },
-    {
       label: "AHMEDNAGERCHATHA",
       value: "5028",
     },
@@ -710,14 +585,6 @@ export const LIST_OF_CITIES = {
     {
       label: "ATTOCK",
       value: "5032",
-    },
-    {
-      label: "BHERA",
-      value: "5033",
-    },
-    {
-      label: "BHALWAL",
-      value: "5034",
     },
     {
       label: "BAHAWALNAGAR",
@@ -996,10 +863,6 @@ export const LIST_OF_CITIES = {
       value: "6005",
     },
     {
-      label: "GUJRAT",
-      value: "7000",
-    },
-    {
       label: "FORTABBAS",
       value: "7038",
     },
@@ -1014,10 +877,6 @@ export const LIST_OF_CITIES = {
     {
       label: "AHMADPUREAST",
       value: "7041",
-    },
-    {
-      label: "HASILPUR",
-      value: "7042",
     },
     {
       label: "KHAIRPURTAMIWALI",
@@ -1088,20 +947,12 @@ export const LIST_OF_CITIES = {
       value: "7059",
     },
     {
-      label: "SHORKOT",
-      value: "7060",
-    },
-    {
       label: "GUJRANWALASADDAR",
       value: "7072",
     },
     {
       label: "VIRKANTEHSIL",
       value: "7073",
-    },
-    {
-      label: "SARAIALAMGIR",
-      value: "7074",
     },
     {
       label: "PINDIBHATTIAN",
@@ -1284,7 +1135,6 @@ export const LIST_OF_CITIES = {
       value: "7241",
     },
   ],
-
   3: [
     {
       label: "QUETTA",
@@ -1379,14 +1229,6 @@ export const LIST_OF_CITIES = {
       value: "6027",
     },
     {
-      label: "PASNI",
-      value: "6028",
-    },
-    {
-      label: "ORMARA",
-      value: "6029",
-    },
-    {
       label: "KOHLU",
       value: "6030",
     },
@@ -1435,10 +1277,6 @@ export const LIST_OF_CITIES = {
       value: "7223",
     },
     {
-      label: "HalimZai",
-      value: "7234",
-    },
-    {
       label: "ParanGhar",
       value: "7236",
     },
@@ -1466,12 +1304,7 @@ export const LIST_OF_CITIES = {
       label: "KHOTMAGSI",
       value: "81100",
     },
-    {
-      label: "ZHOB",
-      value: "9999",
-    },
   ],
-
   4: [
     {
       label: "ABBOTTABAD",
@@ -1508,10 +1341,6 @@ export const LIST_OF_CITIES = {
     {
       label: "SWABI",
       value: "6039",
-    },
-    {
-      label: "KABAL",
-      value: "6040",
     },
     {
       label: "CHARSADDA",
@@ -1586,10 +1415,6 @@ export const LIST_OF_CITIES = {
       value: "6058",
     },
     {
-      label: "KHALABAT",
-      value: "6059",
-    },
-    {
       label: "TANK",
       value: "6060",
     },
@@ -1662,10 +1487,6 @@ export const LIST_OF_CITIES = {
       value: "7065",
     },
     {
-      label: "BATKHELA",
-      value: "7066",
-    },
-    {
       label: "KABAL",
       value: "7067",
     },
@@ -1714,10 +1535,6 @@ export const LIST_OF_CITIES = {
       value: "7247",
     },
     {
-      label: "UPEERMOHMAND",
-      value: "7248",
-    },
-    {
       label: "EKKAGUND",
       value: "7249",
     },
@@ -1734,40 +1551,8 @@ export const LIST_OF_CITIES = {
       value: "7255",
     },
     {
-      label: "BAJAUR",
-      value: "7256",
-    },
-    {
-      label: "BAJAUR",
-      value: "7257",
-    },
-    {
-      label: "BAJAUR",
-      value: "7258",
-    },
-    {
-      label: "BAJAUR",
-      value: "7259",
-    },
-    {
-      label: "BAJAUR",
-      value: "7260",
-    },
-    {
-      label: "BAJAUR",
-      value: "7261",
-    },
-    {
-      label: "BAJAUR",
-      value: "7262",
-    },
-    {
       label: "MAKIN",
       value: "7263",
-    },
-    {
-      label: "BAJAUR",
-      value: "7888",
     },
     {
       label: "CHARBAGH",
@@ -1778,7 +1563,6 @@ export const LIST_OF_CITIES = {
       value: "937",
     },
   ],
-
   5: [
     {
       label: "GILGIT",
@@ -1845,10 +1629,6 @@ export const LIST_OF_CITIES = {
       value: "6087",
     },
     {
-      label: "Skardu",
-      value: "7224",
-    },
-    {
       label: "Shigar",
       value: "7225",
     },
@@ -1885,7 +1665,6 @@ export const LIST_OF_CITIES = {
       value: "7233",
     },
   ],
-
   6: [
     {
       label: "MIRPUR(AK)",
@@ -2016,7 +1795,6 @@ export const LIST_OF_CITIES = {
       value: "7222",
     },
   ],
-
   7: [
     {
       label: "ISLAMABAD",
@@ -2038,22 +1816,6 @@ export const LIST_OF_POB = [
   {
     label: "HYDERABAD",
     value: "012",
-  },
-  {
-    label: "KARACHI",
-    value: "1001",
-  },
-  {
-    label: "SUKKUR",
-    value: "1011",
-  },
-  {
-    label: "HYDERABAD",
-    value: "1012",
-  },
-  {
-    label: "QUETTA",
-    value: "1013",
   },
   {
     label: "CHUHARHARPAL",
@@ -2084,24 +1846,8 @@ export const LIST_OF_POB = [
     value: "1329",
   },
   {
-    label: "SOHAWA",
-    value: "1332",
-  },
-  {
-    label: "TALAGANG",
-    value: "1333",
-  },
-  {
-    label: "TAXILA",
-    value: "1335",
-  },
-  {
     label: "WAHCANTT",
     value: "1338",
-  },
-  {
-    label: "OKARA",
-    value: "2025",
   },
   {
     label: "KHAIRPUR",
@@ -2216,18 +1962,6 @@ export const LIST_OF_POB = [
     value: "5026",
   },
   {
-    label: "KANDHKOT",
-    value: "7001",
-  },
-  {
-    label: "RATODERO",
-    value: "7003",
-  },
-  {
-    label: "GAMBAT",
-    value: "7004",
-  },
-  {
     label: "AWARAN",
     value: "7009",
   },
@@ -2238,10 +1972,6 @@ export const LIST_OF_POB = [
   {
     label: "BARKHAN",
     value: "7011",
-  },
-  {
-    label: "DUKI",
-    value: "7012",
   },
   {
     label: "HARNAI",
@@ -2314,10 +2044,6 @@ export const LIST_OF_POB = [
   {
     label: "MUSLIMBAGH",
     value: "7033",
-  },
-  {
-    label: "BHAG",
-    value: "7035",
   },
   {
     label: "SOHBATPUR",
@@ -2464,16 +2190,8 @@ export const LIST_OF_POB = [
     value: "7185",
   },
   {
-    label: "MORO",
-    value: "7186",
-  },
-  {
     label: "SAKRAND",
     value: "7187",
-  },
-  {
-    label: "NAWABSHAH",
-    value: "7188",
   },
   {
     label: "SINJHORO",
@@ -2488,36 +2206,12 @@ export const LIST_OF_POB = [
     value: "7191",
   },
   {
-    label: "KANDIARO",
-    value: "7192",
-  },
-  {
-    label: "JAMNAWAZALI",
-    value: "7193",
-  },
-  {
-    label: "KHIPRO",
-    value: "7194",
-  },
-  {
-    label: "SINJHORO",
-    value: "7195",
-  },
-  {
-    label: "TANDOADAMKHAN",
-    value: "7196",
-  },
-  {
     label: "LAKHIGHULAMSHAH",
     value: "7197",
   },
   {
     label: "GARHIYASIN",
     value: "7198",
-  },
-  {
-    label: "KHANPUR",
-    value: "7199",
   },
   {
     label: "DOKRI",
@@ -2608,10 +2302,6 @@ export const LIST_OF_POB = [
     value: "7221",
   },
   {
-    label: "Muzaffarabad",
-    value: "0016",
-  },
-  {
     label: "LAHORE",
     value: "002",
   },
@@ -2644,38 +2334,6 @@ export const LIST_OF_POB = [
     value: "048",
   },
   {
-    label: "LAHORE",
-    value: "1002",
-  },
-  {
-    label: "FAISALABAD",
-    value: "1003",
-  },
-  {
-    label: "ISLAMABAD",
-    value: "1004",
-  },
-  {
-    label: "MULTAN",
-    value: "1006",
-  },
-  {
-    label: "ABBOTTABAD",
-    value: "1008",
-  },
-  {
-    label: "GUJRANWALA",
-    value: "1009",
-  },
-  {
-    label: "BAHAWALPUR",
-    value: "1010",
-  },
-  {
-    label: "PESHAWAR",
-    value: "1091",
-  },
-  {
     label: "CHAKWAL",
     value: "1303",
   },
@@ -2700,10 +2358,6 @@ export const LIST_OF_POB = [
     value: "1324",
   },
   {
-    label: "AHMADPUREAST",
-    value: "5027",
-  },
-  {
     label: "AHMEDNAGERCHATHA",
     value: "5028",
   },
@@ -2722,14 +2376,6 @@ export const LIST_OF_POB = [
   {
     label: "ATTOCK",
     value: "5032",
-  },
-  {
-    label: "BHERA",
-    value: "5033",
-  },
-  {
-    label: "BHALWAL",
-    value: "5034",
   },
   {
     label: "BAHAWALNAGAR",
@@ -3008,10 +2654,6 @@ export const LIST_OF_POB = [
     value: "6005",
   },
   {
-    label: "GUJRAT",
-    value: "7000",
-  },
-  {
     label: "FORTABBAS",
     value: "7038",
   },
@@ -3026,10 +2668,6 @@ export const LIST_OF_POB = [
   {
     label: "AHMADPUREAST",
     value: "7041",
-  },
-  {
-    label: "HASILPUR",
-    value: "7042",
   },
   {
     label: "KHAIRPURTAMIWALI",
@@ -3100,20 +2738,12 @@ export const LIST_OF_POB = [
     value: "7059",
   },
   {
-    label: "SHORKOT",
-    value: "7060",
-  },
-  {
     label: "GUJRANWALASADDAR",
     value: "7072",
   },
   {
     label: "VIRKANTEHSIL",
     value: "7073",
-  },
-  {
-    label: "SARAIALAMGIR",
-    value: "7074",
   },
   {
     label: "PINDIBHATTIAN",
@@ -3388,14 +3018,6 @@ export const LIST_OF_POB = [
     value: "6027",
   },
   {
-    label: "PASNI",
-    value: "6028",
-  },
-  {
-    label: "ORMARA",
-    value: "6029",
-  },
-  {
     label: "KOHLU",
     value: "6030",
   },
@@ -3444,10 +3066,6 @@ export const LIST_OF_POB = [
     value: "7223",
   },
   {
-    label: "HalimZai",
-    value: "7234",
-  },
-  {
     label: "ParanGhar",
     value: "7236",
   },
@@ -3474,10 +3092,6 @@ export const LIST_OF_POB = [
   {
     label: "KHOTMAGSI",
     value: "81100",
-  },
-  {
-    label: "ZHOB",
-    value: "9999",
   },
   {
     label: "ABBOTTABAD",
@@ -3514,10 +3128,6 @@ export const LIST_OF_POB = [
   {
     label: "SWABI",
     value: "6039",
-  },
-  {
-    label: "KABAL",
-    value: "6040",
   },
   {
     label: "CHARSADDA",
@@ -3592,10 +3202,6 @@ export const LIST_OF_POB = [
     value: "6058",
   },
   {
-    label: "KHALABAT",
-    value: "6059",
-  },
-  {
     label: "TANK",
     value: "6060",
   },
@@ -3668,10 +3274,6 @@ export const LIST_OF_POB = [
     value: "7065",
   },
   {
-    label: "BATKHELA",
-    value: "7066",
-  },
-  {
     label: "KABAL",
     value: "7067",
   },
@@ -3720,10 +3322,6 @@ export const LIST_OF_POB = [
     value: "7247",
   },
   {
-    label: "UPEERMOHMAND",
-    value: "7248",
-  },
-  {
     label: "EKKAGUND",
     value: "7249",
   },
@@ -3740,40 +3338,8 @@ export const LIST_OF_POB = [
     value: "7255",
   },
   {
-    label: "BAJAUR",
-    value: "7256",
-  },
-  {
-    label: "BAJAUR",
-    value: "7257",
-  },
-  {
-    label: "BAJAUR",
-    value: "7258",
-  },
-  {
-    label: "BAJAUR",
-    value: "7259",
-  },
-  {
-    label: "BAJAUR",
-    value: "7260",
-  },
-  {
-    label: "BAJAUR",
-    value: "7261",
-  },
-  {
-    label: "BAJAUR",
-    value: "7262",
-  },
-  {
     label: "MAKIN",
     value: "7263",
-  },
-  {
-    label: "BAJAUR",
-    value: "7888",
   },
   {
     label: "CHARBAGH",
@@ -3846,10 +3412,6 @@ export const LIST_OF_POB = [
   {
     label: "TANGIR",
     value: "6087",
-  },
-  {
-    label: "Skardu",
-    value: "7224",
   },
   {
     label: "Shigar",
