@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
 import { updateScreen } from "src/Redux/Reducers/ScreenState";
-import { CNICEXIST_HANDLER, COFormSubmission } from "src/Utils/CommonFunctions/COFormSubmission";
+import { CNICEXIST_HANDLER, COFormSubmission, CUSTMOBILE_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { INITIAL_VALUES } from "src/Utils/Constants";
 import { getDataFromIndexDb, storeDataToIndexDb } from "src/Utils/Helpers";
@@ -35,6 +35,7 @@ function WrapperForHookFormProps({ children }) {
   const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
   function submitFormData(data) {
+    console.log('first', 'i am calling')
     const FORM_SUBMISSION_DATA = COFormSubmission[CURRENT_SCREEN];
     const { BODY, API_URL } = FORM_SUBMISSION_DATA({ CURRENT_SCREEN, data, dispatch });
     mutate({ BODY, API_URL, dispatch });
@@ -43,10 +44,26 @@ function WrapperForHookFormProps({ children }) {
   function onSuccessfullFormDataSubmission(response) {
     // For scr_customerCnic, handle dependent API calls
     const TOKEN = response?.data?.data?.token;
+    const DATA = response?.data?.data
+    const CUSTOMER_CNIC = getValues("customerCnic");
+
     if (CURRENT_SCREEN === "scr_customerCnic" && !!TOKEN) {
       localStorage.setItem("referenceKey", TOKEN);
-      const customerCnic = getValues("customerCnic");
-      const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, customerCnic, dispatch });
+      const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, CUSTOMER_CNIC, dispatch });
+      mutate({ BODY, API_URL, dispatch });
+    }
+
+    if (!!DATA?.mobileNumber) {
+      setValue('customerMobile', DATA?.mobileNumber)
+      setValue('customerOperator', DATA?.mobileOperator)
+
+      const RESUME_BODY = {
+        customerCnic: CUSTOMER_CNIC,
+        customerMobile: DATA?.mobileNumber,
+        customerOperator: DATA?.mobileOperator
+      }
+
+      const { BODY, API_URL } = CUSTMOBILE_HANDLER({ CURRENT_SCREEN: 'scr_customerMobile', data: RESUME_BODY, isResumeApplication: true, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }
 

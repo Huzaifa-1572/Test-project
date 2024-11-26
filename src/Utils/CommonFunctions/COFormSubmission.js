@@ -17,11 +17,11 @@ export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
+export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(customerCnic),
+    custIdentityValue: retrieveCNIC(CUSTOMER_CNIC),
     screenKuid: CURRENT_SCREEN,
   };
 
@@ -31,7 +31,11 @@ export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
   };
 };
 
-export const CUSTMOBILE_HANDLER = ({ CURRENT_SCREEN, data }) => {
+export const CUSTMOBILE_HANDLER = ({
+  CURRENT_SCREEN,
+  data,
+  isResumeApplication,
+}) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
@@ -39,7 +43,7 @@ export const CUSTMOBILE_HANDLER = ({ CURRENT_SCREEN, data }) => {
     mobileNumber: retrieveMobileNumber(data.customerMobile),
     mobileOperator: data.customerOperator,
     screenKuid: CURRENT_SCREEN,
-    isResumeApplication: false,
+    isResumeApplication: isResumeApplication,
   };
 
   return {
@@ -175,6 +179,20 @@ export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
   };
 };
 
+export const REVIEW_APPLICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(data.customerCnic),
+    screenKuid: CURRENT_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.REVIEW_APPLICATION}`,
+    BODY,
+  };
+};
+
 export const APPLICATION_COMPLETE_HANDLER = ({ CURRENT_SCREEN, data }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
@@ -216,6 +234,7 @@ export const COFormSubmission = {
     return CUSTMOBILE_HANDLER({
       CURRENT_SCREEN,
       data,
+      isResumeApplication: false,
     });
   },
   scr_mobileVerification: ({ CURRENT_SCREEN, data }) => {
@@ -311,6 +330,12 @@ export const COFormSubmission = {
     });
   },
   scr_reviewApplication: ({ CURRENT_SCREEN, data }) => {
+    return REVIEW_APPLICATION_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+  scr_termsAndConditions: ({ CURRENT_SCREEN, data }) => {
     return APPLICATION_COMPLETE_HANDLER({
       CURRENT_SCREEN,
       data,

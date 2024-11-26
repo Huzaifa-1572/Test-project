@@ -15,6 +15,7 @@ export const ENDPOINTS = {
   GENERIC_HANDLER: "api/dao/v1/generic-handler/",
   DOCUMENT_HANDLER: "api/dao/v1/document/uploadImageBase64",
   GET_IMAGE_HANDLER: "api/dao/v1/document/getImageBase64ByDocId",
+  REVIEW_APPLICATION: "api/dao/v1/customer/validateCustomerInfo",
   APPLICATION_COMPLETE: "api/dao/v1/customer/submitCustomerInfo",
 };
 
