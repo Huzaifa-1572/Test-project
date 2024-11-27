@@ -70,7 +70,6 @@ export const setupRequestInterceptor = () => {
   Axios.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("referenceKey");
-      console.log("sdksdksdkdj", token);
       if (!!token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -131,41 +130,42 @@ export const getScreenData = () => {
   };
 };
 
-export const getProvince = (value) =>{
-  const province = LIST_OF_PROVINCES.find((province)=> province?.value == value)
+export const getProvince = (value) => {
+  const province = LIST_OF_PROVINCES.find((province) => province?.value == value)
   return province?.label || 'N/A'
 }
 
-export const getCity = (value) =>{
-  const city = LIST_OF_POB.find((city)=> city?.value == value)
+export const getCity = (value) => {
+  const city = LIST_OF_POB.find((city) => city?.value == value)
   return city?.label || 'N/A'
 }
 
 export const getReviewApplicationData = () => {
   const SCREEN_DATA = useSelector((state) => state.screenDataState);
   const { title, description, sections } = SCREEN_DATA
-  return  {
+  return {
     TITLE: title || "",
     DESCRIPTION: description || "",
     SECTIONS: sections || [],
   };
 };
 
+// FOR REVIEW PAGE
 export const generateFieldValue = (field) => {
   if (field['value-type'] === 'cnic') {
-      return `${field?.value?.slice(0, 5)}-${field?.value?.slice(5, 12)}-${field?.value?.slice(12)}`
+    return `${field?.value?.slice(0, 5)}-${field?.value?.slice(5, 12)}-${field?.value?.slice(12)}`
   }
   else if (field['value-type'] === 'date') {
-      return field?.value?.split?.('T')?.[0] || 'N/A'
+    return field?.value?.split?.('T')?.[0] || 'N/A'
   }
-  else if (field["kuid"] === "KEY_PROVINCE"){
-      return getProvince(field?.value)
+  else if (field["kuid"] === "KEY_PROVINCE") {
+    return getProvince(field?.value)
   }
-  else if (field["kuid"] === "KEY_PLACE_OF_BIRTH" || field["kuid"] === "KEY_CITY_CODE" ){
+  else if (field["kuid"] === "KEY_PLACE_OF_BIRTH" || field["kuid"] === "KEY_CITY_CODE") {
     return getCity(field?.value)
-}
+  }
   else {
-      return field?.value || 'N/A'
+    return field?.value || 'N/A'
   }
 }
 

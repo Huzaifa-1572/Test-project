@@ -26,18 +26,42 @@ export const THEME = createTheme({
     secondary: { main: "#f2cc0e" },
   },
   components: {
+    // Button customizations
     MuiButton: {
       styleOverrides: {
         root: {
-          // opacity: 0.8,
+          height: "55px",
           "&:hover": {
-            // opacity: 1,
             // Add other hover styles as needed
           },
-          height: "55px",
         },
       },
     },
-    // Add other components with hover styles as needed
+    // TextField customizations for disabled state
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiFilledInput-root.Mui-disabled": {
+            backgroundColor: "#f5f5f5",
+            "&:hover": {
+              backgroundColor: "#f5f5f5",
+            },
+          },
+        },
+      },
+    },
+    // InputBase customizations for general input fields
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            backgroundColor: "#f5f5f5",
+            "&:hover": {
+              backgroundColor: "#f5f5f5",
+            },
+          },
+        },
+      },
+    },
   },
 });

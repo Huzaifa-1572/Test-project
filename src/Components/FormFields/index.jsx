@@ -567,11 +567,11 @@ export const SelectField = ({
           placeholder={placeholder}
           sx={{
             "& .MuiFilledInput-root": {
-              background: !disabled && "white",
+              background: "white",
             },
             "& .MuiSelect-select.MuiInputBase-input.MuiFilledInput-input:focus":
             {
-              backgroundColor: !disabled && "white",
+              backgroundColor: "white",
             },
           }}
           InputProps={{
@@ -583,12 +583,12 @@ export const SelectField = ({
               height: "70px",
               maxWidth: "500px",
               width: "100%",
-              backgroundColor: !disabled && "white",
+              backgroundColor: "white",
               "&:hover": {
-                backgroundColor: !disabled && "white",
+                backgroundColor: "white",
               },
               "&.Mui-focused": {
-                backgroundColor: !disabled && "white",
+                backgroundColor: "white",
               },
             },
           }}
@@ -625,10 +625,9 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
         <Autocomplete
           options={options}
           getOptionLabel={(option) => option.label}
-          isOptionEqualToValue={(option, value) => option.value === value}
-          value={options.find((option) => option.value === value) || null}
+          value={options.find((option) => option.value === value) || null}  // Find the correct option object
           onChange={(event, newValue) => {
-            onChange(newValue ? newValue.value : ''); // Set value as string
+            onChange(newValue ? newValue.value : '');  // Pass only the 'value' (string)
           }}
           disableClearable
           disabled={disabled}
@@ -641,11 +640,20 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
               disabled={disabled}
               InputProps={{
                 ...params.InputProps,
-                disableUnderline: true,
+                disableUnderline: true, // Disable underline
               }}
               sx={{
                 '& .MuiFilledInput-root': {
                   backgroundColor: 'white',
+                  '&.Mui-focused': {
+                    backgroundColor: 'white',
+                  },
+                  '&.Mui-disabled': {
+                    backgroundColor: '#f5f5f5',
+                  },
+                  '&:hover': {
+                    backgroundColor: 'white',
+                  },
                 },
                 '& .MuiInputBase-root': {
                   background: 'white',
@@ -656,9 +664,6 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
                   fontSize: '1.25rem',
                   height: '70px',
                   boxShadow: 'none',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                  },
                 },
                 '& .MuiInputLabel-root': {
                   fontSize: '1.25rem',
@@ -675,9 +680,6 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
     />
   );
 };
-
-
-
 
 // Upload Image
 export const UploadImage = ({
@@ -966,7 +968,6 @@ export const CurrencyInputField = ({
     />
   );
 };
-
 
 // RECAPTCHA FIELD
 export const CaptchaField = ({ name, control, onChange, siteKey, style }) => {
