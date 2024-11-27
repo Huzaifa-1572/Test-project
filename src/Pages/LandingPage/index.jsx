@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import HeroImage from "src/Assets/images/hero.png";
 import HomePageLayout from "src/Layout/HomePageLayout";
-import { updateScreen } from "src/Redux/Reducers/ScreenState";
+import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { clearAppData } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
 
@@ -21,13 +21,13 @@ const LandingPage = () => {
 
   const handleNewAccount = () => {
     const NEXT_SCREEN = "scr_customerCnic";
-    dispatch(updateScreen(NEXT_SCREEN));
+    dispatch(updateCurrentScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");
   };
 
   const handleResumeApplication = () => {
     const NEXT_SCREEN = "scr_customerCnic";
-    dispatch(updateScreen(NEXT_SCREEN));
+    dispatch(updateCurrentScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");
   };
 

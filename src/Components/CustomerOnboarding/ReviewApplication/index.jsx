@@ -1,27 +1,31 @@
 import React, { useState } from 'react'
 import { Box, Grid } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { EDIT_HANDLER, GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission'
 import { generateFieldValue, getReviewApplicationData, getUUID, sanitizer } from 'src/Utils/Helpers'
 import styles from './index.module.scss'
 import CustomButton from 'src/Common/CustomButton'
 import AttachmentIcon from 'src/Assets/images/attach-icon.png';
 import ImageDailog from 'src/Common/ImageDialog'
-import { GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission'
-import { useDispatch, useSelector } from 'react-redux'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
+import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
 
-const ReviewApplication = ({ control, getValues, errors }) => {
+const ReviewApplication = ({ setValue, getValues }) => {
     const dispatch = useDispatch()
-    const CURRENT_SCREEN = useSelector((state) => state?.screenState);
+    const navigate = useNavigate()
+    const customerCnic = getValues("customerCnic");
+    const CURRENT_SCREEN = useSelector((state) => state?.currentScreenState);
     const [openDailog, setopenDailog] = useState(false)
     const [fieldData, setFieldData] = useState({})
     const { TITLE, DESCRIPTION, SECTIONS } = getReviewApplicationData()
-    const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullSubmission, dispatch });
+    const { mutate: mutateGetImage } = usePostDataToServer({ onPostReqSuccess: onSuccessfullGetImage, dispatch });
+    const { mutate: mutateEdit } = usePostDataToServer({ onPostReqSuccess: onSuccessfullEdit, dispatch });
 
     const handleDailogOpen = (e, field) => {
-        const customerCnic = getValues("customerCnic");
         const kuid = field?.kuid;
         const { BODY, API_URL } = GET_IMAGE_HANDLER({ CURRENT_SCREEN, customerCnic, kuid, dispatch });
-        mutate({ BODY, API_URL, dispatch });
+        mutateGetImage({ BODY, API_URL, dispatch });
         setFieldData(field);
         setopenDailog(true);
     }
@@ -30,12 +34,22 @@ const ReviewApplication = ({ control, getValues, errors }) => {
         setopenDailog(false)
     }
 
-    function onSuccessfullSubmission(response) {
+    function onSuccessfullGetImage(response) {
         const IMAGE = response?.data?.data?.imageBase64;
         setFieldData(prev => ({
             ...prev,
             imageBase64: IMAGE
         }));
+    }
+
+    const handleEdit = (screen_kuid) => {
+        localStorage.setItem('isEditable', true)
+        const { BODY, API_URL } = EDIT_HANDLER({ CURRENT_SCREEN: screen_kuid, customerCnic, dispatch });
+        mutateEdit({ BODY, API_URL, dispatch });
+    }
+
+    function onSuccessfullEdit(response) {
+        postRequestSuccess({ response, dispatch, navigate, setValue });
     }
 
     return (
@@ -67,8 +81,7 @@ const ReviewApplication = ({ control, getValues, errors }) => {
                                         <span className={styles.stepTitle}>{section['summary-table-meta']['title2']}</span>
                                     </div>
                                 </div>
-                                {section['summary-table-meta'].editable && <div
-                                    className={styles.editBtn}>EDIT</div>}
+                                {section['summary-table-meta'].editable && <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>EDIT</div>}
                             </div>
 
                             {/*TABLE BODY*/}

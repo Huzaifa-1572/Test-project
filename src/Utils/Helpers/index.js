@@ -118,6 +118,12 @@ export const getScreen = (data) => {
   return screen;
 };
 
+// GET PREV SCREEN
+export const getPrevScreen = (data) => {
+  const screen = data?.prev_screen_kuid || "No Previous Screen Found";
+  return screen;
+}
+
 // GET SCREEN DATA FOR DASHBOARD
 export const getScreenData = () => {
   const SCREEN_DATA = useSelector((state) => state.screenDataState);

@@ -2,6 +2,8 @@ import { BASE_URL, ENDPOINTS } from "src/Utils/config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
 import { retrieveCNIC, retrieveMobileNumber } from "src/Utils/Helpers";
 
+const REVIEW_SCREEN = "scr_cnicDetail";
+
 export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
@@ -120,8 +122,12 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 };
 
 export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-  let fields = [];
+  const EDITABLE = localStorage.getItem("isEditable");
+  if (EDITABLE) {
+    localStorage.removeItem("isEditable");
+  }
 
+  let fields = [];
   if (Array.isArray(kuid)) {
     fields = kuid.map((kuid) => ({
       attributeName: kuid,
@@ -133,7 +139,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: CURRENT_SCREEN,
+    screenKuid: EDITABLE ? REVIEW_SCREEN : CURRENT_SCREEN,
     content: {
       kycs: fields,
     },
@@ -164,12 +170,17 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 };
 
 export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
+  const EDITABLE = localStorage.getItem("isEditable");
+  if (EDITABLE) {
+    localStorage.removeItem("isEditable");
+  }
+
   const BODY = {
     documentType: PAYLOAD_KEYS[kuid],
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: CURRENT_SCREEN,
+    screenKuid: EDITABLE ? REVIEW_SCREEN : CURRENT_SCREEN,
     imageBase64: data[kuid],
   };
 
@@ -218,6 +229,34 @@ export const GET_IMAGE_HANDLER = ({ CURRENT_SCREEN, customerCnic, kuid }) => {
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.GET_IMAGE_HANDLER}`,
+    BODY,
+  };
+};
+
+export const GO_BACK_HANDLER = ({ PREV_SCREEN, customerCnic }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(customerCnic),
+    screenKuid: PREV_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.GO_BACK}`,
+    BODY,
+  };
+};
+
+export const EDIT_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(customerCnic),
+    screenKuid: CURRENT_SCREEN,
+  };
+
+  return {
+    API_URL: `${BASE_URL}${ENDPOINTS.EDIT_HANDLER}`,
     BODY,
   };
 };

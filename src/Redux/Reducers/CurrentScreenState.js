@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = "";
 
-export const SCREEN_STATE = createSlice({
+export const CURRENT_SCREEN_STATE = createSlice({
   name: "SCREEN_STATE",
   initialState,
   reducers: {
-    updateScreen: (state, action) => {
+    updateCurrentScreen: (state, action) => {
       return action.payload;
     },
-    ClearScreen: () => {
+    ClearCurrentScreen: () => {
       return ''
     }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateScreen, ClearScreen } = SCREEN_STATE.actions;
+export const { updateCurrentScreen, ClearCurrentScreen } = CURRENT_SCREEN_STATE.actions;
 
-export default SCREEN_STATE.reducer;
+export default CURRENT_SCREEN_STATE.reducer;

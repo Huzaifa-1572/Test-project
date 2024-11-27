@@ -1,18 +1,23 @@
 import React from "react";
-import { Box, Container, Fade } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import Header from "src/Layout/Header";
 import GoBack from "src/Common/Goback";
 import styles from "./index.module.scss";
-import Header from "src/Layout/Header";
 
-function CustomerOnboardingLayout({ children }) {
+function CustomerOnboardingLayout({ setValue, getValues, children }) {
+  const EDITABLE = localStorage.getItem("isEditable");
+  
   return (
     <>
       <Header />
       <Box className={styles.onboardingContainer}>
         <Container maxWidth="xl">
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <GoBack />
-          </Box>
+          {
+            !EDITABLE &&
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <GoBack setValue={setValue} getValues={getValues} />
+            </Box>
+          }
           {children}
         </Container>
       </Box>

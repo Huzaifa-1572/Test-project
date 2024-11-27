@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
-import { updateScreen } from "src/Redux/Reducers/ScreenState";
+import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { CNICEXIST_HANDLER, COFormSubmission, CUSTMOBILE_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { INITIAL_VALUES } from "src/Utils/Constants";
@@ -16,7 +16,7 @@ import * as yup from "yup";
 function WrapperForHookFormProps({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const CURRENT_SCREEN = useSelector((state) => state?.screenState);
+  const CURRENT_SCREEN = useSelector((state) => state?.currentScreenState);
   const currentScreenRef = useRef(CURRENT_SCREEN);
 
   // Update ref whenever CURRENT_SCREEN changes
@@ -35,7 +35,6 @@ function WrapperForHookFormProps({ children }) {
   const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
   function submitFormData(data) {
-    console.log('first', 'i am calling')
     const FORM_SUBMISSION_DATA = COFormSubmission[CURRENT_SCREEN];
     const { BODY, API_URL } = FORM_SUBMISSION_DATA({ CURRENT_SCREEN, data, dispatch });
     mutate({ BODY, API_URL, dispatch });
@@ -47,12 +46,14 @@ function WrapperForHookFormProps({ children }) {
     const DATA = response?.data?.data
     const CUSTOMER_CNIC = getValues("customerCnic");
 
+    // FOR SECOND CALL ON CUSTOMER CNIC SCREEN
     if (CURRENT_SCREEN === "scr_customerCnic" && !!TOKEN) {
       localStorage.setItem("referenceKey", TOKEN);
       const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, CUSTOMER_CNIC, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }
 
+    // FOR RESUME FLOW
     if (!!DATA?.mobileNumber) {
       setValue('customerMobile', DATA?.mobileNumber)
       setValue('customerOperator', DATA?.mobileOperator)
@@ -88,7 +89,7 @@ function WrapperForHookFormProps({ children }) {
       if (IS_STORED_DATA_AVAILABLE) {
         const SavedFormData = data?.appData?.FORMDATA
         const SavedCurrentScreen = data?.appData?.CURRENT_SCREEN
-        dispatch(updateScreen(SavedCurrentScreen))
+        dispatch(updateCurrentScreen(SavedCurrentScreen))
         reset(SavedFormData)
       }
       else {
@@ -116,7 +117,7 @@ function WrapperForHookFormProps({ children }) {
 
   return (
     <form onSubmit={handleSubmit(submitFormData)}>
-      <CustomerOnboardingLayout>
+      <CustomerOnboardingLayout {...HOOK_FORM_PROPS}>
         {childrenWithProps}
       </CustomerOnboardingLayout>
     </form>

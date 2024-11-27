@@ -1,6 +1,7 @@
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
-import { updateScreen } from "src/Redux/Reducers/ScreenState";
-import { clearIndexDb, getScreen } from "src/Utils/Helpers";
+import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
+import { clearIndexDb, getPrevScreen, getScreen } from "src/Utils/Helpers";
+import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 
 const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   const DATA = response?.data?.data;
@@ -13,8 +14,15 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   // --------------------FOR OTP VERFICATION SCREENS
 
   if (!!DATA) {
+    // FOR CURRENT SCREEN
     const NEXT_SCREEN = getScreen(DATA);
-    dispatch(updateScreen(NEXT_SCREEN));
+    dispatch(updateCurrentScreen(NEXT_SCREEN));
+    
+    // FOR PREVIOUS SCREEN
+    const PREV_SCREEN = getPrevScreen(DATA);
+    dispatch(updatePrevScreen(PREV_SCREEN));
+    
+    // FOR SCREEN DATA
     const NEXT_SCREEN_DATA = DATA?.nextScreenPayload || {};
     dispatch(UpdateScreenData(NEXT_SCREEN_DATA));
 

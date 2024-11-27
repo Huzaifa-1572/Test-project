@@ -1,8 +1,8 @@
 // LOCAL
-// export const BASE_URL = "http://192.168.20.101:8080/";
+export const BASE_URL = "http://192.168.10.202:8080/";
 
 // UAT
-export const BASE_URL = "http://10.6.60.6:8089/";
+// export const BASE_URL = "http://10.6.60.6:8089/";
 
 export const ENDPOINTS = {
   AUTHENTICATION: "api/dao/v1/authenticate",
@@ -17,6 +17,8 @@ export const ENDPOINTS = {
   GET_IMAGE_HANDLER: "api/dao/v1/document/getImageBase64ByDocId",
   REVIEW_APPLICATION: "api/dao/v1/customer/validateCustomerInfo",
   APPLICATION_COMPLETE: "api/dao/v1/customer/submitCustomerInfo",
+  GO_BACK: "api/dao/v1/customer/getKYCDetail",
+  EDIT_HANDLER: "api/dao/v1/customer/editKYCDetail",
 };
 
 
