@@ -6,6 +6,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-d
 import ErrorModal from "./Common/ErrorModal";
 import { setupRequestInterceptor, setupResponseInterceptor } from "./Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "./Utils/Settings";
+import './App.scss'
 
 // LAZY LOADING
 const Loader = lazy(() => import("src/Common/Loader"));

@@ -74,6 +74,8 @@ export const TextInputField = ({
                   backgroundColor: "white", // Maintain white on focus
                 },
               },
+              autoComplete: "off", // Disable autocomplete
+              autoCorrect: "off", // Disable browser correction (especially for mobile)
             }}
             InputLabelProps={{
               sx: {
@@ -133,12 +135,7 @@ export const AlphaNumericInputField = ({
                   ? /^[a-zA-Z0-9-]*$/
                   : /^[a-zA-Z0-9]*$/;
                 // Allow backspace key, enter key, and tab key
-                if (
-                  event.keyCode === 8 ||
-                  event.keyCode === 13 ||
-                  event.keyCode === 9
-                )
-                  return;
+                if (event.keyCode === 8 || event.keyCode === 13 || event.keyCode === 9) return;
                 if (!Validation.test(keyValue)) event.preventDefault();
               }
             }}
@@ -167,6 +164,8 @@ export const AlphaNumericInputField = ({
               inputProps: {
                 type: type,
                 maxLength: maxLength,
+                autoComplete: "off",  // Disable autocomplete
+                autoCorrect: "off",   // Disable autocorrect
               },
             }}
             InputLabelProps={{
@@ -181,7 +180,7 @@ export const AlphaNumericInputField = ({
         );
       }}
     />
-  );
+  )
 };
 
 // TEXTAREA FIELD
@@ -212,7 +211,6 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
               background: 'white',
               border: '1px solid #eaeaea',
               borderRadius: '7px',
-              // maxWidth: '500px',
               width: '100%',
               fontSize: '1.25rem',
               lineHeight: '15px',
@@ -221,6 +219,8 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
             },
             inputProps: {
               maxLength: maxLength,
+              autoComplete: "off",  // Disable autocomplete
+              autoCorrect: "off",   // Disable autocorrect
             },
           },
           inputLabel: {
@@ -236,6 +236,7 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
     )}
   />
 );
+
 
 //Toggle Button
 export const SwitchButton = ({ name, control, label, checked, onChange }) => {
@@ -294,6 +295,10 @@ export const CustomInputField = ({
           "&.Mui-focused": {
             backgroundColor: "white",
           },
+        },
+        inputProps: {
+          autoComplete: "off",  // Disable autocomplete
+          autoCorrect: "off",   // Disable autocorrect
         },
       },
       InputLabelProps: {
@@ -402,7 +407,12 @@ export const NumberInputField = ({
             type={"text"}
             variant="filled"
             inputMode="numeric"
-            inputProps={{ inputMode: "numeric" }}
+            inputProps={{
+              inputMode: "numeric",
+              autoComplete: "off",  // Disable autocomplete
+              autoCorrect: "off",   // Disable autocorrect
+              maxLength: maxLength,
+            }}
             sx={{
               "& .MuiFilledInput-root": {
                 backgroundColor: "white",
@@ -425,9 +435,6 @@ export const NumberInputField = ({
                 lineHeight: "15px",
                 height: "70px",
               },
-              inputProps: {
-                maxLength: maxLength,
-              },
             }}
             InputLabelProps={{
               style: {
@@ -443,6 +450,7 @@ export const NumberInputField = ({
     />
   );
 };
+
 
 //Date Field
 export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
