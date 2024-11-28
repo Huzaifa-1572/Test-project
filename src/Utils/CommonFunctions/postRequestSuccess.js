@@ -1,7 +1,8 @@
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
-import { clearIndexDb, getPrevScreen, getScreen } from "src/Utils/Helpers";
+import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
+import { FIELD_MANIFEST } from "../Constants";
 
 const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   const DATA = response?.data?.data;
@@ -33,8 +34,12 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
         if (field?.userValue) {
           let processedValue = field?.userValue;
 
-          if (field?.field_manifest === "checkbox") {
+          if (field?.field_manifest === FIELD_MANIFEST.CHECKBOX) {
             processedValue = processedValue === "true";
+          }
+
+          if (field?.field_manifest === FIELD_MANIFEST.CNIC) {
+            processedValue = formatCNIC(processedValue)
           }
 
           setValue(field?.kuid, processedValue);

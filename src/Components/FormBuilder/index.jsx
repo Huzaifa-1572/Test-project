@@ -4,7 +4,7 @@ import ValidationError from "src/Components/ValidationError";
 import { FIELD_MANIFEST } from "src/Utils/Constants";
 import { LIST_OF_CITIES, LIST_OF_POB, LIST_OF_PROVINCES } from "src/Utils/Lovs";
 
-export const FormBuilder = ({ field, control, errors, watch, setValue, getValues, options }) => {
+export const FormBuilder = ({ field, control, errors, watch, setValue, getValues, options, disabled }) => {
     const FIELD_MANIFEST_TYPE = field?.field_manifest;
     const PLACE_OF_BIRTH_OPTIONS = useMemo(() => LIST_OF_POB, [])
 
@@ -99,15 +99,13 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                 </>
             );
         case FIELD_MANIFEST.DATE_PICKER:
-            const isExpiryDate = field?.kuid === "KEY_CNIC_EXPIRY_DATE";
-            const isCnicLifeTime = !!watch("KEY_CNIC_LIFETIME");
             return (
                 <>
                     <DateInputField
                         name={field?.kuid}
                         control={control}
                         label={field?.label}
-                        disabled={isExpiryDate && isCnicLifeTime}
+                        disabled={disabled}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>

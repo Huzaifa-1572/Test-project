@@ -270,6 +270,7 @@ export const CustomInputField = ({
   placeholder,
   inputMode,
   autoFocus = false,
+  disabled = false
 }) => {
   const isMobileNumberFormat = format === "####-#######";
 
@@ -336,6 +337,7 @@ export const CustomInputField = ({
           inputMode={inputMode}
           placeholder={placeholder}
           autoFocus={autoFocus}
+          disabled={disabled}
           isAllowed={
             isMobileNumberFormat
               ? (values) => {

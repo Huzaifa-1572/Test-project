@@ -1,8 +1,32 @@
 import * as yup from "yup";
+import dayjs from "dayjs";
 import { retrieveMobileNumber } from "src/Utils/Helpers";
 
 const currentDate = new Date();
 const minDate = new Date(1900, 0, 1);
+
+// FOR DATE OF BIRTH
+const minAge = (age) => {
+  return dayjs().subtract(age, 'year').toDate();
+};
+
+// FOR CNIC ISSUANCE DATE
+const validIssuanceDate = (date) => {
+  return dayjs(date).isBefore(dayjs(), 'day');
+};
+
+const withinReasonableTimeframe = (date, years = 50) => {
+  return dayjs(date).isAfter(dayjs().subtract(years, 'year'), 'day');
+};
+
+// FOR CNIC EXPIRY DATE
+const validExpiryDate = (date) => {
+  return dayjs(date).isAfter(dayjs(), 'day');
+};
+
+const withinReasonableRange = (date, years = 20) => {
+  return dayjs(date).isBefore(dayjs().add(years, 'year'), 'day');
+};
 
 export const shape = {
   "scr_customerCnic": {
@@ -73,44 +97,36 @@ export const shape = {
       .string()
       .required("This field is required")
       .matches(/^\d{5}-\d{7}-\d{1}$/, "A valid CNIC is required"),
-    KEY_DOB: yup.date().required('This field is required')
-      .transform((value, originalValue) => {
-        if (!originalValue) {
-          return null
-        }
-        const parsedDate = Date.parse(originalValue);
-        return isNaN(parsedDate) ? new Date('') : new Date(parsedDate);
-      }),
-    // .min(minDate, `Date of birth must be later than ${format(minDate, 'dd/MM/yyyy')}`)
-    // .max(currentDate, `Date of birth must be earlier than ${format(currentDate, 'dd/MM/yyyy')}`),
-    KEY_CNIC_ISSUANCE_DATE: yup.date().required('This field is required')
-      .transform((value, originalValue) => {
-        if (!originalValue) {
-          return null
-        }
-        const parsedDate = Date.parse(originalValue);
-        return isNaN(parsedDate) ? new Date('') : new Date(parsedDate);
-      }),
-    // .min(minDate, `Date of birth must be later than ${format(minDate, 'dd/MM/yyyy')}`),
-    KEY_CNIC_EXPIRY_DATE: yup.date()
+    KEY_DOB: yup
+      .date()
+      .required('This field is required')
+      .max(minAge(18), 'You must be at least 18 years old')
+      .typeError('This field is required'),
+    KEY_CNIC_ISSUANCE_DATE: yup
+      .date()
+      .required('This field is required')
+      .test('is-valid-date', 'Invalid CNIC issuance date format', (value) => dayjs(value).isValid())
+      .test('not-in-future', 'CNIC issuance date cannot be in the future', (value) => validIssuanceDate(value))
+      .test('within-reasonable-timeframe', 'CNIC issuance date should be within the last 50 years', (value) => withinReasonableTimeframe(value))
+      .typeError('This field is required'),
+    KEY_CNIC_EXPIRY_DATE: yup
+      .date()
       .nullable()
       .when('KEY_CNIC_LIFETIME', {
-        is: (lifetime) => lifetime === false, // Validate only if lifetime is unchecked (false)
-        then: () => yup.date()
+        is: true,
+        then: () => yup.date().nullable(),
+        otherwise: () => yup
+          .date()
           .required('This field is required')
-          .transform((value, originalValue) => {
-            if (!originalValue) {
-              return null;
-            }
-            const parsedDate = Date.parse(originalValue);
-            return isNaN(parsedDate) ? new Date('') : new Date(parsedDate);
-          }),
-        // .min(minDate, `Expiry date must be later than ${format(minDate, 'dd/MM/yyyy')}`),
-        otherwise: () => yup.string().nullable(), // Not required if lifetime is checked
-      }),
+          .test('is-valid-date', 'Invalid CNIC expiry date format', (value) => dayjs(value).isValid())
+          .test('not-in-past', 'CNIC expiry date cannot be in the past', (value) => validExpiryDate(value))
+          .test('within-reasonable-range', 'CNIC expiry date should be within the next 10 years', (value) => withinReasonableRange(value))
+          .typeError('This field is required'),
+      })
+      .typeError('Invalid date format'),
     KEY_CNIC_LIFETIME: yup.boolean().required('This field is required'),
   },
-  "scr_termsAndConditions":{
+  "scr_termsAndConditions": {
     isAccepted: yup.boolean().oneOf([true], 'You must accept the terms').required('This field is required'),
     googleCaptchaReviewApplication: yup.string().required("Captcha is required"),
   }

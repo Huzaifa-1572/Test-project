@@ -27,9 +27,22 @@ export const maskNumber = (mobileNum) => {
   return `${number.slice(0, 4)}*****${number.slice(9, 11)}`;
 };
 
+export function formatMobileNumber(mobileNum) {
+  mobileNum = mobileNum.replace(/[-\s]/g, '');
+  if (mobileNum.length === 11) {
+    return mobileNum.slice(0, 4) + '-' + mobileNum.slice(4, 11);
+  }
+  return mobileNum
+}
+
 export const retrieveMobileNumber = (mobileNum) => {
   return mobileNum.replace(/[-_]/g, "");
 };
+
+export function formatCNIC(cnic) {
+  cnic = cnic.replace(/[-\s]/g, '');
+  return cnic.slice(0, 5) + '-' + cnic.slice(5, 12) + '-' + cnic.slice(12);
+}
 
 export function retrieveCNIC(cnic) {
   return cnic.replace(/[-\s]/g, "");
