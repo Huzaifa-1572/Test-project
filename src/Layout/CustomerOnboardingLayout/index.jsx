@@ -5,7 +5,7 @@ import GoBack from "src/Common/Goback";
 import styles from "./index.module.scss";
 import { useSelector } from "react-redux";
 
-const SCREENS = ['scr_customerCnic', 'scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_personalInformation']
+const SCREENS = ['scr_customerCnic', 'scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_personalInformation', 'scr_applicationComplete']
 
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
   const EDITABLE = localStorage.getItem("isEditable");
