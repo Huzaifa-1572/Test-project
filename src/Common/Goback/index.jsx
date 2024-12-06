@@ -5,6 +5,7 @@ import { GO_BACK_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
 import { useDispatch, useSelector } from "react-redux";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
+import { IoChevronBack } from "react-icons/io5";
 
 const GoBack = ({ setValue, getValues }) => {
     const navigate = useNavigate()
@@ -34,8 +35,9 @@ const GoBack = ({ setValue, getValues }) => {
             variant="contained"
             onClick={handleBack}
             sx={{ fontSize: "12px", height: "40px", backgroundColor: "#5093e0" }}
+            startIcon={<IoChevronBack />}
         >
-            Go Back
+            Back
         </Button>
     );
 };

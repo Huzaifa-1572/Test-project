@@ -200,36 +200,40 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
         rows={rows}
         placeholder={placeholder}
         sx={{
-          '& .MuiFilledInput-root': {
-            backgroundColor: 'white',
+          maxWidth: "500px",
+          width: "100%",
+          "& .MuiFilledInput-root": {
+            backgroundColor: "white",
+            "&:hover": {
+              backgroundColor: "white", // Keep white on hover
+            },
+            "&.Mui-focused": {
+              backgroundColor: "white", // Keep white on focus
+            },
           },
         }}
-        slotProps={{
-          input: {
-            disableUnderline: true,
-            sx: {
-              background: 'white',
-              border: '1px solid #eaeaea',
-              borderRadius: '7px',
-              width: '100%',
-              fontSize: '1.25rem',
-              lineHeight: '15px',
-              marginTop: '20px',
-              paddingBottom: '5px',
+        InputProps={{
+          disableUnderline: true, // Remove underline like in NicInput
+          sx: {
+            border: "1px solid silver",
+            borderRadius: "7px",
+            fontSize: "1.25rem",
+            backgroundColor: "white", // Make sure it's white
+            "&:hover": {
+              backgroundColor: "white",
             },
-            inputProps: {
-              maxLength: maxLength,
-              autoComplete: "off",  // Disable autocomplete
-              autoCorrect: "off",   // Disable autocorrect
+            "&.Mui-focused": {
+              backgroundColor: "white", // Maintain white on focus
             },
           },
-          inputLabel: {
-            sx: {
-              fontSize: '1.25rem',
-              color: '#666666',
-              marginTop: '15px',
-              fontFamily: `'Roboto', 'Arial', sans-serif`,
-            },
+          autoComplete: "off", // Disable autocomplete
+          autoCorrect: "off", // Disable browser correction (especially for mobile)
+        }}
+        InputLabelProps={{
+          sx: {
+            fontSize: "1.25rem",
+            color: "#666666",
+            marginTop: "5px",
           },
         }}
       />

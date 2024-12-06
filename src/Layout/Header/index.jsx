@@ -71,32 +71,13 @@ function Header(props) {
               fontSize: "28px",
               color: "#5093e0",
               textTransform: "uppercase",
+              margin: '0px',
             }}
           >
             Cerisma
           </h1>
         </Link>
       </Box>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item?.id} disablePadding>
-            <Button
-              variant="contained"
-              onClick={() => handleModalopen(item?.id)}
-              size="small"
-              sx={{
-                fontSize: "clamp(10px,3vw,12px)",
-                color: "white",
-                margin: "2px 5px",
-                height: "40px",
-              }}
-            >
-              {item?.value}
-            </Button>
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 
@@ -117,20 +98,12 @@ function Header(props) {
                     fontSize: "28px",
                     color: "#5093e0",
                     textTransform: "uppercase",
+                    margin: '0px',
                   }}
                 >
                   Cerisma
                 </h1>
               </Link>
-
-              <IconButton
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{ display: { md: "none" } }}
-              >
-                <MenuIcon sx={{ fontSize: "40px", color: "black" }} />
-              </IconButton>
             </Box>
           </Box>
 
@@ -147,6 +120,7 @@ function Header(props) {
                     fontSize: "28px",
                     color: "#5093e0",
                     textTransform: "uppercase",
+                    margin: '0px',
                   }}
                 >
                   Cerisma
@@ -154,24 +128,6 @@ function Header(props) {
               </Link>
             </Box>
           </Typography>
-          {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
-            {navItems.map((item) => (
-              <Button
-                variant="contained"
-                onClick={() => handleModalopen(item?.id)}
-                size="small"
-                key={item?.value}
-                sx={{
-                  fontSize: "clamp(10px,3vw,12px)",
-                  color: "white",
-                  margin: "2px 5px",
-                  height: "35px",
-                }}
-              >
-                {item?.value}
-              </Button>
-            ))}
-          </Box> */}
         </Toolbar>
       </AppBar>
 
@@ -200,90 +156,6 @@ function Header(props) {
       <Box component="main">
         <Toolbar />
       </Box>
-
-      {userInfoModal && (
-        <UserInformationModal
-          open={userInfoModal}
-          handleClose={handleModalClose}
-          title={userInfoModalData?.title || "N/A"}
-          content={userInfoModalData?.content || "N/A"}
-        />
-      )}
-
-      {/* VIDEO DAILOG */}
-      <>
-        <Dialog
-          fullScreen={fullScreen}
-          open={openCustJourney}
-          onClose={handleCustomerJourneyClose}
-          maxWidth={"lg"}
-          BackdropProps={{
-            style: { backgroundColor: "rgba(0, 0, 0, 0.7)" }, // Adjust the background opacity
-          }}
-        >
-          {/* Close Button */}
-          <DialogActions>
-            <Button
-              size="small"
-              sx={{ height: "30px" }}
-              variant="contained"
-              autoFocus
-              onClick={handleCustomerJourneyClose}
-            >
-              Close
-            </Button>
-          </DialogActions>
-
-          {/* Dialog Content */}
-          <DialogContent
-            sx={{
-              width: "100%",
-              maxWidth: "1200px",
-              margin: "0 auto",
-              p: 0, // Remove padding to ensure video fills space
-              minWidth: { xs: "90vw", sm: "80vw", md: "70vw" }, // Adjust width based on screen size
-              minHeight: "50vh", // Set minimum height
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "20px",
-              }}
-            >
-              <Box
-                sx={{
-                  width: { xs: "100%", sm: "95%", md: "90%", lg: "85%" }, // Adjust video width
-                  height: "auto",
-                  maxWidth: "1200px",
-                  margin: "0 auto",
-                }}
-              >
-                <video
-                  width="100%"
-                  height="auto"
-                  controls
-                  preload="metadata"
-                  autoPlay
-                  style={{
-                    borderRadius: "8px",
-                    outline: "none",
-                    border: "none",
-                    padding: "0",
-                    margin: "0",
-                    display: "block",
-                    boxShadow: "none", // Ensure no shadow
-                  }}
-                >
-                  <source src={VideoFile} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </Box>
-            </Box>
-          </DialogContent>
-        </Dialog>
-      </>
     </Box>
   );
 }

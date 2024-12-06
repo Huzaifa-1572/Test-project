@@ -1,5 +1,5 @@
 // LOCAL
-// export const BASE_URL = "http://192.168.10.202:8999/";
+// export const BASE_URL = "http://192.168.10.201:8080/";
 
 // UAT
 export const BASE_URL = "http://10.6.60.6:8089/";

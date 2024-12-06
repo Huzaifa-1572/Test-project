@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 // REACT QUERY SETTINGS
 export const QUERY_CLIENT = new QueryClient({
@@ -24,6 +24,9 @@ export const THEME = createTheme({
   palette: {
     primary: { main: "#5093e0" },
     secondary: { main: "#f2cc0e" },
+  },
+  typography: {
+    fontFamily: "'Roboto', 'Arial', sans-serif",
   },
   components: {
     // Button customizations

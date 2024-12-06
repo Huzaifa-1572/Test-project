@@ -21,7 +21,7 @@ export const INITIAL_VALUES = {
   KEY_CNIC_BACK: "",
   KEY_NAME: "",
   KEY_PARANTAGE: "",
-  KEY_CNIC: "",
+  KEY_CUST_IDENT_VALUE: "",
   KEY_DOB: null,
   KEY_CNIC_ISSUANCE_DATE: null,
   KEY_CNIC_EXPIRY_DATE: null,
@@ -47,6 +47,7 @@ export const PAYLOAD_KEYS = {
 
 export const FIELD_MANIFEST = {
   TEXTBOX: "Text Box",
+  MULTILINE_TEXTBOX: "multiline_text_box",
   DROPDOWN: "Drop Down",
   LOV_POB: "lov_place_of_birth",
   LOV_PROVINCE: "lov_province",

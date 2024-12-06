@@ -64,16 +64,20 @@ export const shape = {
   "scr_personalInformation": {
     KEY_FIRST_NAME: yup
       .string()
-      .required("This field is required"),
+      .required("This field is required")
+      .min(3, 'Must be at least 3 characters')
+      .max(100, 'Must be at most 100 characters'),
     KEY_LAST_NAME: yup
       .string()
       .required("This field is required")
+      .min(3, 'Must be at least 3 characters')
+      .max(100, 'Must be at most 100 characters'),
   },
 
   "scr_additionalInformation": {
     KEY_MOTHER_MAIDEN_NAME: yup.string().required('This field is required')
       .min(3, 'Must be at least 3 characters')
-      .max(20, 'Must be at most 20 characters'),
+      .max(100, 'Must be at most 100 characters'),
     KEY_PLACE_OF_BIRTH: yup
       .string()
       .required("This field is required")
@@ -81,19 +85,23 @@ export const shape = {
 
   "scr_addressDetail": {
     KEY_ADDRESS_LINE_1: yup.string().required('This field is required')
-      .min(4, 'Must be at least 4 characters'),
+      .min(4, 'Must be at least 4 characters')
+      .max(200, 'Must be at most 200 characters'),
     KEY_LANDMARK: yup.string().required('This field is required')
-      .min(3, 'Must be at least 3 characters')
-      .max(20, 'Must be at most 20 characters'),
+      .min(4, 'Must be at least 4 characters')
+      .max(100, 'Must be at most 100 characters'),
     KEY_PROVINCE: yup.string().required('This field is required'),
     KEY_CITY_CODE: yup.string().required('This field is required')
   },
 
   "scr_cnicDetail": {
     KEY_NAME: yup.string().required('This field is required')
-      .min(4, 'Must be at least 4 characters'),
-    KEY_PARANTAGE: yup.string().required('This field is required'),
-    KEY_CNIC: yup
+      .min(3, 'Must be at least 3 characters')
+      .max(200, 'Must be at most 200 characters'),
+    KEY_PARANTAGE: yup.string().required('This field is required')
+      .min(3, 'Must be at least 3 characters')
+      .max(200, 'Must be at most 200 characters'),
+    KEY_CUST_IDENT_VALUE: yup
       .string()
       .required("This field is required")
       .matches(/^\d{5}-\d{7}-\d{1}$/, "A valid CNIC is required"),

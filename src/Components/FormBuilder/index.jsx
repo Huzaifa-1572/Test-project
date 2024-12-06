@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { AutocompleteSelectField, CheckboxField, CustomInputField, DateInputField, SelectField, TextInputField, UploadImage } from "src/Components/FormFields";
+import { AutocompleteSelectField, CheckboxField, CustomInputField, DateInputField, MultiLineTextInputField, SelectField, TextInputField, UploadImage } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import { FIELD_MANIFEST } from "src/Utils/Constants";
 import { LIST_OF_CITIES, LIST_OF_POB, LIST_OF_PROVINCES } from "src/Utils/Lovs";
@@ -17,6 +17,19 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                         control={control}
                         label={field?.label}
                         input_type="text"
+                    />
+                    {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
+                </>
+            );
+
+        case FIELD_MANIFEST.MULTILINE_TEXTBOX:
+            return (
+                <>
+                    <MultiLineTextInputField
+                        name={field?.kuid}
+                        control={control}
+                        label={field?.label}
+                        rows={5}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>
@@ -49,7 +62,7 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
         case FIELD_MANIFEST.LOV_PROVINCE:
             return (
                 <>
-                    <SelectField
+                    <AutocompleteSelectField
                         name={field?.kuid}
                         control={control}
                         label={field?.label}
@@ -61,7 +74,7 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
         case FIELD_MANIFEST.LOV_CITY:
             return (
                 <>
-                    <SelectField
+                    <AutocompleteSelectField
                         name={field?.kuid}
                         control={control}
                         label={field?.label}
@@ -94,6 +107,7 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                         label={field?.label}
                         placeholder="xxxxx-xxxxxxx-x"
                         inputMode="numeric"
+                        disabled={field?.locked}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>
@@ -105,7 +119,7 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                         name={field?.kuid}
                         control={control}
                         label={field?.label}
-                        disabled={disabled}
+                        disabled={disabled || field?.locked}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>

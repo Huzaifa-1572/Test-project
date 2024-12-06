@@ -129,10 +129,19 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
 
   let fields = [];
   if (Array.isArray(kuid)) {
-    fields = kuid.map((kuid) => ({
-      attributeName: kuid,
-      attributeValue: data[kuid],
-    }));
+    fields = kuid.map((kuid) => {
+      if (kuid === "KEY_CUST_IDENT_VALUE") {
+        return {
+          attributeName: kuid,
+          attributeValue: retrieveCNIC(data[kuid]),
+        };
+      }
+      
+      return {
+        attributeName: kuid,
+        attributeValue: data[kuid],
+      };
+    });
   }
 
   const BODY = {
@@ -360,7 +369,7 @@ export const COFormSubmission = {
       kuid: [
         "KEY_NAME",
         "KEY_PARANTAGE",
-        "KEY_CNIC",
+        "KEY_CUST_IDENT_VALUE",
         "KEY_DOB",
         "KEY_CNIC_ISSUANCE_DATE",
         "KEY_CNIC_EXPIRY_DATE",
