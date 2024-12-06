@@ -3,13 +3,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import ErrorModal from "./Common/ErrorModal";
-import { setupRequestInterceptor, setupResponseInterceptor } from "./Utils/Helpers";
-import { QUERY_CLIENT, THEME } from "./Utils/Settings";
+import ErrorModal from "src/Common/ErrorModal";
+import { setupRequestInterceptor, setupResponseInterceptor } from "src/Utils/Helpers";
+import { QUERY_CLIENT, THEME } from "src/Utils/Settings";
+import Loader from "src/Common/Loader";
 import './App.scss'
 
 // LAZY LOADING
-const Loader = lazy(() => import("src/Common/Loader"));
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));
 const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
 
@@ -33,12 +33,13 @@ const App = () => {
                 <Route path="/customer-onboarding" element={<CustomerOnboarding />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
+              {/* GENERIC ERROR MODAL */}
               {!!isError && <ErrorModal errorCode={errorCode} errorMessage={errorMessage} isError={isError} />}
             </Router>
           </ThemeProvider>
         </QueryClientProvider>
 
-        {/* Generic loader component */}
+        {/* GENERIC LOADER COMPONENT */}
         {isLoading && <Loader />}
       </Suspense>
     </>

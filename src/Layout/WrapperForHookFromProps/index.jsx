@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
+import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
+import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { CNICEXIST_HANDLER, COFormSubmission, CUSTMOBILE_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { INITIAL_VALUES } from "src/Utils/Constants";
@@ -17,12 +19,28 @@ function WrapperForHookFormProps({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const CURRENT_SCREEN = useSelector((state) => state?.currentScreenState);
+  const SCREEN_DATA = useSelector(state => state?.screenDataState);
+  const PREVIOUS_SCREEN = useSelector(state => state?.prevScreenState)
   const currentScreenRef = useRef(CURRENT_SCREEN);
+  const screenDataRef = useRef(SCREEN_DATA);
+  const previousScreenRef = useRef(PREVIOUS_SCREEN);
 
-  // Update ref whenever CURRENT_SCREEN changes
+
+  // Update ref whenever CURRENT_SCREEN or SCREEN_DATA changes
   useEffect(() => {
     currentScreenRef.current = CURRENT_SCREEN;
   }, [CURRENT_SCREEN]);
+
+  // Update ref when SCREEN_DATA changes
+  useEffect(() => {
+    screenDataRef.current = SCREEN_DATA;
+  }, [SCREEN_DATA]);
+
+  useEffect(() => {
+    previousScreenRef.current = PREVIOUS_SCREEN;
+  }, [PREVIOUS_SCREEN]);
+
+
 
   const yupSchema = shape[CURRENT_SCREEN];
   const validationSchema = yup.object().shape(yupSchema);
@@ -43,7 +61,7 @@ function WrapperForHookFormProps({ children }) {
   function onSuccessfullFormDataSubmission(response) {
     // For scr_customerCnic, handle dependent API calls
     const TOKEN = response?.data?.data?.token;
-    const DATA = response?.data?.data
+    const DATA = response?.data?.data;
     const CUSTOMER_CNIC = getValues("customerCnic");
 
     // FOR SECOND CALL ON CUSTOMER CNIC SCREEN
@@ -55,14 +73,14 @@ function WrapperForHookFormProps({ children }) {
 
     // FOR RESUME FLOW
     if (!!DATA?.mobileNumber) {
-      setValue('customerMobile', DATA?.mobileNumber)
-      setValue('customerOperator', DATA?.mobileOperator)
+      setValue('customerMobile', DATA?.mobileNumber);
+      setValue('customerOperator', DATA?.mobileOperator);
 
       const RESUME_BODY = {
         customerCnic: CUSTOMER_CNIC,
         customerMobile: DATA?.mobileNumber,
         customerOperator: DATA?.mobileOperator
-      }
+      };
 
       const { BODY, API_URL } = CUSTMOBILE_HANDLER({ CURRENT_SCREEN: 'scr_customerMobile', data: RESUME_BODY, isResumeApplication: true, dispatch });
       mutate({ BODY, API_URL, dispatch });
@@ -82,28 +100,32 @@ function WrapperForHookFormProps({ children }) {
 
   // PERSISTING VALUES WHEN PAGE IS REFRESHED
   useEffect(() => {
-
     getDataFromIndexDb().then(data => {
-      console.log('datadsdsdata', data)
-      const IS_STORED_DATA_AVAILABLE = !!data
+      console.log('datadsdsdata', data);
+      const IS_STORED_DATA_AVAILABLE = !!data;
       if (IS_STORED_DATA_AVAILABLE) {
-        const SavedFormData = data?.appData?.FORMDATA
-        const SavedCurrentScreen = data?.appData?.CURRENT_SCREEN
-        dispatch(updateCurrentScreen(SavedCurrentScreen))
-        reset(SavedFormData)
+        const SavedFormData = data?.appData?.FORMDATA;
+        const SavedCurrentScreen = data?.appData?.CURRENT_SCREEN;
+        const SavedPreviousScreen = data?.appData?.PREVIOUS_SCREEN
+        const SavedScreenData = data?.appData?.SCREEN_DATA;
+        dispatch(UpdateScreenData(SavedScreenData));
+        dispatch(updateCurrentScreen(SavedCurrentScreen));
+        dispatch(updatePrevScreen(SavedPreviousScreen))
+        reset(SavedFormData);
       }
       else {
         console.log('No stored data found.');
       }
     });
 
-
     // Update data on beforeunload
     const beforeUnloadHandler = async () => {
       const DATA_TO_STORE = {
         CURRENT_SCREEN: currentScreenRef.current,
+        SCREEN_DATA: screenDataRef.current,
+        PREVIOUS_SCREEN: previousScreenRef.current,
         FORMDATA: getValues(),
-      }
+      };
       await storeDataToIndexDb(DATA_TO_STORE);
     };
     window.addEventListener('beforeunload', beforeUnloadHandler);
@@ -113,7 +135,6 @@ function WrapperForHookFormProps({ children }) {
       window.removeEventListener('beforeunload', beforeUnloadHandler);
     };
   }, []);
-
 
   return (
     <form onSubmit={handleSubmit(submitFormData)}>

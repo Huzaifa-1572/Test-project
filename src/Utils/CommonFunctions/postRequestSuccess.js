@@ -6,28 +6,27 @@ import { FIELD_MANIFEST } from "../Constants";
 
 const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   const DATA = response?.data?.data;
+  const IS_DATA_AVAILABLE = Object.keys(DATA)?.length > 0
+
   // --------------------FOR OTP VERFICATION SCREENS
   const OTP_VERIFICATION_TOKEN = response?.data?.data?.payload?.token;
-  const VERIFICATION_SCREENS = [
-    "scr_mobileVerification",
-    "scr_emailVerification",
-  ];
+  const VERIFICATION_SCREENS = ["scr_mobileVerification", "scr_emailVerification"];
   // --------------------FOR OTP VERFICATION SCREENS
 
-  if (!!DATA) {
-    // FOR CURRENT SCREEN
+  if (IS_DATA_AVAILABLE) {
+    // ------------------FOR CURRENT SCREEN
     const NEXT_SCREEN = getScreen(DATA);
-    dispatch(updateCurrentScreen(NEXT_SCREEN));
-    
-    // FOR PREVIOUS SCREEN
+    if (NEXT_SCREEN !== 'No Screen Found') dispatch(updateCurrentScreen(NEXT_SCREEN));
+
+    // ------------------FOR PREVIOUS SCREEN
     const PREV_SCREEN = getPrevScreen(DATA);
     dispatch(updatePrevScreen(PREV_SCREEN));
-    
-    // FOR SCREEN DATA
+
+    // ------------------FOR SCREEN DATA
     const NEXT_SCREEN_DATA = DATA?.nextScreenPayload || {};
     dispatch(UpdateScreenData(NEXT_SCREEN_DATA));
 
-    // --------------------FOR RESUME SCREENS
+    // ------------------FOR RESUME SCREENS
     const FIELDS = DATA?.nextScreenPayload?.content_group[0]?.fields || [];
     FIELDS?.length &&
       FIELDS?.forEach((field) => {
@@ -45,14 +44,15 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
           setValue(field?.kuid, processedValue);
         }
       });
-    // --------------------FOR RESUME SCREENS
+    // ------------------FOR RESUME SCREENS
 
-    // --------------------FOR OTP VERFICATION SCREENS
+    // ------------------FOR OTP VERFICATION SCREENS
     if (VERIFICATION_SCREENS?.includes(NEXT_SCREEN)) {
       setValue("OTP_VERIFICATION_TOKEN", OTP_VERIFICATION_TOKEN);
     }
-    // --------------------FOR OTP VERFICATION SCREENS
-  } else {
+    // ------------------FOR OTP VERFICATION SCREENS
+  }
+  else {
     localStorage.clear();
     clearIndexDb();
     navigate("/");
