@@ -32,91 +32,108 @@ export const shape = {
   "scr_customerCnic": {
     customerCnic: yup
       .string()
-      .required("This field is required")
-      .matches(/^\d{5}-\d{7}-\d{1}$/, "A valid CNIC is required"),
-    googleCaptcha: yup.string().required("Captcha is required"),
+      .required("CNIC is required.")
+      .matches(/^\d{5}-\d{7}-\d{1}$/, "Please enter a valid CNIC in the format XXXXX-XXXXXXX-X."),
+    googleCaptcha: yup.string().required("Please complete the CAPTCHA to proceed."),
   },
 
   "scr_customerMobile": {
-    customerMobile: yup.string().test('e__NokMobile', 'A valid mobile number is required.', function (value) {
+    customerMobile: yup.string().test('e__NokMobile', 'Please enter a valid mobile number starting with 03xxx-xxxxxxx.', function (value) {
       if (value.length === 11) {
         value = retrieveMobileNumber(value);
       }
       return /^(03)\d{2}-\d{7}$/.test(value);
-    }).required('This field is required'),
+    }).required('Mobile number is required.'),
     customerOperator: yup
       .string()
-      .required("This field is required")
+      .required("Please select a mobile operator.")
   },
 
   "scr_customerEmail": {
     customerEmail: yup
       .string()
-      .required("This field is required")
+      .required("Email address is required.")
       .matches(
         /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
-        "A valid email address is required."
+        "Please enter a valid email address (e.g., name@example.com)."
       )
-      .email("A valid email address is required.")
-      .max(40, "Must be at most 40 characters"),
+      .email("Please enter a valid email address.")
+      .max(50, "Email address must not exceed 50 characters."),
   },
 
   "scr_personalInformation": {
     KEY_FIRST_NAME: yup
       .string()
-      .required("This field is required")
-      .min(3, 'Must be at least 3 characters')
-      .max(100, 'Must be at most 100 characters'),
+      .required("First name is required.")
+      .min(3, "First name must be at least 3 characters.")
+      .max(100, "First name must not exceed 100 characters."),
     KEY_LAST_NAME: yup
       .string()
-      .required("This field is required")
-      .min(3, 'Must be at least 3 characters')
-      .max(100, 'Must be at most 100 characters'),
+      .required("Last name is required.")
+      .min(3, "Last name must be at least 3 characters.")
+      .max(100, "Last name must not exceed 100 characters."),
   },
 
   "scr_additionalInformation": {
-    KEY_MOTHER_MAIDEN_NAME: yup.string().required('This field is required')
-      .min(3, 'Must be at least 3 characters')
-      .max(100, 'Must be at most 100 characters'),
+    KEY_MOTHER_MAIDEN_NAME: yup
+      .string()
+      .required("Mother's maiden name is required.")
+      .min(3, "Mother's maiden name must be at least 3 characters.")
+      .max(100, "Mother's maiden name must not exceed 100 characters."),
     KEY_PLACE_OF_BIRTH: yup
       .string()
-      .required("This field is required")
+      .required("Place of birth is required.")
   },
 
   "scr_addressDetail": {
-    KEY_ADDRESS_LINE_1: yup.string().required('This field is required')
-      .min(4, 'Must be at least 4 characters')
-      .max(200, 'Must be at most 200 characters'),
-    KEY_LANDMARK: yup.string().required('This field is required')
-      .min(4, 'Must be at least 4 characters')
-      .max(100, 'Must be at most 100 characters'),
-    KEY_PROVINCE: yup.string().required('This field is required'),
-    KEY_CITY_CODE: yup.string().required('This field is required')
+    KEY_ADDRESS_LINE_1: yup
+      .string()
+      .required("Address is required.")
+      .min(4, "Address must be at least 4 characters.")
+      .max(200, "Address must not exceed 200 characters."),
+    KEY_LANDMARK: yup
+      .string()
+      .required("Landmark is required.")
+      .min(4, "Landmark must be at least 4 characters.")
+      .max(100, "Landmark must not exceed 100 characters."),
+    KEY_PROVINCE: yup
+      .string()
+      .required('Province is required.'),
+    KEY_CITY_CODE: yup
+      .string()
+      .required('City is required.')
   },
 
   "scr_cnicDetail": {
-    KEY_NAME: yup.string().required('This field is required')
-      .min(3, 'Must be at least 3 characters')
-      .max(200, 'Must be at most 200 characters'),
-    KEY_PARANTAGE: yup.string().required('This field is required')
-      .min(3, 'Must be at least 3 characters')
-      .max(200, 'Must be at most 200 characters'),
+    KEY_NAME: yup
+      .string()
+      .required("Name is required.")
+      .min(3, "Name must be at least 4 characters.")
+      .max(200, "Name must not exceed 200 characters."),
+    KEY_PARANTAGE: yup
+      .string()
+      .required("Parentage is required.")
+      .min(3, "Parentage must be at least 4 characters.")
+      .max(200, "Parentage must not exceed 200 characters."),
     KEY_CUST_IDENT_VALUE: yup
       .string()
-      .required("This field is required")
-      .matches(/^\d{5}-\d{7}-\d{1}$/, "A valid CNIC is required"),
+      .required("CNIC is required.")
+      .matches(
+        /^\d{5}-\d{7}-\d{1}$/,
+        "Please enter a valid CNIC in the format XXXXX-XXXXXXX-X."
+      ),
     KEY_DOB: yup
       .date()
-      .required('This field is required')
-      .max(minAge(18), 'You must be at least 18 years old')
-      .typeError('This field is required'),
+      .required('Date of birth is required.')
+      .max(minAge(18), 'You must be at least 18 years old.')
+      .typeError('Please provide a valid date of birth.'),
     KEY_CNIC_ISSUANCE_DATE: yup
       .date()
-      .required('This field is required')
-      .test('is-valid-date', 'Invalid CNIC issuance date format', (value) => dayjs(value).isValid())
+      .required('CNIC issuance date is required')
+      .test('is-valid-date', 'Please enter a valid CNIC issuance date format.', (value) => dayjs(value).isValid())
       .test('not-in-future', 'CNIC issuance date cannot be in the future', (value) => validIssuanceDate(value))
       .test('within-reasonable-timeframe', 'CNIC issuance date should be within the last 50 years', (value) => withinReasonableTimeframe(value))
-      .typeError('This field is required'),
+      .typeError('Please provide a valid CNIC issuance date.'),
     KEY_CNIC_EXPIRY_DATE: yup
       .date()
       .nullable()
@@ -125,17 +142,22 @@ export const shape = {
         then: () => yup.date().nullable(),
         otherwise: () => yup
           .date()
-          .required('This field is required')
-          .test('is-valid-date', 'Invalid CNIC expiry date format', (value) => dayjs(value).isValid())
+          .required('CNIC expiry date is required')
+          .test('is-valid-date', 'Please enter a valid CNIC expiry date format.', (value) => dayjs(value).isValid())
           .test('not-in-past', 'CNIC expiry date cannot be in the past', (value) => validExpiryDate(value))
           .test('within-reasonable-range', 'CNIC expiry date should be within the next 10 years', (value) => withinReasonableRange(value))
-          .typeError('This field is required'),
+          .typeError('Please provide a valid CNIC expiry date.'),
       })
       .typeError('Invalid date format'),
-    KEY_CNIC_LIFETIME: yup.boolean().required('This field is required'),
+    KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC is lifetime.'),
   },
   "scr_termsAndConditions": {
-    isAccepted: yup.boolean().oneOf([true], 'You must accept the terms').required('This field is required'),
-    googleCaptchaReviewApplication: yup.string().required("Captcha is required"),
+    isAccepted: yup
+      .boolean()
+      .oneOf([true], 'You must accept the terms and conditions to proceed.')
+      .required('You must accept the terms and conditions to continue.'),
+    googleCaptchaReviewApplication: yup
+      .string()
+      .required("Please complete the CAPTCHA to proceed."),
   }
 };

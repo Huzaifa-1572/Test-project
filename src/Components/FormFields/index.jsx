@@ -29,6 +29,7 @@ export const TextInputField = ({
   placeholder = "",
   input_type,
   type = "text",
+  maxLength = 100
 }) => {
   return (
     <Controller
@@ -76,6 +77,9 @@ export const TextInputField = ({
               },
               autoComplete: "off", // Disable autocomplete
               autoCorrect: "off", // Disable browser correction (especially for mobile)
+              inputProps: {
+                maxLength: maxLength,
+              }
             }}
             InputLabelProps={{
               sx: {

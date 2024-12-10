@@ -24,6 +24,7 @@ const CustomerEmail = ({
           label="Email Address"
           placeholder="abc@gmail.com"
           type="mail"
+          maxLength={50}
         />
         {errors?.customerEmail ? (
           <ValidationError message={errors?.customerEmail?.message} />

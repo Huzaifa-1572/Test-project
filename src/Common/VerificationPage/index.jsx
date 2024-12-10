@@ -2,10 +2,21 @@ import OtpInput from 'react-otp-input';
 import { Box, Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
+import usePostDataToServer from 'src/Hooks/usePostdataToServer';
+import { useDispatch, useSelector } from 'react-redux';
+import { COFormSubmission, CUSTEMAIL_HANDLER, CUSTMOBILE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
+import { useNavigate } from 'react-router-dom';
+import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 
 function VerificationPage({ icon, title, content, setValue, getValues }) {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [otp, setOtp] = useState('');
-    const [resendOTP, setResendOTP] = useState(30);
+    const [resendOTP, setResendOTP] = useState(10);
+    const IS_RESUME_FLOW = localStorage.getItem('isResume') || false;
+    const SCREEN_NAME = useSelector(state => state?.prevScreenState)
+
+    const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
     useEffect(() => {
         if (resendOTP > 0) {
@@ -33,6 +44,30 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
             resendOTP % 60
         ).padStart(2, '0')}`;
     };
+
+    const handleResendClick = () => {
+        setOtp('')
+        const data = getValues()
+
+        if (SCREEN_NAME === 'scr_customerMobile') {
+            const { BODY, API_URL } = CUSTMOBILE_HANDLER({ CURRENT_SCREEN: SCREEN_NAME, data, isResumeApplication: IS_RESUME_FLOW })
+            mutate({ BODY, API_URL, dispatch })
+        }
+
+        if (SCREEN_NAME === 'scr_customerEmail') {
+            const { BODY, API_URL } = CUSTEMAIL_HANDLER({ CURRENT_SCREEN: SCREEN_NAME, data })
+            mutate({ BODY, API_URL, dispatch })
+        }
+
+        // Reset the timer to 60 seconds
+        if (resendOTP === 0) {
+            setResendOTP(60);
+        }
+    };
+
+    function onSuccessfullFormDataSubmission(response) {
+        postRequestSuccess({ response, dispatch, navigate, setValue })
+    }
 
     return (
         <Box sx={{ backgroundColor: '#F4F4F4' }}>
@@ -69,15 +104,15 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
                 </div>
 
                 <div>
-                    {/* <div className={styles.resendOTP} >
+                    <div className={styles.resendOTP} >
                         {resendOTP === 0 ? (
-                            // <button type='button' className={styles.countdownStyle} onClick={handleResendClick}>
-                            //     Resend OTP
-                            // </button>
+                            <button type='button' className={styles.countdownStyle} onClick={handleResendClick}>
+                                Resend OTP
+                            </button>
                         ) : (
                             formatCountdownString()
                         )}
-                    </div> */}
+                    </div>
                 </div>
             </Container >
         </Box >

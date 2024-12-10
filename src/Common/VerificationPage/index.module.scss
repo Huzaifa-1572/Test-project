@@ -16,7 +16,6 @@
 
   .mainHeading {
     font-size: clamp(24px, 5vw, 48px);
-    font-family: ArticulatCF-Bold;
     font-weight: bold;
     margin-top: clamp(10px, 2vw, 20px);
     color: white;
@@ -26,7 +25,6 @@
     font-size: clamp(14px, 3vw, 20px);
     margin-bottom: clamp(18px, 1vw, 30px);
     color: white;
-    font-family: ArticulatCF-Medium;
     margin-top: clamp(10px, 2vw, 20px);
     width: clamp(100%, 50vw, 65%);
   }

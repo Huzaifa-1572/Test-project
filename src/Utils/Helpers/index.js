@@ -161,10 +161,11 @@ export const getCity = (value) => {
 
 export const getReviewApplicationData = () => {
   const SCREEN_DATA = useSelector((state) => state.screenDataState);
-  const { title, description, sections } = SCREEN_DATA
+  const { title, description, discrepantMessage, sections } = SCREEN_DATA
   return {
     TITLE: title || "",
     DESCRIPTION: description || "",
+    DISCREPANT_MESSAGE: discrepantMessage || "",
     SECTIONS: sections || [],
   };
 };

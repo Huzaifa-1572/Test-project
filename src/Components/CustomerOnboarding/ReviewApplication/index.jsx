@@ -10,6 +10,7 @@ import AttachmentIcon from 'src/Assets/images/attach-icon.png';
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
+import disc from "src/Assets/svgs/discrepancy-found-icon.svg";
 
 const ReviewApplication = ({ setValue, getValues }) => {
     const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
     const CURRENT_SCREEN = useSelector((state) => state?.currentScreenState);
     const [openDailog, setopenDailog] = useState(false)
     const [fieldData, setFieldData] = useState({})
-    const { TITLE, DESCRIPTION, SECTIONS } = getReviewApplicationData()
+    const { TITLE, DESCRIPTION, DISCREPANT_MESSAGE, SECTIONS } = getReviewApplicationData()
     const { mutate: mutateGetImage } = usePostDataToServer({ onPostReqSuccess: onSuccessfullGetImage, dispatch });
     const { mutate: mutateEdit } = usePostDataToServer({ onPostReqSuccess: onSuccessfullEdit, dispatch });
 
@@ -64,6 +65,19 @@ const ReviewApplication = ({ setValue, getValues }) => {
                     DESCRIPTION &&
                     <div className={styles.descriptionPara}>
                         <p>{DESCRIPTION}</p>
+                    </div>
+                }
+                {/* DISCREPANT MESSAGE */}
+                {
+                    DISCREPANT_MESSAGE &&
+                    <div className={styles.discrepancy}>
+                        <div className={styles.discrepancyIcon}>
+                            <img src={disc} alt="" />
+                        </div>
+                        <div className={styles.disContents}>
+                            <div className={`${styles.desHeading} ${styles.topHeading}`}>{"Discrepant Customer" || 'N/A'}</div>
+                            <div className={`${styles.desText} ${styles.descriptionPara}`}>{DISCREPANT_MESSAGE || 'N/A'}</div>
+                        </div>
                     </div>
                 }
 

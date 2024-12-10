@@ -70,9 +70,10 @@ function WrapperForHookFormProps({ children }) {
       const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, CUSTOMER_CNIC, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }
-
+    
     // FOR RESUME FLOW
-    if (!!DATA?.mobileNumber) {
+    if (DATA?.resume) {
+      localStorage.setItem("isResume", DATA?.resume);
       setValue('customerMobile', DATA?.mobileNumber);
       setValue('customerOperator', DATA?.mobileOperator);
 
@@ -82,7 +83,7 @@ function WrapperForHookFormProps({ children }) {
         customerOperator: DATA?.mobileOperator
       };
 
-      const { BODY, API_URL } = CUSTMOBILE_HANDLER({ CURRENT_SCREEN: 'scr_customerMobile', data: RESUME_BODY, isResumeApplication: true, dispatch });
+      const { BODY, API_URL } = CUSTMOBILE_HANDLER({ CURRENT_SCREEN: 'scr_customerMobile', data: RESUME_BODY, isResumeApplication: DATA?.resume, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }
 

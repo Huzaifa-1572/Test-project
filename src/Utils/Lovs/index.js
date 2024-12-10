@@ -1,12 +1,12 @@
 // PROVINCES
 export const LIST_OF_PROVINCES = [
-  { value: 1, label: "Sindh" },
-  { value: 2, label: "Punjab" },
-  { value: 3, label: "Balochistan" },
-  { value: 4, label: "Khyber-Pakhtunkhwa" },
-  { value: 5, label: "Gilgit–Baltistan" },
-  { value: 6, label: "AJK" },
-  { value: 7, label: "Federal Capital/ICT" },
+  { value: "1", label: "Sindh" },
+  { value: "2", label: "Punjab" },
+  { value: "3", label: "Balochistan" },
+  { value: "4", label: "Khyber-Pakhtunkhwa" },
+  { value: "5", label: "Gilgit–Baltistan" },
+  { value: "6", label: "AJK" },
+  { value: "7", label: "Federal Capital/ICT" },
 ];
 
 // CITIES

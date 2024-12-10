@@ -36,7 +36,7 @@ export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
 export const CUSTMOBILE_HANDLER = ({
   CURRENT_SCREEN,
   data,
-  isResumeApplication,
+  isResumeApplication=false,
 }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
@@ -179,17 +179,12 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 };
 
 export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-  const EDITABLE = localStorage.getItem("isEditable");
-  if (EDITABLE) {
-    localStorage.removeItem("isEditable");
-  }
-
   const BODY = {
     documentType: PAYLOAD_KEYS[kuid],
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: EDITABLE ? REVIEW_SCREEN : CURRENT_SCREEN,
+    screenKuid: CURRENT_SCREEN,
     imageBase64: data[kuid],
   };
 
@@ -281,8 +276,7 @@ export const COFormSubmission = {
   scr_customerMobile: ({ CURRENT_SCREEN, data }) => {
     return CUSTMOBILE_HANDLER({
       CURRENT_SCREEN,
-      data,
-      isResumeApplication: false,
+      data
     });
   },
   scr_mobileVerification: ({ CURRENT_SCREEN, data }) => {

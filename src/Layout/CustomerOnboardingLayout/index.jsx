@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container } from "@mui/material";
 import Header from "src/Layout/Header";
 import GoBack from "src/Common/Goback";
 import styles from "./index.module.scss";
 import { useSelector } from "react-redux";
 
-const SCREENS = ['scr_customerCnic', 'scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_personalInformation', 'scr_applicationComplete']
+const SCREENS = ['scr_customerCnic', 'scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_personalInformation', 'scr_applicationComplete'];
 
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
+  const [isLoading, setIsLoading] = useState(false);
   const EDITABLE = localStorage.getItem("isEditable");
   const CURRENT_SCREEN = useSelector(state => state.currentScreenState);
+
+  // Ensuring the component has loaded before rendering - for GoBack Button
+  useEffect(() => {
+    if (CURRENT_SCREEN) {
+      setIsLoading(true);
+    }
+  }, [CURRENT_SCREEN]);
 
   return (
     <>
@@ -17,7 +25,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
       <Box className={styles.onboardingContainer}>
         <Container maxWidth="xl">
           {
-            !(EDITABLE || SCREENS.includes(CURRENT_SCREEN)) &&
+            isLoading && !(EDITABLE || SCREENS.includes(CURRENT_SCREEN)) &&
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <GoBack setValue={setValue} getValues={getValues} />
             </Box>
