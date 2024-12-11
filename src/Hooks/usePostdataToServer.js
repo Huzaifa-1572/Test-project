@@ -22,7 +22,7 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
       let code = ''
       let message = ''
 
-      if (!DATA_RECEIVED) navigate('/')
+      // if (!DATA_RECEIVED) navigate('/')
 
       if (error?.status === 403) {
         code = "Access Denied-403";

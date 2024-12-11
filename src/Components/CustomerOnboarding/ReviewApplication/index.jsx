@@ -10,7 +10,7 @@ import AttachmentIcon from 'src/Assets/images/attach-icon.png';
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
-import disc from "src/Assets/svgs/discrepancy-found-icon.svg";
+import discrepantImage from "src/Assets/svgs/discrepancy-found-icon.svg";
 
 const ReviewApplication = ({ setValue, getValues }) => {
     const dispatch = useDispatch()
@@ -28,19 +28,19 @@ const ReviewApplication = ({ setValue, getValues }) => {
         const { BODY, API_URL } = GET_IMAGE_HANDLER({ CURRENT_SCREEN, customerCnic, kuid, dispatch });
         mutateGetImage({ BODY, API_URL, dispatch });
         setFieldData(field);
-        setopenDailog(true);
     }
-
+    
     const handleDailogClose = () => {
         setopenDailog(false)
     }
-
+    
     function onSuccessfullGetImage(response) {
-        const IMAGE = response?.data?.data?.imageBase64;
+        const IMAGE = response?.data?.data?.imageData;
         setFieldData(prev => ({
             ...prev,
             imageBase64: IMAGE
         }));
+        setopenDailog(true);
     }
 
     const handleEdit = (screen_kuid) => {
@@ -72,7 +72,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                     DISCREPANT_MESSAGE &&
                     <div className={styles.discrepancy}>
                         <div className={styles.discrepancyIcon}>
-                            <img src={disc} alt="" />
+                            <img src={discrepantImage} alt="" />
                         </div>
                         <div className={styles.disContents}>
                             <div className={`${styles.desHeading} ${styles.topHeading}`}>{"Discrepant Customer" || 'N/A'}</div>
