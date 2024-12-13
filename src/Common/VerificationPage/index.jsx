@@ -12,7 +12,7 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [otp, setOtp] = useState('');
-    const [resendOTP, setResendOTP] = useState(10);
+    const [resendOTP, setResendOTP] = useState(59);
     const IS_RESUME_FLOW = localStorage.getItem('isResume') || false;
     const SCREEN_NAME = useSelector(state => state?.prevScreenState)
 

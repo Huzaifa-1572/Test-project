@@ -5,6 +5,7 @@ import { FormBuilder } from "src/Components/FormBuilder";
 import { getScreenData } from "src/Utils/Helpers";
 import WizardLayout from "src/Layout/WizardLayout";
 import { BiSolidUserDetail } from "react-icons/bi";
+import dayjs from "dayjs";
 
 
 const CnicDetail = ({
@@ -15,14 +16,13 @@ const CnicDetail = ({
 }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
   const CNIC_LIFE_TIME = watch("KEY_CNIC_LIFETIME");
-  const EXPIRY_DATE = watch("KEY_CNIC_EXPIRY_DATE");
 
   // Watch for changes to KEY_CNIC_LIFETIME and KEY_CNIC_EXPIRY_DATE
   useEffect(() => {
-    if (EXPIRY_DATE && CNIC_LIFE_TIME) {
-      setValue("KEY_CNIC_EXPIRY_DATE", null);
+    if (CNIC_LIFE_TIME) {
+      setValue("KEY_CNIC_EXPIRY_DATE", dayjs('2999-01-01T22:00:00.000Z').format('YYYY-MM-DD'));
     }
-  }, [CNIC_LIFE_TIME, EXPIRY_DATE]);
+  }, [CNIC_LIFE_TIME]);
 
   // Function to check field should be disabled
   const getFieldDisabled = (fieldKuid) => {

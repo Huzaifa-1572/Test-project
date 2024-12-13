@@ -24,7 +24,7 @@ const validExpiryDate = (date) => {
   return dayjs(date).isAfter(dayjs(), 'day');
 };
 
-const withinReasonableRange = (date, years = 20) => {
+const withinReasonableRange = (date, years = 100) => {
   return dayjs(date).isBefore(dayjs().add(years, 'year'), 'day');
 };
 
@@ -93,7 +93,7 @@ export const shape = {
       .max(200, "Address must not exceed 200 characters."),
     KEY_LANDMARK: yup
       .string()
-      .required("Landmark is required.")
+      .optional()
       .min(4, "Landmark must be at least 4 characters.")
       .max(100, "Landmark must not exceed 100 characters."),
     KEY_PROVINCE: yup
@@ -102,6 +102,24 @@ export const shape = {
     KEY_CITY_CODE: yup
       .string()
       .required('City is required.')
+  },
+
+  "scr_livePhotoCapture": {
+    KEY_LIVE_PHOTO: yup
+      .string()
+      .required('Please take a photo to proceed.')
+  },
+
+  "scr_uploadCnicFront": {
+    KEY_CNIC_FRONT: yup
+      .string()
+      .required('Please upload the front side of your CNIC.')
+  },
+
+  "scr_uploadCnicBack": {
+    KEY_CNIC_BACK: yup
+      .string()
+      .required('Please upload the back side of your CNIC.')
   },
 
   "scr_cnicDetail": {
@@ -136,19 +154,10 @@ export const shape = {
       .typeError('Please provide a valid CNIC issuance date.'),
     KEY_CNIC_EXPIRY_DATE: yup
       .date()
-      .nullable()
-      .when('KEY_CNIC_LIFETIME', {
-        is: true,
-        then: () => yup.date().nullable(),
-        otherwise: () => yup
-          .date()
-          .required('CNIC expiry date is required')
-          .test('is-valid-date', 'Please enter a valid CNIC expiry date format.', (value) => dayjs(value).isValid())
-          .test('not-in-past', 'CNIC expiry date cannot be in the past', (value) => validExpiryDate(value))
-          .test('within-reasonable-range', 'CNIC expiry date should be within the next 10 years', (value) => withinReasonableRange(value))
-          .typeError('Please provide a valid CNIC expiry date.'),
-      })
-      .typeError('Invalid date format'),
+      .required('CNIC expiry date is required')
+      .test('is-valid-date', 'Please enter a valid CNIC expiry date format.', (value) => dayjs(value).isValid())
+      .test('not-in-past', 'CNIC expiry date cannot be in the past', (value) => validExpiryDate(value))
+      .typeError('Please provide a valid CNIC expiry date.'),
     KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC is lifetime.'),
   },
   "scr_termsAndConditions": {

@@ -184,6 +184,9 @@ export const generateFieldValue = (field) => {
   else if (field["kuid"] === "KEY_PLACE_OF_BIRTH" || field["kuid"] === "KEY_CITY_CODE") {
     return getCity(field?.value)
   }
+  else if (field["kuid"] === "KEY_CNIC_LIFETIME"){
+    return field?.value === 'true' ? 'Yes' : 'No'
+  }
   else {
     return field?.value || 'N/A'
   }
