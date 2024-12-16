@@ -20,7 +20,7 @@ const CnicDetail = ({
   // Watch for changes to KEY_CNIC_LIFETIME and KEY_CNIC_EXPIRY_DATE
   useEffect(() => {
     if (CNIC_LIFE_TIME) {
-      setValue("KEY_CNIC_EXPIRY_DATE", dayjs('2999-01-01T22:00:00.000Z').format('YYYY-MM-DD'));
+      setValue("KEY_CNIC_EXPIRY_DATE", dayjs('2999-01-01').format('YYYY-MM-DD'));
     }
   }, [CNIC_LIFE_TIME]);
 

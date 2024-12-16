@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import DOMPurify from 'dompurify';
 import { useSelector } from "react-redux";
 import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
+import dayjs from "dayjs";
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -46,6 +47,10 @@ export function formatCNIC(cnic) {
 
 export function retrieveCNIC(cnic) {
   return cnic.replace(/[-\s]/g, "");
+}
+
+export function retrieveDate(date) {
+  return dayjs(date).format("YYYY-MM-DD")
 }
 
 //handle file size of img

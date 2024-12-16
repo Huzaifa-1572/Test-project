@@ -1,6 +1,10 @@
 import { BASE_URL, ENDPOINTS } from "src/Utils/config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
-import { retrieveCNIC, retrieveMobileNumber } from "src/Utils/Helpers";
+import {
+  retrieveCNIC,
+  retrieveDate,
+  retrieveMobileNumber,
+} from "src/Utils/Helpers";
 
 const REVIEW_SCREEN = "scr_cnicDetail";
 
@@ -36,7 +40,7 @@ export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
 export const CUSTMOBILE_HANDLER = ({
   CURRENT_SCREEN,
   data,
-  isResumeApplication=false,
+  isResumeApplication = false,
 }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
@@ -136,7 +140,18 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
           attributeValue: retrieveCNIC(data[kuid]),
         };
       }
-      
+
+      if (
+        kuid === "KEY_DOB" ||
+        kuid === "KEY_CNIC_ISSUANCE_DATE" ||
+        kuid === "KEY_CNIC_EXPIRY_DATE"
+      ) {
+        return {
+          attributeName: kuid,
+          attributeValue: retrieveDate(data[kuid]),
+        };
+      }
+
       return {
         attributeName: kuid,
         attributeValue: data[kuid],
@@ -276,7 +291,7 @@ export const COFormSubmission = {
   scr_customerMobile: ({ CURRENT_SCREEN, data }) => {
     return CUSTMOBILE_HANDLER({
       CURRENT_SCREEN,
-      data
+      data,
     });
   },
   scr_mobileVerification: ({ CURRENT_SCREEN, data }) => {
