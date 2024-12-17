@@ -1,12 +1,10 @@
-import { BASE_URL, ENDPOINTS } from "src/Utils/config";
+import { BASE_URL, ENDPOINTS } from "src/Utils/Config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
 import {
   retrieveCNIC,
   retrieveDate,
   retrieveMobileNumber,
 } from "src/Utils/Helpers";
-
-const REVIEW_SCREEN = "scr_cnicDetail";
 
 export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   const BODY = {
@@ -126,7 +124,7 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 };
 
 export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-  const EDITABLE = localStorage.getItem("isEditable");
+  const EDITABLE = localStorage.getItem("isEditable") || false;
   if (EDITABLE) {
     localStorage.removeItem("isEditable");
   }
@@ -163,7 +161,8 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: EDITABLE ? REVIEW_SCREEN : CURRENT_SCREEN,
+    screenKuid: CURRENT_SCREEN,
+    isRedirectedScreen: EDITABLE,
     content: {
       kycs: fields,
     },
