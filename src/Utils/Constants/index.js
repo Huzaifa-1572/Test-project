@@ -31,10 +31,12 @@ export const INITIAL_VALUES = {
 };
 
 export const OPERATOR_OPTION = [
-  { value: "1", label: "Zong" },
-  { value: "2", label: "Jazz" },
-  { value: "3", label: "Telenor" },
-  { value: "4", label: "Uphone" },
+  { value: "41006", label: "Telenor" },
+  { value: "41004", label: "Zong" },
+  { value: "41007", label: "Warid" },
+  { value: "41003", label: "Uphone" },
+  { value: "41001", label: "Mobilink" },
+  { value: "41009", label: "SCOM" },
 ];
 
 export const PAYLOAD_KEYS = {
