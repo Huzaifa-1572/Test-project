@@ -3,7 +3,7 @@ import CustomButton from "src/Common/CustomButton";
 import { CustomInputField, SelectField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
-import { OPERATOR_OPTION } from "src/Utils/Constants";
+import { OPERATOR_OPTION } from "src/Utils/Lovs";
 import { TbDeviceMobile } from "react-icons/tb";
 
 

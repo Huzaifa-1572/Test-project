@@ -30,14 +30,14 @@ export const INITIAL_VALUES = {
   googleCaptchaReviewApplication: "",
 };
 
-export const OPERATOR_OPTION = [
-  { value: "41006", label: "Telenor" },
-  { value: "41004", label: "Zong" },
-  { value: "41007", label: "Warid" },
-  { value: "41003", label: "Uphone" },
-  { value: "41001", label: "Mobilink" },
-  { value: "41009", label: "SCOM" },
-];
+export const OPERATOR_MAP = {
+  41006: "Telenor",
+  41004: "Zong",
+  41007: "Warid",
+  41003: "Ufhone",
+  41001: "Mobilink",
+  41009: "SCOM",
+};
 
 export const PAYLOAD_KEYS = {
   CUST_IDENTIFICATION_KEY: "0001",

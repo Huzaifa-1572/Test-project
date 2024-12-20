@@ -5,6 +5,7 @@ import DOMPurify from 'dompurify';
 import { useSelector } from "react-redux";
 import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
 import dayjs from "dayjs";
+import { OPERATOR_MAP } from "../Constants";
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -51,6 +52,10 @@ export function retrieveCNIC(cnic) {
 
 export function retrieveDate(date) {
   return dayjs(date).format("YYYY-MM-DD")
+}
+
+export function getCurrentDate(){
+  return dayjs().format("YYYY-MM-DD HH:mm:ss.SSS");
 }
 
 //handle file size of img
@@ -191,6 +196,8 @@ export const generateFieldValue = (field) => {
   }
   else if (field["kuid"] === "KEY_CNIC_LIFETIME"){
     return field?.value === 'true' ? 'Yes' : 'No'
+  } else if (field["kuid"] === "KEY_MOBILE_OPERATOR"){
+    return OPERATOR_MAP[field?.value] || field?.value 
   }
   else {
     return field?.value || 'N/A'

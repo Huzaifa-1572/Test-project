@@ -1,6 +1,7 @@
 import { BASE_URL, ENDPOINTS } from "src/Utils/Config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
 import {
+  getCurrentDate,
   retrieveCNIC,
   retrieveDate,
   retrieveMobileNumber,
@@ -13,6 +14,7 @@ export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     reCaptchaToken: data?.googleCaptcha,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -27,6 +29,7 @@ export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(CUSTOMER_CNIC),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -48,6 +51,7 @@ export const CUSTMOBILE_HANDLER = ({
     mobileOperator: data.customerOperator,
     screenKuid: CURRENT_SCREEN,
     isResumeApplication: isResumeApplication,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -65,6 +69,7 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
     otp: data.CUSTOMER_OTP,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -79,6 +84,7 @@ export const CUST_HASVALIDEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
     content: {
       KEY_HAS_VALID_EMAIL: data.isValidEmail,
     },
@@ -98,6 +104,7 @@ export const CUSTEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
     email: data.customerEmail,
     screenKuid: CURRENT_SCREEN,
     isResumeApplication: false,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -115,6 +122,7 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
     otp: data.CUSTOMER_OTP,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -163,6 +171,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
     isRedirectedScreen: EDITABLE,
+    requestDate: getCurrentDate(),
     content: {
       kycs: fields,
     },
@@ -180,6 +189,7 @@ export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
     content: {
       KEY_LONGITUDE: data.KEY_GEO_COORDINATES.KEY_LONGITUDE,
       KEY_LATITUDE: data.KEY_GEO_COORDINATES.KEY_LATITUDE,
@@ -200,6 +210,7 @@ export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
     imageBase64: data[kuid],
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -214,6 +225,7 @@ export const REVIEW_APPLICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -228,6 +240,7 @@ export const APPLICATION_COMPLETE_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -243,6 +256,7 @@ export const GET_IMAGE_HANDLER = ({ CURRENT_SCREEN, customerCnic, kuid }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -257,6 +271,7 @@ export const GO_BACK_HANDLER = ({ PREV_SCREEN, customerCnic }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(customerCnic),
     screenKuid: PREV_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
@@ -271,6 +286,7 @@ export const EDIT_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(customerCnic),
     screenKuid: CURRENT_SCREEN,
+    requestDate: getCurrentDate(),
   };
 
   return {
