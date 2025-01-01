@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styles from "./index.module.scss";
 import Webcam from "react-webcam";
-import CameraSvg from "src/Assets/svgs/camera.svg";
+// import CameraSvg from "src/Assets/svgs/camera.svg";
 import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
 import CustomButton from "src/Common/CustomButton";
 import WizardLayout from "src/Layout/WizardLayout";
@@ -36,7 +36,7 @@ const LivePhotoCapture = ({
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
-      setValue("KEY_LIVE_PHOTO", imageSrc); 
+      setValue("KEY_LIVE_PHOTO", imageSrc);
     }
   }, [webcamRef, setValue]);
 
@@ -61,11 +61,12 @@ const LivePhotoCapture = ({
         {!isCameraAccessAllowed && (
           <>
             <Box className={styles.cameraWrapper}>
-              <img
+              {/* <img
                 className={styles.camIconStyle}
                 src={CameraSvg}
                 alt="Uploaded Selfie"
-              />
+              /> */}
+              CAMERA AYEGA YAHAN
             </Box>
 
             <Box className={styles.permissionText}>

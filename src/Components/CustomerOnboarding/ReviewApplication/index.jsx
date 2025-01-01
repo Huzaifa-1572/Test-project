@@ -6,11 +6,11 @@ import { EDIT_HANDLER, GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFor
 import { generateFieldValue, getReviewApplicationData, getUUID, sanitizer } from 'src/Utils/Helpers'
 import styles from './index.module.scss'
 import CustomButton from 'src/Common/CustomButton'
-import AttachmentIcon from 'src/Assets/images/attach-icon.png';
+// import AttachmentIcon from 'src/Assets/images/attach-icon.png';
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
-import discrepantImage from "src/Assets/svgs/discrepancy-found-icon.svg";
+// import discrepantImage from "src/Assets/svgs/discrepancy-found-icon.svg";
 
 const ReviewApplication = ({ setValue, getValues }) => {
     const dispatch = useDispatch()
@@ -29,11 +29,11 @@ const ReviewApplication = ({ setValue, getValues }) => {
         mutateGetImage({ BODY, API_URL, dispatch });
         setFieldData(field);
     }
-    
+
     const handleDailogClose = () => {
         setopenDailog(false)
     }
-    
+
     function onSuccessfullGetImage(response) {
         const IMAGE = response?.data?.data?.imageData;
         setFieldData(prev => ({
@@ -122,7 +122,8 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                                         {
                                                             field.value === 'Y' && (
                                                                 <span className={styles.previewButton} onClick={(e) => handleDailogOpen(e, field)}>
-                                                                    <img src={AttachmentIcon} alt="Preview Icon" />
+                                                                    {/* <img src={AttachmentIcon} alt="Preview Icon" /> */}
+                                                                    ICON AYEGA YAHAN
                                                                     Preview
                                                                 </span>
                                                             )

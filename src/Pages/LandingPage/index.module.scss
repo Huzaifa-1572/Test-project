@@ -1,74 +1,97 @@
-@use '../../styles/_variables' as *;
-
-// Column Grid Styles
-.landingPageLeftSide {
-  display: flex;
-  flex-direction: column !important;
-  align-items: center;
-  justify-content: center;
-  z-index: 300;
-}
-
-// Column Box Styles
-.mainHeading {
-  text-align: center;
-  color: black;
-  font-weight: bolder;
-  font-size: clamp(14px, 6vw, 22px);
-}
-
-// Column Span Styles
-.mainHeadingSpan {
-  color: $theme-primary;
-  font-weight: bolder;
-  border-bottom: 3px solid white;
-}
-
-// Column Grow Styles
-.mainSubHeading {
-  margin: 15px auto;
-  text-align: center;
-  color: black;
-  font-size: clamp(10px, 8vw, 46px);
-  font-weight: bold;
-}
-
-// Description Styles
-.Descriptionstyles {
-  color: black;
-  font-size: clamp(10px, 3vw, 16px);
-  margin: 30px 0;
-}
-
-// Button Container Styles
-.buttonContainerstyles {
-  max-width: 300px;
-  width: 100%;
-  margin-top: 20px;
-  text-align: center;
-  background: $theme-primary;
-  color: white; // Default color for the button
-  opacity: 0.9;
-  transition: 0.6s;
-  border: 2px solid transparent;
-  font-size: clamp(10px, 3vw, 12px);
-
-  &:hover {
-    background-color: white !important;
-    border: 2px solid $theme-primary;
-    color: $theme-primary;
-    opacity: 1;
+@keyframes scaleInOut {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
   }
 }
 
-.description {
-  color: #444749;
-  text-align: center;
-  text-transform: capitalize;
-  font-weight: 500;
+.heroImage {
+  filter: drop-shadow(15px 15px 20px rgba(0, 0, 0, 0.3));
+  height: 65vh;
+  animation: scaleInOut 3s infinite ease-in-out; /* Apply the animation */
 }
 
-.buttonContainer {
-  margin-top: 30px;
+.cardImage {
+  height: clamp(60px, 12vh, 120px);
+}
+
+.payvay {
+  position: relative;
+  top: 8px;
+}
+
+.landingPageContainer {
+  height: 100%;
   width: 100%;
+  background: #f4f4f4;
+  position: relative;
+}
+
+.geometryImage {
+  position: absolute;
+  right: -80px;
+  top: -70px;
+  width: 300px;
+}
+
+.backgroundImageLeft {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  bottom: -50px;
+  left: 0;
+}
+.backgroundImageRight {
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  bottom: -50px;
+  right: 0;
+}
+
+.contentContainer {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 0;
+}
+
+.textContainer {
+  font-weight: bold;
+  text-align: center;
+  font-size: clamp(14px, 4vw, 24px);
+}
+
+.descriptionText {
+  text-align: center;
+  padding: 20px 0px;
+  font-size: clamp(10px, 3vw, 14px);
+}
+
+.card {
+  background: #f0eeee;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.cardTitle {
+  font-size: clamp(12px, 5vw, 16px);
+  font-weight: bold;
+  padding: 10px 0px;
+  color: #407ec9;
+  text-align: center;
+}
+// #e8927c
+// e4002b
+.cardDescription {
+  font-size: clamp(10px, 4vw, 12px);
+  text-align: center;
 }

@@ -3,8 +3,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from 'src/Assets/images/closeicon.png'
-import FallBack from 'src/Assets/images/fallback.webp'
+// import CloseIcon from 'src/Assets/images/closeicon.png'
+// import FallBack from 'src/Assets/images/fallback.webp'
 import { styled } from "@mui/material/styles";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -38,10 +38,11 @@ export default function ImageDailog({ openDailog, handleDailogClose, title, docu
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
-                    <img height={'30px'} src={CloseIcon} alt='Close Icon' />
+                    {/* <img height={'30px'} src={CloseIcon} alt='Close Icon' /> */} icon ayega
                 </IconButton>
                 <DialogContent>
-                    <img style={{ maxHeight: '500px', height: 'auto', width: "400px" }} src={documentImg || FallBack} alt='image' />
+                    {/* <img style={{ maxHeight: '500px', height: 'auto', width: "400px" }} src={documentImg || FallBack} alt='image' /> */}
+                    aicon ayega
                 </DialogContent>
             </BootstrapDialog>
         </React.Fragment>

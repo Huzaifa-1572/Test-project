@@ -1,16 +1,7 @@
-import { IoMenu as MenuIcon } from "react-icons/io5";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -18,10 +9,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import VideoFile from "src/Assets/videos/customerjourney.mp4";
-import UserInformationModal from "src/Components/Modal/UserInformationModal";
 import { headerModalData } from "./headerModalData";
-import Logo from "src/Assets/images/Logo.png";
+// import Logo from "src/Assets/images/Logo.png";
+import LOGO from 'src/Assets/images/PayvayLogo.png';
 import styles from "./index.module.scss";
 
 const drawerWidth = 240;
@@ -74,7 +64,7 @@ function Header(props) {
               margin: '0px',
             }}
           >
-            Cerisma
+            <img src={LOGO} alt='PAYVAY' />
           </h1>
         </Link>
       </Box>
@@ -101,7 +91,7 @@ function Header(props) {
                     margin: '0px',
                   }}
                 >
-                  Cerisma
+                  <img src={LOGO} alt='PAYVAY' style={{ display: 'inline-block' }} />
                 </h1>
               </Link>
             </Box>
@@ -115,16 +105,7 @@ function Header(props) {
           >
             <Box className={styles.toolbarLS}>
               <Link to={"/"} style={{ textDecoration: "none" }}>
-                <h1
-                  style={{
-                    fontSize: "28px",
-                    color: "#5093e0",
-                    textTransform: "uppercase",
-                    margin: '0px',
-                  }}
-                >
-                  Cerisma
-                </h1>
+                <img src={LOGO} alt='PAYVAY' />
               </Link>
             </Box>
           </Typography>

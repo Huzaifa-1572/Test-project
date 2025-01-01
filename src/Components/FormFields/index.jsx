@@ -15,7 +15,7 @@ import { NumericFormat, PatternFormat } from "react-number-format";
 import { useDispatch } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { validateFileSize } from "src/Utils/Helpers";
-import Tick from "src/assets/svgs/tick_white.svg";
+// import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const PatternFormatRef = React.forwardRef((props, ref) => (
   <PatternFormat {...props} getInputRef={ref} />
@@ -853,7 +853,8 @@ export const UploadImage = ({
                 />
               </label>
               <Box sx={tickContainer}>
-                <img src={Tick} style={tickStyles} />
+                {/* <DoneAllIcon style={tickStyles} /> */}
+                ICON WILL COME
               </Box>
               <Box sx={labelStyles}>{label}</Box>
               {!!subLabel && <Box sx={subLabelStyles}>{subLabel}</Box>}

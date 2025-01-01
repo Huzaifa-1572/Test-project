@@ -1,4 +1,4 @@
-import { IoClose as CloseIcon } from "react-icons/io5";
+// import { IoClose as CloseIcon } from "react-icons/io5";
 import { Box } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -70,7 +70,7 @@ function BootstrapDialogTitle(props) {
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          <CloseIcon />
+          {/* <CloseIcon /> */} icon ayega
         </IconButton>
       ) : null}
     </DialogTitle>

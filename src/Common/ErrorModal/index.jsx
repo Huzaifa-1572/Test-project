@@ -1,8 +1,8 @@
 import { Dialog, IconButton } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import CloseIcon from 'src/Assets/images/closeicon.png';
-import ErrorOutlineIcon from 'src/Assets/svgs/error-modal-icon.svg';
+// import CloseIcon from 'src/Assets/images/closeicon.png';
+// import ErrorOutlineIcon from 'src/Assets/svgs/error-modal-icon.svg';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
 import styles from './index.module.scss';
 
@@ -36,11 +36,11 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
         <img
           height={'30px'}
           width={'30px'}
-          src={CloseIcon}
+          src={''}
         />
       </IconButton>
       <div className={styles.mainContainer}>
-        <img src={ErrorOutlineIcon} alt="Error Icon" className={styles.dialogIcon} />
+        <img src={''} alt="Error Icon" className={styles.dialogIcon} />
         <p className={styles.dialogTitle}>{errorCode || '500'}</p>
         <p className={styles.dialogContent}>{errorMessage || 'Something Went Wrong!'}</p>
         <button onClick={handleClose} className='xl green'>

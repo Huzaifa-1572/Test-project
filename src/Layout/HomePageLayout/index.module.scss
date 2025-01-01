@@ -2,25 +2,10 @@
 
 .container {
   min-height: 100vh;
-  background: url("src/Assets/images/bgimg.jpeg") center/cover;
   width: 100%;
   position: relative;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to right, #ffffff, $theme-primary);
-  opacity: 0.9;
-}
-
 .content {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
   min-height: 100vh;
 }

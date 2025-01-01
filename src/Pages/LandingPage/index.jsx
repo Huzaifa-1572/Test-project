@@ -1,23 +1,27 @@
-import { Box, Button, Container, Grid, Grow } from "@mui/material";
+import { Box, Container } from "@mui/material";
+import Fade from '@mui/material/Fade';
+import Grid from "@mui/material/Grid";
+import Zoom from '@mui/material/Zoom';
 import { useEffect } from "react";
-import { IoPlay as PlayArrowIcon } from "react-icons/io5";
-import { MdOutlineOpenInBrowser as OpenInBrowserIcon } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import HeroImage from "src/Assets/images/hero.png";
+import PAYVAY from "src/Assets/images/PayvayLogo.png";
+import Background from "src/Assets/images/background.png";
+import OpenNewAccount from "src/Assets/images/openAccount.png";
+import resumeAccount from "src/Assets/images/resumeAccount.png";
+import heroImage from "src/Assets/images/wallet.png";
 import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { clearAppData } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
-
 
 const LandingPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    clearAppData()
-  }, [])
+    clearAppData();
+  }, []);
 
   const handleNewAccount = () => {
     const NEXT_SCREEN = "scr_customerCnic";
@@ -33,94 +37,80 @@ const LandingPage = () => {
 
   return (
     <HomePageLayout>
-      <Container maxWidth="xl">
-        <Grid container spacing={2}>
-          {/* COLUMN 1 */}
-          <Grid item xs={12} md={7} className={styles.landingPageLeftSide}>
-            <Grow in={true} timeout={800}>
-              <Box className={styles.mainHeading}>
-                Welcome To{" "}
-                <span className={styles.mainHeadingSpan}>Cerisma </span> Digital
-                Onboarding
-              </Box>
-            </Grow>
+      <Box className={styles.landingPageContainer} sx={{ padding: { xs: '0px', lg: '40px 80px' }, overflow: { lg: 'hidden' } }}>
 
-            <Grow in={true} timeout={800}>
-              <Box className={styles.mainSubHeading}>
-                Open Your Future,{" "}
-                <span className={styles.mainHeadingSpan}>
-                  Anytime, Anywhere!
-                </span>
-              </Box>
-            </Grow>
+        <Box className={styles.backgroundImageLeft} sx={{ display: { xs: 'none', lg: 'block' } }}>
+          <img src={Background} alt="" />
+        </Box>
+        <Box className={styles.backgroundImageRight} sx={{ display: { xs: 'none', lg: 'block' } }}>
+          <img src={Background} alt="" />
+        </Box>
 
-            <Box
-              className={`${styles.description} ${styles.Descriptionstyles}`}
-            >
-              Cerisma, Your Nation's Bank, Introduces Convenient Digital Account
-              Opening. Unlock the Power to Open Cerisma, Digital wallet, All
-              from the Comfort of Your Home. No Need to Visit Cerisma Centers.{" "}
-            </Box>
+        <Container maxWidth="xl" className={styles.contentContainer} sx={{ padding: { xs: '30px', lg: 0 }, display: 'flex', alignItems: 'center', borderRadius: { lg: '15px' }, minHeight: '100%' }}>
+          <Grid container spacing={2} sx={{ height: '100%', display: "flex", justifyContent: "center", alignItems: "center" }}>
 
-            <div className={styles.buttonContainer}>
+            <Grid item xs={12} xl={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+              <Fade in={true} timeout={{ enter: 1500, exit: 1000 }}>
+                <Box className={styles.textContainer}>
+                  <span> Account for Your Needs</span>
+                  <br />
+                  Start Your Journey with{" "}
+                  <img className={styles.payvay} src={PAYVAY} alt="PAYVAY" />
+                </Box>
+              </Fade>
+
+              <Fade in={true} timeout={{ enter: 1500, exit: 1000 }}>
+                <Box className={styles.descriptionText}>
+                  Explore tailored features and benefits by selecting the account
+                  <br />
+                  type that aligns with your goals.
+                </Box>
+              </Fade>
+
               <Grid container spacing={2}>
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Button
-                    variant="contained"
-                    className={styles.buttonContainerstyles}
-                    startIcon={<OpenInBrowserIcon />}
-                    onClick={handleNewAccount}
-                  >
-                    Open New Account
-                  </Button>
+                <Grid item xs={12} sm={1}></Grid>
+                {/* NEW ACCOUNT */}
+                <Grid item xs={12} sm={5}>
+                  <Zoom in={true} timeout={{ enter: 1000, exit: 500 }}>
+                    <Box className={styles.card} onClick={handleNewAccount} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
+                      <img src={OpenNewAccount} alt="Open New Account" className={styles.cardImage} />
+                      <Box className={styles.cardTitle}>
+                        Start New Application
+                      </Box>
+                      <Box className={styles.cardDescription}>
+                        Begin a fresh journey from the start
+                      </Box>
+                    </Box>
+                  </Zoom>
                 </Grid>
 
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Button
-                    variant="contained"
-                    className={styles.buttonContainerstyles}
-                    startIcon={<PlayArrowIcon />}
-                    onClick={handleResumeApplication}
-                  >
-                    Resume Application
-                  </Button>
+                {/* RESUME */}
+                <Grid item xs={12} sm={5}>
+                  <Zoom in={true} timeout={{ enter: 1000, exit: 500 }}>
+                    <Box className={styles.card} onClick={handleResumeApplication} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
+                      <img src={resumeAccount} alt="Resume Application" className={styles.cardImage} />
+                      <Box className={styles.cardTitle}>
+                        Resume Application
+                      </Box>
+                      <Box className={styles.cardDescription}>
+                        Continue right where you left off
+                      </Box>
+                    </Box>
+                  </Zoom>
                 </Grid>
+                <Grid item xs={12} sm={1}></Grid>
               </Grid>
-            </div>
-          </Grid>
+            </Grid>
 
-          {/* COLUMN 2 */}
-          <Grid
-            item
-            xs={12}
-            md={5}
-            sx={{ display: { xs: "none", md: "flex" } }}
-          >
-            <Grow in={true} timeout={800}>
-              <img
-                src={HeroImage}
-                alt="illustration"
-                width={"100%"}
-                height={"100%"}
-                style={{
-                  filter: "drop-shadow(10px 10px 15px rgba(0, 0, 0, 0.5))",
-                }}
-              />
-            </Grow>
+            {/* FOR XL SCREENS ONLY */}
+            <Grid item xl={6} sx={{ justifyContent: "center", alignItems: "center", display: { xs: 'none', xl: 'flex' } }}>
+              <img src={heroImage} alt="WALLET" className={styles.heroImage} />
+            </Grid>
+
           </Grid>
-        </Grid>
-      </Container>
-    </HomePageLayout>
+        </Container>
+      </Box>
+    </HomePageLayout >
   );
 };
 
