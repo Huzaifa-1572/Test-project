@@ -9,8 +9,8 @@
 }
 
 .reviewContentWrapper {
-  margin-top: 2.2rem;
-  margin-left: 60px;
+  width: 90%;
+  margin: 0 auto;
 
   .discrepancy {
     background-color: #f79009;
@@ -76,82 +76,69 @@
     // margin-bottom: 3.188rem;
     margin-top: 12px;
   }
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 
   .contentHeader {
-    height: 7.375rem;
-    background-color: #b9d4f5;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    align-content: center;
-    --bs-gutter-y: 0;
-    flex-wrap: wrap;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: 30px;
-    margin-left: calc(-0.5 * var(--bs-gutter-x));
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-
-    .stepInfo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.938rem;
-
-      .iconCircle {
-        width: 3.875rem;
-        height: 3.875rem;
-        border-radius: 50%;
-        background-color: #edf4fd;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .infoText {
-        display: flex;
-        flex-direction: column;
-
-        .stepNumber {
-          font-size: 0.75rem;
-          font-weight: normal;
-          text-align: left;
-          color: #000;
-          margin-bottom: 2px;
-        }
-
-        .stepTitle {
-          font-size: 1.1rem;
-          font-weight: bolder;
-          //   font-family: "ArticulatCF-Bold";
-          text-align: left;
-          color: #000;
-        }
+    margin-bottom: -20px;
+    padding: 0 4px;
+    .infoText {
+      padding: 10px 32px;
+      padding-bottom: 25px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      background-color: #b9d4f5;
+      .stepTitle {
+        font-size: 1.1rem;
+        font-weight: bolder;
+        text-align: left;
+        color: #000;
       }
     }
-
     .editBtn {
-      //   font-family: "ArticulatCF-Bold";
-      font-size: 1.25rem;
-      font-weight: bold;
+      padding: 10px 32px;
+      padding-bottom: 25px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      background-color: #5093e0;
+      font-size: 1.1rem;
+      font-weight: 600;
       text-align: left;
-      color: #5093e0;
+      color: #fff;
       cursor: pointer;
     }
   }
 
+  .contentBody {
+    position: relative;
+    z-index: 9;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   .contentRow {
     height: 4.375rem;
-    background-color: #f8f8f8;
+    background-color: #ffffff;
+    border: 1px solid rgb(220, 220, 220);
     display: flex;
-    // /* justify-content: left; */
     align-items: center;
     font-size: 1.25rem;
-    margin-right: 30px;
     color: #000;
     padding-left: 1.75rem;
     padding-right: 1.75rem;
+    border-radius: 12px;
 
     .label {
       font-weight: normal;
@@ -182,10 +169,10 @@
     .icon {
       width: 1.75rem;
       height: 1.75rem;
+      background-image: url("src/Assets/images/lock-icon.svg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
-      background-image: url("/assets/images/review-application/lock-icon.svg");
     }
 
     .discrepancyIcon {
@@ -195,7 +182,8 @@
   }
 
   .contentRow:nth-child(even) {
-    background: #ffffff;
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
   }
 }
 
@@ -211,11 +199,6 @@
 
 @media (max-width: 500px) {
   .reviewContentWrapper {
-    margin-top: 2rem;
-    margin-left: 0px;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-
     .topHeading {
       font-size: 30px;
       margin-top: 15px;
@@ -226,41 +209,37 @@
       font-size: 16px;
       margin-bottom: 20px;
     }
+  }
 
+  .contentContainer {
     .contentHeader {
-      height: 4.375rem;
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-      margin-right: 0px;
+      margin-bottom: -16px;
+      padding: 0 4px;
 
-      .stepInfo {
-        gap: 0.5rem;
-
-        .iconCircle {
-          width: 2.875rem;
-          height: 2.875rem;
-        }
-
-        .infoText {
-          .stepTitle {
-            font-size: 12px;
-            width: 200px;
-          }
+      .infoText {
+        padding: 4px 20px;
+        padding-bottom: 20px;
+        .stepTitle {
+          font-size: 12px;
         }
       }
 
       .editBtn {
-        font-size: 16px;
+        padding: 8px 20px;
+        padding-bottom: 20px;
+        font-size: 12px;
       }
     }
 
     .contentRow {
-      min-height: 3.375rem;
+      min-height: 3.2rem;
       max-height: 5rem;
-      font-size: 15px;
+      height: 100%;
+      font-size: 14px;
       padding-left: 1rem;
       padding-right: 1rem;
       margin-right: 0px;
+      text-align: end;
 
       .icon {
         width: 1.5rem;

@@ -10,6 +10,7 @@ import CustomButton from 'src/Common/CustomButton'
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
+import { TbLockExclamation } from 'react-icons/tb'
 // import discrepantImage from "src/Assets/svgs/discrepancy-found-icon.svg";
 
 const ReviewApplication = ({ setValue, getValues }) => {
@@ -81,66 +82,60 @@ const ReviewApplication = ({ setValue, getValues }) => {
                     </div>
                 }
 
-                {SECTIONS?.map((section) => {
-                    return (
-                        <Box key={getUUID()}>
-                            {/* TABLE HEADER */}
-                            <div className={styles.contentHeader}>
-                                <div className={styles.stepInfo}>
-                                    <div className={styles.iconCircle}>
-                                        <img src={sanitizer(`src/Assets/images/review-application/${section['summary-table-meta']['icon']}`)} alt="info-icon" />
-                                    </div>
+                <div className={styles.contentContainer}>
+                    {SECTIONS?.map((section) => {
+                        return (
+                            <Box key={getUUID()}>
+                                {/* TABLE HEADER */}
+                                <div className={styles.contentHeader}>
                                     <div className={styles.infoText}>
-                                        <span className={styles.stepNumber}>{section['summary-table-meta']['title1']}</span>
                                         <span className={styles.stepTitle}>{section['summary-table-meta']['title2']}</span>
                                     </div>
+                                    {section['summary-table-meta'].editable ? <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>Edit</div> : <div className={styles.editBtn}><TbLockExclamation size={20} /></div>}
                                 </div>
-                                {section['summary-table-meta'].editable && <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>EDIT</div>}
-                            </div>
 
-                            {/*TABLE BODY*/}
-                            {section?.fields?.map(field =>
-                                field.value && (
-                                    <div className={`${styles.contentRow} ${field.hasDiscrepancy ? styles.lightRedBg : ''}`} key={getUUID()}>
-                                        <Grid container>
-                                            <Grid item sm={6} xs={6} lg={6} className={styles.label}>{field.label}</Grid>
-                                            {
-                                                field['value-type'] !== 'image' &&
-                                                (
-                                                    <Grid item sm={6} xs={6} lg={6} className={`${field['value-type'] !== 'image' ? '' : styles.clickable} ${!!field.locked ? styles.locked : ''}`}>
-                                                        <div className={styles.value}>
-                                                            {generateFieldValue(field)}
-                                                        </div>
-                                                        {!!field?.locked && <div className={styles.icon}></div>}
-                                                    </Grid>
-                                                )
+                                {/*TABLE BODY*/}
+                                <div className={styles.contentBody}>
+                                    {section?.fields?.map(field =>
+                                        field.value && (
+                                            <div className={`${styles.contentRow} ${field.hasDiscrepancy ? styles.lightRedBg : ''}`} key={getUUID()}>
+                                                <Grid container>
+                                                    <Grid item sm={6} xs={6} lg={6} className={styles.label}>{field.label}</Grid>
+                                                    {
+                                                        field['value-type'] !== 'image' && (
+                                                            <Grid item sm={6} xs={6} lg={6} className={`${field['value-type'] !== 'image' ? '' : styles.clickable} ${!!field.locked ? styles.locked : ''}`}>
+                                                                <div className={styles.value}>
+                                                                    {generateFieldValue(field)}
+                                                                </div>
+                                                                {!!field?.locked && <div className={styles.icon}></div>}
+                                                            </Grid>
+                                                        )
 
-                                            }
-                                            {
-                                                field['value-type'] === 'image' && (
-                                                    <Grid item sm={6} xs={6} lg={6} className={`${styles.value} ${styles.clickable}`}>
-                                                        {
-                                                            field.value === 'Y' && (
-                                                                <span className={styles.previewButton} onClick={(e) => handleDailogOpen(e, field)}>
-                                                                    {/* <img src={AttachmentIcon} alt="Preview Icon" /> */}
-                                                                    ICON AYEGA YAHAN
-                                                                    Preview
-                                                                </span>
-                                                            )
-                                                        }
-                                                    </Grid>
-                                                )
-                                            }
-                                        </Grid>
-                                    </div>
-
-                                )
-
-                            )}
-                        </Box>
-                    )
-                }
-                )}
+                                                    }
+                                                    {
+                                                        field['value-type'] === 'image' && (
+                                                            <Grid item sm={6} xs={6} lg={6} className={`${styles.value} ${styles.clickable}`}>
+                                                                {
+                                                                    field.value === 'Y' && (
+                                                                        <span className={styles.previewButton} onClick={(e) => handleDailogOpen(e, field)}>
+                                                                            {/* <img src={AttachmentIcon} alt="Preview Icon" /> */}
+                                                                            ICON AYEGA YAHAN
+                                                                            Preview
+                                                                        </span>
+                                                                    )
+                                                                }
+                                                            </Grid>
+                                                        )
+                                                    }
+                                                </Grid>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            </Box>
+                        )
+                    })}
+                </div>
 
                 <CustomButton label={"Continue"} />
 
