@@ -45,7 +45,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
     }
 
     const handleEdit = (screen_kuid) => {
-        localStorage.setItem('isEditable', true)
+        localStorage.setItem('isEdit', true)
         const { BODY, API_URL } = EDIT_HANDLER({ CURRENT_SCREEN: screen_kuid, customerCnic, dispatch });
         mutateEdit({ BODY, API_URL, dispatch });
     }

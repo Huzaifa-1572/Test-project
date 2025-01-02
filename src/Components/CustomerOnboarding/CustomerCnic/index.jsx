@@ -1,16 +1,20 @@
 import { Box } from "@mui/material";
+import CNICICON from 'src/Assets/images/cnicIcon.png';
 import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import styles from "./index.module.scss";
-import { MdCreditCard } from "react-icons/md";
+import UNDRAW from 'src/Assets/images/cnicundraw.svg';
+import TEST from 'src/Assets/images/test.svg';
+
+
 
 
 const CustomerCnic = ({ control, errors }) => {
   return (
     <WizardLayout
-      Icon={MdCreditCard}
+      Icon={TEST}
       title={"CNIC Verification"}
       description={"Please enter your CNIC to start your online application."}
     >

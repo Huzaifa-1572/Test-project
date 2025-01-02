@@ -9,7 +9,7 @@ const SCREENS = ['scr_customerCnic', 'scr_customerMobile', 'scr_mobileVerificati
 
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
   const [isLoading, setIsLoading] = useState(false);
-  const EDITABLE = localStorage.getItem("isEditable");
+  const isEdit = localStorage.getItem("isEdit");
   const CURRENT_SCREEN = useSelector(state => state.currentScreenState);
 
   // Ensuring the component has loaded before rendering - for GoBack Button
@@ -22,17 +22,17 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
   return (
     <>
       <Header />
-      <Box className={styles.onboardingContainer}>
+      <Box className={styles.onboardingContainer} sx={{ padding: { xs: '30px 5px', md: '30px 30px' } }}>
         <Container maxWidth="xl">
           {
-            isLoading && !(EDITABLE || SCREENS.includes(CURRENT_SCREEN)) &&
+            isLoading && !(isEdit || SCREENS.includes(CURRENT_SCREEN)) &&
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               <GoBack setValue={setValue} getValues={getValues} />
             </Box>
           }
           {children}
         </Container>
-      </Box>
+      </Box >
     </>
   );
 }

@@ -132,9 +132,9 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 };
 
 export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
-  const EDITABLE = localStorage.getItem("isEditable") || false;
-  if (EDITABLE) {
-    localStorage.removeItem("isEditable");
+  const isEdit = localStorage.getItem("isEdit") || false;
+  if (isEdit) {
+    localStorage.removeItem("isEdit");
   }
 
   let fields = [];
@@ -170,7 +170,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     screenKuid: CURRENT_SCREEN,
-    isRedirectedScreen: EDITABLE,
+    isRedirectedScreen: isEdit,
     requestDate: getCurrentDate(),
     content: {
       kycs: fields,
