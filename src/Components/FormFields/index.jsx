@@ -271,6 +271,7 @@ export const SwitchButton = ({ name, control, label, checked, onChange }) => {
 
 // PATTERN INPUT FIELD
 export const CustomInputField = ({
+  type = 'text',
   name,
   control,
   label,
@@ -340,6 +341,7 @@ export const CustomInputField = ({
       render={({ field }) => (
         <PatternFormatRef
           {...field}
+          type={type}
           format={format ? format : ""}
           mask="_"
           inputMode={inputMode}

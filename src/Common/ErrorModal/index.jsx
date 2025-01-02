@@ -1,9 +1,8 @@
-import { Dialog, IconButton } from '@mui/material';
+import { Button, Dialog } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import CloseIcon from 'src/Assets/images/closeicon.png';
-// import ErrorOutlineIcon from 'src/Assets/svgs/error-modal-icon.svg';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
+import { CgCloseO } from "react-icons/cg";
 import styles from './index.module.scss';
 
 const ErrorModal = ({ errorCode, errorMessage, isError }) => {
@@ -25,27 +24,23 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
       aria-describedby="alert-dialog-description"
       maxWidth="sm"
       fullWidth
+      PaperProps={{
+        sx: {
+          margin: '32px 0',
+          borderRadius: '8px',
+          width: "calc(100% - 40px)"
+        }
+      }}
     >
-      <IconButton onClick={handleClose} sx={{
-        position: 'absolute',
-        right: 8,
-        top: 8,
-        color: (theme) => theme.palette.grey[500],
-        zIndex: 9999,
-      }}>
-        <img
-          height={'30px'}
-          width={'30px'}
-          src={''}
-        />
-      </IconButton>
       <div className={styles.mainContainer}>
-        <img src={''} alt="Error Icon" className={styles.dialogIcon} />
-        <p className={styles.dialogTitle}>{errorCode || '500'}</p>
-        <p className={styles.dialogContent}>{errorMessage || 'Something Went Wrong!'}</p>
-        <button onClick={handleClose} className='xl green'>
-          Close
-        </button>
+        <div className={styles.dialogIconBox}>
+          <CgCloseO onClick={handleClose} className={styles.dialogIcon} />
+        </div>
+        <div className={styles.dialogContentBox}>
+          <p className={styles.dialogTitle}>{errorCode || 'Ooops!'}</p>
+          <p className={styles.dialogContent}>{errorMessage || 'Something Went Wrong!'}</p>
+          <Button className={styles.dialogButton} onClick={handleClose}>Try Again!</Button>
+        </div>
       </div>
     </Dialog >
   );
