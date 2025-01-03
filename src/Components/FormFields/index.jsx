@@ -290,7 +290,7 @@ export const CustomInputField = ({
       variant: "filled",
       placeholder: placeholder,
       fullWidth: true,
-      autoFocus: true,
+      autoFocus: autoFocus,
       InputProps: {
         disableUnderline: true,
         sx: {

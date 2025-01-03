@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { IoChevronBack } from "react-icons/io5";
+import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 
 const GoBack = ({ setValue, getValues }) => {
     const navigate = useNavigate()
@@ -16,10 +17,17 @@ const GoBack = ({ setValue, getValues }) => {
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullSubmission, dispatch });
 
     const handleBack = () => {
-        if (CURRENT_SCREEN === 'scr_customerCnic') {
+        if (CURRENT_SCREEN === 'scr_deviceLocation') {
             navigate('/')
             return
         }
+
+        if (CURRENT_SCREEN === 'scr_customerCnic') {
+            const NEXT_SCREEN = "scr_deviceLocation";
+            dispatch(updateCurrentScreen(NEXT_SCREEN));
+            return
+        }
+
         const customerCnic = getValues('customerCnic')
         const { BODY, API_URL } = GO_BACK_HANDLER({ PREV_SCREEN, customerCnic, dispatch });
         mutate({ BODY, API_URL, dispatch });

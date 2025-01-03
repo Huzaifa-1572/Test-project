@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import CNICICON from 'src/Assets/images/cnicIcon.png';
 import CustomButton from "src/Common/CustomButton";
-import { CaptchaField, CustomInputField } from "src/Components/FormFields";
+import { CaptchaField, CustomInputField, TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 
@@ -25,17 +25,13 @@ const CustomerCnic = ({ control, errors }) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
-          <CustomInputField
-            name={"customerCnic"}
+          <TextInputField
+            name={"customerName"}
             control={control}
-            format={"#####-#######-#"}
-            label="Please Enter Your CNIC #"
-            placeholder="xxxxx-xxxxxxx-x"
-            inputMode="numeric"
-            autoFocus={true}
-            type="tel"
+            label="Name As Per CNIC"
+            input_type="text"
           />
-          {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
+          {errors?.customerName ? (<ValidationError message={errors?.customerName?.message} />) : null}
         </Grid>
 
         <Grid item xs={12} lg={6}>
@@ -43,10 +39,10 @@ const CustomerCnic = ({ control, errors }) => {
             name={"customerCnic"}
             control={control}
             format={"#####-#######-#"}
-            label="Name As Per CNIC"
+            label="Please Enter Your CNIC"
             placeholder="xxxxx-xxxxxxx-x"
             inputMode="numeric"
-            autoFocus={true}
+            type="tel"
           />
           {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
         </Grid>

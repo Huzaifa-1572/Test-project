@@ -8,6 +8,7 @@ const EmailVerification = ({ setValue, getValues }) => {
             // icon={mobileOtpLogo}
             title={'Email Verification'}
             content={"Please enter the one time passcode which was sent to your email address"}
+            goBackContent={"Change Email Address"}
             setValue={setValue}
             getValues={getValues}
         />

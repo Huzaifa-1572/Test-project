@@ -8,6 +8,7 @@ const MobileVerification = ({ setValue, getValues }) => {
             // icon={mobileOtpLogo}
             title={'Mobile Verification'}
             content={"Please enter the one time passcode which is sent to your mobile number"}
+            goBackContent={"Change Mobile Number"}
             setValue={setValue}
             getValues={getValues}
         />

@@ -30,6 +30,11 @@ const withinReasonableRange = (date, years = 100) => {
 
 export const shape = {
   "scr_customerCnic": {
+    customerName: yup
+      .string()
+      .required("Name is required.")
+      .min(3, "Name must be at least 3 characters.")
+      .max(100, "Name must not exceed 100 characters."),
     customerCnic: yup
       .string()
       .required("CNIC is required.")
@@ -59,19 +64,6 @@ export const shape = {
       )
       .email("Please enter a valid email address.")
       .max(50, "Email address must not exceed 50 characters."),
-  },
-
-  "scr_personalInformation": {
-    KEY_FIRST_NAME: yup
-      .string()
-      .required("First name is required.")
-      .min(3, "First name must be at least 3 characters.")
-      .max(100, "First name must not exceed 100 characters."),
-    KEY_LAST_NAME: yup
-      .string()
-      .required("Last name is required.")
-      .min(3, "Last name must be at least 3 characters.")
-      .max(100, "Last name must not exceed 100 characters."),
   },
 
   "scr_additionalInformation": {
@@ -160,13 +152,11 @@ export const shape = {
       .typeError('Please provide a valid CNIC expiry date.'),
     KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC is lifetime.'),
   },
+
   "scr_termsAndConditions": {
     isAccepted: yup
       .boolean()
       .oneOf([true], 'You must accept the terms and conditions to proceed.')
-      .required('You must accept the terms and conditions to continue.'),
-    googleCaptchaReviewApplication: yup
-      .string()
-      .required("Please complete the CAPTCHA to proceed."),
+      .required('You must accept the terms and conditions to continue.')
   }
 };

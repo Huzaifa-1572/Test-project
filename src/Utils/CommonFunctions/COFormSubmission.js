@@ -66,6 +66,16 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     mobileNumber: retrieveMobileNumber(data.customerMobile),
+    name: data.customerName,
+    mnp: data.customerOperator,
+    longitude: data.KEY_GEO_COORDINATES.KEY_LONGITUDE,
+    latitude: data.KEY_GEO_COORDINATES.KEY_LATITUDE,
+    deviceId: "temp",
+    playerId: "temp",
+    makeModel: "temp",
+    deviceType: "temp",
+    deviceVersion: "temp",
+    rooted: false,
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
     otp: data.CUSTOMER_OTP,
@@ -179,25 +189,6 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.CUSTOMER_INFORMATION}`,
-    BODY,
-  };
-};
-
-export const DEVICE_LOCATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
-  const BODY = {
-    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
-    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: CURRENT_SCREEN,
-    requestDate: getCurrentDate(),
-    content: {
-      KEY_LONGITUDE: data.KEY_GEO_COORDINATES.KEY_LONGITUDE,
-      KEY_LATITUDE: data.KEY_GEO_COORDINATES.KEY_LATITUDE,
-    },
-  };
-
-  return {
-    API_URL: `${BASE_URL}${ENDPOINTS.GENERIC_HANDLER}`,
     BODY,
   };
 };
@@ -333,24 +324,11 @@ export const COFormSubmission = {
       data,
     });
   },
-  scr_personalInformation: ({ CURRENT_SCREEN, data }) => {
-    return MULTIPLE_KYC_HANDLER({
-      CURRENT_SCREEN,
-      data,
-      kuid: ["KEY_FIRST_NAME", "KEY_LAST_NAME"],
-    });
-  },
   scr_additionalInformation: ({ CURRENT_SCREEN, data }) => {
     return MULTIPLE_KYC_HANDLER({
       CURRENT_SCREEN,
       data,
       kuid: ["KEY_PLACE_OF_BIRTH", "KEY_MOTHER_MAIDEN_NAME"],
-    });
-  },
-  scr_deviceLocation: ({ CURRENT_SCREEN, data }) => {
-    return DEVICE_LOCATION_HANDLER({
-      CURRENT_SCREEN,
-      data,
     });
   },
   scr_addressDetail: ({ CURRENT_SCREEN, data }) => {

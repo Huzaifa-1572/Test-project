@@ -24,13 +24,13 @@ const LandingPage = () => {
   }, []);
 
   const handleNewAccount = () => {
-    const NEXT_SCREEN = "scr_customerCnic";
+    const NEXT_SCREEN = "scr_deviceLocation";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");
   };
 
   const handleResumeApplication = () => {
-    const NEXT_SCREEN = "scr_customerCnic";
+    const NEXT_SCREEN = "scr_deviceLocation";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");
   };

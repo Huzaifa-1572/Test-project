@@ -11,7 +11,6 @@ const MobileVerification = lazy(() => import("src/Components/CustomerOnboarding/
 const HasValidEmail = lazy(() => import("src/Components/CustomerOnboarding/HasValidEmail"));
 const CustomerEmail = lazy(() => import("src/Components/CustomerOnboarding/CustomerEmail"));
 const EmailVerification = lazy(() => import("src/Components/CustomerOnboarding/EmailVerification"));
-const PersonalInformation = lazy(() => import("src/Components/CustomerOnboarding/PersonalInformation"));
 const AdditionalInformation = lazy(() => import("src/Components/CustomerOnboarding/AdditionalInformation"));
 const DeviceLocation = lazy(() => import("src/Components/CustomerOnboarding/DeviceLocation"));
 const AddressDetail = lazy(() => import("src/Components/CustomerOnboarding/AddressDetail"));
@@ -31,7 +30,6 @@ const showScreen = {
   scr_hasValidEmail: <HasValidEmail />,
   scr_customerEmail: <CustomerEmail />,
   scr_emailVerification: <EmailVerification />,
-  scr_personalInformation: <PersonalInformation />,
   scr_additionalInformation: <AdditionalInformation />,
   scr_deviceLocation: <DeviceLocation />,
   scr_addressDetail: <AddressDetail />,

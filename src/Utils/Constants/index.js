@@ -1,5 +1,6 @@
 export const INITIAL_VALUES = {
   isResumeApplication: false,
+  customerName:"",
   customerCnic: "",
   googleCaptcha: "",
   customerMobile: "",
@@ -7,8 +8,6 @@ export const INITIAL_VALUES = {
   isValidEmail: "",
   customerEmail: "",
   OTP_VERIFICATION_TOKEN: "",
-  KEY_FIRST_NAME: "",
-  KEY_LAST_NAME: "",
   KEY_MOTHER_MAIDEN_NAME: "",
   KEY_PLACE_OF_BIRTH: "",
   KEY_GEO_COORDINATES: null,
@@ -26,8 +25,7 @@ export const INITIAL_VALUES = {
   KEY_CNIC_ISSUANCE_DATE: null,
   KEY_CNIC_EXPIRY_DATE: null,
   KEY_CNIC_LIFETIME: false,
-  isAccepted: false,
-  googleCaptchaReviewApplication: "",
+  isAccepted: false
 };
 
 export const OPERATOR_MAP = {

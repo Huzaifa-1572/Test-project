@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import usePostDataToServer from 'src/Hooks/usePostdataToServer';
 import { useDispatch, useSelector } from 'react-redux';
-import { COFormSubmission, CUSTEMAIL_HANDLER, CUSTMOBILE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
+import { CUSTEMAIL_HANDLER, CUSTMOBILE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
 import { useNavigate } from 'react-router-dom';
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
+import { updateCurrentScreen } from 'src/Redux/Reducers/CurrentScreenState';
+import { updatePrevScreen } from 'src/Redux/Reducers/PrevScreenState';
 
-function VerificationPage({ icon, title, content, setValue, getValues }) {
+function VerificationPage({ icon, title, content, goBackContent, setValue, getValues }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [otp, setOtp] = useState('');
@@ -69,6 +71,20 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
         postRequestSuccess({ response, dispatch, navigate, setValue })
     }
 
+    const handleGoBack = () => {
+        if (SCREEN_NAME === 'scr_customerMobile') {
+            const PREV_SCREEN = 'scr_customerCnic'
+            dispatch(updateCurrentScreen(SCREEN_NAME));
+            dispatch(updatePrevScreen(PREV_SCREEN));
+        }
+
+        if (SCREEN_NAME === 'scr_customerEmail') {
+            const PREV_SCREEN = 'scr_hasValidEmail'
+            dispatch(updatePrevScreen(PREV_SCREEN));
+            dispatch(updateCurrentScreen(SCREEN_NAME));
+        }
+    }
+
     return (
         <Box sx={{ backgroundColor: '#F4F4F4' }}>
             <Container maxWidth="lg" className={styles.paperContainer} sx={{ borderRadius: { sm: '0px', md: '0px', lg: '10px', xl: '10px' } }} >
@@ -114,6 +130,13 @@ function VerificationPage({ icon, title, content, setValue, getValues }) {
                         )}
                     </div>
                 </div>
+
+                {
+                    goBackContent &&
+                    <p className={styles.content} style={{ marginTop: "12px" }}>
+                        <span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={handleGoBack}>{goBackContent}</span>
+                    </p>
+                }
             </Container >
         </Box >
     );
