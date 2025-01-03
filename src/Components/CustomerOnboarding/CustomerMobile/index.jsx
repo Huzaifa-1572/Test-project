@@ -5,6 +5,8 @@ import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { OPERATOR_OPTION } from "src/Utils/Lovs";
 import { TbDeviceMobile } from "react-icons/tb";
+import Grid from "@mui/material/Grid";
+
 
 
 const CustomerMobile = ({ control, errors }) => {
@@ -15,8 +17,8 @@ const CustomerMobile = ({ control, errors }) => {
       title={"Mobile Verification"}
       description={'Please enter your mobile number.'}
     >
-      <Box sx={{ margin: "15px 0px" }}>
-        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: { xs: "center", sm: "start" }, gap: "20px", margin: "20px 0px" }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} lg={6}>
           <CustomInputField
             name={"customerMobile"}
             control={control}
@@ -26,7 +28,9 @@ const CustomerMobile = ({ control, errors }) => {
             inputMode="numeric"
           />
           {errors?.customerMobile ? (<ValidationError message={errors?.customerMobile?.message} />) : null}
+        </Grid>
 
+        <Grid item xs={12} lg={6}>
           <SelectField
             name={"customerOperator"}
             control={control}
@@ -35,12 +39,13 @@ const CustomerMobile = ({ control, errors }) => {
             options={OPERATOR_OPTION}
           />
           {errors?.customerOperator ? (<ValidationError message={errors?.customerOperator?.message} />) : null}
-        </Box>
-      </Box>
+        </Grid>
 
-      <CustomButton label={"Proceed"} />
-
-    </WizardLayout>
+        <Grid item xs={12} lg={6}>
+          <CustomButton label={"Proceed"} />
+        </Grid>
+      </Grid>
+    </WizardLayout >
   );
 };
 

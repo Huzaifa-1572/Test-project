@@ -1,48 +1,62 @@
-import { Box } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import CNICICON from 'src/Assets/images/cnicIcon.png';
 import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
-import styles from "./index.module.scss";
-import UNDRAW from 'src/Assets/images/cnicundraw.svg';
-import TEST from 'src/Assets/images/test.svg';
-
-
-
 
 const CustomerCnic = ({ control, errors }) => {
   return (
     <WizardLayout
-      Icon={TEST}
+      Icon={CNICICON}
       title={"CNIC Verification"}
-      description={"Please enter your CNIC to start your online application."}
+      description={"Please Enter Your CNIC To Start Your Online Application"}
     >
-      <Box sx={{ margin: "20px 0px" }}>
-        <CustomInputField
-          name={"customerCnic"}
-          control={control}
-          format={"#####-#######-#"}
-          label="CNIC"
-          placeholder="xxxxx-xxxxxxx-x"
-          inputMode="numeric"
-          autoFocus={true}
-        />
-        {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
-      </Box>
 
-      <CustomButton label="verify" />
+      <Grid container spacing={2}>
 
-      <Box className={styles.robotStyles}>
-        <Box sx={{ width: "100%", maxWidth: "400px" }}>
+        <Grid item xs={12}>
           <CaptchaField
             name={'googleCaptcha'}
             control={control}
             siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
           />
           {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
-        </Box>
-      </Box>
+        </Grid>
+
+        <Grid item xs={12} lg={6}>
+          <CustomInputField
+            name={"customerCnic"}
+            control={control}
+            format={"#####-#######-#"}
+            label="Please Enter Your CNIC #"
+            placeholder="xxxxx-xxxxxxx-x"
+            inputMode="numeric"
+            autoFocus={true}
+          />
+          {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
+        </Grid>
+
+        <Grid item xs={12} lg={6}>
+          <CustomInputField
+            name={"customerCnic"}
+            control={control}
+            format={"#####-#######-#"}
+            label="Name As Per CNIC"
+            placeholder="xxxxx-xxxxxxx-x"
+            inputMode="numeric"
+            autoFocus={true}
+          />
+          {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
+        </Grid>
+
+
+        <Grid item xs={12} lg={6}>
+          <CustomButton label="Proceed" />
+        </Grid>
+
+      </Grid>
+
     </WizardLayout>
   );
 };

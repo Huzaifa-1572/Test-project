@@ -22,16 +22,14 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
   return (
     <>
       <Header />
-      <Box className={styles.onboardingContainer} sx={{ padding: { xs: '30px 5px', md: '30px 30px' } }}>
-        <Container maxWidth="xl">
-          {
-            isLoading && !(isEdit || SCREENS.includes(CURRENT_SCREEN)) &&
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              <GoBack setValue={setValue} getValues={getValues} />
-            </Box>
-          }
-          {children}
-        </Container>
+      <Box className={styles.onboardingContainer}>
+        {
+          isLoading && !(isEdit || SCREENS.includes(CURRENT_SCREEN)) &&
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <GoBack setValue={setValue} getValues={getValues} />
+          </Box>
+        }
+        {children}
       </Box >
     </>
   );

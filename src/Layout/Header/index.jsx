@@ -77,7 +77,7 @@ function Header(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ background: "white", boxShadow: "none" }}>
+      <AppBar component="nav" sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "none" }}>
         <Toolbar>
           {/* FOR SMALLER SCREENS */}
           <Box sx={{ mr: 2, width: "100%", display: { md: "none" } }}>
