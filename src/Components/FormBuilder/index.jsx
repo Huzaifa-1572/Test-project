@@ -108,6 +108,7 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                         label={field?.label}
                         placeholder="xxxxx-xxxxxxx-x"
                         inputMode="numeric"
+                        type="tel"
                         disabled={field?.locked}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}

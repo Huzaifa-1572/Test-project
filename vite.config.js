@@ -15,4 +15,7 @@ export default defineConfig({
   optimizeDeps: {
     force: true,
   },
+  server: {
+    host: '0.0.0.0', // Allow access from network devices
+  },
 })

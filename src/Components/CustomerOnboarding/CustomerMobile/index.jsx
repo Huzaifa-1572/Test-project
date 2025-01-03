@@ -26,6 +26,7 @@ const CustomerMobile = ({ control, errors }) => {
             label="Mobile Number"
             placeholder="03xx-xxxxxxx"
             inputMode="numeric"
+            type="tel"
           />
           {errors?.customerMobile ? (<ValidationError message={errors?.customerMobile?.message} />) : null}
         </Grid>

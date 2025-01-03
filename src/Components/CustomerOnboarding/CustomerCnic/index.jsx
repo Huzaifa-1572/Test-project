@@ -33,6 +33,7 @@ const CustomerCnic = ({ control, errors }) => {
             placeholder="xxxxx-xxxxxxx-x"
             inputMode="numeric"
             autoFocus={true}
+            type="tel"
           />
           {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
         </Grid>
