@@ -66,7 +66,7 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
     mobileNumber: retrieveMobileNumber(data.customerMobile),
-    name: data.customerName,
+    name: data.KEY_NAME,
     mnp: data.customerOperator,
     longitude: data.KEY_GEO_COORDINATES.KEY_LONGITUDE,
     latitude: data.KEY_GEO_COORDINATES.KEY_LATITUDE,

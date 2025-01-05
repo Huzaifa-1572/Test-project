@@ -1,144 +1,46 @@
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Drawer from "@mui/material/Drawer";
-import { useTheme } from "@mui/material/styles";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import * as React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { headerModalData } from "./headerModalData";
-// import Logo from "src/Assets/images/Logo.png";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useNavigate } from 'react-router-dom';
 import LOGO from 'src/Assets/images/PayvayLogo.png';
-import styles from "./index.module.scss";
+import './index.css';
 
-const drawerWidth = 240;
-const navItems = [
-  { id: "1", value: "Contact us" },
-  { id: "2", value: "FAQs" },
-  { id: "3", value: "Eligibility Criteria" },
-  { id: "4", value: "Customer Journey" },
-];
 
-function Header(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [userInfoModal, setuserInfoModal] = useState(false);
-  const [userInfoModalData, setuserInfoModalData] = useState({});
-  const [openCustJourney, seopenCustJourney] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+function Header() {
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
+  const NAVIGATE_TO = useNavigate()
 
-  const handleModalopen = (id) => {
-    if (id === "4") {
-      seopenCustJourney(true);
-    } else {
-      setuserInfoModalData(headerModalData[id]);
-      setuserInfoModal(true);
-    }
-  };
 
-  const handleModalClose = () => {
-    setuserInfoModal(false);
-  };
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
-
-  const handleCustomerJourneyClose = () => {
-    seopenCustJourney(false);
-  };
-
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box className={styles.drawer}>
-        <Link to={"/"} style={{ textDecoration: "none" }}>
-          <h1
-            style={{
-              fontSize: "28px",
-              color: "#5093e0",
-              textTransform: "uppercase",
-              margin: '0px',
-            }}
-          >
-            <img src={LOGO} alt='PAYVAY' />
-          </h1>
-        </Link>
-      </Box>
-    </Box>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const handleLogoClick = () => {
+    NAVIGATE_TO('/')
+  }
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar component="nav" sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "none" }}>
-        <Toolbar>
-          {/* FOR SMALLER SCREENS */}
-          <Box sx={{ mr: 2, width: "100%", display: { md: "none" } }}>
-            <Box className={styles.toolbarSM}>
-              <Link to={"/"} style={{ textDecoration: "none" }}>
-                <h1
-                  style={{
-                    fontSize: "28px",
-                    color: "#5093e0",
-                    textTransform: "uppercase",
-                    margin: '0px',
-                  }}
-                >
-                  <img src={LOGO} alt='PAYVAY' style={{ display: 'inline-block' }} />
-                </h1>
-              </Link>
-            </Box>
-          </Box>
+    <>
+      <Box className='navbar' sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "0px 2px 1px rgba(0,0,0,0.1)" }}>
+        <div className='navbar-logo' onClick={handleLogoClick} >
+          <img src={LOGO} alt='NBP logo' title='PAYVAY' />
+        </div>
 
-          {/* FOR LARGE SCREEN */}
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", md: "block" } }}
-          >
-            <Box className={styles.toolbarLS}>
-              <Link to={"/"} style={{ textDecoration: "none" }}>
-                <img src={LOGO} alt='PAYVAY' />
-              </Link>
-            </Box>
-          </Typography>
-        </Toolbar>
-      </AppBar>
+        {/* RESPONSIVE ICONS */}
+        <div className='menu-icon' >
+          {click ? <span className='close-icon'></span> : <GiHamburgerMenu onClick={handleClick} />}
+        </div>
 
-      {/* THIS IS MOBILE SCREEN DRAWER */}
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", md: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-
-      <Box component="main">
-        <Toolbar />
+        <ul onClick={handleClick} className={click ? 'nav-menu active nav-backoverlay-active' : 'nav-menu nav-backoverlay-inactive '}>
+          <li className={'nav-item'}>
+            Contact Us
+          </li>
+          <li className={'nav-item'}>
+            FAQS
+          </li>
+          <li className={'nav-item'}>
+            Eligibility Criteria
+          </li>
+        </ul>
       </Box>
-    </Box>
+    </>
   );
 }
-
 export default Header;

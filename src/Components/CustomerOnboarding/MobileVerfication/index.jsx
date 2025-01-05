@@ -1,11 +1,11 @@
 import React from 'react'
 import VerificationPage from 'src/Common/VerificationPage';
-// import mobileOtpLogo from "src/Assets/svgs/mobileotp.svg";
+import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobileVerificationIcon.png'
 
 const MobileVerification = ({ setValue, getValues }) => {
     return (
         <VerificationPage
-            // icon={mobileOtpLogo}
+            icon={MOBILE_VERIFICATION_LOGO}
             title={'Mobile Verification'}
             content={"Please enter the one time passcode which is sent to your mobile number"}
             goBackContent={"Change Mobile Number"}

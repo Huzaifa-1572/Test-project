@@ -34,16 +34,15 @@
         opacity: 1;
         border-radius: 50%;
         box-sizing: content-box;
-        animation: spinner 1.2048192771084336s cubic-bezier(0, 0.2, 0.8, 1)
-          infinite;
+        animation: spinner 1.2048192771084336s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 
         &:nth-child(1) {
-          border-color: #5093e0;
+          border-color: #407ec9;
           animation-delay: 0s;
         }
 
         &:nth-child(2) {
-          border-color: #363d4a;
+          border-color: #e8927c;
           animation-delay: -0.6024096385542168s;
         }
       }

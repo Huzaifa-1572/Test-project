@@ -39,10 +39,10 @@ const GoBack = ({ setValue, getValues }) => {
 
     return (
         <Button
-            size="small"
+            size="large"
             variant="contained"
             onClick={handleBack}
-            sx={{ fontSize: "12px", height: "40px", backgroundColor: "#5093e0" }}
+            sx={{ fontSize: "14px", height: "44px", backgroundColor: "#407ec9", letterSpacing: '1px' }}
             startIcon={<IoChevronBack />}
         >
             Back

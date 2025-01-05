@@ -4,34 +4,27 @@ import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField, TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
+import CNIC_UNDRAW from "src/Assets/images/abcd.svg"
 
 const CustomerCnic = ({ control, errors }) => {
   return (
     <WizardLayout
       Icon={CNICICON}
       title={"CNIC Verification"}
-      description={"Please Enter Your CNIC To Start Your Online Application"}
+      description={"Please Enter your CNIC to continue with your online onboarding."}
+      heroImage={CNIC_UNDRAW}
     >
 
       <Grid container spacing={2}>
 
-        <Grid item xs={12}>
-          <CaptchaField
-            name={'googleCaptcha'}
-            control={control}
-            siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
-          />
-          {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
-        </Grid>
-
         <Grid item xs={12} lg={6}>
           <TextInputField
-            name={"customerName"}
+            name={"KEY_NAME"}
             control={control}
             label="Name As Per CNIC"
             input_type="text"
           />
-          {errors?.customerName ? (<ValidationError message={errors?.customerName?.message} />) : null}
+          {errors?.KEY_NAME ? (<ValidationError message={errors?.KEY_NAME?.message} />) : null}
         </Grid>
 
         <Grid item xs={12} lg={6}>
@@ -45,6 +38,15 @@ const CustomerCnic = ({ control, errors }) => {
             type="tel"
           />
           {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
+        </Grid>
+
+        <Grid item xs={12}>
+          <CaptchaField
+            name={'googleCaptcha'}
+            control={control}
+            siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
+          />
+          {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
         </Grid>
 
 

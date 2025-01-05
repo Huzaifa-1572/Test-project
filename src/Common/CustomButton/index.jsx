@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import styles from "./index.module.scss";
+import { IoMdArrowRoundForward } from "react-icons/io";
 
 const CustomButton = ({ label, disabled, onClick, type = "submit" }) => {
   return (
@@ -11,8 +12,9 @@ const CustomButton = ({ label, disabled, onClick, type = "submit" }) => {
         className={styles.button}
         disabled={disabled}
         onClick={onClick}
+
       >
-        {label}
+        {label} <IoMdArrowRoundForward />
       </Button>
     </Box>
   );

@@ -70,7 +70,7 @@ function WrapperForHookFormProps({ children }) {
       const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, CUSTOMER_CNIC, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }
-    
+
     // FOR RESUME FLOW
     if (DATA?.resume) {
       localStorage.setItem("isResume", DATA?.resume);
@@ -102,7 +102,6 @@ function WrapperForHookFormProps({ children }) {
   // PERSISTING VALUES WHEN PAGE IS REFRESHED
   useEffect(() => {
     getDataFromIndexDb().then(data => {
-      console.log('datadsdsdata', data);
       const IS_STORED_DATA_AVAILABLE = !!data;
       if (IS_STORED_DATA_AVAILABLE) {
         const SavedFormData = data?.appData?.FORMDATA;

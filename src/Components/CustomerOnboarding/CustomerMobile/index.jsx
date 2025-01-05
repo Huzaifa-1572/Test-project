@@ -1,11 +1,11 @@
-import { Box } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import CustomButton from "src/Common/CustomButton";
 import { CustomInputField, SelectField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { OPERATOR_OPTION } from "src/Utils/Lovs";
-import { TbDeviceMobile } from "react-icons/tb";
-import Grid from "@mui/material/Grid";
+import MOBILE_ICON from 'src/Assets/images/mobileIcon.png'
+import MOBILE_UNDRAW from 'src/Assets/images/mobileUndraw.svg'
 
 
 
@@ -13,9 +13,10 @@ const CustomerMobile = ({ control, errors }) => {
 
   return (
     <WizardLayout
-      Icon={TbDeviceMobile}
+      Icon={MOBILE_ICON}
       title={"Mobile Verification"}
-      description={'Please enter your mobile number.'}
+      description={"Kindly enter your mobile number to continue your application."}
+      heroImage={MOBILE_UNDRAW}
     >
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>

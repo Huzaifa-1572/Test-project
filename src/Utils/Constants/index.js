@@ -1,6 +1,5 @@
 export const INITIAL_VALUES = {
   isResumeApplication: false,
-  customerName:"",
   customerCnic: "",
   googleCaptcha: "",
   customerMobile: "",

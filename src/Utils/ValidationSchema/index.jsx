@@ -30,7 +30,7 @@ const withinReasonableRange = (date, years = 100) => {
 
 export const shape = {
   "scr_customerCnic": {
-    customerName: yup
+    KEY_NAME: yup
       .string()
       .required("Name is required.")
       .min(3, "Name must be at least 3 characters.")

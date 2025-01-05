@@ -1,10 +1,10 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import DEVICE_ICON from "src/Assets/images/locationIcon.png";
+import LOCATION_UNDRAW from "src/Assets/images/abc.svg";
+import CustomButton from "src/Common/CustomButton";
 import Loader from "src/Common/Loader";
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
-import CustomButton from "src/Common/CustomButton";
 import WizardLayout from "src/Layout/WizardLayout";
-import { MdLocationOn } from "react-icons/md";
-import { useDispatch } from "react-redux";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 
@@ -28,11 +28,12 @@ const DeviceLocation = ({
     <>
       {locationStatus === "loading" && <Loader />}
       <WizardLayout
-        Icon={MdLocationOn}
+        Icon={DEVICE_ICON}
         title={"Device Location"}
-        description={"Please enable your device location"}
+        description={"We need your location to provide a personalized and seamless experience."}
+        heroImage={LOCATION_UNDRAW}
       >
-        <CustomButton type="button" label={"Proceed"} onClick={handleProceed} />
+        <CustomButton type="button" label={"Continue"} onClick={handleProceed} />
       </WizardLayout>
     </>
   );
