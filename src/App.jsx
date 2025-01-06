@@ -20,6 +20,17 @@ const App = () => {
   useEffect(() => {
     setupRequestInterceptor();
     setupResponseInterceptor();
+
+    // Get the current URL's query string
+    const searchParams = new URLSearchParams(window.location.search);
+
+    // Extract deviceId and playerId
+    const deviceId = searchParams.get('deviceId') || '';
+    const playerId = searchParams.get('playerId') || '';
+    const makeModel = searchParams.get('makeModel') || '';
+    const deviceType = searchParams.get('deviceType') || '';
+    const deviceVersion = searchParams.get('deviceVersion') || '';
+    const rooted = searchParams.get('rooted') || '';
   }, []);
 
   return (

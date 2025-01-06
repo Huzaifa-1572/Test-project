@@ -9,7 +9,7 @@ const ProgressBar = () => {
     // const CURRENT_SCREEN = useSelector((state) => state?.screenState);
     // const progress = getScreenProgress(CURRENT_SCREEN);
     return (
-        <Paper elevation={2} sx={{ maxWidth: '400px', width: '100%', borderRadius: '7px' }}>
+        <Paper elevation={0} sx={{ border: '1px solid #f4f4f4', maxWidth: '400px', width: '100%', borderRadius: '7px' }}>
             <Box sx={{
                 display: 'flex',
                 padding: '10px',

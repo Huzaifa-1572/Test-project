@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
 import { CgCloseO } from "react-icons/cg";
 import styles from './index.module.scss';
+import WARNING_UNDRAW from 'src/Assets/images/warning.svg'
 
 const ErrorModal = ({ errorCode, errorMessage, isError }) => {
   const dispatch = useDispatch()
@@ -34,12 +35,12 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
     >
       <div className={styles.mainContainer}>
         <div className={styles.dialogIconBox}>
-          <CgCloseO onClick={handleClose} className={styles.dialogIcon} />
+          <img src={WARNING_UNDRAW} alt='Warning' height={'100%'} width={'100%'} />
         </div>
         <div className={styles.dialogContentBox}>
-          <p className={styles.dialogTitle}>{errorCode || 'Ooops!'}</p>
+          <p className={styles.dialogTitle}>{errorCode || 'Error!'}</p>
           <p className={styles.dialogContent}>{errorMessage || 'Something Went Wrong!'}</p>
-          <Button className={styles.dialogButton} onClick={handleClose}>Try Again!</Button>
+          <Button className={styles.dialogButton} onClick={handleClose}>Close</Button>
         </div>
       </div>
     </Dialog >

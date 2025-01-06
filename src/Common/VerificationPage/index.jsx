@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,10 +8,10 @@ import { updateCurrentScreen } from 'src/Redux/Reducers/CurrentScreenState';
 import { updatePrevScreen } from 'src/Redux/Reducers/PrevScreenState';
 import { CUSTEMAIL_HANDLER, CUSTMOBILE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
-import styles from './index.module.scss';
 import CustomButton from '../CustomButton';
+import styles from './index.module.scss';
 
-function VerificationPage({ icon, title, content, goBackContent, setValue, getValues }) {
+function VerificationPage({ icon, title, content, description, goBackContent, setValue, getValues }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [otp, setOtp] = useState('');
@@ -87,7 +87,7 @@ function VerificationPage({ icon, title, content, goBackContent, setValue, getVa
     }
 
     return (
-        <Container maxWidth="lg" className={styles.paperContainer} sx={{ borderRadius: { xs: '20px', lg: '20px' } }} >
+        <Container maxWidth="lg" className={styles.paperContainer} sx={{ marginTop: { xs: 0, md: '-40px' }, borderRadius: { xs: '7px', sm: '20px' } }}>
             <div className={styles.iconStyle}>
                 <img src={icon} alt="mobileOtpLogo" />
             </div>
@@ -95,6 +95,25 @@ function VerificationPage({ icon, title, content, goBackContent, setValue, getVa
             <p className={styles.content}>
                 {content}
             </p>
+            <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Box sx={{ marginRight: '20px' }}>{description}</Box>
+                {
+                    goBackContent &&
+                    <Box className={styles.goBack}>
+                        <span onClick={handleGoBack}>{goBackContent}</span>
+                    </Box>
+                }
+            </Box>
+
+            <div className={styles.resendOTP} >
+                {resendOTP === 0 ? (
+                    <Button type='button' variant='outlined' size='small' className={styles.countdownStyle} onClick={handleResendClick}>
+                        Resend OTP
+                    </Button>
+                ) : (
+                    formatCountdownString()
+                )}
+            </div>
 
             <div className={styles.OptContainer}>
                 <OtpInput
@@ -113,24 +132,6 @@ function VerificationPage({ icon, title, content, goBackContent, setValue, getVa
                 <CustomButton label='Verify' />
             </Box>
 
-            <div>
-                <div className={styles.resendOTP} >
-                    {resendOTP === 0 ? (
-                        <button type='button' className={styles.countdownStyle} onClick={handleResendClick}>
-                            Resend OTP
-                        </button>
-                    ) : (
-                        formatCountdownString()
-                    )}
-                </div>
-            </div>
-
-            {
-                goBackContent &&
-                <Box className={styles.content} sx={{ marginTop: "12px" }}>
-                    <span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={handleGoBack}>{goBackContent}</span>
-                </Box>
-            }
         </Container >
     );
 }
