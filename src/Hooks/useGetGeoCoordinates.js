@@ -12,7 +12,6 @@ const useGetGeoCoordinates = ({ setValue, getValues }) => {
         KEY_LONGITUDE: position.coords.longitude,
         KEY_LATITUDE: position.coords.latitude,
       };
-      alert(JSON.stringify(coords))
       setValue("KEY_GEO_COORDINATES", coords);
       setLocationStatus("success"); // Location status successfully retrieved
     };
@@ -30,8 +29,6 @@ const useGetGeoCoordinates = ({ setValue, getValues }) => {
         })
       );
     };
-
-    alert(JSON.stringify(navigator.geolocation))
 
     if (navigator.geolocation) {
       console.log(navigator.geolocation);

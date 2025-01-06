@@ -2,12 +2,12 @@
   color: black;
   margin: 10px 0px;
   font-weight: 700;
-  font-size: clamp(26px, 5vw, 42px);
+  font-size: clamp(26px, 5vw, 38px);
   letter-spacing: 0.5px;
 }
 
 .content {
-  margin: 10px 0px;
+  margin: 25px 0px;
   font-weight: 500;
   font-size: clamp(15px, 4vw, 20px);
 }
@@ -26,7 +26,6 @@
   height: 50vh;
   width: 100%;
   animation: scaleInOut 3s infinite ease-in-out;
-  margin-top: -50px;
 }
 
 .iconBox {
@@ -35,6 +34,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 120px;
-  width: 120px;
+  height: 110px;
+  width: 110px;
 }

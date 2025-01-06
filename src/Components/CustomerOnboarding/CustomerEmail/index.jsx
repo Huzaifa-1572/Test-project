@@ -1,23 +1,21 @@
 import { Box } from "@mui/material";
-import React from "react";
+import EMAIL_ICON from "src/Assets/images/emailIcon.png";
+import CustomButton from "src/Common/CustomButton";
 import { TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
-import CustomButton from "src/Common/CustomButton";
-import { MdOutlineMail } from "react-icons/md";
+import EMAIL_UNDRAW from "src/Assets/images/emailUndraw.svg"
 
 
-const CustomerEmail = ({
-  control,
-  errors,
-}) => {
+const CustomerEmail = ({ control, errors }) => {
   return (
     <WizardLayout
-      Icon={MdOutlineMail}
+      Icon={EMAIL_ICON}
       title={"Email Verification"}
-      description={'Please enter Your email address.'}
+      description={'Kindly provide a valid email address to proceed further.'}
+      heroImage={EMAIL_UNDRAW}
     >
-      <Box sx={{ marginTop: "20px 0px" }}>
+      <Box>
         <TextInputField
           name={"customerEmail"}
           control={control}
@@ -26,14 +24,10 @@ const CustomerEmail = ({
           type="mail"
           maxLength={50}
         />
-        {errors?.customerEmail ? (
-          <ValidationError message={errors?.customerEmail?.message} />
-        ) : null}
+        {errors?.customerEmail ? (<ValidationError message={errors?.customerEmail?.message} />) : null}
       </Box>
 
-      <CustomButton
-        label={"Verify Email"}
-      />
+      <CustomButton label={"Verify Email"} />
     </WizardLayout>
   );
 };

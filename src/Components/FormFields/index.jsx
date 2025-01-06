@@ -65,7 +65,7 @@ export const TextInputField = ({
               sx: {
                 border: "1px solid silver",
                 borderRadius: "7px",
-                fontSize: "1.25rem",
+                fontSize: "1.1rem",
                 height: "70px",
                 backgroundColor: "white", // Make sure it's white
                 "&:hover": {
@@ -161,7 +161,7 @@ export const AlphaNumericInputField = ({
                 borderRadius: "3px",
                 maxWidth: "500px",
                 width: "100%",
-                fontSize: "1.25rem",
+                fontSize: "1.1rem",
                 lineHeight: "15px",
                 height: "70px",
               },
@@ -221,7 +221,7 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
           sx: {
             border: "1px solid silver",
             borderRadius: "7px",
-            fontSize: "1.25rem",
+            fontSize: "1.1rem",
             backgroundColor: "white", // Make sure it's white
             "&:hover": {
               backgroundColor: "white",
@@ -296,7 +296,7 @@ export const CustomInputField = ({
         sx: {
           border: "1px solid silver",
           borderRadius: "7px",
-          fontSize: "1.25rem",
+          fontSize: "1.1rem",
           height: "70px",
           backgroundColor: "white",
           "&:hover": {
@@ -443,7 +443,7 @@ export const NumberInputField = ({
                 borderRadius: "3px",
                 maxWidth: "500px",
                 width: "100%",
-                fontSize: "1.25rem",
+                fontSize: "1.1rem",
                 lineHeight: "15px",
                 height: "70px",
               },
@@ -492,7 +492,7 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                       style: {
                         border: "1px solid silver",
                         borderRadius: "7px",
-                        fontSize: "1.25rem",
+                        fontSize: "1.1rem",
                         height: "70px",
                         backgroundColor: disabled ? "#f0f0f0" : "white", // Conditional background color
                         cursor: disabled ? "not-allowed" : "text", // Show not-allowed cursor when disabled
@@ -515,14 +515,14 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                   borderRadius: "7px",
                   maxWidth: "500px",
                   width: "100%",
-                  fontSize: "1.25rem",
+                  fontSize: "1.1rem",
                   height: "70px",
                   "& .MuiIconButton-root": {
                     backgroundColor: disabled ? "#f0f0f0" : "white", // Icon button matches background
                     pointerEvents: disabled ? "none" : "auto", // Disable interactions on the icon button
                   },
                   "& .MuiInputLabel-root": {
-                    fontSize: "1.25rem",
+                    fontSize: "1.1rem",
                     color: disabled ? "#aaaaaa" : "#666666", // Label styling for disabled state
                   },
                   svg: { marginTop: "4px" },
@@ -599,7 +599,7 @@ export const SelectField = ({
             sx: {
               border: "1px solid silver", // Correctly apply the border here
               borderRadius: "7px",
-              fontSize: "1.25rem",
+              fontSize: "1.1rem",
               height: "70px",
               maxWidth: "500px",
               width: "100%",
@@ -681,12 +681,12 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
                   border: '1px solid silver',
                   maxWidth: '500px',
                   width: '100%',
-                  fontSize: '1.25rem',
+                  fontSize: '1.1rem',
                   height: '70px',
                   boxShadow: 'none',
                 },
                 '& .MuiInputLabel-root': {
-                  fontSize: '1.25rem',
+                  fontSize: '1.1rem',
                   color: '#666666',
                   marginTop: '10px',
                   fontFamily: `'Roboto', 'Arial', sans-serif`,
@@ -953,7 +953,7 @@ export const CurrencyInputField = ({
           borderRadius: "3px",
           maxWidth: "500px",
           width: "100%",
-          fontSize: "1.25rem",
+          fontSize: "1.1rem",
           lineHeight: "15px",
           height: "70px",
         },

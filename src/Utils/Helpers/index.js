@@ -21,6 +21,7 @@ export function maskEmail(email = "") {
   return maskedUsername + "@" + domain;
 }
 
+
 export const maskNumber = (mobileNum) => {
   let number = mobileNum.replace(/-/g, "");
   if (mobileNum.startsWith("92")) {
@@ -55,7 +56,7 @@ export function retrieveDate(date) {
   return dayjs(date).format("YYYY-MM-DD")
 }
 
-export function getCurrentDate(){
+export function getCurrentDate() {
   return dayjs().format("YYYY-MM-DD HH:mm:ss.SSS");
 }
 
@@ -207,10 +208,10 @@ export const generateFieldValue = (field) => {
   else if (field["kuid"] === "KEY_PLACE_OF_BIRTH" || field["kuid"] === "KEY_CITY_CODE") {
     return getCity(field?.value)
   }
-  else if (field["kuid"] === "KEY_CNIC_LIFETIME"){
+  else if (field["kuid"] === "KEY_CNIC_LIFETIME") {
     return field?.value === 'true' ? 'Yes' : 'No'
-  } else if (field["kuid"] === "KEY_MOBILE_OPERATOR"){
-    return OPERATOR_MAP[field?.value] || field?.value 
+  } else if (field["kuid"] === "KEY_MOBILE_OPERATOR") {
+    return OPERATOR_MAP[field?.value] || field?.value
   }
   else {
     return field?.value || 'N/A'

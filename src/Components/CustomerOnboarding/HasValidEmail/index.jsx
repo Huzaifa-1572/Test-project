@@ -1,10 +1,9 @@
 import { Grid } from '@mui/material';
-import React from 'react'
+import { IoMdCheckmark, IoMdClose } from "react-icons/io";
+import EMAIL_ICON from 'src/Assets/images/emailIcon.png';
+import HAS_VALID_EMAIL_UNDRAW from 'src/Assets/images/validEmailUndraw.svg';
 import CustomButton from 'src/Common/CustomButton';
-import WizardLayout from 'src/Layout/WizardLayout'
-import { MdCreditCard } from "react-icons/md";
-
-
+import WizardLayout from 'src/Layout/WizardLayout';
 
 const HasValidEmail = ({ setValue }) => {
 
@@ -18,16 +17,17 @@ const HasValidEmail = ({ setValue }) => {
 
     return (
         <WizardLayout
-            Icon={MdCreditCard}
-            title={"Email Validation Check"}
-            description={"Confirm if you have a valid email by selecting 'Yes' or 'No' below."}
+            Icon={EMAIL_ICON}
+            title={"Do You Have a Valid Email Address?"}
+            description={"Please ensure that the email address you provide is valid and active."}
+            heroImage={HAS_VALID_EMAIL_UNDRAW}
         >
             <Grid container sx={{ gap: "24px" }}>
                 <Grid item xs={12} md={6} lg={4}>
-                    <CustomButton label="YES" onClick={handleYes} />
+                    <CustomButton label="YES" onClick={handleYes} Icon={<IoMdCheckmark />} />
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
-                    <CustomButton label="NO" onClick={handleNo} />
+                    <CustomButton label="NO" onClick={handleNo} Icon={<IoMdClose />} />
                 </Grid>
             </Grid>
         </WizardLayout>

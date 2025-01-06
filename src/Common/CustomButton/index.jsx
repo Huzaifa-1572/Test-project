@@ -3,7 +3,7 @@ import { Box, Button } from "@mui/material";
 import styles from "./index.module.scss";
 import { IoMdArrowRoundForward } from "react-icons/io";
 
-const CustomButton = ({ label, disabled, onClick, type = "submit" }) => {
+const CustomButton = ({ label, disabled, onClick, Icon, type = "submit" }) => {
   return (
     <Box className={styles.buttonContainer}>
       <Button
@@ -12,9 +12,8 @@ const CustomButton = ({ label, disabled, onClick, type = "submit" }) => {
         className={styles.button}
         disabled={disabled}
         onClick={onClick}
-
       >
-        {label} <IoMdArrowRoundForward />
+        {label} {Icon || <IoMdArrowRoundForward />}
       </Button>
     </Box>
   );

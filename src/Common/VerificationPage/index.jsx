@@ -87,7 +87,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     }
 
     return (
-        <Container maxWidth="lg" className={styles.paperContainer} sx={{ marginTop: { xs: 0, md: '-40px' }, borderRadius: { xs: '7px', sm: '20px' } }}>
+        <Container maxWidth="lg" className={styles.paperContainer} sx={{ borderRadius: { xs: '7px', sm: '20px' } }}>
             <div className={styles.iconStyle}>
                 <img src={icon} alt="mobileOtpLogo" />
             </div>
@@ -95,11 +95,11 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
             <p className={styles.content}>
                 {content}
             </p>
-            <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 <Box sx={{ marginRight: '20px' }}>{description}</Box>
                 {
                     goBackContent &&
-                    <Box className={styles.goBack}>
+                    <Box className={styles.goBack} sx={{ margin: { xs: '12px 0px', sm: 0 } }}>
                         <span onClick={handleGoBack}>{goBackContent}</span>
                     </Box>
                 }
@@ -128,7 +128,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                 />
             </div>
 
-            <Box>
+            <Box sx={{ width: '40%' }}>
                 <CustomButton label='Verify' />
             </Box>
 
