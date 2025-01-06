@@ -293,7 +293,12 @@ export const COFormSubmission = {
       data,
     });
   },
-
+  scr_customerCnicResume: ({ CURRENT_SCREEN, data }) => {
+    return AUTHENTICATION_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
   scr_customerMobile: ({ CURRENT_SCREEN, data }) => {
     return CUSTMOBILE_HANDLER({
       CURRENT_SCREEN,

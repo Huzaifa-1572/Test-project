@@ -14,9 +14,15 @@ const DeviceLocation = ({
   setValue,
 }) => {
   const dispatch = useDispatch()
-  const locationStatus = useGetGeoCoordinates({ setValue, getValues });
+  const { locationStatus, fetchLocation } = useGetGeoCoordinates({ setValue, getValues });
 
   const handleProceed = () => {
+    const LOCATION = getValues("KEY_GEO_COORDINATES");
+    if (!LOCATION) {
+      fetchLocation();
+      return;
+    }
+
     const NEXT_SCREEN = "scr_customerCnic";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
 

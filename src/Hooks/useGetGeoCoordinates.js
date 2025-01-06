@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 
@@ -6,7 +6,7 @@ const useGetGeoCoordinates = ({ setValue, getValues }) => {
   const dispatch = useDispatch();
   const [locationStatus, setLocationStatus] = useState("loading"); // 'loading', 'success', 'error'
 
-  useEffect(() => {
+  const fetchLocation = useCallback(() => {
     const successCallback = (position) => {
       const coords = {
         KEY_LONGITUDE: position.coords.longitude,
@@ -40,14 +40,18 @@ const useGetGeoCoordinates = ({ setValue, getValues }) => {
         showErrorModal({
           errorCode: "Geolocation Error",
           errorMessage:
-            "Failed to retrieve location. Please enable location access in browser settings.",
+            "Failed to retrieve location. Please enable location access.",
           isError: true,
         })
       );
     }
   }, [dispatch, setValue]);
 
-  return locationStatus; // Return loading, success, or error status
+  useEffect(() => {
+    fetchLocation();
+  }, []);
+
+  return { locationStatus, fetchLocation };
 };
 
 export default useGetGeoCoordinates;
