@@ -6,7 +6,7 @@ import ProgressBar from "src/Common/ProgressBar";
 import Header from "src/Layout/Header";
 import styles from "./index.module.scss";
 
-const SCREENS = ['scr_customerCnic', 'scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_livePhotoCapture', 'scr_applicationComplete'];
+const SCREENS = ['scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_livePhotoCapture', 'scr_applicationComplete'];
 
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
   const [isLoading, setIsLoading] = useState(false);

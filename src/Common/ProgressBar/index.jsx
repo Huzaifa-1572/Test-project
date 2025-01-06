@@ -1,13 +1,12 @@
 import { Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CircularProgressBar } from 'src/Common/ProgressBar/CircularProgressBar';
-// import { getScreenProgress } from 'src/Utils/CommonFunctions/helper';
-
+import { getScreenProgress } from 'src/Utils/Helpers';
 
 const ProgressBar = () => {
-    // const CURRENT_SCREEN = useSelector((state) => state?.screenState);
-    // const progress = getScreenProgress(CURRENT_SCREEN);
+    const CURRENT_SCREEN = useSelector((state) => state?.currentScreenState);
+    const progress = getScreenProgress(CURRENT_SCREEN);
     return (
         <Paper elevation={2} sx={{ maxWidth: '400px', width: '100%', borderRadius: '7px' }}>
             <Box sx={{
@@ -16,7 +15,7 @@ const ProgressBar = () => {
                 borderRadius: '8px',
                 gap: '16px'
             }}>
-                <CircularProgressBar value={34} />
+                <CircularProgressBar value={progress} />
                 <Box>
                     <Box sx={{ color: '#e8927c', fontFamily: 'poppins-Medium' }}>Application In Progress.</Box>
                     <Box sx={{ fontFamily: 'poppins-Medium', fontSize: 'clamp(8px,2.8vw,12px)' }} >

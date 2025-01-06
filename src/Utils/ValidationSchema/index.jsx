@@ -2,9 +2,6 @@ import * as yup from "yup";
 import dayjs from "dayjs";
 import { retrieveMobileNumber } from "src/Utils/Helpers";
 
-const currentDate = new Date();
-const minDate = new Date(1900, 0, 1);
-
 // FOR DATE OF BIRTH
 const minAge = (age) => {
   return dayjs().subtract(age, 'year').toDate();
