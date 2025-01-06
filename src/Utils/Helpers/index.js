@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
 import dayjs from "dayjs";
 import { OPERATOR_MAP } from "../Constants";
+import { showScreen } from "src/Pages/CustomerOnboarding";
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -179,6 +180,18 @@ export const getReviewApplicationData = () => {
     SECTIONS: sections || [],
   };
 };
+
+// Function to track progress
+export const getScreenProgress = (CURRENT_SCREEN) => {
+  const screenKeys = Object.keys(showScreen) || [];
+  const currentIndex = screenKeys.indexOf(CURRENT_SCREEN);
+  if (currentIndex === -1) {
+    return 0;
+  }
+  const progress = ((currentIndex + 1) / screenKeys.length) * 100;
+  return Math.round(progress);
+};
+
 
 // FOR REVIEW PAGE
 export const generateFieldValue = (field) => {

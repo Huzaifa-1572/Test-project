@@ -30,6 +30,7 @@ const LandingPage = () => {
   };
 
   const handleResumeApplication = () => {
+    localStorage.setItem("isResume", true);
     const NEXT_SCREEN = "scr_deviceLocation";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
     navigate("/customer-onboarding");

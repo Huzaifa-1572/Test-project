@@ -1,7 +1,5 @@
 import { Box, Button } from "@mui/material";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import styles from "./index.module.scss";
 import Webcam from "react-webcam";
 // import CameraSvg from "src/Assets/svgs/camera.svg";
@@ -9,7 +7,7 @@ import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
 import CustomButton from "src/Common/CustomButton";
 import WizardLayout from "src/Layout/WizardLayout";
 import { TbCameraPlus } from "react-icons/tb";
-
+import ValidationError from "src/Components/ValidationError";
 
 const LivePhotoCapture = ({
   errors,
@@ -94,8 +92,8 @@ const LivePhotoCapture = ({
               />
             )}
 
-            {!!errors?.LivePhoto?.message && !livePhoto ? (
-              <ValidationError message={errors?.LivePhoto?.message} />
+            {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
+              <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
             ) : null}
           </>
         )}

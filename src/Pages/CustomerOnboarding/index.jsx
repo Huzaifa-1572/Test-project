@@ -22,8 +22,9 @@ const ReviewApplication = lazy(() => import("src/Components/CustomerOnboarding/R
 const TermAndCondition = lazy(() => import("src/Components/CustomerOnboarding/TermAndCondition"));
 const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding/ApplicationComplete"));
 
-const showScreen = {
+export const showScreen = {
   // CUSTOMER ONBOARDING SCREENS
+  scr_deviceLocation: <DeviceLocation />,
   scr_customerCnic: <CustomerCnic />,
   scr_customerMobile: <CustomerMobile />,
   scr_mobileVerification: <MobileVerification />,
@@ -31,7 +32,6 @@ const showScreen = {
   scr_customerEmail: <CustomerEmail />,
   scr_emailVerification: <EmailVerification />,
   scr_additionalInformation: <AdditionalInformation />,
-  scr_deviceLocation: <DeviceLocation />,
   scr_addressDetail: <AddressDetail />,
   scr_livePhotoCapture: <LivePhotoCapture />,
   scr_uploadCnicFront: <CnicFront />,

@@ -11,7 +11,7 @@ import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
 import { TbLockExclamation } from 'react-icons/tb'
-// import discrepantImage from "src/Assets/svgs/discrepancy-found-icon.svg";
+import discrepantImage from "src/Assets/images/discrepancy-found-icon.svg";
 
 const ReviewApplication = ({ setValue, getValues }) => {
     const dispatch = useDispatch()

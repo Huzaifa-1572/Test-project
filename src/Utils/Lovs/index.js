@@ -3,7 +3,7 @@ export const OPERATOR_OPTION = [
   { value: "41006", label: "Telenor" },
   { value: "41004", label: "Zong" },
   { value: "41007", label: "Warid" },
-  { value: "41003", label: "Ufhone" },
+  { value: "41003", label: "Ufone" },
   { value: "41001", label: "Mobilink" },
   { value: "41009", label: "SCOM" },
 ];
