@@ -1,25 +1,21 @@
 import { Box } from "@mui/material";
-import React from "react";
+import CARD_ICON from 'src/Assets/images/cardIcon.png';
+import CARD_UNDRAW from 'src/Assets/images/cardUndraw.svg';
 import CustomButton from "src/Common/CustomButton";
+import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
-import { FormBuilder } from "src/Components/FormBuilder";
-import { BiBuildingHouse } from "react-icons/bi";
 
 
-const CnicBack = ({
-  control,
-  getValues,
-  errors,
-  setValue,
-}) => {
+const CnicBack = ({ control, getValues, errors, setValue }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
 
   return (
     <WizardLayout
-      Icon={BiBuildingHouse}
+      Icon={CARD_ICON}
       title={TITLE}
       description={DESCRIPTION}
+      heroImage={CARD_UNDRAW}
     >
       {
         FIELDS?.map(field => (

@@ -1,25 +1,21 @@
 import { Box } from "@mui/material";
-import React from "react";
+import CARD_ICON from 'src/Assets/images/cardIcon.png';
+import CARD_UNDRAW from 'src/Assets/images/cardUndraw.svg';
 import CustomButton from "src/Common/CustomButton";
+import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
-import { FormBuilder } from "src/Components/FormBuilder";
-import { BiBuildingHouse } from "react-icons/bi";
 
 
-const CnicFront = ({
-  control,
-  getValues,
-  errors,
-  setValue,
-}) => {
+const CnicFront = ({ control, getValues, errors, setValue }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
 
   return (
     <WizardLayout
-      Icon={BiBuildingHouse}
-      title={TITLE}
-      description={DESCRIPTION}
+      Icon={CARD_ICON}
+      title={"Upload CNIC Front Image" || TITLE}
+      description={"Kindly upload a clear image of the front side of your CNIC to proceed." || DESCRIPTION}
+      heroImage={CARD_UNDRAW}
     >
       {
         FIELDS?.map(field => (

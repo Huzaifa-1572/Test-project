@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import DEVICE_ICON from "src/Assets/images/locationIcon.png";
-import LOCATION_UNDRAW from "src/Assets/images/abc.svg";
+import LOCATION_UNDRAW from "src/Assets/images/deviceLocationundraw.svg";
 import CustomButton from "src/Common/CustomButton";
 import Loader from "src/Common/Loader";
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";

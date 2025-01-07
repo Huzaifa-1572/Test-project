@@ -1,19 +1,15 @@
-import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
+import dayjs from "dayjs";
+import { useEffect } from "react";
+import CARD_ICON from 'src/Assets/images/cardIcon.png';
+import CNIC_DETAIL_UNDRAW from 'src/Assets/images/cnicDetailUndraw.svg';
 import CustomButton from "src/Common/CustomButton";
 import { FormBuilder } from "src/Components/FormBuilder";
-import { getScreenData } from "src/Utils/Helpers";
 import WizardLayout from "src/Layout/WizardLayout";
-import { BiSolidUserDetail } from "react-icons/bi";
-import dayjs from "dayjs";
+import { getScreenData } from "src/Utils/Helpers";
 
 
-const CnicDetail = ({
-  control,
-  setValue,
-  errors,
-  watch,
-}) => {
+const CnicDetail = ({ control, setValue, errors, watch }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
   const CNIC_LIFE_TIME = watch("KEY_CNIC_LIFETIME");
 
@@ -32,14 +28,15 @@ const CnicDetail = ({
 
   return (
     <WizardLayout
-      Icon={BiSolidUserDetail}
+      Icon={CARD_ICON}
       title={TITLE}
-      description={DESCRIPTION}
+      description={'Kindly review and confirm the details of your CNIC to proceed with the process.' || DESCRIPTION}
+      heroImage={CNIC_DETAIL_UNDRAW}
     >
       <Grid container sx={{ gap: "24px" }}>
         {
           FIELDS?.map(field => (
-            <Grid key={field?.kuid} item xs={12} md={6} lg={4}>
+            <Grid key={field?.kuid} item xs={12} lg={5}>
               <FormBuilder field={field} control={control} errors={errors} watch={watch} disabled={getFieldDisabled(field?.kuid)} />
             </Grid>
           ))

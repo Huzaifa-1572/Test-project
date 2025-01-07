@@ -1,19 +1,17 @@
 import { Box, Button } from "@mui/material";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import styles from "./index.module.scss";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
-// import CameraSvg from "src/Assets/svgs/camera.svg";
-import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
+import styles from "./index.module.scss";
+import LIVE_IMAGE_ICON from 'src/Assets/images/liveImageIcon.png';
+import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
+import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
 import CustomButton from "src/Common/CustomButton";
-import WizardLayout from "src/Layout/WizardLayout";
-import { TbCameraPlus } from "react-icons/tb";
 import ValidationError from "src/Components/ValidationError";
+import WizardLayout from "src/Layout/WizardLayout";
+import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
 
-const LivePhotoCapture = ({
-  errors,
-  setValue,
-  watch,
-}) => {
+
+const LivePhotoCapture = ({ errors, setValue, watch }) => {
   const webcamRef = useRef(null);
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const { TITLE, DESCRIPTION } = getScreenData()
@@ -50,26 +48,27 @@ const LivePhotoCapture = ({
 
   return (
     <WizardLayout
-      Icon={TbCameraPlus}
+      Icon={LIVE_IMAGE_ICON}
       title={TITLE}
-      description={DESCRIPTION}
+      description={'Please capture your live photo now to proceed with the verification process. Ensure that your face is clearly visible and the lighting is adequate for the best results.'}
+      heroImage={LIVE_IMAGE_UNDRAW}
     >
 
-      <Box className={styles.wrapperContainer}>
+      <Box>
         {!isCameraAccessAllowed && (
           <>
             <Box className={styles.cameraWrapper}>
-              {/* <img
+              <img
                 className={styles.camIconStyle}
-                src={CameraSvg}
-                alt="Uploaded Selfie"
-              /> */}
-              CAMERA AYEGA YAHAN
+                src={SELFIE_UNDRAW}
+                alt="Upload Selfie"
+              />
+              <Box className={styles.permissionText}>
+                Allow camera permission to capture live photo
+              </Box>
             </Box>
 
-            <Box className={styles.permissionText}>
-              Allow camera permission to capture live photo
-            </Box>
+
           </>
         )}
 
@@ -77,7 +76,7 @@ const LivePhotoCapture = ({
           <>
             {!!livePhoto ? (
               <img
-                className={styles.uploadedSelfie}
+                className={styles.webcamStyles}
                 src={livePhoto}
                 alt="Uploaded Selfie"
               />
@@ -91,15 +90,16 @@ const LivePhotoCapture = ({
                 mirrored={true}
               />
             )}
-
-            {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
-              <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
-            ) : null}
+            <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+              {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
+                <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
+              ) : null}
+            </Box>
           </>
         )}
 
         {/* BUTTONS CONTAINER */}
-        <Box sx={{ marginTop: "50px" }}>
+        <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, marginTop: "20px" }}>
           {!!livePhoto ? (
             <Button
               className={styles.captureButton}
@@ -114,12 +114,11 @@ const LivePhotoCapture = ({
               onClick={capturePhoto}
               type="button"
             >
-              Capture
+              Capture Selfie
             </Button>
           )}
         </Box>
       </Box>
-
       <CustomButton label={"Proceed"} />
     </WizardLayout>
   );

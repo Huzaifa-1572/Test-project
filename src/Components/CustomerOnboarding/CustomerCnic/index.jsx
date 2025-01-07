@@ -4,7 +4,7 @@ import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField, TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
-import CNIC_UNDRAW from "src/Assets/images/abcd.svg"
+import CNIC_UNDRAW from "src/Assets/images/customerCnicUndraw.svg"
 
 const CustomerCnic = ({ control, errors }) => {
   return (

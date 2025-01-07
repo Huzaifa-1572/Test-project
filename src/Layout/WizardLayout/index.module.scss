@@ -2,14 +2,15 @@
   color: black;
   margin: 10px 0px;
   font-weight: 700;
-  font-size: clamp(26px, 5vw, 38px);
+  font-size: clamp(22px, 4vw, 38px);
   letter-spacing: 0.5px;
 }
 
 .content {
   margin: 25px 0px;
   font-weight: 500;
-  font-size: clamp(15px, 4vw, 20px);
+  font-size: clamp(12px, 3vw, 20px);
+  color: #3b3b3b;
 }
 
 @keyframes scaleInOut {
@@ -34,6 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 110px;
-  width: 110px;
+  height: clamp(85px, 10vh, 110px);
+  width: clamp(85px, 10vh, 110px);
+  padding: 25px;
 }

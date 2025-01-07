@@ -15,7 +15,7 @@ import { NumericFormat, PatternFormat } from "react-number-format";
 import { useDispatch } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { validateFileSize } from "src/Utils/Helpers";
-// import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { LuCheckCheck } from "react-icons/lu";
 
 const PatternFormatRef = React.forwardRef((props, ref) => (
   <PatternFormat {...props} getInputRef={ref} />
@@ -714,13 +714,18 @@ export const UploadImage = ({
   const dispatch = useDispatch();
 
   const mainContainer = {
-    borderRadius: "10px",
-    backgroundColor: "#ffffff",
-    minHeight: "212px",
+    borderRadius: "15px",
+    backgroundColor: "#EEF6FF",
+    minHeight: "250px",
     height: "auto",
     maxWidth: "500px",
     padding: "20px",
     cursor: "pointer",
+    border: '2px solid #2C74BB',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
   };
   const previewImgStyle = {
     padding: "10px",
@@ -736,7 +741,7 @@ export const UploadImage = ({
   };
   const imgStyle = {
     color: "white",
-    fontSize: "24px",
+    fontSize: "26px",
   };
   const handleFileChange = (e, name) => {
     const file = e.target.files[0];
@@ -762,24 +767,25 @@ export const UploadImage = ({
   const handleInputChange = (e, name) => {
     handleFileChange(e, name);
   };
+
   const mainContainerUPLOADED = {
     maxWidth: "500px",
-    minHeight: "312px",
-    height: "auto",
-    backgroundColor: "#619de3",
+    height: "312px",
+    backgroundColor: "#f4f4f4",
     padding: "0 0 14px 0",
     borderRadius: "8px",
     boxShadow: "none",
     position: "relative",
+    border: '2px solid #407ec9'
   };
   const imageContainer = {
     width: "100%",
-    height: "180px",
+    height: "220px",
     overflow: "hidden",
+    objectFit: 'cover',
     borderTopLeftRadius: "0.4rem",
     borderTopRightRadius: "0.4rem",
     background: "#619de3",
-    marginBottom: "10px",
   };
   const changeButtonStyles = {
     position: "absolute",
@@ -787,7 +793,7 @@ export const UploadImage = ({
     top: "20px",
     right: "20px",
     backgroundColor: "white",
-    color: "black",
+    color: "#3B3B3B",
     fontSize: "16px",
     padding: "12px 24px",
     border: "none",
@@ -802,24 +808,22 @@ export const UploadImage = ({
     margin: "10px 10px 10px 26px",
     width: "60px",
     height: "60px",
-    display: "inline-block",
-    verticalAlign: "middle",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+
   };
   const tickStyles = {
-    paddingTop: "19px",
-    display: "block",
-    margin: "auto",
+    fontSize: '40px',
+    color: '#3B3B3B',
   };
 
   const labelStyles = {
-    fontFamily: "ArticulatCF-Bold",
     fontSize: "20px",
-    margin: "0 0 0 26px",
-    color: "white",
+    color: '#3B3B3B'
   };
   const subLabelStyles = {
-    fontFamily: "ArticulatCF-Regular",
-    fontSize: "16px",
+    fontSize: "76px",
     margin: "0 0 0 26px",
     marginTop: "16px",
     marginRight: "25px",
@@ -832,7 +836,7 @@ export const UploadImage = ({
       control={control}
       defaultValue=""
       render={({ field }) => (
-        <Box sx={{ border: "1px solid silver", borderRadius: "8px" }}>
+        <Box sx={{ borderRadius: "8px" }}>
           {field.value ? (
             <Box sx={mainContainerUPLOADED}>
               <Box sx={imageContainer}>
@@ -854,12 +858,13 @@ export const UploadImage = ({
                   onChange={(e) => handleInputChange(e, name)}
                 />
               </label>
-              <Box sx={tickContainer}>
-                {/* <DoneAllIcon style={tickStyles} /> */}
-                ICON WILL COME
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={tickContainer}>
+                  <LuCheckCheck style={tickStyles} />
+                </Box>
+                <Box sx={labelStyles}>{label}</Box>
+                {!!subLabel && <Box sx={subLabelStyles}>{subLabel}</Box>}
               </Box>
-              <Box sx={labelStyles}>{label}</Box>
-              {!!subLabel && <Box sx={subLabelStyles}>{subLabel}</Box>}
             </Box>
           ) : (
             <label htmlFor="file-input">
@@ -874,13 +879,12 @@ export const UploadImage = ({
                   accept={accept}
                   onChange={(e) => handleFileChange(e, name)}
                 />
-                <Box sx={{ fontFamily: "ArticulatCF-Bold", fontSize: "20px" }}>
+                <Box sx={{ fontSize: "20px", color: '#407ec9' }}>
                   {label}
                 </Box>
                 {!!subLabel && (
                   <Box
                     sx={{
-                      fontFamily: "ArticulatCF-Regular",
                       fontSize: "18px",
                       marginTop: "16px",
                       marginRight: "15px",
