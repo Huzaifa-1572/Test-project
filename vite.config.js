@@ -13,6 +13,7 @@ export default defineConfig({
     assetsInlineLimit: 0
   },
   optimizeDeps: {
+    include: ['@mui/material', '@emotion/react', '@emotion/styled'],
     force: true,
   },
   server: {
