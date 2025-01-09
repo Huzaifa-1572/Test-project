@@ -12,6 +12,13 @@ import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
 import { TbLockExclamation } from 'react-icons/tb'
 import discrepantImage from "src/Assets/images/discrepancy-found-icon.svg";
+import REVIEW_UNDRAW from 'src/Assets/images/reviewUndraw.svg'
+import { IoMdWarning } from "react-icons/io";
+import { FaLock } from "react-icons/fa";
+import { HiViewfinderCircle } from "react-icons/hi2";
+
+
+
 
 const ReviewApplication = ({ setValue, getValues }) => {
     const dispatch = useDispatch()
@@ -58,9 +65,12 @@ const ReviewApplication = ({ setValue, getValues }) => {
         <div className={styles.topWrapper}>
             <div className={styles.reviewContentWrapper}>
                 {/* TITLE */}
-                <div>
-                    <h1 className={styles.topHeading}>{TITLE || "Review Application"}</h1>
-                </div>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <h1 className={styles.topHeading}>
+                        {TITLE || "Review Application"}
+                    </h1>
+                    <img src={REVIEW_UNDRAW} alt='review-application' height='80px' width='100' />
+                </Box>
                 {/* DESCRIPTION */}
                 {
                     DESCRIPTION &&
@@ -72,13 +82,13 @@ const ReviewApplication = ({ setValue, getValues }) => {
                 {
                     DISCREPANT_MESSAGE &&
                     <div className={styles.discrepancy}>
-                        <div className={styles.discrepancyIcon}>
-                            <img src={discrepantImage} alt="" />
-                        </div>
-                        <div className={styles.disContents}>
-                            <div className={`${styles.desHeading} ${styles.topHeading}`}>{"Discrepant Customer" || 'N/A'}</div>
+                        <Box className={styles.discrepancyIcon}>
+                            <IoMdWarning size={24} color='red' />
+                        </Box>
+                        <Box className={styles.disContents}>
+                            <div className={`${styles.desHeading} ${styles.topHeading}`}>{"Discrepant Customer!" || 'N/A'}</div>
                             <div className={`${styles.desText} ${styles.descriptionPara}`}>{DISCREPANT_MESSAGE || 'N/A'}</div>
-                        </div>
+                        </Box>
                     </div>
                 }
 
@@ -91,7 +101,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                     <div className={styles.infoText}>
                                         <span className={styles.stepTitle}>{section['summary-table-meta']['title2']}</span>
                                     </div>
-                                    {section['summary-table-meta'].editable ? <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>Edit</div> : <div className={styles.editBtn}><TbLockExclamation size={20} /></div>}
+                                    {section['summary-table-meta'].editable ? <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>Edit</div> : <div className={styles.editBtn}><FaLock size={20} /></div>}
                                 </div>
 
                                 {/*TABLE BODY*/}
@@ -100,7 +110,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                         field.value && (
                                             <div className={`${styles.contentRow} ${field.hasDiscrepancy ? styles.lightRedBg : ''}`} key={getUUID()}>
                                                 <Grid container>
-                                                    <Grid item sm={6} xs={6} lg={6} className={styles.label}>{field.label}</Grid>
+                                                    <Grid item xs={6} className={styles.label}>{field.label}</Grid>
                                                     {
                                                         field['value-type'] !== 'image' && (
                                                             <Grid item sm={6} xs={6} lg={6} className={`${field['value-type'] !== 'image' ? '' : styles.clickable} ${!!field.locked ? styles.locked : ''}`}>
@@ -118,8 +128,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                                                 {
                                                                     field.value === 'Y' && (
                                                                         <span className={styles.previewButton} onClick={(e) => handleDailogOpen(e, field)}>
-                                                                            {/* <img src={AttachmentIcon} alt="Preview Icon" /> */}
-                                                                            ICON AYEGA YAHAN
+                                                                            <HiViewfinderCircle size={20} />
                                                                             Preview
                                                                         </span>
                                                                     )
