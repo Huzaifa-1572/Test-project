@@ -17,7 +17,7 @@ const GoBack = ({ setValue, getValues }) => {
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullSubmission, dispatch });
 
     const handleBack = () => {
-        if (CURRENT_SCREEN === 'scr_deviceLocation') {
+        if (CURRENT_SCREEN === 'scr_deviceLocation' || CURRENT_SCREEN === 'scr_customerCnicResume') {
             navigate('/')
             return
         }

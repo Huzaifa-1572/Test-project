@@ -39,6 +39,24 @@ export const shape = {
     googleCaptcha: yup.string().required("Please complete the CAPTCHA to proceed."),
   },
 
+  "scr_customerCnicResume": {
+    KEY_GEO_COORDINATES: yup
+      .object({
+        KEY_LATITUDE: yup
+          .number()
+          .required("Failed to retrieve location. Please enable location access."),
+        KEY_LONGITUDE: yup
+          .number()
+          .required("Failed to retrieve location. Please enable location access."),
+      })
+      .required("Failed to retrieve location. Please enable location access."),
+    customerCnic: yup
+      .string()
+      .required("CNIC is required.")
+      .matches(/^\d{5}-\d{7}-\d{1}$/, "Please enter a valid CNIC in the format XXXXX-XXXXXXX-X."),
+    googleCaptcha: yup.string().required("Please complete the CAPTCHA to proceed."),
+  },
+
   "scr_customerMobile": {
     customerMobile: yup.string().test('e__NokMobile', 'Please enter a valid mobile number starting with 03xxx-xxxxxxx.', function (value) {
       if (value.length === 11) {
