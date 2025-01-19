@@ -21,7 +21,7 @@ const AddressDetail = ({ control, errors, watch }) => {
         {
           FIELDS?.map(field => {
             return (
-              <Grid key={field?.kuid} item xs={12} lg={field?.kuid === 'KEY_ADDRESS_LINE_1' ? 12 : 4}>
+              <Grid key={field?.kuid} item xs={12} lg={field?.kuid === 'KEY_ADDRESS_LINE_1' ? 10 : 5}>
                 <FormBuilder field={field} control={control} errors={errors} watch={watch} />
               </Grid>
             )

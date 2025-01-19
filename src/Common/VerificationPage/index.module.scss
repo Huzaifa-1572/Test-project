@@ -7,8 +7,7 @@
   text-align: center;
   @include HorizontalAndVerticalCenter;
   flex-direction: column;
-  border: 1px solid #e0e0e0;
-  background: #ededed;
+  background: #f6f6f6;
   .OptContainer {
     @include HorizontalAndVerticalCenter;
     flex-direction: column;

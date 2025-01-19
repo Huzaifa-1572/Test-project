@@ -31,9 +31,9 @@ export const OPERATOR_MAP = {
   41006: "Telenor",
   41004: "Zong",
   41007: "Warid",
-  41003: "Ufhone",
+  41003: "Ufone",
   41001: "Mobilink",
-  41009: "SCOM",
+  41009: "Scom",
 };
 
 export const PAYLOAD_KEYS = {

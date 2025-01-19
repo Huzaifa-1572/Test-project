@@ -30,7 +30,7 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
   }, []);
 
   const capturePhoto = useCallback(async () => {
-    const imageSrc = webcamRef.current.getScreenshot();
+    const imageSrc = webcamRef?.current?.getScreenshot();
     if (imageSrc) {
       setValue("KEY_LIVE_PHOTO", imageSrc);
     }

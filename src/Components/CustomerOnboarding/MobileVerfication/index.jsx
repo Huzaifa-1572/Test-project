@@ -1,6 +1,5 @@
-import React from 'react'
+import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobileVerificationIcon.png';
 import VerificationPage from 'src/Common/VerificationPage';
-import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobileVerificationIcon.png'
 
 const MobileVerification = ({ setValue, getValues }) => {
     const CUSTOMER_MOBILE_NUMBER = getValues('customerMobile')

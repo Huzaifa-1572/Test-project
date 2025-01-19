@@ -6,11 +6,12 @@ import ProgressBar from "src/Common/ProgressBar";
 import Header from "src/Layout/Header";
 import styles from "./index.module.scss";
 
-const SCREENS = ['scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_livePhotoCapture', 'scr_applicationComplete'];
+const DONT_SHOW_BACK_BUTTON_ON_SCREENS = ['scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_livePhotoCapture', 'scr_applicationComplete'];
 
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
   const [isLoading, setIsLoading] = useState(false);
   const isEdit = localStorage.getItem("isEdit");
+  const isResume = localStorage.getItem("isResume")
   const CURRENT_SCREEN = useSelector(state => state.currentScreenState);
 
   // Ensuring the component has loaded before rendering - for GoBack Button
@@ -20,7 +21,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
     }
   }, [CURRENT_SCREEN]);
 
-  const SHOW_BACK_BUTTON = isLoading && !(isEdit || SCREENS.includes(CURRENT_SCREEN))
+  const SHOW_BACK_BUTTON = isLoading && !(isEdit || DONT_SHOW_BACK_BUTTON_ON_SCREENS?.includes(CURRENT_SCREEN))
 
   return (
     <>
@@ -39,7 +40,10 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
             </Grid>
 
             <Grid item xs={12} sm={8} sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', sm: 'flex-end' } }}>
-              <ProgressBar />
+              {/* DONT SHOW PROGRESS BAR ON RESUME SCREENS */}
+              {
+                (CURRENT_SCREEN === 'scr_customerCnicResume') || (CURRENT_SCREEN === 'scr_mobileVerification' && isResume)
+                  ? null : <ProgressBar />}
             </Grid>
           </Grid>
         </Container>

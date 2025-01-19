@@ -28,7 +28,7 @@ export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(CUSTOMER_CNIC),
-    screenKuid: CURRENT_SCREEN,
+    screenKuid: CURRENT_SCREEN === "scr_customerCnicResume" ? 'scr_customerCnic' : CURRENT_SCREEN,
     requestDate: getCurrentDate(),
   };
 

@@ -18,6 +18,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const [resendOTP, setResendOTP] = useState(59);
     const IS_RESUME_FLOW = localStorage.getItem('isResume') || false;
     const PREVIOUS_SCREEN = useSelector(state => state?.prevScreenState)
+    const isResume = localStorage.getItem('isResume')
 
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
@@ -97,11 +98,12 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
             </p>
             <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                 <Box sx={{ marginRight: '20px' }}>{description}</Box>
+                {/* IF WE ARE NOT IN RESUME MODE THEN ONLY SHOW CHANGE OPTION */}
                 {
-                    goBackContent &&
-                    <Box className={styles.goBack} sx={{ margin: { xs: '12px 0px', sm: 0 } }}>
-                        <span onClick={handleGoBack}>{goBackContent}</span>
-                    </Box>
+                    (goBackContent && !isResume) ?
+                        <Box className={styles.goBack} sx={{ margin: { xs: '12px 0px', sm: 0 } }}>
+                            <span onClick={handleGoBack}>{goBackContent}</span>
+                        </Box> : null
                 }
             </Box>
 

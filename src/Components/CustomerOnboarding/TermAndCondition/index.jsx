@@ -12,7 +12,8 @@ const TermAndCondition = ({
   errors,
 }) => {
   return (
-    <Box sx={{ paddingTop: "16px" }}>
+    <Box sx={{ width: '100%', paddingTop: "16px" }}>
+      {/* TERM & CONDITION */}
       <Box>
         <div>
           <h1 className={styles.topHeading}>Terms And Conditions</h1>
@@ -40,6 +41,7 @@ const TermAndCondition = ({
           </ol>
         </div>
       </Box>
+      {/* DECLARATION & ACCEPTANCE */}
       <Box>
         <div>
           <h1 className={styles.topHeading}> Declaration and Acceptance</h1>

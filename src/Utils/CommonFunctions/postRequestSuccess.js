@@ -1,11 +1,6 @@
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
-import {
-  clearIndexDb,
-  formatCNIC,
-  getPrevScreen,
-  getScreen,
-} from "src/Utils/Helpers";
+import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 import { FIELD_MANIFEST } from "../Constants";
 import dayjs from "dayjs";
@@ -60,7 +55,7 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
               "DD/MM/YYYY", // 23/02/2021
               "MM-DD-YYYY", // 02-23-2021
               "YYYY.MM.DD", // 2021.02.23
-              "YYYY/DD/MM", // 2021/23/02 (for example)
+              "YYYY/DD/MM", // 2021/23/02
             ];
 
             let parsedDate = null;

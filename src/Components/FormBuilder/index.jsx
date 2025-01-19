@@ -30,7 +30,7 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                         name={field?.kuid}
                         control={control}
                         label={field?.label}
-                        rows={5}
+                        rows={3}
                     />
                     {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
                 </>

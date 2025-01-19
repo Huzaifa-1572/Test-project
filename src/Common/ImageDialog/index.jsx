@@ -3,9 +3,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
-// import CloseIcon from 'src/Assets/images/closeicon.png'
-// import FallBack from 'src/Assets/images/fallback.webp'
 import { styled } from "@mui/material/styles";
+import { IoMdClose } from "react-icons/io";
+import { Skeleton } from "@mui/material";
+
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -19,14 +21,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 export default function ImageDailog({ openDailog, handleDailogClose, title, documentImg }) {
 
     return (
-        <React.Fragment>
+        <>
             <BootstrapDialog
                 onClose={handleDailogClose}
                 aria-labelledby="customized-dialog-title"
                 open={openDailog}
             >
-                <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                    {title}
+                <DialogTitle sx={{ m: 0, p: 2, fontSize: "clamp(12px,3vw,25px)", color: '#666666', textTransform: 'capitalize' }} id="customized-dialog-title">
+                    {`${title} Preview`}
                 </DialogTitle>
                 <IconButton
                     aria-label="close"
@@ -38,13 +40,17 @@ export default function ImageDailog({ openDailog, handleDailogClose, title, docu
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
-                    {/* <img height={'30px'} src={CloseIcon} alt='Close Icon' /> */} icon ayega
+                    <IoMdClose />
                 </IconButton>
                 <DialogContent>
-                    {/* <img style={{ maxHeight: '500px', height: 'auto', width: "400px" }} src={documentImg || FallBack} alt='image' /> */}
-                    aicon ayega
+                    {
+                        !documentImg ?
+                            <Skeleton variant="rectangular" sx={{ maxHeight: '500px', height: 'auto', maxWidth: '550px', width: "100%" }} />
+                            :
+                            <img style={{ maxHeight: '500px', height: 'auto', maxWidth: '550px', width: "100%" }} src={documentImg} alt='image' />
+                    }
                 </DialogContent>
             </BootstrapDialog>
-        </React.Fragment>
+        </>
     );
 }

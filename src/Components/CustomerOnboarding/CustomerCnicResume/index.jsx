@@ -4,7 +4,7 @@ import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
-import CNIC_UNDRAW from "src/Assets/images/abcd.svg"
+import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg"
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
 import Loader from "src/Common/Loader";
 
@@ -24,8 +24,8 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
             {locationStatus === "loading" && <Loader />}
             <WizardLayout
                 Icon={CNICICON}
-                title={"CNIC Verification"}
-                description={"Please Enter your CNIC to continue with your online onboarding."}
+                title={"Resume Application"}
+                description={"Enter your CNIC number to retrieve your application details and proceed from where you paused."}
                 heroImage={CNIC_UNDRAW}
             >
                 <Grid container spacing={2}>

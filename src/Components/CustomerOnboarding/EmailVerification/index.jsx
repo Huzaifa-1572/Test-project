@@ -7,7 +7,7 @@ const EmailVerification = ({ setValue, getValues }) => {
     const SENT_TO_CONTENT = () => {
         return (
             <>
-                sent to <b>{CUSTOMER_EMAIL}</b>
+                sent to {CUSTOMER_EMAIL}
             </>
         );
     };

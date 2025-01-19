@@ -75,7 +75,7 @@ export const shape = {
       .required("Email address is required.")
       .matches(
         /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
-        "Please enter a valid email address (e.g., name@example.com)."
+        "Please enter a valid email address."
       )
       .email("Please enter a valid email address.")
       .max(50, "Email address must not exceed 50 characters."),
@@ -97,12 +97,7 @@ export const shape = {
       .string()
       .required("Address is required.")
       .min(4, "Address must be at least 4 characters.")
-      .max(200, "Address must not exceed 200 characters."),
-    KEY_LANDMARK: yup
-      .string()
-      .optional()
-      .min(4, "Landmark must be at least 4 characters.")
-      .max(100, "Landmark must not exceed 100 characters."),
+      .max(100, "Address must not exceed 100 characters."),
     KEY_PROVINCE: yup
       .string()
       .required('Province is required.'),
@@ -114,7 +109,7 @@ export const shape = {
   "scr_livePhotoCapture": {
     KEY_LIVE_PHOTO: yup
       .string()
-      .required('Please take a photo to proceed.')
+      .required('Please capture a photo to proceed.')
   },
 
   "scr_uploadCnicFront": {
@@ -133,12 +128,12 @@ export const shape = {
     KEY_NAME: yup
       .string()
       .required("Name is required.")
-      .min(3, "Name must be at least 4 characters.")
+      .min(3, "Name must be at least 3 characters.")
       .max(200, "Name must not exceed 200 characters."),
     KEY_PARANTAGE: yup
       .string()
       .required("Parentage is required.")
-      .min(3, "Parentage must be at least 4 characters.")
+      .min(3, "Parentage must be at least 3 characters.")
       .max(200, "Parentage must not exceed 200 characters."),
     KEY_CUST_IDENT_VALUE: yup
       .string()
@@ -155,17 +150,17 @@ export const shape = {
     KEY_CNIC_ISSUANCE_DATE: yup
       .date()
       .required('CNIC issuance date is required')
-      .test('is-valid-date', 'Please enter a valid CNIC issuance date format.', (value) => dayjs(value).isValid())
+      .test('is-valid-date', 'Please enter a valid CNIC issuance date.', (value) => dayjs(value).isValid())
       .test('not-in-future', 'CNIC issuance date cannot be in the future', (value) => validIssuanceDate(value))
       .test('within-reasonable-timeframe', 'CNIC issuance date should be within the last 50 years', (value) => withinReasonableTimeframe(value))
       .typeError('Please provide a valid CNIC issuance date.'),
     KEY_CNIC_EXPIRY_DATE: yup
       .date()
       .required('CNIC expiry date is required')
-      .test('is-valid-date', 'Please enter a valid CNIC expiry date format.', (value) => dayjs(value).isValid())
+      .test('is-valid-date', 'Please enter a valid CNIC expiry date.', (value) => dayjs(value).isValid())
       .test('not-in-past', 'CNIC expiry date cannot be in the past', (value) => validExpiryDate(value))
       .typeError('Please provide a valid CNIC expiry date.'),
-    KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC is lifetime.'),
+    KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC has lifetime expiry.'),
   },
 
   "scr_termsAndConditions": {

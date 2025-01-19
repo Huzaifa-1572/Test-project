@@ -1,5 +1,6 @@
-import { Box, LinearProgress, Typography, Paper } from '@mui/material';
+import { Box, LinearProgress, Paper } from '@mui/material';
 import { useSelector } from 'react-redux';
+import PROGRESSBAR_UNDRAW from 'src/Assets/images/progressUndraw.svg';
 import { getScreenProgress } from 'src/Utils/Helpers';
 
 const ProgressBar = () => {
@@ -7,11 +8,12 @@ const ProgressBar = () => {
     const progress = getScreenProgress(CURRENT_SCREEN);
 
     return (
-        <Paper elevation={0} sx={{ border: '2px solid #f4f4f4', maxWidth: '400px', width: '100%', borderRadius: '7px', padding: '16px' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <Typography variant="body1" sx={{ fontFamily: 'Poppins-Medium', color: '#e8927c' }}>
+        <Paper elevation={0} sx={{ display: 'flex', alignItems: 'center', border: '2px solid #f4f4f4', maxWidth: '400px', width: '100%', borderRadius: '8px', padding: '7px 12px' }}>
+            <Box sx={{ width: '100%' }}>
+                <Box sx={{ marginBottom: '10px', color: '#666666' }}>
                     Application Progress
-                </Typography>
+                    <span style={{ marginLeft: '7px', color: '#407ec9' }}>{progress.toFixed(0)}%</span>
+                </Box>
                 <LinearProgress
                     variant="determinate"
                     value={progress}
@@ -20,22 +22,13 @@ const ProgressBar = () => {
                         borderRadius: '5px',
                         backgroundColor: '#f0f0f0',
                         '& .MuiLinearProgress-bar': {
-                            backgroundColor: '#e8927c',
+                            backgroundColor: '#407ec9',
                         },
                     }}
                 />
-                <Typography
-                    variant="body2"
-                    sx={{
-                        fontFamily: 'Poppins-Regular',
-                        color: '#555',
-                        textAlign: 'right',
-                    }}
-                >
-                    {progress.toFixed(0)}%
-                </Typography>
             </Box>
-        </Paper>
+            <img src={PROGRESSBAR_UNDRAW} height='70px' width='70px' />
+        </Paper >
     );
 };
 
