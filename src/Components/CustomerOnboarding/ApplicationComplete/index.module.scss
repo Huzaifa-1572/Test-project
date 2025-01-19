@@ -49,7 +49,7 @@
   .boxWrapper {
     @include HorizontalAndVerticalCenter;
     flex-direction: column;
-    background-color: $theme-primary;
+    background-color: #5a95de;
     border-radius: 15px;
     margin-top: 20px;
     padding: 20px;
@@ -62,7 +62,7 @@
       margin-top: 10px;
       color: white;
       font-weight: bolder;
-      font-size: clamp(16px, 4vw, 30px);
+      font-size: clamp(24px, 4vw, 30px);
     }
   }
 }

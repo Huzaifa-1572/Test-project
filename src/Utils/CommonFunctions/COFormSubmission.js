@@ -61,6 +61,8 @@ export const CUSTMOBILE_HANDLER = ({
 };
 
 export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
+  const MOBILE_DEVICE_DATA = JSON.parse(sessionStorage.getItem('device'))
+
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
@@ -70,12 +72,12 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     mnp: data.customerOperator,
     longitude: data.KEY_GEO_COORDINATES.KEY_LONGITUDE,
     latitude: data.KEY_GEO_COORDINATES.KEY_LATITUDE,
-    deviceId: "temp",
-    playerId: "temp",
-    makeModel: "temp",
-    deviceType: "temp",
-    deviceVersion: "temp",
-    rooted: false,
+    deviceId: MOBILE_DEVICE_DATA?.deviceId,
+    playerId: MOBILE_DEVICE_DATA?.playerId,
+    makeModel: MOBILE_DEVICE_DATA?.makeModel,
+    deviceType: MOBILE_DEVICE_DATA?.deviceType,
+    deviceVersion: MOBILE_DEVICE_DATA?.deviceVersion,
+    rooted: MOBILE_DEVICE_DATA?.rooted,
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
     otp: data.CUSTOMER_OTP,

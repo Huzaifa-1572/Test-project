@@ -119,7 +119,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                                     }
                                                     {
                                                         field['value-type'] === 'image' && (
-                                                            <Grid item sm={6} xs={6} lg={6} className={`${styles.value} ${styles.clickable}`}>
+                                                            <Grid item sm={6} xs={6} lg={6} className={styles.value} sx={{ display: 'flex', justifyContent: { xs: 'flex-end', sm: 'flex-start' } }}>
                                                                 {
                                                                     field.value === 'Y' && (
                                                                         <span className={styles.previewButton} onClick={(e) => handleDailogOpen(e, field)}>

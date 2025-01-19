@@ -24,13 +24,21 @@ const App = () => {
     // Get the current URL's query string
     const searchParams = new URLSearchParams(window.location.search);
 
-    // Extract deviceId and playerId
-    const deviceId = searchParams.get('deviceId') || '';
-    const playerId = searchParams.get('playerId') || '';
-    const makeModel = searchParams.get('makeModel') || '';
-    const deviceType = searchParams.get('deviceType') || '';
-    const deviceVersion = searchParams.get('deviceVersion') || '';
-    const rooted = searchParams.get('rooted') || '';
+    // Extract data coming from mobile app
+    const deviceId = searchParams.get('deviceId') || 'temp';
+    const playerId = searchParams.get('playerId') || 'temp';
+    const makeModel = searchParams.get('makeModel') || 'temp';
+    const deviceType = searchParams.get('deviceType') || 'temp';
+    const deviceVersion = searchParams.get('deviceVersion') || 'temp';
+    const rooted = searchParams.get('rooted') || false;
+    sessionStorage.setItem('device', JSON.stringify({
+      deviceId: deviceId,
+      playerId: playerId,
+      makeModel: makeModel,
+      deviceType: deviceType,
+      deviceVersion: deviceVersion,
+      rooted: rooted,
+    }))
   }, []);
 
   return (

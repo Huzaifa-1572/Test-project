@@ -78,8 +78,6 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
                 <br />Allow camera permission to capture live photo.
               </Box>
             </Box>
-
-
           </>
         )}
 
