@@ -1,15 +1,6 @@
-// .onboardingContainer {
-//   background-size: cover;
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   overflow-x: hidden;
-//   position: relative;
-// }
-
 .contentContainer {
   min-height: calc(100vh - 65px);
   width: 100%;
   display: flex;
-  // backdrop-filter: blur(14px);
   flex-direction: column;
 }

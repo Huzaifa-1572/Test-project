@@ -1,24 +1,25 @@
 import { Box } from "@mui/material";
-import { CaptchaField, CheckboxField } from "src/Components/FormFields";
-import React from "react";
 import CustomButton from "src/Common/CustomButton";
+import { CheckboxField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import TermAndConditionData from "src/Mock/TermAndCondition.json";
 import PrivacyPolicyData from "src/Mock/PrivacyPolicy.json";
+import TermAndConditionData from "src/Mock/TermAndCondition.json";
 import styles from "./index.module.scss";
+import TERMS_AND_CONDITION_UNDRAW from 'src/Assets/images/termsAndConditionsUndraw.svg'
+import DECLARATION_UNDRAW from 'src/Assets/images/declarationUndraw.svg'
 
-const TermAndCondition = ({
-  control,
-  errors,
-}) => {
+
+const TermAndCondition = ({ control, errors }) => {
   return (
     <Box sx={{ width: '100%', paddingTop: "16px" }}>
       {/* TERM & CONDITION */}
-      <Box>
-        <div>
-          <h1 className={styles.topHeading}>Terms And Conditions</h1>
-        </div>
-        <div className={styles.termContainer}>
+      <Box sx={{ margin: '20px 0px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <h1 className={styles.topHeading}>Terms & Conditions</h1>
+          <img src={TERMS_AND_CONDITION_UNDRAW} alt='' height='100px' width='100' />
+        </Box>
+
+        <Box className={styles.termContainer}>
           <ol className={styles.list}>
             {TermAndConditionData.map((item, index) => (
               <li key={index}>
@@ -39,13 +40,15 @@ const TermAndCondition = ({
               </li>
             ))}
           </ol>
-        </div>
+        </Box>
       </Box>
       {/* DECLARATION & ACCEPTANCE */}
-      <Box>
-        <div>
-          <h1 className={styles.topHeading}> Declaration and Acceptance</h1>
-        </div>
+      <Box sx={{ margin: '20px 0px' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <h1 className={styles.topHeading}>Declaration and Acceptance</h1>
+          <img src={DECLARATION_UNDRAW} alt='' height='100px' width='100' />
+        </Box>
+
         <div className={styles.termContainer}>
           <ul className={styles.list}>
             {PrivacyPolicyData.map((item, index) => (
@@ -73,7 +76,7 @@ const TermAndCondition = ({
         <CheckboxField name={"isAccepted"} label={"I acknowledge and accept the Terms and Conditions."} control={control} />
         {errors?.isAccepted && (<ValidationError message={errors?.isAccepted?.message} />)}
       </Box>
-      <CustomButton label={"Submit"} />
+      <CustomButton label={"Submit Application"} />
     </Box>
   );
 };

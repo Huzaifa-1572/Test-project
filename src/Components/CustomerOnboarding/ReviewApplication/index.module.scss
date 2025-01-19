@@ -55,7 +55,7 @@
   }
 
   .topHeading {
-    font-size: clamp(24px, 4vw, 44px);
+    font-size: clamp(20px, 4vw, 44px);
     margin-right: 10px;
     font-weight: 600;
     text-align: left;
@@ -112,7 +112,6 @@
   .contentBody {
     position: relative;
     z-index: 9;
-    padding: 20px;
     background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     display: flex;
@@ -141,7 +140,7 @@
       align-items: center;
       align-content: center;
       display: flex;
-      font-size: clamp(12px, 2.5vw, 25px);
+      font-size: clamp(12px, 2.5vw, 20px);
     }
 
     .value {
@@ -149,7 +148,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: clamp(12px, 2.5vw, 25px);
+      font-size: clamp(12px, 2.5vw, 20px);
       color: #6c6c6b;
 
       @media (max-width: 500px) {
@@ -241,15 +240,15 @@
   background-color: white;
   border: 2px solid #5093e0;
   color: #5093e0;
-  padding: 8px 16px;
+  padding: 8px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: clamp(8px, 2vw, 14px);
   font-weight: bold;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 20px;
   transition-duration: 0.3s;
-  width: 110px;
+  width: clamp(85px, 20vw, 110px);
   display: flex;
   align-items: center;
   justify-content: center;

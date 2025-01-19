@@ -1,23 +1,18 @@
-import React, { useState } from 'react'
 import { Box, Grid } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { EDIT_HANDLER, GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission'
-import { generateFieldValue, getReviewApplicationData, getUUID, sanitizer } from 'src/Utils/Helpers'
-import styles from './index.module.scss'
+import { useNavigate } from 'react-router-dom'
 import CustomButton from 'src/Common/CustomButton'
-// import AttachmentIcon from 'src/Assets/images/attach-icon.png';
+import { EDIT_HANDLER, GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission'
+import { generateFieldValue, getReviewApplicationData, getUUID } from 'src/Utils/Helpers'
+import styles from './index.module.scss'
+import { FaLock } from "react-icons/fa"
+import { HiViewfinderCircle } from "react-icons/hi2"
+import { IoMdWarning } from "react-icons/io"
+import REVIEW_UNDRAW from 'src/Assets/images/reviewUndraw.svg'
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
-import { TbLockExclamation } from 'react-icons/tb'
-import discrepantImage from "src/Assets/images/discrepancy-found-icon.svg";
-import REVIEW_UNDRAW from 'src/Assets/images/reviewUndraw.svg'
-import { IoMdWarning } from "react-icons/io";
-import { FaLock } from "react-icons/fa";
-import { HiViewfinderCircle } from "react-icons/hi2";
-
-
 
 
 const ReviewApplication = ({ setValue, getValues }) => {
@@ -105,7 +100,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                 </div>
 
                                 {/*TABLE BODY*/}
-                                <div className={styles.contentBody}>
+                                <Box className={styles.contentBody} sx={{ padding: { xs: '5px', md: '20px' } }}>
                                     {section?.fields?.map(field =>
                                         field.value && (
                                             <div className={`${styles.contentRow} ${field.hasDiscrepancy ? styles.lightRedBg : ''}`} key={getUUID()}>
@@ -140,7 +135,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                             </div>
                                         )
                                     )}
-                                </div>
+                                </Box>
                             </Box>
                         )
                     })}

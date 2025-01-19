@@ -205,10 +205,13 @@ export const generateFieldValue = (field) => {
   else if (field["kuid"] === "KEY_PROVINCE") {
     return getProvince(field?.value)
   }
-  else if (field["kuid"] === "KEY_PLACE_OF_BIRTH" || field["kuid"] === "KEY_CITY_CODE") {
+  else if (field["kuid"] === "KEY_PLACE_OF_BIRTH") {
     return getCity(field?.value)
   }
-  else if (field["kuid"] === "KEY_CNIC_LIFETIME") {
+  else if (field["kuid"] === "KEY_EMAIL") {
+    return field?.value === 'N' ? '-' : field?.value
+  }
+  else if (field["kuid"] === "KEY_CNIC_LIFETIME" || field["kuid"] === "customerEmail") {
     return field?.value === 'true' ? 'Yes' : 'No'
   } else if (field["kuid"] === "KEY_MOBILE_OPERATOR") {
     return OPERATOR_MAP[field?.value] || field?.value

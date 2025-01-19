@@ -46,7 +46,6 @@ export const showScreen = {
 
 const CustomerOnboarding = () => {
   const CURRENT_SCREEN = useSelector(state => state?.currentScreenState)
-  console.log('CURRENT SCREEN', CURRENT_SCREEN)
 
   return (
     <Suspense fallback={<Loader />}>
