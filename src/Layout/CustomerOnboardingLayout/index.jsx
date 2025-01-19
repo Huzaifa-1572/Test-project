@@ -7,7 +7,7 @@ import Header from "src/Layout/Header";
 import styles from "./index.module.scss";
 
 const DONT_SHOW_BACK_BUTTON_ON_SCREENS = ['scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_livePhotoCapture', 'scr_applicationComplete'];
-
+const DONT_SHOW_PROGRESS_BAR = ['scr_customerCnicResume', 'scr_applicationComplete']
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
   const [isLoading, setIsLoading] = useState(false);
   const isEdit = localStorage.getItem("isEdit");
@@ -42,7 +42,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
             <Grid item xs={12} sm={8} sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', sm: 'flex-end' } }}>
               {/* DONT SHOW PROGRESS BAR ON RESUME SCREENS */}
               {
-                (CURRENT_SCREEN === 'scr_customerCnicResume') || (CURRENT_SCREEN === 'scr_mobileVerification' && isResume)
+                DONT_SHOW_PROGRESS_BAR?.includes(CURRENT_SCREEN) || (CURRENT_SCREEN === 'scr_mobileVerification' && isResume)
                   ? null : <ProgressBar />}
             </Grid>
           </Grid>

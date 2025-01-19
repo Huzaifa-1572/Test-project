@@ -3,45 +3,16 @@
 
 .topWrapper {
   text-align: center;
-  background-color: $theme-dark-navy-blue;
   @include HorizontalAndVerticalCenter;
   flex-direction: column;
-  height: 100vh;
+  width: 100%;
   overflow-y: auto;
-
-  .flexContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-  }
-
-  .navbarWrapper {
-    height: 40px;
-    width: 250px;
-    cursor: pointer;
-  }
-
-  .backButtonContainer {
-    padding-right: 20px;
-
-    @media (max-width: 768px) {
-      margin-top: 15px;
-      position: static;
-      justify-content: center;
-      padding-right: 0;
-    }
-  }
 
   .backButtonWrapper {
     width: 200px;
     height: 50px;
     border-radius: 22px;
-    background-color: #0d1821;
+    background-color: #363636;
     color: white;
     gap: 5px;
     font-size: 14px;
@@ -54,8 +25,8 @@
 
     &:hover {
       background-color: #fff;
-      border: 1px solid #e4e4e4;
-      color: #5093e0;
+      border: 1px solid $theme-primary;
+      color: $theme-dark;
     }
 
     @media (max-width: 768px) {
@@ -64,52 +35,34 @@
     }
   }
 
-  .successLogoWrapper {
-    margin-top: 25px;
-    width: clamp(100px, 150px, 220px);
-    height: clamp(100px, 20vw, 220px);
-    color: $theme-primary;
-  }
-
   .titleWrapper {
-    width: clamp(80%, 80vw, 100%);
-    margin-top: 15px;
-    color: white;
-    // font-family: "ArticulatCF-Bold";
-    font-size: clamp(25px, 5vw, 60px);
+    margin-top: 5px;
+    font-size: clamp(20px, 4vw, 40px);
   }
 
   .descriptionWrapper {
-    margin-top: 15px;
-    margin-bottom: clamp(15px, 3vw, 10px);
-    color: white;
-    // font-family: "ArticulatCF-Regular";
-    font-size: clamp(8px, 4vw, 18px);
-    width: clamp(38%, 55vh, 70%);
+    margin: 15px;
+    font-size: clamp(12px, 2.5vw, 18px);
+    color: gray;
   }
 
   .boxWrapper {
     @include HorizontalAndVerticalCenter;
     flex-direction: column;
-    background-color: #22303c;
-    width: clamp(50%, 80vw, 100%);
-    border-radius: 10px;
-    padding-top: 10px;
-    padding-bottom: clamp(20px, 5vw, 40px);
+    background-color: $theme-primary;
+    border-radius: 15px;
     margin-top: 20px;
+    padding: 20px;
 
     .boxTitle {
-      margin-top: clamp(15px, 3vw, 10px);
       color: white;
-    //   font-family: "ArticulatCF-Regular";
-      font-size: clamp(18px, 6vw, 26px);
+      font-size: clamp(18px, 6vw, 30px);
     }
     .trackingID {
-      margin-top: clamp(15px, 3vw, 10px);
+      margin-top: 10px;
       color: white;
-      font-weight: bold;
-    //   font-family: "ArticulatCF-Bold";
-      font-size: clamp(18px, 6vw, 24px);
+      font-weight: bolder;
+      font-size: clamp(16px, 4vw, 30px);
     }
   }
 }
