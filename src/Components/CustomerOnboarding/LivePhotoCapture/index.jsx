@@ -9,12 +9,15 @@ import CustomButton from "src/Common/CustomButton";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
+import { useDispatch } from "react-redux";
+import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 
 
 const LivePhotoCapture = ({ errors, setValue, watch }) => {
   const webcamRef = useRef(null);
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const { TITLE, DESCRIPTION } = getScreenData()
+  const dispatch = useDispatch()
 
   // To check whether the camera access permission is allowed or not
   useEffect(() => {
@@ -26,6 +29,13 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
       .catch((errorMessage) => {
         console.error(errorMessage); // Camera permission denied or error: ...
         setisCameraAccessAllowed(false);
+        dispatch(
+          showErrorModal({
+            errorCode: "Camera Unavailable",
+            errorMessage: "Unable to access the camera. Please ensure your device's camera is functional and permissions are enabled in your settings.",
+            isError: true,
+          })
+        )
       });
   }, []);
 
@@ -64,7 +74,8 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
                 alt="Upload Selfie"
               />
               <Box className={styles.permissionText}>
-                Allow camera permission to capture live photo
+                Searching camera...
+                <br />Allow camera permission to capture live photo.
               </Box>
             </Box>
 
@@ -113,13 +124,14 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
               className={styles.captureButton}
               onClick={capturePhoto}
               type="button"
+              disabled={!isCameraAccessAllowed}
             >
               Capture Selfie
             </Button>
           )}
         </Box>
       </Box>
-      <CustomButton label={"Proceed"} />
+      {isCameraAccessAllowed ? <CustomButton label={"Proceed"} /> : null}
     </WizardLayout>
   );
 };
