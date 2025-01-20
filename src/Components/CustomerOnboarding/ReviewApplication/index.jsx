@@ -112,7 +112,6 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                                                 <div className={styles.value}>
                                                                     {generateFieldValue(field)}
                                                                 </div>
-                                                                {!!field?.locked && <div className={styles.icon}></div>}
                                                             </Grid>
                                                         )
 

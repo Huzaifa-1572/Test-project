@@ -4,6 +4,9 @@
 // UAT
 export const BASE_URL = "http://10.6.60.6:8089/";
 
+// export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
+
+
 export const ENDPOINTS = {
   AUTHENTICATION: "api/dao/v1/authenticate",
   IS_CUSTOMER_EXIST: "api/dao/v1/customer/isExist",
