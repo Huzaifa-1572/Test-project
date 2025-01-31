@@ -7,6 +7,8 @@ import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
 import dayjs from "dayjs";
 import { OPERATOR_MAP } from "../Constants";
 import { showScreen } from "src/Pages/CustomerOnboarding";
+import CryptoJS from "crypto-js";
+
 
 export function maskEmail(email = "") {
   const parts = email.split("@");
@@ -252,3 +254,9 @@ export async function getDataFromIndexDb() {
 export async function clearIndexDb() {
   await db.data.clear();
 }
+
+
+//GET SHA256 HASH
+export const getSHA256Hash = (data) => {
+  return CryptoJS.SHA256(data).toString();
+};

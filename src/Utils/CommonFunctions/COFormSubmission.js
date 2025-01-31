@@ -2,6 +2,7 @@ import { BASE_URL, ENDPOINTS } from "src/Utils/Config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
 import {
   getCurrentDate,
+  getSHA256Hash,
   retrieveCNIC,
   retrieveDate,
   retrieveMobileNumber,
@@ -80,7 +81,7 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     rooted: MOBILE_DEVICE_DATA?.rooted,
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
-    otp: data.CUSTOMER_OTP,
+    otp: getSHA256Hash(data.CUSTOMER_OTP),
     requestDate: getCurrentDate(),
   };
 
@@ -133,7 +134,7 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     email: data.customerEmail,
     screenKuid: CURRENT_SCREEN,
     token: data.OTP_VERIFICATION_TOKEN,
-    otp: data.CUSTOMER_OTP,
+    otp: getSHA256Hash(data.CUSTOMER_OTP),
     requestDate: getCurrentDate(),
   };
 
