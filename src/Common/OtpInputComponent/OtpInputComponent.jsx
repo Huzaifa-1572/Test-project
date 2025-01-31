@@ -1,6 +1,5 @@
-import React from "react";
-import OtpInput from "react-otp-input";
 import { Box } from "@mui/material";
+import OtpInput from "react-otp-input";
 import Timer from "src/Common/Timer";
 
 const MobileOtpStyles = {

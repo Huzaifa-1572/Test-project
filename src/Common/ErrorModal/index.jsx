@@ -1,10 +1,11 @@
 import { Button, Dialog } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
-import { CgCloseO } from "react-icons/cg";
-import styles from './index.module.scss';
 import WARNING_UNDRAW from 'src/Assets/images/warning.svg';
+import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
+import styles from './index.module.scss';
+
+const ERROR_CODES = ["Access Denied-403", "Error-401"]
 
 const ErrorModal = ({ errorCode, errorMessage, isError }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
 
   const handleClose = () => {
     dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
-    if (errorCode === "Access Denied-403") {
+    if (ERROR_CODES.includes(errorCode)) {
       navigate('/');
     }
   };
