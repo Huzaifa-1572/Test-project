@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DeviceDecisionModal from 'src/Common/Modals/DeviceDecisionModal';
 import usePostDataToServer from 'src/Hooks/usePostdataToServer';
 import { updateCurrentScreen } from 'src/Redux/Reducers/CurrentScreenState';
 import { updatePrevScreen } from 'src/Redux/Reducers/PrevScreenState';
@@ -18,6 +19,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const [resendOTP, setResendOTP] = useState(59);
     const IS_RESUME_FLOW = localStorage.getItem('isResume') || false;
     const PREVIOUS_SCREEN = useSelector(state => state?.prevScreenState)
+    const { title: modalTitle, description: modalDescription, isDeviceDecisionModal } = useSelector(state => state.deviceDecisionModal)
     const isResume = localStorage.getItem('isResume')
 
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
@@ -123,8 +125,18 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                     onChange={handleOtpChange}
                     numInputs={6}
                     isInputNum={true}
+                    secret
                     renderSeparator={<span></span>}
-                    renderInput={(props) => <input {...props} />}
+                    renderInput={(props) => (
+                        <input
+                            {...props}
+                            style={{
+                                WebkitTextSecurity: "disc",
+                                MozTextSecurity: "disc",
+                                textSecurity: "disc",
+                            }}
+                        />
+                    )}
                     inputStyle={styles.inputStyle}
                     shouldAutoFocus={true}
                 />
@@ -133,6 +145,16 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
             <Box sx={{ width: '40%' }}>
                 <CustomButton label='Verify' />
             </Box>
+
+            {
+                !!isDeviceDecisionModal ?
+                    <DeviceDecisionModal
+                        title={modalTitle}
+                        description={modalDescription}
+                        isDeviceDecisionModal={isDeviceDecisionModal}
+                        setValue={setValue}
+                    /> : null
+            }
 
         </Container >
     );

@@ -14,7 +14,7 @@
     background-color: #eaeaea;
     padding: 32px 0;
     width: 100%;
-    height: clamp(200px, 15vh, 230px);
+    height: clamp(170px, 12vh, 230px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +70,7 @@
 @media (max-width: 800px) {
   .mainContainer {
     .dialogContentBox {
-      padding: 20px 0 20px 0;
+      padding: 20px;
     }
     .dialogButton {
       width: 90%;

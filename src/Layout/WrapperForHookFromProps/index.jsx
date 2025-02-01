@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
+import { showDeviceDecisionModal } from "src/Redux/Reducers/DeviceDecisionModalState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { CNICEXIST_HANDLER, COFormSubmission, CUSTMOBILE_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
@@ -24,7 +25,6 @@ function WrapperForHookFormProps({ children }) {
   const currentScreenRef = useRef(CURRENT_SCREEN);
   const screenDataRef = useRef(SCREEN_DATA);
   const previousScreenRef = useRef(PREVIOUS_SCREEN);
-
 
   // Update ref whenever CURRENT_SCREEN or SCREEN_DATA changes
   useEffect(() => {
@@ -73,6 +73,18 @@ function WrapperForHookFormProps({ children }) {
 
     // FOR RESUME FLOW
     if (DATA?.resume) {
+      const CUSTOMER_DEVICE_ID_LATEST = JSON.parse(sessionStorage.getItem('device'))?.deviceId || null
+      const CUSTOMER_DEVICE_ID_PREVIOUS = DATA?.deviceID
+      if ((CUSTOMER_DEVICE_ID_LATEST !== CUSTOMER_DEVICE_ID_PREVIOUS) && (CUSTOMER_DEVICE_ID_PREVIOUS !== undefined)) {
+        dispatch(
+          showDeviceDecisionModal({
+            title: "Device Change Detected",
+            description: `Dear Customer! You have previously registered with device ${CUSTOMER_DEVICE_ID_PREVIOUS}. Do you want to continue using the current device?`,
+            isDeviceDecisionModal: true,
+          })
+        )
+      }
+
       localStorage.setItem("isResume", DATA?.resume);
       setValue('customerMobile', DATA?.mobileNumber);
       setValue('customerOperator', DATA?.mobileOperator);
@@ -82,7 +94,6 @@ function WrapperForHookFormProps({ children }) {
         customerMobile: DATA?.mobileNumber,
         customerOperator: DATA?.mobileOperator
       };
-
       const { BODY, API_URL } = CUSTMOBILE_HANDLER({ CURRENT_SCREEN: 'scr_customerMobile', data: RESUME_BODY, isResumeApplication: DATA?.resume, dispatch });
       mutate({ BODY, API_URL, dispatch });
     }

@@ -1,4 +1,4 @@
-import { Button, Dialog } from '@mui/material';
+import { Box, Button, Dialog } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import WARNING_UNDRAW from 'src/Assets/images/warning.svg';
@@ -54,11 +54,11 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
         </div>
         <div className={styles.dialogContentBox}>
           <p className={styles.dialogTitle}>{errorCode || 'Error!'}</p>
-          <p className={styles.dialogContent}>{errorMessage || 'Something Went Wrong!'}</p>
+          <p className={styles.dialogContent}>{errorMessage || 'something went wrong!'}</p>
           <Button className={styles.dialogButton} onClick={handleClose}>Close</Button>
         </div>
       </div>
-    </Dialog>
+    </Dialog >
   );
 };
 

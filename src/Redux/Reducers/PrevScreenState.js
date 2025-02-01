@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = "";
+const initialState = "home_page";
 
 export const PREV_SCREEN_STATE = createSlice({
   name: "PREV_SCREEN_STATE",

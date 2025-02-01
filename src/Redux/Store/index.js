@@ -4,6 +4,7 @@ import ErrorState from "src/Redux/Reducers/ErrorState";
 import CurrentScreenState from "src/Redux/Reducers/CurrentScreenState";
 import PrevScreenState from "src/Redux/Reducers/PrevScreenState";
 import ScreenDataState from "src/Redux/Reducers/ScreenDataState";
+import DeviceDecisionModalState from "src/Redux/Reducers/DeviceDecisionModalState";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     errorState: ErrorState,
     currentScreenState: CurrentScreenState,
     prevScreenState: PrevScreenState,
-    screenDataState: ScreenDataState
+    screenDataState: ScreenDataState,
+    deviceDecisionModal: DeviceDecisionModalState
   },
 });

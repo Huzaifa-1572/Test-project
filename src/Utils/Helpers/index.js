@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { OPERATOR_MAP } from "../Constants";
 import { showScreen } from "src/Pages/CustomerOnboarding";
 import CryptoJS from "crypto-js";
+import { ClearPrevScreen } from "src/Redux/Reducers/PrevScreenState";
 
 
 export function maskEmail(email = "") {

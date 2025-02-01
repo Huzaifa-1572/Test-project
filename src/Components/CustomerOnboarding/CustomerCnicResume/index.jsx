@@ -1,15 +1,16 @@
 import Grid from "@mui/material/Grid";
 import CNICICON from 'src/Assets/images/cnicIcon.png';
+import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg";
 import CustomButton from "src/Common/CustomButton";
+import Loader from "src/Common/Loader";
 import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import WizardLayout from "src/Layout/WizardLayout";
-import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg"
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
-import Loader from "src/Common/Loader";
+import WizardLayout from "src/Layout/WizardLayout";
 
 const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
     const { locationStatus, fetchLocation } = useGetGeoCoordinates({ setValue, getValues });
+
 
     const handleProceed = () => {
         const LOCATION = getValues("KEY_GEO_COORDINATES");
@@ -58,7 +59,6 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
                     </Grid>
 
                 </Grid>
-
             </WizardLayout>
         </>
     );

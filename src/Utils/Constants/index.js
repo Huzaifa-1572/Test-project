@@ -6,6 +6,7 @@ export const INITIAL_VALUES = {
   customerOperator: "",
   isValidEmail: "",
   customerEmail: "",
+  CUSTOMER_CONTINUE_WITH_NEW_DEVICE: false,
   OTP_VERIFICATION_TOKEN: "",
   KEY_MOTHER_MAIDEN_NAME: "",
   KEY_PLACE_OF_BIRTH: "",

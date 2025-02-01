@@ -3,11 +3,11 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { lazy, Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import ErrorModal from "src/Common/ErrorModal";
+import Loader from "src/Common/Loader";
+import ErrorModal from "src/Common/Modals/ErrorModal";
 import { setupRequestInterceptor, setupResponseInterceptor } from "src/Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "src/Utils/Settings";
-import Loader from "src/Common/Loader";
-import './App.scss'
+import './App.scss';
 
 // LAZY LOADING
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));

@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { closeLoader, showLoader } from "src/Redux/Reducers/LoaderState";
 import { clearIndexDb } from "src/Utils/Helpers";
-import { useNavigate } from "react-router-dom";
 
 const POST_REQUEST = async ({ BODY, API_URL, HEADERS, dispatch }) => {
   dispatch(showLoader());
@@ -11,18 +10,14 @@ const POST_REQUEST = async ({ BODY, API_URL, HEADERS, dispatch }) => {
 };
 
 const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
-  const navigate = useNavigate()
   return useMutation({
     mutationFn: (variables) => POST_REQUEST({ ...variables, dispatch }),
     onSuccess: (data) => {
       onPostReqSuccess(data);
     },
     onError: (error) => {
-      const DATA_RECEIVED = error?.response?.data?.data
       let code = ''
       let message = ''
-
-      // if (!DATA_RECEIVED) navigate('/')
 
       if (error?.status === 403) {
         code = "Access Denied-403";

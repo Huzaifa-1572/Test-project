@@ -83,6 +83,7 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     token: data.OTP_VERIFICATION_TOKEN,
     otp: getSHA256Hash(data.CUSTOMER_OTP),
     requestDate: getCurrentDate(),
+    isUserContinue: data.CUSTOMER_CONTINUE_WITH_NEW_DEVICE
   };
 
   return {

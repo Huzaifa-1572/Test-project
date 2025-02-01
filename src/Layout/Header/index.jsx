@@ -24,7 +24,7 @@ function Header() {
         </div>
 
         {/* RESPONSIVE ICONS */}
-        <div className='menu-icon' >
+        {/* <div className='menu-icon' >
           {click ? <span className='close-icon'></span> : <GiHamburgerMenu onClick={handleClick} />}
         </div>
 
@@ -38,7 +38,7 @@ function Header() {
           <li className={'nav-item'}>
             Eligibility Criteria
           </li>
-        </ul>
+        </ul> */}
       </Box>
     </>
   );

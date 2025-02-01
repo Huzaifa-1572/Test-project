@@ -1,6 +1,9 @@
 import { lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import Loader from "src/Common/Loader";
+import { useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
 const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
 
 
@@ -46,6 +49,15 @@ export const showScreen = {
 
 const CustomerOnboarding = () => {
   const CURRENT_SCREEN = useSelector(state => state?.currentScreenState)
+  const { state } = useLocation();
+  const IS_ALLOWED = state?.isAllowed || false
+
+  console.log('isAllowed', state)
+
+  // isAllowed make it sure user can'nt access route directly.
+  if (!IS_ALLOWED) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <Suspense fallback={<Loader />}>

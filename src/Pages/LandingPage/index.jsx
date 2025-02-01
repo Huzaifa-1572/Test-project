@@ -14,6 +14,7 @@ import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { clearAppData } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
+import { ClearPrevScreen } from "src/Redux/Reducers/PrevScreenState";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -26,13 +27,15 @@ const LandingPage = () => {
   const handleNewAccount = () => {
     const NEXT_SCREEN = "scr_deviceLocation";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
-    navigate("/customer-onboarding");
+    // isAllowed make it sure user can'nt access route directly.
+    navigate("/customer-onboarding", { state: { isAllowed: true } });
   };
 
   const handleResumeApplication = () => {
     const NEXT_SCREEN = "scr_customerCnicResume";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
-    navigate("/customer-onboarding");
+    // isAllowed make it sure user can'nt access route directly.
+    navigate("/customer-onboarding", { state: { isAllowed: true } });
   };
 
   return (
