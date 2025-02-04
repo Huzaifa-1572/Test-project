@@ -208,7 +208,7 @@ export const generateFieldValue = (field) => {
   else if (field["kuid"] === "KEY_PROVINCE") {
     return getProvince(field?.value)
   }
-  else if (field["kuid"] === "KEY_PLACE_OF_BIRTH") {
+  else if ((field["kuid"] === "KEY_PLACE_OF_BIRTH") || (field["kuid"] === "KEY_CITY_CODE")) {
     return getCity(field?.value)
   }
   else if (field["kuid"] === "KEY_EMAIL") {

@@ -96,7 +96,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
                                     <div className={styles.infoText}>
                                         <span className={styles.stepTitle}>{section['summary-table-meta']['title2']}</span>
                                     </div>
-                                    {section['summary-table-meta'].editable ? <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>Edit</div> : <div className={styles.editBtn}><FaLock size={20} /></div>}
+                                    {section['summary-table-meta'].editable ? <div className={styles.editBtn} onClick={() => handleEdit(section['summary-table-meta']?.['editable-meta']?.['screen_kuid'])}>Edit</div> : <div className={styles.editBtn}><FaLock size={15} /></div>}
                                 </div>
 
                                 {/*TABLE BODY*/}

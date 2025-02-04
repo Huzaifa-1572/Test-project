@@ -2,7 +2,7 @@
 // export const BASE_URL = "http://192.168.10.203:8082/";
 
 // UAT
-// export const BASE_URL = "http://10.6.60.6:8089/";
+// export const BASE_URL = "http://10.6.60.6:8090/";
 
 export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
 

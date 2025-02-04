@@ -6,8 +6,21 @@ import ProgressBar from "src/Common/ProgressBar";
 import Header from "src/Layout/Header";
 import styles from "./index.module.scss";
 
-const DONT_SHOW_BACK_BUTTON_ON_SCREENS = ['scr_customerMobile', 'scr_mobileVerification', 'scr_hasValidEmail', 'scr_customerEmail', 'scr_emailVerification', 'scr_livePhotoCapture', 'scr_applicationComplete'];
-const DONT_SHOW_PROGRESS_BAR = ['scr_customerCnicResume', 'scr_applicationComplete']
+const DONT_SHOW_BACK_BUTTON_ON_SCREENS = [
+  'scr_customerMobile',
+  'scr_mobileVerification',
+  'scr_hasValidEmail',
+  'scr_customerEmail',
+  'scr_emailVerification',
+  'scr_livePhotoCapture',
+  'scr_reviewApplication',
+  'scr_applicationComplete'
+];
+const DONT_SHOW_PROGRESS_BAR = [
+  'scr_customerCnicResume',
+  'scr_applicationComplete'
+]
+
 function CustomerOnboardingLayout({ setValue, getValues, children }) {
   const [isLoading, setIsLoading] = useState(false);
   const isEdit = localStorage.getItem("isEdit");
@@ -30,7 +43,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
       <Box className={styles.contentContainer}>
         <Container maxWidth="xl" sx={{ padding: { xs: '10px 15px', md: '20px 40px' } }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: { xs: 'flex-end', sm: 'flex-start' } }}>
+            <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
               {
                 SHOW_BACK_BUTTON &&
                 <Box>

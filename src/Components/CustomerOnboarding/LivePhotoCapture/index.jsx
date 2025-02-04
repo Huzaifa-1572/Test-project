@@ -60,9 +60,20 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
     <WizardLayout
       Icon={LIVE_IMAGE_ICON}
       title={TITLE}
-      description={'Please capture your live photo now to proceed with the verification process. Ensure that your face is clearly visible and the lighting is adequate for the best results.'}
+      description={'Please capture your live photo now to proceed with the verification process.'}
       heroImage={LIVE_IMAGE_UNDRAW}
     >
+      <Box>
+        <Box sx={{ color: '#407ec9' }}>Guideline:</Box>
+        <Box sx={{ fontSize: "clamp(10px,3vw,14px)", margin: '7px 0px', color: "#3b3b3b" }}>
+          <Box sx={{ lineHeight: '15px' }}> Face should be clearly visible.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Image should be straight and properly aligned (not rotated or tilted).</Box>
+          <Box sx={{ lineHeight: '15px' }}> Avoid blurry photos – ensure the camera is stable.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Good lighting is required – avoid shadows or overexposure.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Face should be centered in the frame.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Use a neutral background – avoid clutter or distractions.</Box>
+        </Box>
+      </Box>
 
       <Box>
         {!isCameraAccessAllowed && (

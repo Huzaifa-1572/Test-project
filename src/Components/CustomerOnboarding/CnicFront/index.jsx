@@ -24,6 +24,19 @@ const CnicFront = ({ control, getValues, errors, setValue }) => {
           </Box>
         ))
       }
+
+      <Box sx={{ margin: '20px 0px' }}>
+        <Box sx={{ color: '#407ec9' }}>Guideline:</Box>
+        <Box sx={{ fontSize: "clamp(10px,3vw,14px)", margin: '7px 0px', color: "#3b3b3b" }}>
+          <Box sx={{ lineHeight: '15px' }}> Image should be clearly visible.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Image should be straight and properly aligned (not rotated or tilted).</Box>
+          <Box sx={{ lineHeight: '15px' }}> Avoid blurry photos.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Good lighting is required – avoid shadows or overexposure.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Image should be centered in the frame.</Box>
+          <Box sx={{ lineHeight: '15px' }}> Use a neutral background – avoid clutter or distractions.</Box>
+        </Box>
+      </Box>
+
       <CustomButton label={"Proceed"} />
     </WizardLayout>
   );

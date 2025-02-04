@@ -52,8 +52,6 @@ const CustomerOnboarding = () => {
   const { state } = useLocation();
   const IS_ALLOWED = state?.isAllowed || false
 
-  console.log('isAllowed', state)
-
   // isAllowed make it sure user can'nt access route directly.
   if (!IS_ALLOWED) {
     return <Navigate to="/" replace />;

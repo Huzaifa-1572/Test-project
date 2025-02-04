@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { GO_BACK_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { IoChevronBack } from "react-icons/io5";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
+import { IoMdArrowRoundBack } from "react-icons/io";
+
 
 const GoBack = ({ setValue, getValues }) => {
     const navigate = useNavigate()
@@ -38,15 +40,30 @@ const GoBack = ({ setValue, getValues }) => {
     }
 
     return (
-        <Button
-            size="large"
-            variant="contained"
-            onClick={handleBack}
-            sx={{ fontSize: "14px", height: "44px", backgroundColor: "#407ec9", letterSpacing: '1px' }}
-            startIcon={<IoChevronBack />}
-        >
-            Back
-        </Button>
+        <>
+            {/* FOR LARGER SCREEN */}
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <Button
+                    size="large"
+                    variant="contained"
+                    onClick={handleBack}
+                    sx={{ fontSize: "14px", height: "44px", backgroundColor: "#407ec9", letterSpacing: '1px' }}
+                    startIcon={<IoChevronBack />}
+                >
+                    Back
+                </Button>
+            </Box>
+
+            {/* FOR SMALLER SCREENS */}
+            <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+                <IoMdArrowRoundBack
+                    style={{ cursor: 'pointer' }}
+                    onClick={handleBack}
+                    size={'35px'}
+                    color='#407ec9'
+                />
+            </Box>
+        </>
     );
 };
 
