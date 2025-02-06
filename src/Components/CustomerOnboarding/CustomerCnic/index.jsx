@@ -49,7 +49,6 @@ const CustomerCnic = ({ control, errors }) => {
           {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
         </Grid>
 
-
         <Grid item xs={12} lg={6}>
           <CustomButton label="Proceed" />
         </Grid>

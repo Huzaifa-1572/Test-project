@@ -1,16 +1,18 @@
 import { Box, Button } from "@mui/material";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
-import styles from "./index.module.scss";
 import LIVE_IMAGE_ICON from 'src/Assets/images/liveImageIcon.png';
 import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
 import CustomButton from "src/Common/CustomButton";
+import Guidelines from "src/Common/Guidelines";
+import { LIVE_IMAGE_GUIDELINES } from "src/Common/Guidelines/guideline";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
-import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
-import { useDispatch } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
+import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
+import styles from "./index.module.scss";
 
 
 const LivePhotoCapture = ({ errors, setValue, watch }) => {
@@ -18,6 +20,7 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const { TITLE, DESCRIPTION } = getScreenData()
   const dispatch = useDispatch()
+  const guidelinePoints = useMemo(() => LIVE_IMAGE_GUIDELINES, [])
 
   // To check whether the camera access permission is allowed or not
   useEffect(() => {
@@ -63,17 +66,7 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
       description={'Please capture your live photo now to proceed with the verification process.'}
       heroImage={LIVE_IMAGE_UNDRAW}
     >
-      <Box>
-        <Box sx={{ color: '#407ec9' }}>Guideline:</Box>
-        <Box sx={{ fontSize: "clamp(10px,3vw,14px)", margin: '7px 0px', color: "#3b3b3b" }}>
-          <Box sx={{ lineHeight: '15px' }}> Face should be clearly visible.</Box>
-          <Box sx={{ lineHeight: '15px' }}> Image should be straight and properly aligned (not rotated or tilted).</Box>
-          <Box sx={{ lineHeight: '15px' }}> Avoid blurry photos – ensure the camera is stable.</Box>
-          <Box sx={{ lineHeight: '15px' }}> Good lighting is required – avoid shadows or overexposure.</Box>
-          <Box sx={{ lineHeight: '15px' }}> Face should be centered in the frame.</Box>
-          <Box sx={{ lineHeight: '15px' }}> Use a neutral background – avoid clutter or distractions.</Box>
-        </Box>
-      </Box>
+      <Guidelines guidelinePoints={guidelinePoints} />
 
       <Box>
         {!isCameraAccessAllowed && (

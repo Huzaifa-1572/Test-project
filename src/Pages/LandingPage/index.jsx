@@ -57,8 +57,8 @@ const LandingPage = () => {
                 <Box className={styles.textContainer}>
                   <span> Account for Your Needs</span>
                   <br />
-                  Start Your Journey with{" "}
-                  <img className={styles.payvay} src={PAYVAY} alt="PAYVAY" />
+                  Start Your Journey with Payvay!
+                  {/* <img className={styles.payvay} src={PAYVAY} alt="PAYVAY" /> */}
                 </Box>
               </Fade>
 

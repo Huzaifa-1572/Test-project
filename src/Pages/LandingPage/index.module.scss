@@ -61,17 +61,18 @@
 .textContainer {
   font-weight: bold;
   text-align: center;
-  font-size: clamp(14px, 4vw, 24px);
+  font-size: clamp(18px, 4vw, 26px);
+  line-height: 30px;
 }
 
 .descriptionText {
   text-align: center;
   padding: 20px 0px;
-  font-size: clamp(10px, 3vw, 14px);
+  font-size: clamp(10px, 2vw, 14px);
 }
 
 .card {
-  background: #f0eeee;
+  background: #f4f4f4;
   border-radius: 15px;
   display: flex;
   justify-content: center;
