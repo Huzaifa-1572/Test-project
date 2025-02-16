@@ -2,7 +2,7 @@
   color: black;
   margin: 10px 0px;
   font-weight: 700;
-  font-size: clamp(22px, 4vw, 38px);
+  font-size: clamp(25px, 4vw, 38px);
   letter-spacing: 0.5px;
 }
 
@@ -38,4 +38,9 @@
   height: clamp(85px, 10vh, 110px);
   width: clamp(85px, 10vh, 110px);
   padding: 25px;
+}
+
+.smallDeviceIconContainer {
+  height: clamp(150px, 10vh, 250px);
+  width: clamp(150px, 10vh, 250px);
 }

@@ -8,11 +8,20 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
         <Grid container spacing={2} sx={{ marginBottom: '60px' }}>
             {/* MAIN CONTENT */}
             <Grid item xs={12} md={8}>
-                <Box sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+                {/* FOR LARGE DEVICES */}
+                <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
                     <Box className={styles.iconBox} >
                         <img src={Icon} className={styles.icon} />
                     </Box>
                 </Box>
+
+                {/* FOR SMALL DEVICES */}
+                <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+                    <Box className={styles.smallDeviceIconContainer} >
+                        <img src={heroImage} height={'100%'} width={'100%'} />
+                    </Box>
+                </Box>
+
                 <Fade in={true} timeout={800}>
                     <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
                         {title}
