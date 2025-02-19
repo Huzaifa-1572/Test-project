@@ -2,8 +2,10 @@ import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
-import { FIELD_MANIFEST } from "../Constants";
+import { FIELD_MANIFEST, dateFormats } from "../Constants";
 import dayjs from "dayjs";
+
+
 
 const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   const DATA = response?.data?.data;
@@ -47,28 +49,16 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
           }
 
           if (field?.field_manifest === FIELD_MANIFEST.DATE_PICKER) {
-            const dateFormats = [
-              "DD.MM.YYYY", // 23.02.2021
-              "MM/DD/YYYY", // 02/23/2021
-              "YYYY-MM-DD", // 2021-02-23
-              "YYYY/MM/DD", // 2021/02/23
-              "DD/MM/YYYY", // 23/02/2021
-              "MM-DD-YYYY", // 02-23-2021
-              "YYYY.MM.DD", // 2021.02.23
-              "YYYY/DD/MM", // 2021/23/02
-            ];
-
             let parsedDate = null;
             for (let format of dateFormats) {
-              parsedDate = dayjs(processedValue, format);
+              parsedDate = dayjs(processedValue, format, true);
+
               if (parsedDate.isValid()) {
                 break;
               }
             }
 
-            processedValue = parsedDate.isValid()
-              ? parsedDate.format("MM/DD/YYYY")
-              : processedValue;
+            processedValue = parsedDate && parsedDate.isValid() ? parsedDate.format("MM/DD/YYYY") : processedValue;
           }
 
           setValue(field?.kuid, processedValue);

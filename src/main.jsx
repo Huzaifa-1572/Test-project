@@ -5,6 +5,9 @@ import { store } from "src/Redux/Store/index.js";
 import App from "./App.jsx";
 import "./index.css";
 
+// DISABLING ALL CONSOLE IN APP
+console.log = () => { }
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>

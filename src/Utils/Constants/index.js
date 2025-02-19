@@ -57,3 +57,16 @@ export const FIELD_MANIFEST = {
   DATE_PICKER: "DatePicker",
   CHECKBOX: "checkbox",
 };
+
+
+export const dateFormats = [
+  "DD.MM.YYYY", // 23.02.2021
+  "MM/DD/YYYY", // 02/23/2021
+  "YYYY-MM-DD", // 2021-02-23
+  "YYYY/MM/DD", // 2021/02/23
+  "DD/MM/YYYY", // 23/02/2021
+  "MM-DD-YYYY", // 02-23-2021
+  "YYYY.MM.DD", // 2021.02.23
+  "YYYY/DD/MM", // 2021/23/02
+  "MM.DD.YYYY", // 23.02.2021
+];

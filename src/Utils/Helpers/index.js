@@ -66,7 +66,7 @@ export function getCurrentDate() {
 //handle file size of img
 export const validateFileSize = (file) => {
   const fileSizeInMB = file.size / (1024 * 1024);
-  const sizeLimit = 2; // Size limit in MB
+  const sizeLimit = 4; // Size limit in MB
   return fileSizeInMB <= sizeLimit;
 };
 

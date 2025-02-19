@@ -750,7 +750,7 @@ export const UploadImage = ({
       dispatch(
         showErrorModal({
           errorCode: "File Size Exceeded",
-          errorMessage: "Please upload a file smaller than 2MB.",
+          errorMessage: "Please upload a file smaller than 4MB.",
           isError: true,
         })
       );
