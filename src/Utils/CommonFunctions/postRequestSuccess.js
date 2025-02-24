@@ -1,9 +1,9 @@
-import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
-import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
-import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
-import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
-import { FIELD_MANIFEST, dateFormats } from "../Constants";
 import dayjs from "dayjs";
+import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
+import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
+import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
+import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
+import { FIELD_MANIFEST } from "../Constants";
 
 
 
@@ -32,28 +32,33 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
 
     // ------------------FOR RESUME SCREENS
     const FIELDS = DATA?.nextScreenPayload?.content_group[0]?.fields || [];
-    FIELDS?.length &&
-      FIELDS?.forEach((field) => {
-        if (field?.userValue) {
-          let processedValue = field?.userValue;
+    FIELDS?.forEach((field) => {
+      if (field?.userValue) {
+        let processedValue = field?.userValue;
 
-          if (field?.field_manifest === FIELD_MANIFEST.CHECKBOX) {
-            processedValue = processedValue === "true";
-          }
-
-          if (field?.field_manifest === FIELD_MANIFEST.CNIC) {
-            processedValue = formatCNIC(processedValue);
-          }
-
-          if (field?.field_manifest === FIELD_MANIFEST.DATE_PICKER) {
-            const REPLACE_DOTS_WITH_SLASHES = processedValue?.replace(/\./g, "/");
-            const parsedDate = dayjs(REPLACE_DOTS_WITH_SLASHES, "DD/MM/YYYY");
-            processedValue = parsedDate?.isValid() ? parsedDate : null;
-          }
-
-          setValue(field?.kuid, processedValue);
+        if (field?.field_manifest === FIELD_MANIFEST.CHECKBOX) {
+          processedValue = processedValue === "true";
         }
-      });
+
+        if (field?.field_manifest === FIELD_MANIFEST.CNIC) {
+          processedValue = formatCNIC(processedValue);
+        }
+
+        if (field?.field_manifest === FIELD_MANIFEST.DATE_PICKER) {
+          // Replace dots with slashes for consistency
+          const standardizedValue = processedValue?.replace(/\./g, "/");
+          const parsedDate = dayjs(standardizedValue, ["YYYY-MM-DD", "DD/MM/YYYY", "DD.MM.YYYY"], true);
+          console.log('Parsed Date:', parsedDate.format(), 'Valid:', parsedDate.isValid());
+          processedValue = parsedDate.isValid() ? parsedDate.format("YYYY-MM-DD") : null;
+        }
+
+        setValue(field?.kuid, processedValue);
+      }
+      else {
+        return
+      }
+    });
+
     // ------------------FOR RESUME SCREENS
 
     // ------------------FOR OTP VERFICATION SCREENS
