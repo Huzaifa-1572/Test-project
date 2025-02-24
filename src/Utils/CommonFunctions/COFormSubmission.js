@@ -147,13 +147,11 @@ export const CUSTEMAIL_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
 
 export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
   const isEdit = localStorage.getItem("isEdit") || false;
-  if (isEdit) {
-    localStorage.removeItem("isEdit");
-  }
+  if (isEdit) { localStorage.removeItem("isEdit") }
 
   let fields = [];
   if (Array.isArray(kuid)) {
-    fields = kuid.map((kuid) => {
+    fields = kuid?.map((kuid) => {
       if (kuid === "KEY_CUST_IDENT_VALUE") {
         return {
           attributeName: kuid,
@@ -161,11 +159,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
         };
       }
 
-      if (
-        kuid === "KEY_DOB" ||
-        kuid === "KEY_CNIC_ISSUANCE_DATE" ||
-        kuid === "KEY_CNIC_EXPIRY_DATE"
-      ) {
+      if ((kuid === "KEY_DOB") || (kuid === "KEY_CNIC_ISSUANCE_DATE") || (kuid === "KEY_CNIC_EXPIRY_DATE")) {
         return {
           attributeName: kuid,
           attributeValue: retrieveDate(data[kuid]),

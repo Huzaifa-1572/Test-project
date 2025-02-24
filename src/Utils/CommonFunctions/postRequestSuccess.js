@@ -13,10 +13,7 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
 
   // --------------------FOR OTP VERFICATION SCREENS
   const OTP_VERIFICATION_TOKEN = response?.data?.data?.payload?.token;
-  const VERIFICATION_SCREENS = [
-    "scr_mobileVerification",
-    "scr_emailVerification",
-  ];
+  const VERIFICATION_SCREENS = ["scr_mobileVerification", "scr_emailVerification"];
   // --------------------FOR OTP VERFICATION SCREENS
 
   if (IS_DATA_AVAILABLE) {
@@ -49,16 +46,9 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
           }
 
           if (field?.field_manifest === FIELD_MANIFEST.DATE_PICKER) {
-            let parsedDate = null;
-            for (let format of dateFormats) {
-              parsedDate = dayjs(processedValue, format, true);
-
-              if (parsedDate.isValid()) {
-                break;
-              }
-            }
-
-            processedValue = parsedDate && parsedDate.isValid() ? parsedDate.format("MM/DD/YYYY") : processedValue;
+            const REPLACE_DOTS_WITH_SLASHES = processedValue?.replace(/\./g, "/");
+            const parsedDate = dayjs(REPLACE_DOTS_WITH_SLASHES, "DD/MM/YYYY");
+            processedValue = parsedDate?.isValid() ? parsedDate : null;
           }
 
           setValue(field?.kuid, processedValue);
