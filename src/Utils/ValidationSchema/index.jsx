@@ -142,24 +142,9 @@ export const shape = {
         /^\d{5}-\d{7}-\d{1}$/,
         "Please enter a valid CNIC in the format XXXXX-XXXXXXX-X."
       ),
-    KEY_DOB: yup
-      .date()
-      .required('Date of birth is required.')
-      .max(minAge(18), 'You must be at least 18 years old.')
-      .typeError('Please provide a valid date of birth.'),
-    KEY_CNIC_ISSUANCE_DATE: yup
-      .date()
-      .required('CNIC issuance date is required')
-      .test('is-valid-date', 'Please enter a valid CNIC issuance date.', (value) => dayjs(value).isValid())
-      .test('not-in-future', 'CNIC issuance date cannot be in the future', (value) => validIssuanceDate(value))
-      .test('within-reasonable-timeframe', 'CNIC issuance date should be within the last 50 years', (value) => withinReasonableTimeframe(value))
-      .typeError('Please provide a valid CNIC issuance date.'),
-    KEY_CNIC_EXPIRY_DATE: yup
-      .date()
-      .required('CNIC expiry date is required')
-      .test('is-valid-date', 'Please enter a valid CNIC expiry date.', (value) => dayjs(value).isValid())
-      .test('not-in-past', 'CNIC expiry date cannot be in the past', (value) => validExpiryDate(value))
-      .typeError('Please provide a valid CNIC expiry date.'),
+    KEY_DOB: yup.string().required('Date of birth is required.'),
+    KEY_CNIC_ISSUANCE_DATE: yup.string().required('CNIC issuance date is required'),
+    KEY_CNIC_EXPIRY_DATE: yup.string().required('CNIC expiry date is required'),
     KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC has lifetime expiry.'),
   },
 

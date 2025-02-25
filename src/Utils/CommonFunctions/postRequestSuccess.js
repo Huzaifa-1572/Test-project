@@ -47,15 +47,11 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
         if (field?.field_manifest === FIELD_MANIFEST.DATE_PICKER) {
           // Replace dots with slashes for consistency
           const standardizedValue = processedValue?.replace(/\./g, "/");
-          const parsedDate = dayjs(standardizedValue, ["YYYY-MM-DD", "DD/MM/YYYY", "DD.MM.YYYY"], true);
-          console.log('Parsed Date:', parsedDate.format(), 'Valid:', parsedDate.isValid());
+          const parsedDate = dayjs(standardizedValue, ["YYYY-MM-DD", "DD.MM.YYYY"], true);
           processedValue = parsedDate.isValid() ? parsedDate.format("YYYY-MM-DD") : null;
         }
 
         setValue(field?.kuid, processedValue);
-      }
-      else {
-        return
       }
     });
 

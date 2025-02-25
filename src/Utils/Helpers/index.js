@@ -56,7 +56,7 @@ export function retrieveCNIC(cnic) {
 }
 
 export function retrieveDate(date) {
-  return dayjs(date).format("YYYY-MM-DD")
+  return date?.replace(/\./g, "-");
 }
 
 export function getCurrentDate() {
@@ -66,7 +66,7 @@ export function getCurrentDate() {
 //handle file size of img
 export const validateFileSize = (file) => {
   const fileSizeInMB = file.size / (1024 * 1024);
-  const sizeLimit = 4; // Size limit in MB
+  const sizeLimit = 6; // Size limit in MB
   return fileSizeInMB <= sizeLimit;
 };
 

@@ -28,7 +28,8 @@ export const TextInputField = ({
   placeholder = "",
   input_type,
   type = "text",
-  maxLength = 100
+  maxLength = 100,
+  disabled
 }) => {
   return (
     <Controller
@@ -42,6 +43,7 @@ export const TextInputField = ({
             name={name}
             label={label}
             type={type}
+            disabled={disabled}
             variant="filled"
             onKeyDown={(event) => {
               if (type === "text") {
@@ -738,12 +740,12 @@ export const UploadImage = ({
   };
   const handleFileChange = (e, name) => {
     const file = e.target.files[0];
-    // Check if file size is greater than 2MB
+    // Check if file size is greater than 5MB
     if (!validateFileSize(file)) {
       dispatch(
         showErrorModal({
           errorCode: "File Size Exceeded",
-          errorMessage: "Please upload a file smaller than 4MB.",
+          errorMessage: "Please upload a file smaller than 5MB.",
           isError: true,
         })
       );
