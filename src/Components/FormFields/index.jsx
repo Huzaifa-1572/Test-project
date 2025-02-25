@@ -10,12 +10,11 @@ import dayjs from "dayjs";
 import React from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, useController } from "react-hook-form";
-import { LuUpload } from "react-icons/lu";
+import { LuCheckCheck, LuUpload } from "react-icons/lu";
 import { NumericFormat, PatternFormat } from "react-number-format";
 import { useDispatch } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { validateFileSize } from "src/Utils/Helpers";
-import { LuCheckCheck } from "react-icons/lu";
 
 const PatternFormatRef = React.forwardRef((props, ref) => (
   <PatternFormat {...props} getInputRef={ref} />
@@ -46,16 +45,11 @@ export const TextInputField = ({
             variant="filled"
             onKeyDown={(event) => {
               if (type === "text") {
-                const keyCode = event.keyCode || event.which;
-                const keyValue = String.fromCharCode(keyCode);
-                // Allow backspace key, enter key, and tab key
-                if (
-                  event.keyCode === 8 ||
-                  event.keyCode === 13 ||
-                  event.keyCode === 9
-                )
-                  return;
-                if (!/^[a-zA-Z ]*$/.test(keyValue)) event.preventDefault();
+                const key = event.key;
+                // Allow backspace, enter, and tab
+                if (["Backspace", "Enter", "Tab"].includes(key)) return;
+                // Block any numeric input including numpad
+                if (!/^[a-zA-Z ]$/.test(key)) event.preventDefault();
               }
             }}
             fullWidth
@@ -462,7 +456,6 @@ export const NumberInputField = ({
     />
   );
 };
-
 
 //Date Field
 export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
