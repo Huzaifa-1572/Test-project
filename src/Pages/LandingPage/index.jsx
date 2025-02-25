@@ -25,7 +25,7 @@ const LandingPage = () => {
   }, []);
 
   const handleNewAccount = () => {
-    const NEXT_SCREEN = "scr_deviceLocation";
+    const NEXT_SCREEN = "scr_applicationComplete";
     dispatch(updateCurrentScreen(NEXT_SCREEN));
     // isAllowed make it sure user can'nt access route directly.
     navigate("/customer-onboarding", { state: { isAllowed: true } });

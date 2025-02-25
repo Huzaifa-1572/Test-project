@@ -8,6 +8,12 @@
   width: 100%;
   overflow-y: auto;
 
+  .mainHeading {
+    color: #e8927c;
+    margin: 15px 0px;
+    letter-spacing: 2px;
+  }
+
   .backButtonWrapper {
     width: 200px;
     height: 50px;
@@ -15,6 +21,7 @@
     background-color: #363636;
     color: white;
     gap: 5px;
+    margin: 20px 0px;
     font-size: 14px;
     display: flex;
     justify-content: center;
@@ -37,7 +44,7 @@
 
   .titleWrapper {
     margin-top: 5px;
-    font-size: clamp(20px, 4vw, 40px);
+    font-size: clamp(18px, 4vw, 40px);
   }
 
   .descriptionWrapper {
@@ -56,7 +63,7 @@
 
     .boxTitle {
       color: white;
-      font-size: clamp(18px, 6vw, 30px);
+      font-size: clamp(16px, 6vw, 30px);
     }
     .trackingID {
       margin-top: 10px;
