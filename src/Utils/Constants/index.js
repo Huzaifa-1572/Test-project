@@ -56,6 +56,7 @@ export const FIELD_MANIFEST = {
   CNIC: "CNIC",
   DATE_PICKER: "DatePicker",
   CHECKBOX: "checkbox",
+  TEXTDATE: "Text Date"
 };
 
 

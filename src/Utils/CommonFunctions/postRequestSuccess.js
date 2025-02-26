@@ -33,26 +33,32 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
     // ------------------FOR RESUME SCREENS
     const FIELDS = DATA?.nextScreenPayload?.content_group[0]?.fields || [];
     FIELDS?.forEach((field) => {
-      if (field?.userValue) {
-        let processedValue = field?.userValue;
+      if (!field?.userValue) return;
 
-        if (field?.field_manifest === FIELD_MANIFEST.CHECKBOX) {
-          processedValue = processedValue === "true";
-        }
+      let processedValue = field?.userValue;
 
-        if (field?.field_manifest === FIELD_MANIFEST.CNIC) {
-          processedValue = formatCNIC(processedValue);
-        }
+      switch (field?.field_manifest) {
+        case FIELD_MANIFEST.CHECKBOX:
+          processedValue = field?.userValue === "true";
+          break;
 
-        if (field?.field_manifest === FIELD_MANIFEST.DATE_PICKER) {
-          // Replace dots with slashes for consistency
-          const standardizedValue = processedValue?.replace(/\./g, "/");
-          const parsedDate = dayjs(standardizedValue, ["YYYY-MM-DD", "DD.MM.YYYY"], true);
+        case FIELD_MANIFEST.CNIC:
+          processedValue = formatCNIC(field?.userValue);
+          break;
+
+        case FIELD_MANIFEST.DATE_PICKER: {
+          const standardizedValue = field?.userValue?.replace(/[.-]/g, "/");
+          const parsedDate = dayjs(standardizedValue, ["YYYY-MM-DD", "DD/MM/YYYY"], true);
           processedValue = parsedDate.isValid() ? parsedDate.format("YYYY-MM-DD") : null;
+          break;
         }
 
-        setValue(field?.kuid, processedValue);
+        case FIELD_MANIFEST.TEXTDATE:
+          processedValue = field?.userValue?.replace(/[.-]/g, "-");
+          break;
       }
+
+      setValue(field?.kuid, processedValue);
     });
 
     // ------------------FOR RESUME SCREENS

@@ -23,6 +23,20 @@ export const FormBuilder = ({ field, control, errors, watch, setValue, getValues
                 </>
             );
 
+        case FIELD_MANIFEST.TEXTDATE:
+            return (
+                <>
+                    <TextInputField
+                        name={field?.kuid}
+                        control={control}
+                        label={field?.label}
+                        input_type="text"
+                        disabled={disabled || field?.locked}
+                    />
+                    {errors[field?.kuid]?.message && (<ValidationError message={errors[field?.kuid]?.message} />)}
+                </>
+            );
+
         case FIELD_MANIFEST.MULTILINE_TEXTBOX:
             return (
                 <>
