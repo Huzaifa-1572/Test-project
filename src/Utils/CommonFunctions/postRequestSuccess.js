@@ -33,8 +33,6 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
     // ------------------FOR RESUME SCREENS
     const FIELDS = DATA?.nextScreenPayload?.content_group[0]?.fields || [];
     FIELDS?.forEach((field) => {
-      if (!field?.userValue) return;
-
       let processedValue = field?.userValue;
 
       switch (field?.field_manifest) {
@@ -54,13 +52,17 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
         }
 
         case FIELD_MANIFEST.TEXTDATE:
-          processedValue = field?.userValue?.replace(/[.-]/g, "-");
+          if (!field?.userValue && !field?.locked) {
+            processedValue = '01-01-2999 (valid for lifetime)' || 'OCR FAILED'
+          }
+          else {
+            processedValue = field?.userValue?.replace(/[.-]/g, "-") || 'OCR FAILED';
+          }
           break;
       }
 
       setValue(field?.kuid, processedValue);
     });
-
     // ------------------FOR RESUME SCREENS
 
     // ------------------FOR OTP VERFICATION SCREENS

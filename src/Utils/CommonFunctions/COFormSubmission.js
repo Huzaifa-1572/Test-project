@@ -5,6 +5,7 @@ import {
   getSHA256Hash,
   retrieveCNIC,
   retrieveDate,
+  retrieveDOE,
   retrieveMobileNumber,
 } from "src/Utils/Helpers";
 
@@ -159,10 +160,17 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
         };
       }
 
-      if ((kuid === "KEY_DOB") || (kuid === "KEY_CNIC_ISSUANCE_DATE") || (kuid === "KEY_CNIC_EXPIRY_DATE")) {
+      if ((kuid === "KEY_DOB") || (kuid === "KEY_CNIC_ISSUANCE_DATE")) {
         return {
           attributeName: kuid,
           attributeValue: retrieveDate(data[kuid]),
+        };
+      }
+
+      if (kuid === "KEY_CNIC_EXPIRY_DATE") {
+        return {
+          attributeName: kuid,
+          attributeValue: retrieveDOE(data[kuid]),
         };
       }
 
@@ -172,6 +180,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
       };
     });
   }
+
 
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
@@ -183,6 +192,7 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
     content: {
       kycs: fields,
     },
+
   };
 
   return {

@@ -145,7 +145,6 @@ export const shape = {
     KEY_DOB: yup.string().required('Date of birth is required.'),
     KEY_CNIC_ISSUANCE_DATE: yup.string().required('CNIC issuance date is required'),
     KEY_CNIC_EXPIRY_DATE: yup.string().required('CNIC expiry date is required'),
-    KEY_CNIC_LIFETIME: yup.boolean().required('Please select if the CNIC has lifetime expiry.'),
   },
 
   "scr_termsAndConditions": {

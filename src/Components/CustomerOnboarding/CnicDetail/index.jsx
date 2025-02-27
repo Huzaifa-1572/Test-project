@@ -1,6 +1,4 @@
 import { Grid } from "@mui/material";
-import dayjs from "dayjs";
-import { useEffect } from "react";
 import CARD_ICON from 'src/Assets/images/cardIcon.png';
 import CNIC_DETAIL_UNDRAW from 'src/Assets/images/cnicDetailUndraw.svg';
 import CustomButton from "src/Common/CustomButton";
@@ -13,13 +11,6 @@ const CnicDetail = ({ control, setValue, errors, watch }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
   const CNIC_LIFE_TIME = watch("KEY_CNIC_LIFETIME");
 
-  // Watch for changes to KEY_CNIC_LIFETIME and KEY_CNIC_EXPIRY_DATE
-  useEffect(() => {
-    if (CNIC_LIFE_TIME) {
-      setValue("KEY_CNIC_EXPIRY_DATE", dayjs('2999-01-01').format('YYYY-MM-DD'));
-    }
-  }, [CNIC_LIFE_TIME]);
-
   // Function to check field should be disabled
   const getFieldDisabled = (fieldKuid) => {
     const EXPIRY_DATE = fieldKuid === "KEY_CNIC_EXPIRY_DATE";
@@ -30,7 +21,7 @@ const CnicDetail = ({ control, setValue, errors, watch }) => {
     <WizardLayout
       Icon={CARD_ICON}
       title={TITLE}
-      description={'Kindly review and confirm the details of your CNIC to proceed with the process.' || DESCRIPTION}
+      description={'Kindly review and confirm the details of your CNIC to proceed with the process.'}
       heroImage={CNIC_DETAIL_UNDRAW}
     >
       <Grid container sx={{ gap: "24px" }}>

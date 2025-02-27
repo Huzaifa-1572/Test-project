@@ -29,80 +29,71 @@ export const TextInputField = ({
   input_type,
   type = "text",
   maxLength = 100,
-  disabled
+  disabled,
 }) => {
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => {
-        return (
-          <TextField
-            {...field}
-            id={name}
-            name={name}
-            label={label}
-            type={type}
-            disabled={disabled}
-            variant="filled"
-            onKeyDown={(event) => {
-              if (type === "text") {
-                const key = event.key;
-                // Allow backspace, enter, and tab
-                if (["Backspace", "Enter", "Tab"].includes(key)) return;
-                // Block any numeric input including numpad
-                if (!/^[a-zA-Z ]$/.test(key)) event.preventDefault();
-              }
-            }}
-            fullWidth
-            placeholder={input_type === "date" ? "" : placeholder}
-            InputProps={{
-              disableUnderline: true, // Remove underline like in NicInput
-              sx: {
-                border: "1px solid silver",
-                borderRadius: "7px",
-                fontSize: "1.1rem",
-                height: "70px",
-                backgroundColor: "white", // Make sure it's white
-                "&:hover": {
-                  backgroundColor: "white",
-                },
-                "&.Mui-focused": {
-                  backgroundColor: "white", // Maintain white on focus
-                },
-              },
-              autoComplete: "off", // Disable autocomplete
-              autoCorrect: "off", // Disable browser correction (especially for mobile)
-              inputProps: {
-                maxLength: maxLength,
-              }
-            }}
-            InputLabelProps={{
-              sx: {
-                fontSize: "0.85rem",
-                color: "#666666",
-                marginTop: "5px",
-              },
-            }}
-            sx={{
-              maxWidth: "500px",
-              width: "100%",
-              "& .MuiFilledInput-root": {
-                backgroundColor: "white",
-                "&:hover": {
-                  backgroundColor: "white", // Keep white on hover
-                },
-                "&.Mui-focused": {
-                  backgroundColor: "white", // Keep white on focus
-                },
-              },
-            }}
-          />
-        );
-      }}
+      render={({ field: { onChange, value, ...restField } }) => (
+        <TextField
+          {...restField}
+          id={name}
+          name={name}
+          label={label}
+          type={type}
+          disabled={disabled}
+          variant="filled"
+          value={value}
+          onKeyDown={(event) => {
+            if (type === "text") {
+              const key = event.key;
+              if (["Backspace", "Enter", "Tab"].includes(key)) return;
+              if (!/^[a-zA-Z ]$/.test(key)) event.preventDefault();
+            }
+          }}
+          onChange={(event) => {
+            let newValue = event.target.value;
+            if (type === "text") {
+              newValue = newValue.replace(/[0-9]/g, ""); // Remove numbers dynamically
+            }
+            onChange(newValue); // Update the field value in the form state
+          }}
+          fullWidth
+          placeholder={input_type === "date" ? "" : placeholder}
+          InputProps={{
+            disableUnderline: true,
+            sx: {
+              border: "1px solid silver",
+              borderRadius: "7px",
+              fontSize: "1.1rem",
+              height: "70px",
+              backgroundColor: "white",
+              "&:hover": { backgroundColor: "white" },
+              "&.Mui-focused": { backgroundColor: "white" },
+            },
+            autoComplete: "off",
+            autoCorrect: "off",
+            inputProps: { maxLength: maxLength },
+          }}
+          InputLabelProps={{
+            sx: { fontSize: "0.85rem", color: "#666666", marginTop: "5px" },
+          }}
+          sx={{
+            maxWidth: "500px",
+            width: "100%",
+            "& .MuiFilledInput-root": {
+              backgroundColor: "white",
+              "&:hover": { backgroundColor: "white" },
+              "&.Mui-focused": { backgroundColor: "white" },
+            },
+          }}
+        />
+      )}
     />
   );
 };
+
 
 // ALPHA NUMERIC FIELD
 export const AlphaNumericInputField = ({

@@ -1,14 +1,13 @@
 import Axios from "axios";
+import CryptoJS from "crypto-js";
+import dayjs from "dayjs";
 import Dexie from "dexie";
-import { v4 as uuidv4 } from "uuid";
 import DOMPurify from 'dompurify';
 import { useSelector } from "react-redux";
-import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
-import dayjs from "dayjs";
-import { OPERATOR_MAP } from "../Constants";
 import { showScreen } from "src/Pages/CustomerOnboarding";
-import CryptoJS from "crypto-js";
-import { ClearPrevScreen } from "src/Redux/Reducers/PrevScreenState";
+import { v4 as uuidv4 } from "uuid";
+import { OPERATOR_MAP } from "../Constants";
+import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
 
 
 export function maskEmail(email = "") {
@@ -58,6 +57,11 @@ export function retrieveCNIC(cnic) {
 export function retrieveDate(date) {
   return date?.replace(/\./g, "-");
 }
+
+export function retrieveDOE(date) {
+  return date?.split(' ')[0];
+}
+
 
 export function getCurrentDate() {
   return dayjs().format("YYYY-MM-DD HH:mm:ss.SSS");
@@ -216,7 +220,8 @@ export const generateFieldValue = (field) => {
   }
   else if (field["kuid"] === "KEY_CNIC_LIFETIME" || field["kuid"] === "customerEmail") {
     return field?.value === 'true' ? 'Yes' : 'No'
-  } else if (field["kuid"] === "KEY_MOBILE_OPERATOR") {
+  }
+  else if (field["kuid"] === "KEY_MOBILE_OPERATOR") {
     return OPERATOR_MAP[field?.value] || field?.value
   }
   else {
