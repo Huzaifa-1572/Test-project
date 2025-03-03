@@ -9,12 +9,20 @@ const ApplicationComplete = ({ reset }) => {
     const NAVIGATE_TO = useNavigate()
     const { FIELDS } = getScreenData();
     const trackingID = FIELDS[0]?.userValue;
+    const MOBILE_DEVICE_DATA = JSON.parse(sessionStorage.getItem('device'))
+    const deviceId = MOBILE_DEVICE_DATA?.deviceId
+
 
     const handleClick = () => {
         localStorage.clear()
         clearIndexDb()
         reset()
-        NAVIGATE_TO('/')
+        if (deviceId === 'temp') {
+            NAVIGATE_TO('/')
+        }
+        // FOR MOBILE APP
+        const data = { event: "buttonClicked", message: "buttonClicked" };
+        window.ReactNativeWebView.postMessage(JSON.stringify(data));
     }
 
     return (

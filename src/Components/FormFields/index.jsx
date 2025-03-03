@@ -55,7 +55,7 @@ export const TextInputField = ({
           onChange={(event) => {
             let newValue = event.target.value;
             if (type === "text") {
-              newValue = newValue.replace(/[0-9]/g, ""); // Remove numbers dynamically
+              newValue = newValue.replace(/[^A-Za-z ]/g, ""); // Remove numbers dynamically
             }
             onChange(newValue); // Update the field value in the form state
           }}
@@ -63,6 +63,8 @@ export const TextInputField = ({
           placeholder={input_type === "date" ? "" : placeholder}
           InputProps={{
             disableUnderline: true,
+            inputMode: "text", // Ensures a text-based keyboard on mobile
+            pattern: "[A-Za-z ]*", // Restricts input to alphabets and spaces only
             sx: {
               border: "1px solid silver",
               borderRadius: "7px",
