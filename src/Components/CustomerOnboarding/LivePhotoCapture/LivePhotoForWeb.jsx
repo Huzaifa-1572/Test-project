@@ -22,7 +22,7 @@ const yawThreshold = 0.4;
 const requiredYawFrames = 3;
 const rollThresholdDegrees = 20;
 
-const LivePhotoCapture = ({ errors, setValue, watch }) => {
+const LivePhotoForWeb = ({ errors, setValue, watch }) => {
   const webcamRef = useRef(null);
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const { TITLE, DESCRIPTION } = getScreenData();
@@ -56,6 +56,7 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
         );
       });
   }, [dispatch]);
+
   const capturePhoto = useCallback(async () => {
     const imageSrc = webcamRef?.current?.getScreenshot();
     if (imageSrc) {
@@ -80,6 +81,7 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
     currentPromptRef.current = newPrompt;
     frameCounterRef.current = 0;
   };
+
   const resetState = () => {
     if (currentPromptRef.current === "Liveness Verified :white_check_mark:") return;
     setFaceDetected(false);
@@ -302,4 +304,4 @@ const LivePhotoCapture = ({ errors, setValue, watch }) => {
     </WizardLayout>
   );
 };
-export default LivePhotoCapture;
+export default LivePhotoForWeb;

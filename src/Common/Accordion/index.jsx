@@ -5,8 +5,9 @@ import AccordionDetails, {
     accordionDetailsClasses,
 } from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { MdExpandMore } from "react-icons/md";
 import Fade from '@mui/material/Fade';
+import { MdExpandMore } from "react-icons/md";
+
 
 export default function AccordionTransition() {
     const [expanded, setExpanded] = React.useState(false);
@@ -16,7 +17,7 @@ export default function AccordionTransition() {
     };
 
     return (
-        <div>
+        <>
             <Accordion
                 expanded={expanded}
                 onChange={handleExpansion}
@@ -41,19 +42,18 @@ export default function AccordionTransition() {
                             },
                         },
                     {
-                        // Remove Paper background and elevation
                         boxShadow: 'none',
-                        background: 'none',
-                    },
+                        margin: '20px 0px',
+                    }
                 ]}
             >
                 <AccordionSummary
-                    expandIcon={<MdExpandMore />}
+                    expandIcon={<MdExpandMore color='white' size={30} />}
                     aria-controls="panel1-content"
                     id="panel1-header"
-                    sx={{ background: '#e8927c', color: 'white', padding: '10px', borderRadius: '7px', margin: '20px 0px' }}
+                    sx={{ background: '#e8927c', borderRadius: '3px', padding: '7px 10px', color: 'white' }}
                 >
-                    <Typography component="span"> Lorem ipsum dolor sit amet</Typography>
+                    <Typography sx={{ fontSize: '17px' }} component="span">Custom transition using Fade</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -87,19 +87,18 @@ export default function AccordionTransition() {
                             },
                         },
                     {
-                        // Remove Paper background and elevation
                         boxShadow: 'none',
-                        background: 'none',
-                    },
+                        margin: '20px 0px',
+                    }
                 ]}
             >
                 <AccordionSummary
-                    expandIcon={<MdExpandMore />}
+                    expandIcon={<MdExpandMore color='white' size={30} />}
                     aria-controls="panel1-content"
                     id="panel1-header"
-                    sx={{ background: '#e8927c', color: 'white', padding: '10px', borderRadius: '7px', margin: '20px 0px' }}
+                    sx={{ background: '#e8927c', borderRadius: '3px', padding: '7px 10px', color: 'white' }}
                 >
-                    <Typography component="span"> Lorem ipsum dolor sit amet</Typography>
+                    <Typography sx={{ fontSize: '17px' }} component="span">Custom transition using Fade</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -108,28 +107,6 @@ export default function AccordionTransition() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-
-            <Accordion
-                sx={{
-                    // Remove Paper background and elevation
-                    boxShadow: 'none',
-                    background: 'none',
-                }}
-            >
-                <AccordionSummary
-                    expandIcon={<MdExpandMore />}
-                    aria-controls="panel2-content"
-                    id="panel2-header"
-                >
-                    <Typography component="span"> Lorem ipsum dolor sit amet</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
-        </div >
+        </>
     );
 }

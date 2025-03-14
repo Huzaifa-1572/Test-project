@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import CustomButton from "src/Common/CustomButton";
 import { CheckboxField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
@@ -82,16 +82,9 @@ const TermAndCondition = ({ control, errors }) => {
       </Box>
 
       {/* FOR SMALL DEVICES */}
-      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-        <Box sx={{ margin: '20px 0px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h1 className={styles.topHeading}>Terms & Conditions</h1>
-          <img src={TERMS_AND_CONDITION_UNDRAW} alt='' height='70px' width='70' />
-        </Box>
-        <Accordion />
-
-        <Box sx={{ margin: '20px 0px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h1 className={styles.topHeading}>Declaration and Acceptance</h1>
-          <img src={DECLARATION_UNDRAW} alt='' height='70px' width='70' />
+      <Container maxWidth='md' sx={{ display: { xs: 'block', md: 'none' } }}>
+        <Box sx={{ margin: '20px 0px' }}>
+          <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }} className={styles.topHeading}>Terms & Conditions</Box>
         </Box>
         <Accordion />
 
@@ -100,7 +93,7 @@ const TermAndCondition = ({ control, errors }) => {
           {errors?.isAccepted && (<ValidationError message={errors?.isAccepted?.message} />)}
         </Box>
         <CustomButton label={"Submit Application"} />
-      </Box>
+      </Container>
 
 
 

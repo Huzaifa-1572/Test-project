@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Loader from "src/Common/Loader";
 import { useLocation } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import LivePhotoForMobile from "src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForMobile";
 
 const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
 
@@ -18,7 +19,7 @@ const EmailVerification = lazy(() => import("src/Components/CustomerOnboarding/E
 const AdditionalInformation = lazy(() => import("src/Components/CustomerOnboarding/AdditionalInformation"));
 const DeviceLocation = lazy(() => import("src/Components/CustomerOnboarding/DeviceLocation"));
 const AddressDetail = lazy(() => import("src/Components/CustomerOnboarding/AddressDetail"));
-const LivePhotoCapture = lazy(() => import("src/Components/CustomerOnboarding/LivePhotoCapture"));
+const LivePhotoCapture = lazy(() => import("src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForWeb"));
 const CnicFront = lazy(() => import("src/Components/CustomerOnboarding/CnicFront"));
 const CnicBack = lazy(() => import("src/Components/CustomerOnboarding/CnicBack"));
 const CnicDetail = lazy(() => import("src/Components/CustomerOnboarding/CnicDetail"));
@@ -29,7 +30,8 @@ const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding
 export const showScreen = {
   // CUSTOMER ONBOARDING SCREENS
   // scr_deviceLocation: <DeviceLocation />,
-  scr_deviceLocation: <LivePhotoCapture />,
+  scr_deviceLocation: <LivePhotoForMobile />,
+  // scr_deviceLocation: <TermAndCondition />,
   scr_customerCnic: <CustomerCnic />,
   scr_customerCnicResume: <CustomerCnicResume />,
   scr_customerMobile: <CustomerMobile />,

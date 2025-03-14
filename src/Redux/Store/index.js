@@ -5,6 +5,7 @@ import CurrentScreenState from "src/Redux/Reducers/CurrentScreenState";
 import PrevScreenState from "src/Redux/Reducers/PrevScreenState";
 import ScreenDataState from "src/Redux/Reducers/ScreenDataState";
 import DeviceDecisionModalState from "src/Redux/Reducers/DeviceDecisionModalState";
+import FaceDetectionModelState from "src/Redux/Reducers/FaceDetectionModelState";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     currentScreenState: CurrentScreenState,
     prevScreenState: PrevScreenState,
     screenDataState: ScreenDataState,
-    deviceDecisionModal: DeviceDecisionModalState
+    deviceDecisionModal: DeviceDecisionModalState,
+    faceDetectionModelState: FaceDetectionModelState
   },
 });
