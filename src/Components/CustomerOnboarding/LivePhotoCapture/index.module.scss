@@ -37,7 +37,8 @@
 
 .captureButton {
   border-radius: 7px !important;
-  min-width: 200px;
+  max-width: 500px;
+  width: 100%;
   height: 55px;
   background-color: #000000 !important;
   color: #cfd1d3 !important;
@@ -47,4 +48,46 @@
     background: white !important;
     border: black solid 2px !important;
   }
+}
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  width: 85%; /* Full width of the webcam */
+  height: 6px; /* Thickness of the scanning line */
+  background-color: #e8927c;
+  animation: scanLineVertical 3s linear infinite;
+}
+
+@keyframes scanLineVertical {
+  0% {
+    top: 20%;
+  }
+  50% {
+    top: 80%; /* Bottom of the webcam */
+  }
+  100% {
+    top: 20%;
+  }
+}
+
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.scannerImageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: scaleUpDown 2s ease-in-out infinite;
 }

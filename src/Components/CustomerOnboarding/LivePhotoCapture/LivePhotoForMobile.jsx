@@ -1,26 +1,80 @@
-import { Box, Button, Container } from "@mui/material";
+import { Alert, Box, Button, Container } from "@mui/material";
+import * as faceDetection from "@tensorflow-models/face-detection";
+import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import "@tensorflow/tfjs-backend-webgl";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import * as tf from "@tensorflow/tfjs-core";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
 import LIVE_IMAGE_ICON from 'src/Assets/images/liveImageIcon.png';
 import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
+import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
 import CustomButton from "src/Common/CustomButton";
-import Guidelines from "src/Common/Guidelines";
-import { LIVE_IMAGE_GUIDELINES } from "src/Common/Guidelines/guideline";
+import LivenessHelpModal from "src/Common/Modals/LivenessHelpModal";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
-import styles from './index.module.scss'
+import styles from './index.module.scss';
+import { LuScanFace } from "react-icons/lu";
+import { FaEye } from "react-icons/fa6";
+import { TbMoodLookLeft } from "react-icons/tb";
+import { TbMoodLookRight } from "react-icons/tb";
+import { FaRegFaceSmileBeam } from "react-icons/fa6";
+
+
+const generatePrompt = (prompt, blinkCount) => {
+    switch (prompt) {
+        case 'Detecting Face...':
+            return (
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<LuScanFace />} severity="info">
+                    Please be patient while we detect your face.
+                </Alert>
+            )
+
+        case 'Face Detected! slowly blink your eyes.':
+            return (
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaEye />} severity="info">
+                    Thank you for your patience. Now, please blink your eyes slowly. When you close your eyes, hold them closed for 1 or 2 seconds.
+                    <br />
+                    <strong>Blink Count : {blinkCount}</strong>
+                </Alert>
+            )
+
+        case 'Look Left':
+            return (
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookLeft />} severity="info">
+                    Perfect! Please slowly turn your head to the left and hold your posture for 1 or 2 seconds.
+                </Alert>
+            )
+
+        case 'Now Look Right':
+            return (
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookRight />} severity="info">
+                    Great! Now, please slowly turn your head to the right and hold your posture for 1 or 2 seconds.
+                </Alert>
+            )
+
+        case 'Look Straight':
+            return (
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaRegFaceSmileBeam />} severity="info">
+                    Now, please look straight.
+                </Alert>
+            )
+
+        default:
+            break;
+    }
+}
 
 // Detection parameters
-const BLINK_HOLD_TIME = 20; // ms eyes must remain closed
-const blinkThreshold = 0.14; // Adjusted for smaller devices
+const BLINK_HOLD_TIME = 15; // ms eyes must remain closed
+const blinkThreshold = 0.13; // Adjusted for smaller devices
 const requiredBlinkFrames = 2; // Require 2 consecutive frames for blink
-const yawThreshold = 0.3; // Threshold for normalized head displacement for a full turn
+const yawThreshold = 0.2; // Threshold for normalized head displacement for a full turn
 const requiredYawFrames = 2; // Require 2 consecutive frames for head turn
+const FRAME_SKIP = 5; // Process every 5th frame
 
 const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const webcamRef = useRef(null);
@@ -30,13 +84,11 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const [prompt, setPrompt] = useState("Detecting Face...");
     const [faceDetected, setFaceDetected] = useState(false);
     const [blinkCount, setBlinkCount] = useState(0);
-    const { detectionModel, landmarksModel } = useSelector(state => state.faceDetectionModelState)
     const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
     const { TITLE, DESCRIPTION } = getScreenData();
     const dispatch = useDispatch();
-    const guidelinePoints = useMemo(() => LIVE_IMAGE_GUIDELINES, []);
     const livePhoto = watch("KEY_LIVE_PHOTO");
-
+    const [showHelpModal, setshowHelpModal] = useState(false);
 
     // Refs for live values and flags
     const currentPromptRef = useRef("Detecting Face...");
@@ -52,10 +104,15 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const blinkStageCompletedRef = useRef(false);
     const headMovementStageCompletedRef = useRef(false);
     const isRestartingRef = useRef(false);
+    const frameCounter = useRef(0);
 
+    const handleHelpModalClose = () => {
+        setshowHelpModal(false);
+    };
 
     // To check whether the camera access permission is allowed or not
     useEffect(() => {
+        setshowHelpModal(true);
         checkCameraPermission()
             .then((permissionStatus) => {
                 console.log(permissionStatus); // Camera permission granted
@@ -111,13 +168,21 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     };
 
     useEffect(() => {
+        let detectionModel, landmarksModel;
         let animationFrameId;
 
-        // Ensure models are loaded before starting detection
-        if (!detectionModel || !landmarksModel) {
-            console.log("Models are not loaded yet.");
-            return;
-        }
+        const loadModels = async () => {
+            await tf.setBackend("webgl");
+            detectionModel = await faceDetection.createDetector(
+                faceDetection.SupportedModels.MediaPipeFaceDetector,
+                { runtime: "tfjs", modelType: "short" }
+            );
+            landmarksModel = await faceLandmarksDetection.createDetector(
+                faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
+                { runtime: "tfjs", refineLandmarks: false } // Use lite model
+            );
+            detectFaces(detectionModel, landmarksModel);
+        };
 
         const detectFaces = async (detector, meshDetector) => {
             if (isRestartingRef.current) {
@@ -132,17 +197,24 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 );
                 return;
             }
-
             const video = webcamRef.current.video;
             if (video.readyState === 4) {
                 try {
+                    frameCounter.current++;
+                    if (frameCounter.current % FRAME_SKIP !== 0) {
+                        animationFrameId = requestAnimationFrame(() =>
+                            detectFaces(detector, meshDetector)
+                        );
+                        return;
+                    }
+
                     const faces = await detector.estimateFaces(video, { flipHorizontal: false });
                     if (faces.length > 0) {
                         isRestartingRef.current = false;
                         if (!faceDetectedRef.current) {
                             faceDetectedRef.current = true;
                             setFaceDetected(true);
-                            updatePrompt("Face Detected! Blink Twice");
+                            updatePrompt("Face Detected! slowly blink your eyes.");
                             blinkStageCompletedRef.current = false;
                             headMovementStageCompletedRef.current = false;
                             leftFrameCounter.current = 0;
@@ -169,13 +241,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     console.error("Face detection error:", error);
                 }
             }
-
-            // Throttle face detection to every 100ms
-            setTimeout(() => {
-                animationFrameId = requestAnimationFrame(() =>
-                    detectFaces(detector, meshDetector)
-                );
-            }, 100);
+            animationFrameId = requestAnimationFrame(() =>
+                detectFaces(detector, meshDetector)
+            );
         };
 
         const calculateEAR = (top, bottom, left, right) => {
@@ -205,8 +273,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
             const rightEAR = calculateEAR(rightEyeTop, rightEyeBottom, rightEyeLeft, rightEyeRight);
             const avgEAR = (leftEAR + rightEAR) / 2;
             const currentTime = Date.now();
-
-            // console.log("Left EAR:", leftEAR, "Right EAR:", rightEAR, "Avg EAR:", avgEAR); // Log EAR values
 
             if (avgEAR < blinkThreshold) {
                 blinkFrameCounter.current++;
@@ -283,105 +349,138 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 }
                 if (rightFrameCounter.current >= requiredYawFrames && !lookingRightRef.current) {
                     lookingRightRef.current = true;
-                    updatePrompt("Liveness Verified");
+                    updatePrompt("Look Straight");
                     headMovementStageCompletedRef.current = true;
+                    setTimeout(() => { capturePhoto() }, 3000)
                 }
             }
         };
 
-        detectFaces(detectionModel, landmarksModel);
-
+        loadModels();
 
         return () => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             if (detectionModel) detectionModel.dispose();
             if (landmarksModel) landmarksModel.dispose();
         };
-    }, [detectionModel, landmarksModel]);
+    }, []);
 
     return (
-        <WizardLayout
-            Icon={LIVE_IMAGE_ICON}
-            title={TITLE}
-            description={'Please capture your live photo now to proceed with the verification process.'}
-            heroImage={LIVE_IMAGE_UNDRAW}
-        >
-            <Guidelines guidelinePoints={guidelinePoints} />
-            <Box>
-                {!isCameraAccessAllowed && (
-                    <>
-                        <Box className={styles.cameraWrapper}>
-                            <img
-                                className={styles.camIconStyle}
-                                src={SELFIE_UNDRAW}
-                                alt="Upload Selfie"
-                            />
-                            <Box className={styles.permissionText}>
-                                Searching camera...
-                                <br />Allow camera permission to capture live photo.
-                            </Box>
-                        </Box>
-                    </>
-                )}
-                {isCameraAccessAllowed && (
-                    <>
-                        {!!livePhoto ? (
-                            <img
-                                className={styles.webcamStyles}
-                                src={livePhoto}
-                                alt="Uploaded Selfie"
-                            />
-                        ) : (
-                            <Container maxWidth='lg'>
-                                <h2>{prompt}</h2>
-                                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
-                                    <Webcam
-                                        ref={webcamRef}
-                                        width={320} // Lower resolution
-                                        height={280}
-                                        style={{ borderRadius: '12px' }}
-                                        screenshotFormat="image/jpeg"
-                                        mirrored={true}
-                                        videoConstraints={{
-                                            facingMode: "user",
-                                            width: 320, // Lower resolution
-                                            height: 280,
-                                        }}
-                                    />
-                                    <canvas
-                                        ref={canvasRef}
-                                        width={320} // Match webcam resolution
-                                        height={280}
-                                        style={{ borderRadius: '12px', position: "absolute", top: 0, left: 0, zIndex: 1 }}
-                                    />
+        <>
+            <WizardLayout
+                Icon={LIVE_IMAGE_ICON}
+                title={TITLE}
+                description={'Please capture your live photo now to proceed with the verification process.'}
+                heroImage={LIVE_IMAGE_UNDRAW}
+            >
+                <Box>
+                    {!isCameraAccessAllowed && (
+                        <>
+                            <Box className={styles.cameraWrapper}>
+                                <img
+                                    className={styles.camIconStyle}
+                                    src={SELFIE_UNDRAW}
+                                    alt="Upload Selfie"
+                                />
+                                <Box className={styles.permissionText}>
+                                    Searching camera...
+                                    <br />Allow camera permission to capture live photo.
                                 </Box>
-                                <p>Face Detected: {faceDetected ? "Yes" : "No"}</p>
-                                <p>Blinks: {blinkCount}</p>
-                            </Container>
-                        )}
-                        <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                            {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
-                                <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
-                            ) : null}
-                        </Box>
-                    </>
-                )}
-                {/* BUTTONS CONTAINER */}
-                <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, marginTop: "20px" }}>
-                    {!!livePhoto ? (
-                        <Button
-                            className={styles.captureButton}
-                            type="button"
-                            onClick={retake}
-                        >
-                            Retake
-                        </Button>
-                    ) : null
-                    }
+                            </Box>
+                        </>
+                    )}
+                    {isCameraAccessAllowed && (
+                        <>
+                            {!!livePhoto ? (
+                                <img
+                                    className={styles.webcamStyles}
+                                    src={livePhoto}
+                                    alt="Uploaded Selfie"
+                                />
+                            ) : (
+                                <>
+                                    <Container maxWidth='lg'>
+                                        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
+                                            {/* WEBCAM CONTAINER */}
+                                            <Box sx={{ position: 'relative' }}>
+
+                                                <Webcam
+                                                    ref={webcamRef}
+                                                    width={320}
+                                                    height={280}
+                                                    screenshotFormat="image/jpeg"
+                                                    mirrored={true}
+                                                    videoConstraints={{
+                                                        facingMode: "user",
+                                                        width: 320,
+                                                        height: 280,
+                                                    }}
+                                                />
+
+                                                <Box
+                                                    sx={{
+                                                        position: 'absolute',
+                                                        top: 0,
+                                                        left: '50%',
+                                                        transform: 'translate(-50%, -0%)',
+                                                        color: 'white',
+                                                        fontSize: '12px',
+                                                        fontWeight: 'bold',
+                                                        textAlign: 'center',
+                                                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                                        padding: '3px 5px',
+                                                        width: '100%'
+                                                    }}
+                                                >
+                                                    {prompt}
+                                                </Box>
+
+                                                <div className={styles.scannerImageContainer}>
+                                                    <img src={SCANNER} alt="Scanner" height="100%" width="100%" />
+                                                </div>
+
+                                                <canvas
+                                                    ref={canvasRef}
+                                                    width={320}
+                                                    height={280}
+                                                    style={{ borderRadius: '12px', position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                                                />
+
+                                            </Box>
+                                        </Box>
+                                    </Container>
+                                    {generatePrompt(prompt, blinkCount)}
+
+                                </>
+                            )}
+                            <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                                {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
+                                    <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
+                                ) : null}
+                            </Box>
+                        </>
+                    )}
+                    <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, marginTop: "20px" }}>
+                        {!!livePhoto ? (
+                            <Button
+                                className={styles.captureButton}
+                                type="button"
+                                onClick={retake}
+                            >
+                                Retake
+                            </Button>
+                        ) : null}
+                    </Box>
                 </Box>
-            </Box>
-            {isCameraAccessAllowed ? <CustomButton label={"Proceed"} /> : null}
-        </WizardLayout>
+                {isCameraAccessAllowed ? <CustomButton label={"Proceed"} /> : null}
+            </WizardLayout >
+
+            <LivenessHelpModal
+                showHelp={showHelpModal}
+                handleClose={handleHelpModalClose}
+            />
+        </>
     );
 };
+
 export default LivePhotoForMobile;

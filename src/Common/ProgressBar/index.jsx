@@ -10,9 +10,9 @@ const ProgressBar = () => {
     return (
         <Paper elevation={0} sx={{ display: 'flex', alignItems: 'center', border: '1px solid #ececec', maxWidth: '400px', width: '100%', borderRadius: '8px', padding: '7px 12px' }}>
             <Box sx={{ width: '100%' }}>
-                <Box sx={{ marginBottom: '10px', color: '#666666', fontSize: 'clamp(10px,2vw,14px)' }}>
+                <Box sx={{ fontWeight: 'bold', marginBottom: '10px', color: '#666666', fontSize: 'clamp(10px,2vw,14px)' }}>
                     Application Progress...
-                    <span style={{ marginLeft: '7px', color: '#407ec9' }}>{progress.toFixed(0)}%</span>
+                    <strong style={{ marginLeft: '7px', color: '#407ec9' }}>{progress.toFixed(0)}%</strong>
                 </Box>
                 <LinearProgress
                     variant="determinate"
@@ -27,7 +27,7 @@ const ProgressBar = () => {
                     }}
                 />
             </Box>
-            <img src={PROGRESSBAR_UNDRAW} height='70px' width='70px' />
+            <img src={PROGRESSBAR_UNDRAW} height='50px' width='70px' />
         </Paper >
     );
 };

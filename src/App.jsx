@@ -18,7 +18,7 @@ const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
   const { errorCode, errorMessage, isError } = useSelector((state) => state?.errorState);
   // LOADING FACE DETECTION MODELS WHEN APPLICATION LOADS
-  useFaceDetectionModels()
+  // useFaceDetectionModels()
 
   useEffect(() => {
     setupRequestInterceptor();
