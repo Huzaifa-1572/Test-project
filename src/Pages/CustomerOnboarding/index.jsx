@@ -29,8 +29,8 @@ const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding
 
 export const showScreen = {
   // CUSTOMER ONBOARDING SCREENS
-  scr_deviceLocation: <DeviceLocation />,
-  // scr_deviceLocation: <LivePhotoForMobile />,
+  // scr_deviceLocation: <DeviceLocation />,
+  scr_deviceLocation: <LivePhotoForMobile />,
   // scr_deviceLocation: <TermAndCondition />,
   scr_customerCnic: <CustomerCnic />,
   scr_customerCnicResume: <CustomerCnicResume />,

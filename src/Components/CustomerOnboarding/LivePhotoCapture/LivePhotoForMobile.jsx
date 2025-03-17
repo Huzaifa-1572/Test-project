@@ -4,6 +4,9 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 import "@tensorflow/tfjs-backend-webgl";
 import * as tf from "@tensorflow/tfjs-core";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { FaEye, FaRegFaceSmileBeam } from "react-icons/fa6";
+import { LuScanFace } from "react-icons/lu";
+import { TbMoodLookLeft, TbMoodLookRight } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
 import LIVE_IMAGE_ICON from 'src/Assets/images/liveImageIcon.png';
@@ -17,11 +20,7 @@ import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
 import styles from './index.module.scss';
-import { LuScanFace } from "react-icons/lu";
-import { FaEye } from "react-icons/fa6";
-import { TbMoodLookLeft } from "react-icons/tb";
-import { TbMoodLookRight } from "react-icons/tb";
-import { FaRegFaceSmileBeam } from "react-icons/fa6";
+
 
 
 const generatePrompt = (prompt, blinkCount) => {
@@ -112,7 +111,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
     // To check whether the camera access permission is allowed or not
     useEffect(() => {
-        setshowHelpModal(true);
+        !livePhoto && setshowHelpModal(true);
         checkCameraPermission()
             .then((permissionStatus) => {
                 console.log(permissionStatus); // Camera permission granted
@@ -365,6 +364,10 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         };
     }, []);
 
+    const handleHelp = () => {
+        setshowHelpModal(true)
+    }
+
     return (
         <>
             <WizardLayout
@@ -399,6 +402,11 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                 />
                             ) : (
                                 <>
+                                    <Box sx={{ justifyContent: 'flex-end', marginBottom: '10px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
+                                        <span style={{ cursor: 'pointer' }} onClick={handleHelp}>
+                                            Get Help
+                                        </span>
+                                    </Box>
                                     <Container maxWidth='lg'>
                                         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
                                             {/* WEBCAM CONTAINER */}
@@ -410,6 +418,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                     height={280}
                                                     screenshotFormat="image/jpeg"
                                                     mirrored={true}
+                                                    onUserMediaError={handleInitError}
                                                     videoConstraints={{
                                                         facingMode: "user",
                                                         width: 320,
@@ -450,7 +459,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                         </Box>
                                     </Container>
                                     {generatePrompt(prompt, blinkCount)}
-
                                 </>
                             )}
                             <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>

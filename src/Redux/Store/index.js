@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import LoaderState from "src/Redux/Reducers/LoaderState";
-import ErrorState from "src/Redux/Reducers/ErrorState";
 import CurrentScreenState from "src/Redux/Reducers/CurrentScreenState";
+import DeviceDecisionModalState from "src/Redux/Reducers/DeviceDecisionModalState";
+import ErrorState from "src/Redux/Reducers/ErrorState";
+import LoaderState from "src/Redux/Reducers/LoaderState";
 import PrevScreenState from "src/Redux/Reducers/PrevScreenState";
 import ScreenDataState from "src/Redux/Reducers/ScreenDataState";
-import DeviceDecisionModalState from "src/Redux/Reducers/DeviceDecisionModalState";
-import FaceDetectionModelState from "src/Redux/Reducers/FaceDetectionModelState";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +14,5 @@ export const store = configureStore({
     prevScreenState: PrevScreenState,
     screenDataState: ScreenDataState,
     deviceDecisionModal: DeviceDecisionModalState,
-    faceDetectionModelState: FaceDetectionModelState
   },
 });

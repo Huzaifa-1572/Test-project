@@ -8,7 +8,6 @@ import ErrorModal from "src/Common/Modals/ErrorModal";
 import { setupRequestInterceptor, setupResponseInterceptor } from "src/Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "src/Utils/Settings";
 import './App.scss';
-import { useFaceDetectionModels } from "./Hooks/useFaceDetection";
 
 // LAZY LOADING
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));
@@ -17,8 +16,6 @@ const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
 const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
   const { errorCode, errorMessage, isError } = useSelector((state) => state?.errorState);
-  // LOADING FACE DETECTION MODELS WHEN APPLICATION LOADS
-  // useFaceDetectionModels()
 
   useEffect(() => {
     setupRequestInterceptor();

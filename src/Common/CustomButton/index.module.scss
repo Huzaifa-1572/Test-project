@@ -15,7 +15,7 @@
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: white;
+    background-color: white !important;
     border: 2px solid vars.$theme-primary;
     color: vars.$theme-primary;
   }

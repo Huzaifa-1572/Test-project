@@ -8,8 +8,6 @@ const Loader = () => {
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
-        <div className={styles.bar}></div>
-        <div className={styles.bar}></div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { Box, Button, Dialog } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import WARNING_UNDRAW from 'src/Assets/images/warning.svg';
+import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
 import styles from './index.module.scss';
 
@@ -49,13 +49,11 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
       }}
     >
       <div className={styles.mainContainer}>
-        <div className={styles.dialogIconBox}>
-          <img src={WARNING_UNDRAW} alt='Warning' height={'100%'} width={'100%'} />
-        </div>
+        <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
         <div className={styles.dialogContentBox}>
-          <p className={styles.dialogTitle}>{errorCode || 'Error!'}</p>
+          <p className={styles.dialogTitle}>Oh No!</p>
           <p className={styles.dialogContent}>{errorMessage || 'something went wrong!'}</p>
-          <Button className={styles.dialogButton} onClick={handleClose}>Close</Button>
+          <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
         </div>
       </div>
     </Dialog >
