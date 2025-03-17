@@ -17,96 +17,49 @@ export default function AccordionTransition() {
     };
 
     return (
-        <>
-            <Accordion
-                expanded={expanded}
-                onChange={handleExpansion}
-                slots={{ transition: Fade }}
-                slotProps={{ transition: { timeout: 400 } }}
-                sx={[
-                    expanded
-                        ? {
-                            [`& .${accordionClasses.region}`]: {
-                                height: 'auto',
-                            },
-                            [`& .${accordionDetailsClasses.root}`]: {
-                                display: 'block',
-                            },
-                        }
-                        : {
-                            [`& .${accordionClasses.region}`]: {
-                                height: 0,
-                            },
-                            [`& .${accordionDetailsClasses.root}`]: {
-                                display: 'none',
-                            },
+        <Accordion
+            expanded={expanded}
+            onChange={handleExpansion}
+            slots={{ transition: Fade }}
+            slotProps={{ transition: { timeout: 400 } }}
+            sx={[
+                expanded
+                    ? {
+                        [`& .${accordionClasses.region}`]: {
+                            height: 'auto',
                         },
-                    {
-                        boxShadow: 'none',
-                        margin: '20px 0px',
-                    }
-                ]}
-            >
-                <AccordionSummary
-                    expandIcon={<MdExpandMore color='white' size={30} />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                    sx={{ background: '#e8927c', borderRadius: '3px', padding: '7px 10px', color: 'white' }}
-                >
-                    <Typography sx={{ fontSize: '17px' }} component="span">Custom transition using Fade</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
-
-            <Accordion
-                expanded={expanded}
-                onChange={handleExpansion}
-                slots={{ transition: Fade }}
-                slotProps={{ transition: { timeout: 400 } }}
-                sx={[
-                    expanded
-                        ? {
-                            [`& .${accordionClasses.region}`]: {
-                                height: 'auto',
-                            },
-                            [`& .${accordionDetailsClasses.root}`]: {
-                                display: 'block',
-                            },
-                        }
-                        : {
-                            [`& .${accordionClasses.region}`]: {
-                                height: 0,
-                            },
-                            [`& .${accordionDetailsClasses.root}`]: {
-                                display: 'none',
-                            },
+                        [`& .${accordionDetailsClasses.root}`]: {
+                            display: 'block',
                         },
-                    {
-                        boxShadow: 'none',
-                        margin: '20px 0px',
                     }
-                ]}
+                    : {
+                        [`& .${accordionClasses.region}`]: {
+                            height: 0,
+                        },
+                        [`& .${accordionDetailsClasses.root}`]: {
+                            display: 'none',
+                        },
+                    },
+                {
+                    boxShadow: 'none',
+                    margin: '20px 0px',
+                }
+            ]}
+        >
+            <AccordionSummary
+                expandIcon={<MdExpandMore color='white' size={30} />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+                sx={{ background: '#e8927c', borderRadius: '3px', padding: '7px 10px', color: 'white' }}
             >
-                <AccordionSummary
-                    expandIcon={<MdExpandMore color='white' size={30} />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                    sx={{ background: '#e8927c', borderRadius: '3px', padding: '7px 10px', color: 'white' }}
-                >
-                    <Typography sx={{ fontSize: '17px' }} component="span">Custom transition using Fade</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                    </Typography>
-                </AccordionDetails>
-            </Accordion>
-        </>
+                <Typography sx={{ fontSize: '17px' }} component="span"> Lorem ipsum dolor sit amet</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Typography>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                </Typography>
+            </AccordionDetails>
+        </Accordion>
     );
 }

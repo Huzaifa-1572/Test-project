@@ -913,7 +913,8 @@ export const CheckboxField = ({ name, control, label }) => {
           label={label}
           sx={{
             '& .MuiFormControlLabel-label': {
-              color: "gray"
+              color: "gray",
+              fontSize: 'clamp(12px, 2vw, 18px)',
             },
           }}
         />

@@ -82,10 +82,14 @@ const TermAndCondition = ({ control, errors }) => {
       </Box>
 
       {/* FOR SMALL DEVICES */}
-      <Container maxWidth='md' sx={{ display: { xs: 'block', md: 'none' } }}>
+      <Container maxWidth='md' sx={{ padding: '0 !important', margin: '0 !important', display: { xs: 'block', md: 'none' } }}>
         <Box sx={{ margin: '20px 0px' }}>
           <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }} className={styles.topHeading}>Terms & Conditions</Box>
         </Box>
+        <Accordion />
+        <Accordion />
+        <Accordion />
+        <Accordion />
         <Accordion />
 
         <Box sx={{ marginTop: '16px' }}>
