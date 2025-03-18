@@ -1,15 +1,20 @@
 import dayjs from "dayjs";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
+import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
 import { FIELD_MANIFEST } from "../Constants";
 
 
-
 const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   const DATA = response?.data?.data;
   const IS_DATA_AVAILABLE = Object.keys(DATA)?.length > 0;
+
+  if (response?.data?.message === 'No account found with this customer') {
+    dispatch(showErrorModal({ errorCode: 'User Not found', errorMessage: response?.data?.message || 'N/A', isError: true }))
+    navigate('/')
+  }
 
   // --------------------FOR OTP VERFICATION SCREENS
   const OTP_VERIFICATION_TOKEN = response?.data?.data?.payload?.token;

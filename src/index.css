@@ -1,6 +1,12 @@
 * {
-  font-family: "Roboto", "Arial", sans-serif !important;
+  font-family: 'DM Sans', sans-serif !important;
   margin: 0%;
   padding: 0%;
   box-sizing: border-box;
+  font-display: swap;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-display: swap;
 }

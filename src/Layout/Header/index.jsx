@@ -20,7 +20,7 @@ function Header() {
     <>
       <Box className='navbar' sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "0px 2px 1px rgba(0,0,0,0.1)" }}>
         <div className='navbar-logo' onClick={handleLogoClick} >
-          <img src={LOGO} alt='NBP logo' title='PAYVAY' />
+          <img src={LOGO} alt='PAYVAY' title='PAYVAY' />
         </div>
 
         {/* RESPONSIVE ICONS */}

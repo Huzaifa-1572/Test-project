@@ -29,7 +29,9 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                 </Fade>
                 {description && (
                     <Fade in={true} timeout={800}>
-                        <Box className={styles.content} sx={{ textAlign: { xs: "center", sm: "left" } }}>
+                        <Box className={styles.content} sx={{
+                            textAlign: { xs: "center", sm: "left" }, margin: { xs: '10px 0px', sm: '25px 0px' }
+                        }}>
                             {description}
                         </Box>
                     </Fade>

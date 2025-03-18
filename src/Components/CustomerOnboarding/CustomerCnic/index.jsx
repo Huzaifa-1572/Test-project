@@ -10,7 +10,7 @@ const CustomerCnic = ({ control, errors }) => {
   return (
     <WizardLayout
       Icon={CNICICON}
-      title={"CNIC Verification"}
+      title={"Cnic Verification"}
       description={"Please enter your CNIC to continue with your online onboarding."}
       heroImage={CNIC_UNDRAW}
     >

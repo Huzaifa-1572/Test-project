@@ -1,17 +1,6 @@
-@keyframes scaleInOut {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-}
-
 .heroImage {
   filter: drop-shadow(15px 15px 20px rgba(0, 0, 0, 0.3));
   height: 65vh;
-  animation: scaleInOut 3s infinite ease-in-out; /* Apply the animation */
 }
 
 .cardImage {
