@@ -5,9 +5,9 @@ import styles from "./index.module.scss";
 // THIS IS CALLED IN customerOnboardingLayout
 const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
     return (
-        <Grid container spacing={2} sx={{ marginBottom: '60px' }}>
+        <Grid container spacing={2} sx={{ display: "flex", marginBottom: '15px' }}>
             {/* MAIN CONTENT */}
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
                 {/* FOR LARGE DEVICES */}
                 <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
                     <Box className={styles.iconBox} >
@@ -16,26 +16,28 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                 </Box>
 
                 {/* FOR SMALL DEVICES */}
-                <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
-                    <Box className={styles.smallDeviceIconContainer} >
-                        <img src={heroImage} height={'100%'} width={'100%'} />
+                <Box sx={{ flex: 1 }}>
+                    <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+                        <Box className={styles.smallDeviceIconContainer} >
+                            <img src={heroImage} height={'100%'} width={'100%'} />
+                        </Box>
                     </Box>
-                </Box>
 
-                <Fade in={true} timeout={800}>
-                    <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-                        {title}
-                    </Box>
-                </Fade>
-                {description && (
                     <Fade in={true} timeout={800}>
-                        <Box className={styles.content} sx={{
-                            textAlign: { xs: "center", sm: "left" }, margin: { xs: '10px 0px', sm: '25px 0px' }
-                        }}>
-                            {description}
+                        <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
+                            {title}
                         </Box>
                     </Fade>
-                )}
+                    {description && (
+                        <Fade in={true} timeout={800}>
+                            <Box className={styles.content} sx={{
+                                textAlign: { xs: "center", sm: "left" }, margin: { xs: '10px 0px', sm: '25px 0px' }
+                            }}>
+                                {description}
+                            </Box>
+                        </Fade>
+                    )}
+                </Box>
                 {children}
             </Grid>
 
