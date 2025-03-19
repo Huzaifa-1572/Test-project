@@ -60,11 +60,19 @@ const ReviewApplication = ({ setValue, getValues }) => {
         <div className={styles.topWrapper}>
             <div className={styles.reviewContentWrapper}>
                 {/* TITLE */}
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
                     <h1 className={styles.topHeading}>
                         {TITLE || "Review Application"}
                     </h1>
                     <img src={REVIEW_UNDRAW} alt='review-application' height='80px' width='100' />
+                </Box>
+
+                {/* FOR MOBILE */}
+                <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', alignItems: 'center' }}>
+                    <img src={REVIEW_UNDRAW} alt='review-application' height='70px' width='90' />
+                    <h1 className={styles.topHeading}>
+                        {TITLE || "Hey! Review Your Application"}
+                    </h1>
                 </Box>
                 {/* DESCRIPTION */}
                 {
