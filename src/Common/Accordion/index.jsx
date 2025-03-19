@@ -1,15 +1,12 @@
-import * as React from 'react';
 import Accordion, { accordionClasses } from '@mui/material/Accordion';
+import AccordionDetails, { accordionDetailsClasses } from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails, {
-    accordionDetailsClasses,
-} from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
 import { MdExpandMore } from "react-icons/md";
 
-
-export default function AccordionTransition() {
+export default function AccordionTransition({ summary, detail }) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpansion = () => {
@@ -43,21 +40,28 @@ export default function AccordionTransition() {
                 {
                     boxShadow: 'none',
                     margin: '20px 0px',
+                    '&::before': {
+                        display: 'none',
+                    },
                 }
             ]}
         >
             <AccordionSummary
-                expandIcon={<MdExpandMore color='white' size={30} />}
+                expandIcon={<MdExpandMore color='#2C74BB' size={20} />}
                 aria-controls="panel1-content"
                 id="panel1-header"
-                sx={{ background: '#e8927c', borderRadius: '3px', padding: '7px 10px', color: 'white' }}
+                sx={{
+                    background: '#DCEEFF',
+                    borderRadius: '5px',
+                    padding: '5px 10px',
+                    color: '#2C74BB',
+                }}
             >
-                <Typography sx={{ fontSize: '17px' }} component="span"> Lorem ipsum dolor sit amet</Typography>
+                <Typography sx={{ fontSize: '15px' }} component="span"> {summary}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails sx={{ color: '#707070', padding: '10px' }} >
                 <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                    {detail}
                 </Typography>
             </AccordionDetails>
         </Accordion>
