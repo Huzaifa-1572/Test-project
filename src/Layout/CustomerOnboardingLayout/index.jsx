@@ -38,12 +38,16 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
 
   return (
     <>
-      <Header />
+      <Header
+        SHOW_BACK_BUTTON={SHOW_BACK_BUTTON}
+        setValue={setValue}
+        getValues={getValues}
+      />
 
       <Box className={styles.contentContainer}>
-        <Container maxWidth="xl" sx={{ padding: { xs: '10px 15px', md: '20px 40px' } }}>
+        <Container maxWidth="xl" sx={{ padding: { xs: '20px 15px', md: '15px 40px' } }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Grid item xs={12} sm={4} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-start' }}>
               {
                 SHOW_BACK_BUTTON &&
                 <Box>

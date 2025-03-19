@@ -14,9 +14,8 @@
 
 .navbar-logo {
   text-decoration: none;
-  width: 30%;
+  width: 100%;
   display: flex;
-  justify-content: left;
   align-items: center;
   padding: 0px 50px;
 }
@@ -25,7 +24,8 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
-  max-height: 30px;
+  max-height: 25px;
+  display: inline-block;
 }
 
 .navbar-logo h1 {
@@ -118,7 +118,6 @@
 @media screen and (max-width: 996px) {
   .navbar-logo {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     padding: 0px 10px;
   }

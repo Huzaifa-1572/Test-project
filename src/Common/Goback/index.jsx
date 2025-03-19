@@ -60,7 +60,7 @@ const GoBack = ({ setValue, getValues }) => {
                     style={{ cursor: 'pointer' }}
                     onClick={handleBack}
                     size={'35px'}
-                    color='#407ec9'
+                    color='black'
                 />
             </Box>
         </>

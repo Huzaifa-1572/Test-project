@@ -1,16 +1,15 @@
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from 'react-router-dom';
 import LOGO from 'src/Assets/images/PayvayLogo.png';
+import GoBack from "src/Common/Goback";
 import './index.css';
 
 
-function Header() {
+function Header({ SHOW_BACK_BUTTON, setValue, getValues }) {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const NAVIGATE_TO = useNavigate()
-
 
   const handleLogoClick = () => {
     NAVIGATE_TO('/')
@@ -18,10 +17,19 @@ function Header() {
 
   return (
     <>
-      <Box className='navbar' sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "0px 2px 1px rgba(0,0,0,0.1)" }}>
-        <div className='navbar-logo' onClick={handleLogoClick} >
-          <img src={LOGO} alt='PAYVAY' title='PAYVAY' />
-        </div>
+      <Box className='navbar' sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "0px 1px 1px rgba(0,0,0,0.1)" }}>
+        {
+          SHOW_BACK_BUTTON &&
+          <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+            <GoBack setValue={setValue} getValues={getValues} />
+          </Box>
+        }
+
+        <Box sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }} className='navbar-logo' onClick={handleLogoClick} >
+          <Box>
+            <img src={LOGO} alt='PAYVAY' title='PAYVAY' />
+          </Box>
+        </Box>
 
         {/* RESPONSIVE ICONS */}
         {/* <div className='menu-icon' >
