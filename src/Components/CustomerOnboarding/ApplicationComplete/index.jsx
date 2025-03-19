@@ -33,9 +33,9 @@ const ApplicationComplete = ({ reset }) => {
         <div className={styles.topWrapper}>
             <img src={APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={140} />
             <h1 className={styles.mainHeading}>Thankyou!</h1>
-            <h2 className={styles.titleWrapper}>Application Submitted Successfully</h2>
+            <h2 className={styles.titleWrapper}>Application submitted successfully.</h2>
             <p className={styles.descriptionWrapper}>
-                Our team is reviewing your application. You'll be notified once it's approved. Thank you for choosing us!
+                <strong>Your account verification is pending</strong>. Our team is reviewing your application. You'll be notified once it's approved. Thank you for choosing us!
             </p>
 
             <Container maxWidth={'sm'} className={styles.boxWrapper}>

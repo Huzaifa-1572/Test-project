@@ -372,7 +372,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         <>
             <WizardLayout
                 Icon={LIVE_IMAGE_ICON}
-                title={TITLE}
+                title={'Hey! its time for a selfie'}
                 description={'Please capture your live photo now to proceed with the verification process.'}
                 heroImage={LIVE_IMAGE_UNDRAW}
             >
