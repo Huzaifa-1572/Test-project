@@ -1,15 +1,22 @@
-import { Box, Button, Dialog } from '@mui/material';
+import { Button, Dialog } from '@mui/material';
+import Slide from '@mui/material/Slide';
+import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
 import styles from './index.module.scss';
 
+
 const ERROR_CODES = ["Access Denied-403", "Error-401"]
 
 const ErrorModal = ({ errorCode, errorMessage, isError }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
   const handleClose = () => {
     dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
@@ -24,6 +31,8 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      TransitionComponent={Transition}
+      keepMounted
       maxWidth="sm"
       fullWidth
       PaperProps={{

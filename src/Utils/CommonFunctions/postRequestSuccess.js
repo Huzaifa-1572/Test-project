@@ -11,10 +11,10 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
   const DATA = response?.data?.data;
   const IS_DATA_AVAILABLE = Object.keys(DATA)?.length > 0;
 
-  if (response?.data?.message === 'No account found with this customer') {
-    dispatch(showErrorModal({ errorCode: 'User Not found', errorMessage: response?.data?.message || 'N/A', isError: true }))
-    navigate('/')
-  }
+  // if (response?.data?.message === 'No account found with this customer') {
+  //   dispatch(showErrorModal({ errorCode: 'User Not found', errorMessage: response?.data?.message || 'N/A', isError: true }))
+  //   navigate('/')
+  // }
 
   // --------------------FOR OTP VERFICATION SCREENS
   const OTP_VERIFICATION_TOKEN = response?.data?.data?.payload?.token;

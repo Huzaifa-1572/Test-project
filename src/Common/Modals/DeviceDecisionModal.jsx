@@ -1,9 +1,10 @@
 import { Box, Button, Dialog } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import WARNING_UNDRAW from 'src/Assets/images/warning.svg';
+import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
 import styles from './index.module.scss';
 import { closeDeviceDecisionModal } from 'src/Redux/Reducers/DeviceDecisionModalState';
+
 
 const DeviceDecisionModal = ({ title, description, isDeviceDecisionModal, setValue }) => {
     const dispatch = useDispatch();
@@ -50,9 +51,7 @@ const DeviceDecisionModal = ({ title, description, isDeviceDecisionModal, setVal
             }}
         >
             <div className={styles.mainContainer}>
-                <div className={styles.dialogIconBox}>
-                    <img src={WARNING_UNDRAW} alt='Warning' height={'100%'} width={'100%'} />
-                </div>
+                <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
                 <div className={styles.dialogContentBox}>
                     <p className={styles.dialogTitle}>{title || 'Error!'}</p>
                     <p className={styles.dialogContent}>{description || 'something went wrong!'}</p>
