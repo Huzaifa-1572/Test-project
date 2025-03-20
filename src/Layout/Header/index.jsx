@@ -25,9 +25,9 @@ function Header({ SHOW_BACK_BUTTON, setValue, getValues }) {
           </Box>
         }
 
-        <Box sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }} className='navbar-logo' onClick={handleLogoClick} >
+        <Box sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }} className='navbar-logo' >
           <Box>
-            <img src={LOGO} alt='PAYVAY' title='PAYVAY' />
+            <img src={LOGO} alt='PAYVAY' title='PAYVAY' onClick={handleLogoClick} />
           </Box>
         </Box>
 

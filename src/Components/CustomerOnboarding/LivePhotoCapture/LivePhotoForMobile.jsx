@@ -4,6 +4,7 @@ import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detec
 import "@tensorflow/tfjs-backend-webgl";
 import * as tf from "@tensorflow/tfjs-core";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { FaCamera } from "react-icons/fa";
 import { FaEye, FaRegFaceSmileBeam } from "react-icons/fa6";
 import { LuScanFace } from "react-icons/lu";
 import { TbMoodLookLeft, TbMoodLookRight } from "react-icons/tb";
@@ -23,42 +24,43 @@ import styles from './index.module.scss';
 
 
 
+
 const generatePrompt = (prompt, blinkCount) => {
     switch (prompt) {
         case 'Detecting Face...':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<LuScanFace />} severity="info">
+                <Alert sx={{ margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' color='#e8927c' />} severity="info">
                     Please be patient while we detect your face.
                 </Alert>
             )
 
         case 'Face Detected! slowly blink your eyes.':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaEye />} severity="info">
-                    Thank you for your patience. Now, please blink your eyes slowly. When you close your eyes, hold them closed for 1 or 2 seconds.
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaEye size='40px' color='#e8927c' />} severity="info">
+                    <strong>Blink slowly</strong>, hold your eyes closed for 1-2 seconds.
                     <br />
-                    <strong>Blink Count : {blinkCount}</strong>
+                    <strong>Close Eye Detection Count : {blinkCount}</strong>
                 </Alert>
             )
 
         case 'Look Left':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookLeft />} severity="info">
-                    Perfect! Please slowly turn your head to the left and hold your posture for 1 or 2 seconds.
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookLeft size='40px' color='#e8927c' />} severity="info">
+                    <strong> Perfect!</strong> Now slowly <strong>turn your head left</strong > and hold your posture for 1-2 seconds.
                 </Alert>
             )
 
         case 'Now Look Right':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookRight />} severity="info">
-                    Great! Now, please slowly turn your head to the right and hold your posture for 1 or 2 seconds.
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookRight size='40px' color='#e8927c' />} severity="info">
+                    <strong>Great!</strong> Now slowly <strong>turn your head right</strong> and hold your posture for 1-2 seconds.
                 </Alert>
             )
 
         case 'Look Straight':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaRegFaceSmileBeam />} severity="info">
-                    Now, please look straight.
+                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaRegFaceSmileBeam size='40px' color='#e8927c' />} severity="info">
+                    Now, look straight & don't close your eyes.
                 </Alert>
             )
 
@@ -395,11 +397,17 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     {isCameraAccessAllowed && (
                         <>
                             {!!livePhoto ? (
-                                <img
-                                    className={styles.webcamStyles}
-                                    src={livePhoto}
-                                    alt="Uploaded Selfie"
-                                />
+                                <>
+                                    <Alert sx={{ margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="success">
+                                        <strong>Selfie captured successfully!</strong> You can now proceed.
+                                    </Alert>
+                                    <img
+                                        className={styles.webcamStyles}
+                                        src={livePhoto}
+                                        alt="Uploaded Selfie"
+                                    />
+                                </>
+
                             ) : (
                                 <>
                                     <Box sx={{ justifyContent: 'flex-end', marginBottom: '10px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
@@ -407,6 +415,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                             Get Help
                                         </span>
                                     </Box>
+
+                                    {generatePrompt(prompt, blinkCount)}
+
                                     <Container maxWidth='lg'>
                                         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
                                             {/* WEBCAM CONTAINER */}
@@ -458,7 +469,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                             </Box>
                                         </Box>
                                     </Container>
-                                    {generatePrompt(prompt, blinkCount)}
                                 </>
                             )}
                             <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
@@ -474,13 +484,14 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                 className={styles.captureButton}
                                 type="button"
                                 onClick={retake}
+                                endIcon={<FaCamera />}
                             >
-                                Retake
+                                Take a new picture
                             </Button>
                         ) : null}
                     </Box>
                 </Box>
-                {isCameraAccessAllowed ? <CustomButton label={"Proceed"} /> : null}
+                {isCameraAccessAllowed ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
             </WizardLayout >
 
             <LivenessHelpModal

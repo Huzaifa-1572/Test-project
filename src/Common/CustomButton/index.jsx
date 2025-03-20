@@ -12,8 +12,9 @@ const CustomButton = ({ label, disabled, onClick, Icon, type = "submit" }) => {
         className={styles.button}
         disabled={disabled}
         onClick={onClick}
+        endIcon={Icon || <IoMdArrowRoundForward />}
       >
-        {label} {Icon || <IoMdArrowRoundForward />}
+        {label}
       </Button>
     </Box>
   );
