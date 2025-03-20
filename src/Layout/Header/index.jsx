@@ -17,7 +17,7 @@ function Header({ SHOW_BACK_BUTTON, setValue, getValues }) {
 
   return (
     <>
-      <Box className='navbar' sx={{ background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "0px 1px 1px rgba(0,0,0,0.1)" }}>
+      <Box className='navbar' sx={{ paddingTop: '10px', background: { xs: '#f4f4f4', lg: 'white' }, boxShadow: "0px 1px 1px rgba(0,0,0,0.1)" }}>
         {
           SHOW_BACK_BUTTON &&
           <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
@@ -26,7 +26,7 @@ function Header({ SHOW_BACK_BUTTON, setValue, getValues }) {
         }
 
         <Box sx={{ justifyContent: { xs: 'center', sm: 'flex-start' } }} className='navbar-logo' >
-          <Box>
+          <Box sx={{ paddingRight: '15px' }}>
             <img src={LOGO} alt='PAYVAY' title='PAYVAY' onClick={handleLogoClick} />
           </Box>
         </Box>
