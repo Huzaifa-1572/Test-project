@@ -71,10 +71,10 @@ const generatePrompt = (prompt, blinkCount) => {
 
 // Detection parameters
 const BLINK_HOLD_TIME = 15; // ms eyes must remain closed
-const blinkThreshold = 0.13; // Adjusted for smaller devices
+const blinkThreshold = 0.15; // Adjusted for smaller devices
 const requiredBlinkFrames = 2; // Require 2 consecutive frames for blink
-const yawThreshold = 0.2; // Threshold for normalized head displacement for a full turn
-const requiredYawFrames = 2; // Require 2 consecutive frames for head turn
+const yawThreshold = 0.3; // Threshold for normalized head displacement for a full turn
+const requiredYawFrames = 3; // Require 2 consecutive frames for head turn
 const FRAME_SKIP = 5; // Process every 5th frame
 
 const LivePhotoForMobile = ({ errors, setValue, watch }) => {
@@ -491,7 +491,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                         ) : null}
                     </Box>
                 </Box>
-                {isCameraAccessAllowed ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
+                {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
             </WizardLayout >
 
             <LivenessHelpModal
