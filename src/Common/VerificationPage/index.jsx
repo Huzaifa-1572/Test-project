@@ -12,6 +12,9 @@ import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 import CustomButton from '../CustomButton';
 import styles from './index.module.scss';
 
+
+
+
 function VerificationPage({ icon, title, content, description, goBackContent, setValue, getValues }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -25,6 +28,12 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
     useEffect(() => {
+        window.handleDataFromApp = (data) => {
+            console.log('data', 'sdosdsdijds')
+            alert(`OTP: ${data?.otp || 'nahi aay'}`)
+        }
+
+
         if (resendOTP > 0) {
             const interval = setInterval(() => {
                 setResendOTP((prevTimer) => Math.max(0, prevTimer - 1));

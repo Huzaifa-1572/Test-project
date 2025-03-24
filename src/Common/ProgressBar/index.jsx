@@ -8,9 +8,9 @@ const ProgressBar = () => {
     const progress = getScreenProgress(CURRENT_SCREEN);
 
     return (
-        <Paper elevation={0} sx={{ display: 'flex', alignItems: 'center', border: '1px solid #ececec', maxWidth: '400px', width: '100%', borderRadius: '8px', padding: '7px 12px' }}>
+        <Paper elevation={0} sx={{ display: 'flex', alignItems: 'center', border: '1px solid #dceeff', maxWidth: '400px', width: '100%', borderRadius: '8px', padding: '7px 12px' }}>
             <Box sx={{ width: '100%' }}>
-                <Box sx={{ fontWeight: 'bold', marginBottom: '10px', color: '#666666', fontSize: 'clamp(10px,2vw,14px)' }}>
+                <Box sx={{ fontWeight: 'bold', marginBottom: '10px', color: '#666666', fontSize: 'clamp(12px,2.5vw,14px)' }}>
                     Application Progress...
                     <strong style={{ marginLeft: '7px', color: '#407ec9' }}>{progress.toFixed(0)}%</strong>
                 </Box>
@@ -20,14 +20,16 @@ const ProgressBar = () => {
                     sx={{
                         height: '10px',
                         borderRadius: '5px',
-                        backgroundColor: '#f0f0f0',
+                        backgroundColor: '#dceeff',
                         '& .MuiLinearProgress-bar': {
                             backgroundColor: '#407ec9',
                         },
                     }}
                 />
             </Box>
-            <img src={PROGRESSBAR_UNDRAW} height='50px' width='70px' />
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <img src={PROGRESSBAR_UNDRAW} height='50px' width='70px' />
+            </Box>
         </Paper >
     );
 };

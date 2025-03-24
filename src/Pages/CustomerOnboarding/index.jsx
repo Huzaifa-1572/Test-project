@@ -4,6 +4,7 @@ import Loader from "src/Common/Loader";
 import { useLocation } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import LivePhotoForMobile from "src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForMobile";
+import CnicFrontForMobile from "src/Components/CustomerOnboarding/CnicFront/CnicFrontForMobile";
 
 const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
 
@@ -30,8 +31,8 @@ const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding
 export const showScreen = {
   // CUSTOMER ONBOARDING SCREENS
   // scr_deviceLocation: <DeviceLocation />,
-  scr_deviceLocation: <LivePhotoForMobile />,
-  // scr_deviceLocation: <ApplicationComplete />,
+  // scr_deviceLocation: <MobileVerification />,
+  scr_deviceLocation: <CnicFrontForMobile />,
   scr_customerCnic: <CustomerCnic />,
   scr_customerCnicResume: <CustomerCnicResume />,
   scr_customerMobile: <CustomerMobile />,

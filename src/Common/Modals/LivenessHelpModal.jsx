@@ -72,7 +72,7 @@ const LivenessHelpModal = ({ showHelp, handleClose }) => {
                     <Box sx={{ textAlign: 'left', fontSize: '14px' }}>
                         {GUIDELINES?.map((guideline) => (
                             <Box key={getUUID()} sx={{ margin: '13px 0px', color: '#696969' }}>
-                                <strong style={{ color: '#e4002b', fontSize: '14px' }}>{guideline?.heading}</strong> {guideline?.content}
+                                <strong style={{ color: '#407ec9', fontSize: '14px' }}>{guideline?.heading}</strong> {guideline?.content}
                             </Box>
                         ))}
                     </Box>

@@ -45,7 +45,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
       />
 
       <Box className={styles.contentContainer}>
-        <Container maxWidth="xl" sx={{ padding: { xs: '20px 15px', md: '15px 40px' } }}>
+        <Container maxWidth="xl" sx={{ padding: { xs: '10px 15px', md: '15px 40px' } }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-start' }}>
               {
