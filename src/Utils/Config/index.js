@@ -1,9 +1,10 @@
 // LOCAL
 // export const BASE_URL = "http://192.168.10.204:8082/";
 
-// UAT
+// UAT WITHOUT OCR
 // export const BASE_URL = "http://10.6.60.6:8090/";
 
+// WITH OCR 8089
 export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
 
 

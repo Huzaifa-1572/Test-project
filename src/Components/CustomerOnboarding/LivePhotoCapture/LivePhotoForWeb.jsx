@@ -11,7 +11,7 @@ import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
 import CustomButton from "src/Common/CustomButton";
 import Guidelines from "src/Common/Guidelines";
-import { LIVE_IMAGE_GUIDELINES } from "src/Common/Guidelines/guideline";
+import { LIVE_IMAGE_GUIDELINES_FOR_WEB } from "src/Common/Guidelines/guideline";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
@@ -27,7 +27,7 @@ const LivePhotoForWeb = ({ errors, setValue, watch }) => {
   const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
   const { TITLE, DESCRIPTION } = getScreenData();
   const dispatch = useDispatch();
-  const guidelinePoints = useMemo(() => LIVE_IMAGE_GUIDELINES, []);
+  const guidelinePoints = useMemo(() => LIVE_IMAGE_GUIDELINES_FOR_WEB, []);
   const [prompt, setPrompt] = useState("Detecting Face...");
   const [faceDetected, setFaceDetected] = useState(false);
   const currentPromptRef = useRef("Detecting Face...");

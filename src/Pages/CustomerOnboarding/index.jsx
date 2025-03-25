@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import Loader from "src/Common/Loader";
 import { useLocation } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import LivePhotoForMobile from "src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForMobile";
-import CnicFrontForMobile from "src/Components/CustomerOnboarding/CnicFront/CnicFrontForMobile";
+import { isMobile } from 'react-device-detect';
+
 
 const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
 
@@ -20,42 +20,50 @@ const EmailVerification = lazy(() => import("src/Components/CustomerOnboarding/E
 const AdditionalInformation = lazy(() => import("src/Components/CustomerOnboarding/AdditionalInformation"));
 const DeviceLocation = lazy(() => import("src/Components/CustomerOnboarding/DeviceLocation"));
 const AddressDetail = lazy(() => import("src/Components/CustomerOnboarding/AddressDetail"));
-const LivePhotoCapture = lazy(() => import("src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForWeb"));
-const CnicFront = lazy(() => import("src/Components/CustomerOnboarding/CnicFront"));
-const CnicBack = lazy(() => import("src/Components/CustomerOnboarding/CnicBack"));
+const LivePhotoForWeb = lazy(() => import("src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForWeb"));
+const LivePhotoForMobile = lazy(() => import("src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForMobile"));
+const CnicFrontForWeb = lazy(() => import("src/Components/CustomerOnboarding/CnicFront/CnicFrontForWeb"));
+const CnicFrontForMobile = lazy(() => import("src/Components/CustomerOnboarding/CnicFront/CnicFrontForMobile"));
+const CnicBackForWeb = lazy(() => import("src/Components/CustomerOnboarding/CnicBack/CnicBackForWeb"));
+const CnicBackForMobile = lazy(() => import("src/Components/CustomerOnboarding/CnicBack/CnicBackForMobile"));
 const CnicDetail = lazy(() => import("src/Components/CustomerOnboarding/CnicDetail"));
 const ReviewApplication = lazy(() => import("src/Components/CustomerOnboarding/ReviewApplication"));
 const TermAndCondition = lazy(() => import("src/Components/CustomerOnboarding/TermAndCondition"));
 const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding/ApplicationComplete"));
 
-export const showScreen = {
-  // CUSTOMER ONBOARDING SCREENS
-  // scr_deviceLocation: <DeviceLocation />,
-  // scr_deviceLocation: <MobileVerification />,
-  scr_deviceLocation: <CnicFrontForMobile />,
-  scr_customerCnic: <CustomerCnic />,
-  scr_customerCnicResume: <CustomerCnicResume />,
-  scr_customerMobile: <CustomerMobile />,
-  scr_mobileVerification: <MobileVerification />,
-  scr_hasValidEmail: <HasValidEmail />,
-  scr_customerEmail: <CustomerEmail />,
-  scr_emailVerification: <EmailVerification />,
-  scr_livePhotoCapture: <LivePhotoForMobile />,
-  scr_uploadCnicFront: <CnicFront />,
-  scr_uploadCnicBack: <CnicBack />,
-  scr_cnicDetail: <CnicDetail />,
-  scr_additionalInformation: <AdditionalInformation />,
-  scr_addressDetail: <AddressDetail />,
-  scr_reviewApplication: <ReviewApplication />,
-  scr_termsAndConditions: <TermAndCondition />,
-  scr_applicationComplete: <ApplicationComplete />,
-};
+
+
+export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
+
+  const SCREEN_DICTIONARY = {
+    // CUSTOMER ONBOARDING SCREENS
+    scr_deviceLocation: <DeviceLocation />,
+    scr_customerCnic: <CustomerCnic />,
+    scr_customerCnicResume: <CustomerCnicResume />,
+    scr_customerMobile: <CustomerMobile />,
+    scr_mobileVerification: <MobileVerification />,
+    scr_hasValidEmail: <HasValidEmail />,
+    scr_customerEmail: <CustomerEmail />,
+    scr_emailVerification: <EmailVerification />,
+    scr_livePhotoCapture: (isMobile || isWebview) ? <LivePhotoForMobile /> : <LivePhotoForWeb />,
+    scr_uploadCnicFront: (isMobile || isWebview) ? <CnicFrontForMobile /> : <CnicFrontForWeb />,
+    scr_uploadCnicBack: (isMobile || isWebview) ? <CnicBackForMobile /> : <CnicBackForWeb />,
+    scr_cnicDetail: <CnicDetail />,
+    scr_additionalInformation: <AdditionalInformation />,
+    scr_addressDetail: <AddressDetail />,
+    scr_reviewApplication: <ReviewApplication />,
+    scr_termsAndConditions: <TermAndCondition />,
+    scr_applicationComplete: <ApplicationComplete />,
+  }
+  return SCREEN_DICTIONARY[CURRENT_SCREEN]
+}
+
 
 const CustomerOnboarding = () => {
   const CURRENT_SCREEN = useSelector(state => state?.currentScreenState)
   const { state } = useLocation();
   const IS_ALLOWED = state?.isAllowed || false
-
+  const isWebview = JSON.parse(sessionStorage.getItem('device')).deviceId !== 'temp'
   // isAllowed make it sure user can'nt access route directly.
   if (!IS_ALLOWED) {
     return <Navigate to="/" replace />;
@@ -64,7 +72,7 @@ const CustomerOnboarding = () => {
   return (
     <Suspense fallback={<Loader />}>
       <WrapperForHookFormProps>
-        {showScreen[CURRENT_SCREEN]}
+        {showScreen({ CURRENT_SCREEN, isWebview })}
       </WrapperForHookFormProps>
     </Suspense>
   );

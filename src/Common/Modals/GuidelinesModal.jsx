@@ -1,36 +1,10 @@
 import { Box, Button, Dialog } from '@mui/material';
-import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
 import styles from './index.module.scss';
 import { getUUID } from 'src/Utils/Helpers';
 
-const GUIDELINES = [
-    {
-        heading: 'No Glasses:',
-        content: 'Strictly don’t wear glasses. If wearing, please remove them.'
-    },
-    {
-        heading: 'Face Detection:',
-        content: 'Keep your face well-lit, centered, and fully visible.'
-    },
-    {
-        heading: 'Eye Blinking:',
-        content: 'When blinking, kindly Pause/close your eyes for at least 1–2 seconds.'
-    },
-    {
-        heading: 'Head Movement:',
-        content: 'Move your head slowly in the asked direction, and pause your posture for at least 1–2 seconds.'
-    },
-    {
-        heading: 'Good Lighting:',
-        content: 'Ensure you’re in a well-lit environment with no strong backlight or shadows.'
-    },
-    {
-        heading: 'Avoid Blurriness:',
-        content: 'Keep the camera focused and the image sharp.'
-    }
-];
 
-const LivenessHelpModal = ({ showHelp, handleClose }) => {
+
+const GuidelinesModal = ({ showHelp, handleClose, icon, title, guidelines }) => {
     return (
         <Dialog
             open={showHelp}
@@ -63,14 +37,14 @@ const LivenessHelpModal = ({ showHelp, handleClose }) => {
         >
             <div className={styles.mainContainer}>
                 <div className={styles.dialogIconBox}>
-                    <img src={GUIDELINE_UNDRAW} alt='Warning' height={'100px'} width={'100%'} />
+                    <img src={icon} alt='Warning' height={'100px'} width={'100%'} />
                 </div>
                 <Box sx={{ padding: '0px 20px', borderRadius: '8px' }}>
                     <Box className={styles.dialogTitle}>
-                        Face Detection Guidelines
+                        {title}
                     </Box>
                     <Box sx={{ textAlign: 'left', fontSize: '14px' }}>
-                        {GUIDELINES?.map((guideline) => (
+                        {guidelines?.map((guideline) => (
                             <Box key={getUUID()} sx={{ margin: '13px 0px', color: '#696969' }}>
                                 <strong style={{ color: '#407ec9', fontSize: '14px' }}>{guideline?.heading}</strong> {guideline?.content}
                             </Box>
@@ -85,4 +59,4 @@ const LivenessHelpModal = ({ showHelp, handleClose }) => {
     );
 };
 
-export default LivenessHelpModal;
+export default GuidelinesModal;

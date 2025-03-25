@@ -11,10 +11,10 @@ import styles from './index.module.scss';
 
 
 
-const CnicFrontForMobile = ({ errors, watch, setValue }) => {
+const CnicBackForMobile = ({ errors, watch, setValue }) => {
     const dispatch = useDispatch();
     const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
-    const CNIC_FRONT = watch("KEY_CNIC_FRONT");
+    const CNIC_BACK = watch("KEY_CNIC_BACK");
     const webcamRef = useRef(null);
 
     // Camera access permission check
@@ -42,12 +42,12 @@ const CnicFrontForMobile = ({ errors, watch, setValue }) => {
     const capturePhoto = useCallback(async () => {
         const imageSrc = webcamRef?.current?.getScreenshot();
         if (imageSrc) {
-            setValue("KEY_CNIC_FRONT", imageSrc);
+            setValue("KEY_CNIC_BACK", imageSrc);
         }
     }, [webcamRef, setValue]);
 
     const retake = () => {
-        setValue("KEY_CNIC_FRONT", null);
+        setValue("KEY_CNIC_BACK", null);
     };
 
     const handleInitError = (error) => {
@@ -58,21 +58,21 @@ const CnicFrontForMobile = ({ errors, watch, setValue }) => {
         <Box className={styles.container}>
             {/* HEADER */}
             <Box sx={{ textAlign: 'center' }}>
-                <img src={CARD_UNDRAW} alt="cnic-front" className={styles.smallDeviceIconContainer} />
+                <img src={CARD_UNDRAW} alt="cnic-back" className={styles.smallDeviceIconContainer} />
                 <Box className={styles.heading}>
-                    {CNIC_FRONT ? 'CNIC Front Image' : 'Capture CNIC Front Image '}
+                    {CNIC_BACK ? 'CNIC Back Image' : 'Capture CNIC Back Image '}
                 </Box>
             </Box>
 
 
             <Container maxWidth={'sm'} className={styles.cameraContainer}>
                 {isCameraAccessAllowed ? (
-                    !!CNIC_FRONT ? (
+                    !!CNIC_BACK ? (
                         <>
                             <Box sx={{ textAlign: 'center' }}>
                                 <img
                                     className={styles.imageContainer}
-                                    src={CNIC_FRONT}
+                                    src={CNIC_BACK}
                                     alt="Uploaded Selfie"
                                 />
                             </Box>
@@ -100,20 +100,20 @@ const CnicFrontForMobile = ({ errors, watch, setValue }) => {
 
                                 {/* PROMPT */}
                                 <Box className={styles.prompt}>
-                                    Position the front of your CNIC within the frame
+                                    Position the back of your CNIC within the frame
                                 </Box>
                             </Box>
                         </>)
                 ) : (
                     <Skeleton variant="rounded" width='100%' height='420px' sx={{ color: 'gray', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {!!CNIC_FRONT ? 'Loading...' : 'Searching for camera...'}
+                        {!!CNIC_BACK ? 'Loading...' : 'Searching for camera...'}
                     </Skeleton>
                 )}
             </Container>
 
             {/* BUTTONS */}
             <Box sx={{ textAlign: 'center', marginTop: "20px" }}>
-                {!!CNIC_FRONT ? (
+                {!!CNIC_BACK ? (
                     <Button
                         className={styles.captureButton}
                         type="button"
@@ -131,17 +131,17 @@ const CnicFrontForMobile = ({ errors, watch, setValue }) => {
                     Click here to capture
                 </Button>}
 
-                {(isCameraAccessAllowed && !!CNIC_FRONT) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
+                {(isCameraAccessAllowed && !!CNIC_BACK) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
 
             </Box>
 
             <Box sx={{ textAlign: 'center' }}>
-                {!!errors?.KEY_CNIC_FRONT?.message && !CNIC_FRONT ? (
-                    <ValidationError message={errors?.KEY_CNIC_FRONT?.message} />
+                {!!errors?.KEY_CNIC_BACK?.message && !CNIC_BACK ? (
+                    <ValidationError message={errors?.KEY_CNIC_BACK?.message} />
                 ) : null}
             </Box>
         </Box >
     );
 };
 
-export default CnicFrontForMobile;
+export default CnicBackForMobile;

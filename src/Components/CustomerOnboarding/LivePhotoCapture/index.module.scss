@@ -91,3 +91,11 @@
   bottom: 0;
   animation: scaleUpDown 2s ease-in-out infinite;
 }
+
+.alert {
+  margin-left: -25px;
+  display: flex;
+  align-items: center;
+  color: #407ec9;
+  margin: 20px 0px;
+}

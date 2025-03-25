@@ -10,7 +10,7 @@ import WizardLayout from "src/Layout/WizardLayout";
 import { getScreenData } from "src/Utils/Helpers";
 
 
-const CnicBack = ({ control, getValues, errors, setValue }) => {
+const CnicBackForMobile = ({ control, getValues, errors, setValue }) => {
   const { TITLE, DESCRIPTION, FIELDS } = getScreenData()
   const guidelinePoints = useMemo(() => CNIC_UPLOAD_GUIDELINES, [])
 
@@ -37,4 +37,4 @@ const CnicBack = ({ control, getValues, errors, setValue }) => {
   );
 };
 
-export default CnicBack;
+export default CnicBackForMobile;

@@ -3,25 +3,28 @@ import * as faceDetection from "@tensorflow-models/face-detection";
 import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import "@tensorflow/tfjs-backend-webgl";
 import * as tf from "@tensorflow/tfjs-core";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { FaEye, FaRegFaceSmileBeam } from "react-icons/fa6";
+import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import { LuScanFace } from "react-icons/lu";
-import { TbMoodLookLeft, TbMoodLookRight } from "react-icons/tb";
 import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
+import BLINK_DETECTION from 'src/Assets/images/blink-detect.gif';
 import LIVE_IMAGE_ICON from 'src/Assets/images/liveImageIcon.png';
 import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
+import LOOK_LEFT from 'src/Assets/images/look-left.gif';
+import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
+import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
 import CustomButton from "src/Common/CustomButton";
-import LivenessHelpModal from "src/Common/Modals/LivenessHelpModal";
+import GuidelinesModal from "src/Common/Modals/GuidelinesModal";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
+import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
 import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
 import styles from './index.module.scss';
-
 
 
 
@@ -29,37 +32,37 @@ const generatePrompt = (prompt, blinkCount) => {
     switch (prompt) {
         case 'Detecting Face...':
             return (
-                <Alert sx={{ margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' color='#e8927c' />} severity="info">
+                <Alert className={styles.alert} variant="outlined" icon={<LuScanFace size='40px' color='#e8927c' />} severity="info">
                     Please be patient while we detect your face.
                 </Alert>
             )
 
         case 'Face Detected! slowly blink your eyes.':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaEye size='40px' color='#e8927c' />} severity="info">
-                    <strong>Blink slowly</strong>, hold your eyes closed for 1-2 seconds.
+                <Alert className={styles.alert} variant="outlined" icon={<img src={BLINK_DETECTION} height='65px' width='70px' />} severity="info">
+                    <strong style={{ color: '#407ec9' }}>Blink slowly</strong>, hold your eyes closed for 1-2 seconds.
                     <br />
-                    <strong>Close Eye Detection Count : {blinkCount}</strong>
+                    <strong style={{ color: '#407ec9' }}>Close Eye Detection Count : {blinkCount}</strong>
                 </Alert>
             )
 
         case 'Look Left':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookLeft size='40px' color='#e8927c' />} severity="info">
-                    <strong> Perfect!</strong> Now slowly <strong>turn your head left</strong > and hold your posture for 1-2 seconds.
+                <Alert className={styles.alert} variant="outlined" icon={<img src={LOOK_LEFT} height='60px' width='70px' />} severity="info">
+                    <strong style={{ color: '#407ec9' }}> Perfect!</strong> Now slowly <strong style={{ color: '#407ec9' }}>turn your head left</strong > and hold your posture for 1-2 seconds.
                 </Alert>
             )
 
         case 'Now Look Right':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<TbMoodLookRight size='40px' color='#e8927c' />} severity="info">
-                    <strong>Great!</strong> Now slowly <strong>turn your head right</strong> and hold your posture for 1-2 seconds.
+                <Alert className={styles.alert} variant="outlined" icon={<img src={LOOK_RIGHT} height='60px' width='70px' />} severity="info">
+                    <strong style={{ color: '#407ec9' }}>Great!</strong> Now slowly <strong style={{ color: '#407ec9' }}>turn your head right</strong> and hold your posture for 1-2 seconds.
                 </Alert>
             )
 
         case 'Look Straight':
             return (
-                <Alert sx={{ marginBottom: '20px' }} variant="outlined" icon={<FaRegFaceSmileBeam size='40px' color='#e8927c' />} severity="info">
+                <Alert className={styles.alert} variant="outlined" icon={<FaRegFaceSmileBeam size='40px' color='#e8927c' />} severity="info">
                     Now, look straight & don't close your eyes.
                 </Alert>
             )
@@ -90,6 +93,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const dispatch = useDispatch();
     const livePhoto = watch("KEY_LIVE_PHOTO");
     const [showHelpModal, setshowHelpModal] = useState(false);
+    const guidelines = useMemo(() => LIVENESS_GUIDELINES, [])
 
     // Refs for live values and flags
     const currentPromptRef = useRef("Detecting Face...");
@@ -141,6 +145,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
     const retake = () => {
         setValue("KEY_LIVE_PHOTO", null);
+        setPrompt('Detecting Face...')
     };
 
     const handleInitError = (error) => {
@@ -398,7 +403,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                         <>
                             {!!livePhoto ? (
                                 <>
-                                    <Alert sx={{ margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="success">
+                                    <Alert sx={{ background: '#dceeff', color: '#407ec9', margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="info">
                                         <strong>Selfie captured successfully!</strong> You can now proceed.
                                     </Alert>
                                     <img
@@ -494,9 +499,12 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
             </WizardLayout >
 
-            <LivenessHelpModal
+            <GuidelinesModal
                 showHelp={showHelpModal}
                 handleClose={handleHelpModalClose}
+                icon={GUIDELINE_UNDRAW}
+                title={'Face Detection Guidelines'}
+                guidelines={guidelines}
             />
         </>
     );
