@@ -91,7 +91,6 @@ const CnicFrontForMobile = ({ errors, watch, setValue }) => {
                                 screenshotFormat="image/jpeg"
                                 onUserMediaError={handleInitError}
                                 videoConstraints={{ facingMode: "environment" }}
-                                mirrored={true}
                             />
 
                             <Box className={styles.overlay}>
