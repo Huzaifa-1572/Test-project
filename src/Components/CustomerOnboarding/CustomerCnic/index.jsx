@@ -5,6 +5,7 @@ import { CaptchaField, CustomInputField, TextInputField } from "src/Components/F
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import CNIC_UNDRAW from "src/Assets/images/customerCnicUndraw.svg"
+import { Box } from "@mui/material";
 
 const CustomerCnic = ({ control, errors }) => {
   return (
@@ -41,12 +42,15 @@ const CustomerCnic = ({ control, errors }) => {
         </Grid>
 
         <Grid item xs={12}>
-          <CaptchaField
-            name={'googleCaptcha'}
-            control={control}
-            siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
-          />
-          {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+          <Box sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+            <CaptchaField
+              name={'googleCaptcha'}
+              control={control}
+              siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
+            />
+
+            {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+          </Box>
         </Grid>
 
         <Grid item xs={12} lg={6}>

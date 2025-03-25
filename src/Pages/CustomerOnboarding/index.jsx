@@ -32,6 +32,25 @@ const TermAndCondition = lazy(() => import("src/Components/CustomerOnboarding/Te
 const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding/ApplicationComplete"));
 
 
+export const SCREENS_FOR_PROGRESS_BAR = [
+  'scr_deviceLocation',
+  'scr_customerCnic',
+  'scr_customerCnicResume',
+  'scr_customerMobile',
+  'scr_mobileVerification',
+  'scr_hasValidEmail',
+  'scr_customerEmail',
+  'scr_emailVerification',
+  'scr_livePhotoCapture',
+  'scr_uploadCnicFront',
+  'scr_uploadCnicBack',
+  'scr_cnicDetail',
+  'scr_additionalInformation',
+  'scr_addressDetail',
+  'scr_reviewApplication',
+  'scr_termsAndConditions',
+  'scr_applicationComplete'
+]
 
 export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
 

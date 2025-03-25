@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import Dexie from "dexie";
 import DOMPurify from 'dompurify';
 import { useSelector } from "react-redux";
-import { showScreen } from "src/Pages/CustomerOnboarding";
+import { SCREENS_FOR_PROGRESS_BAR } from "src/Pages/CustomerOnboarding";
 import { v4 as uuidv4 } from "uuid";
 import { OPERATOR_MAP } from "../Constants";
 import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
@@ -191,7 +191,7 @@ export const getReviewApplicationData = () => {
 
 // Function to track progress
 export const getScreenProgress = (CURRENT_SCREEN) => {
-  const screenKeys = Object.keys(showScreen) || [];
+  const screenKeys = SCREENS_FOR_PROGRESS_BAR || [];
   const currentIndex = screenKeys.indexOf(CURRENT_SCREEN);
   if (currentIndex === -1) {
     return 0;
