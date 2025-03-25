@@ -29,7 +29,7 @@ const AddressDetail = ({ control, errors, watch }) => {
           })
         }
       </Grid>
-      <CustomButton label={"Proceed"} />
+      <CustomButton label={"Continue"} />
     </WizardLayout>
   );
 };
