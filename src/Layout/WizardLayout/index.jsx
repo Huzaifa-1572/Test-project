@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 // THIS IS CALLED IN customerOnboardingLayout
 const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
     return (
-        <Grid container spacing={2} sx={{ display: "flex", marginBottom: '15px' }}>
+        <Grid container spacing={2} sx={{ display: "flex", marginBottom: '5px' }}>
             {/* MAIN CONTENT */}
             <Grid item xs={12} md={8} sx={{ display: 'flex', flexDirection: 'column' }}>
                 {/* FOR LARGE DEVICES */}
@@ -16,7 +16,7 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                 </Box>
 
                 {/* FOR SMALL DEVICES */}
-                <Box sx={{ flex: 1, }}>
+                <Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
                         <Box className={styles.smallDeviceIconContainer} >
                             <img src={heroImage} height={'100%'} width={'100%'} />
