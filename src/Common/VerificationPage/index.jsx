@@ -99,10 +99,10 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     }
 
     return (
-        <Container maxWidth="lg" className={styles.paperContainer} sx={{ borderRadius: { xs: '7px', sm: '20px' } }}>
-            <div className={styles.iconStyle}>
-                <img src={icon} alt="mobileOtpLogo" />
-            </div>
+        <Container maxWidth="lg" className={styles.paperContainer} sx={{ background: { xs: 'none', md: '#f6f6f6' }, borderRadius: { xs: '7px', sm: '20px' } }}>
+            <Box>
+                <img src={icon} alt="mobileOtpLogo" height={'100px'} width={'140px'} />
+            </Box>
             <h2 className={styles.mainHeading}>{title}</h2>
             <p className={styles.content}>
                 {content}
@@ -120,7 +120,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
 
             <div className={styles.resendOTP} >
                 {resendOTP === 0 ? (
-                    <Button type='button' variant='outlined' size='small' className={styles.countdownStyle} onClick={handleResendClick}>
+                    <Button type='button' variant='outlined' className={styles.countdownStyle} onClick={handleResendClick}>
                         Resend OTP
                     </Button>
                 ) : (
@@ -151,7 +151,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                 />
             </div>
 
-            <Box sx={{ width: '40%' }}>
+            <Box sx={{ width: { xs: '100%', md: '40%' } }}>
                 <CustomButton label='Verify' />
             </Box>
 

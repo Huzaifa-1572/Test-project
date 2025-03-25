@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import CNICICON from 'src/Assets/images/cnicIcon.png';
 import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg";
@@ -45,17 +46,19 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <CaptchaField
-                            name={'googleCaptcha'}
-                            control={control}
-                            siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
-                        />
-                        {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+                        <Box sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+                            <CaptchaField
+                                name={'googleCaptcha'}
+                                control={control}
+                                siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
+                            />
+                            {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+                        </Box>
                     </Grid>
 
 
                     <Grid item xs={12} lg={6}>
-                        <CustomButton label="Proceed" onClick={handleProceed} />
+                        <CustomButton label="Resume" onClick={handleProceed} />
                     </Grid>
 
                 </Grid>

@@ -44,7 +44,7 @@ const CustomerMobile = ({ control, errors }) => {
         </Grid>
 
         <Grid item xs={12} lg={6}>
-          <CustomButton label={"Proceed"} />
+          <CustomButton label={"Continue"} />
         </Grid>
       </Grid>
     </WizardLayout >

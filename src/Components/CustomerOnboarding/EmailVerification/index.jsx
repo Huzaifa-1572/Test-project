@@ -1,6 +1,8 @@
 import React from 'react'
 import VerificationPage from 'src/Common/VerificationPage';
-import EMAIL_VERIFICATION from 'src/Assets/images/emailVerificationIcon.png'
+// import EMAIL_VERIFICATION from 'src/Assets/images/emailVerificationIcon.png'
+import EMAIL_VERIFICATION from 'src/Assets/images/email-otp.svg'
+
 
 const EmailVerification = ({ setValue, getValues }) => {
     const CUSTOMER_EMAIL = getValues('customerEmail')

@@ -145,7 +145,8 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
     const retake = () => {
         setValue("KEY_LIVE_PHOTO", null);
-        setPrompt('Detecting Face...')
+        resetState();
+
     };
 
     const handleInitError = (error) => {

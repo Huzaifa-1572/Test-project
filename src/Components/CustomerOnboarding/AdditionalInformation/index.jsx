@@ -28,7 +28,7 @@ const AdditionalInformation = ({ control, errors }) => {
         }
       </Grid>
 
-      <CustomButton label={"Proceed"} />
+      <CustomButton label={"Continue"} />
     </WizardLayout>
   );
 };
