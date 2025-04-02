@@ -8,7 +8,7 @@ const ProgressBar = () => {
     const progress = getScreenProgress(CURRENT_SCREEN);
 
     return (
-        <Paper elevation={0} sx={{ background: '#dceeff', display: 'flex', alignItems: 'center', maxWidth: '400px', width: '100%', borderRadius: '8px', padding: '12px' }}>
+        <Paper elevation={0} sx={{ background: '#dceeff', display: 'flex', alignItems: 'center', maxWidth: '400px', width: '100%', borderRadius: '5px', padding: '12px' }}>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ fontWeight: 'bold', marginBottom: '10px', color: '#407ec9', fontSize: 'clamp(12px,2.5vw,14px)' }}>
                     Application Progress...

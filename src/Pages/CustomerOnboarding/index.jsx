@@ -56,7 +56,7 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
 
   const SCREEN_DICTIONARY = {
     // CUSTOMER ONBOARDING SCREENS
-    scr_deviceLocation: <DeviceLocation />,
+    scr_deviceLocation: <CnicFrontForMobile />,
     scr_customerCnic: <CustomerCnic />,
     scr_customerCnicResume: <CustomerCnicResume />,
     scr_customerMobile: <CustomerMobile />,
