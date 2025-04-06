@@ -13,6 +13,14 @@ export default function AccordionTransition({ summary, detail }) {
         setExpanded((prevExpanded) => !prevExpanded);
     };
 
+    // Function to render the detail content
+    const renderDetail = () => {
+        if (typeof detail === 'function') {
+            return detail();
+        }
+        return detail;
+    };
+
     return (
         <Accordion
             expanded={expanded}
@@ -61,7 +69,7 @@ export default function AccordionTransition({ summary, detail }) {
             </AccordionSummary>
             <AccordionDetails sx={{ color: '#707070', padding: '10px' }} >
                 <Typography>
-                    {detail}
+                    {renderDetail()}
                 </Typography>
             </AccordionDetails>
         </Accordion>

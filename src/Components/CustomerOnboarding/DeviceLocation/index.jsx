@@ -7,6 +7,7 @@ import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
 import WizardLayout from "src/Layout/WizardLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
+import { Box } from "@mui/material";
 
 
 const DeviceLocation = ({
@@ -39,7 +40,9 @@ const DeviceLocation = ({
         description={"We need your location to provide a personalized and seamless experience."}
         heroImage={LOCATION_UNDRAW}
       >
-        <CustomButton type="button" label={"Continue"} onClick={handleProceed} />
+        <Box sx={{ position: 'relative', bottom: { xs: '-120px', sm: '0' } }}>
+          <CustomButton type="button" label={"Continue"} onClick={handleProceed} />
+        </Box>
       </WizardLayout>
     </>
   );

@@ -29,8 +29,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
 
     useEffect(() => {
         window.handleDataFromApp = (data) => {
-            console.log('data', 'sdosdsdijds')
-            alert(`OTP: ${data?.otp || 'nahi aay'}`)
+            setOtp(data?.otp || '');
         }
 
 

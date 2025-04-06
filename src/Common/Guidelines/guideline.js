@@ -26,6 +26,7 @@ export const LIVENESS_GUIDELINES = [
 ];
 
 export const CNIC_UPLOAD_GUIDELINES = [
+    "Please use your original CNIC.",
     "Keep image clear and centered.",
     "Ensure the image is straight and stable.",
     "Use good lighting, avoid shadows and blurriness.",

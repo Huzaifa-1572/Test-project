@@ -56,7 +56,7 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
 
   const SCREEN_DICTIONARY = {
     // CUSTOMER ONBOARDING SCREENS
-    scr_deviceLocation: <CnicFrontForMobile />,
+    scr_deviceLocation: <DeviceLocation />,
     scr_customerCnic: <CustomerCnic />,
     scr_customerCnicResume: <CustomerCnicResume />,
     scr_customerMobile: <CustomerMobile />,
@@ -66,7 +66,11 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
     scr_emailVerification: <EmailVerification />,
     scr_livePhotoCapture: (isMobile || isWebview) ? <LivePhotoForMobile /> : <LivePhotoForWeb />,
     scr_uploadCnicFront: (isMobile || isWebview) ? <CnicFrontForMobile /> : <CnicFrontForWeb />,
+    // scr_uploadCnicFront: <CnicFrontForWeb />,
+
     scr_uploadCnicBack: (isMobile || isWebview) ? <CnicBackForMobile /> : <CnicBackForWeb />,
+    // scr_uploadCnicBack: <CnicBackForWeb />,
+
     scr_cnicDetail: <CnicDetail />,
     scr_additionalInformation: <AdditionalInformation />,
     scr_addressDetail: <AddressDetail />,
