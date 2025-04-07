@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
 import styles from './index.module.scss';
 import { closeDeviceDecisionModal } from 'src/Redux/Reducers/DeviceDecisionModalState';
+import { toSentenceCase } from 'src/Utils/Helpers';
 
 
 const DeviceDecisionModal = ({ title, description, isDeviceDecisionModal, setValue }) => {
@@ -53,8 +54,8 @@ const DeviceDecisionModal = ({ title, description, isDeviceDecisionModal, setVal
             <div className={styles.mainContainer}>
                 <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
                 <div className={styles.dialogContentBox}>
-                    <p className={styles.dialogTitle}>{title || 'Error!'}</p>
-                    <p className={styles.dialogContent}>{description || 'something went wrong!'}</p>
+                    <p className={styles.dialogTitle}>{toSentenceCase(title) || 'Error!'}</p>
+                    <p className={styles.dialogContent}>{toSentenceCase(description) || 'something went wrong!'}</p>
                     {/* DECISION BUTTON */}
                     <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                         <Button variant="outlined" sx={{ marginRight: '15px' }} onClick={handleAbort}> Abort</Button>

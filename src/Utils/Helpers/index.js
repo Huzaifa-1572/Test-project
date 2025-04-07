@@ -266,3 +266,8 @@ export async function clearIndexDb() {
 export const getSHA256Hash = (data) => {
   return CryptoJS.SHA256(data).toString();
 };
+
+
+export const toSentenceCase = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};

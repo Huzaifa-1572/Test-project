@@ -1,6 +1,6 @@
 import { Box, Button, Dialog } from '@mui/material';
 import styles from './index.module.scss';
-import { getUUID } from 'src/Utils/Helpers';
+import { getUUID, toSentenceCase } from 'src/Utils/Helpers';
 
 
 
@@ -41,12 +41,12 @@ const GuidelinesModal = ({ showHelp, handleClose, icon, title, guidelines }) => 
                 </div>
                 <Box sx={{ padding: '0px 20px', borderRadius: '8px' }}>
                     <Box className={styles.dialogTitle}>
-                        {title}
+                        {toSentenceCase(title)}
                     </Box>
                     <Box sx={{ textAlign: 'left', fontSize: '14px' }}>
                         {guidelines?.map((guideline) => (
                             <Box key={getUUID()} sx={{ margin: '13px 0px', color: '#696969' }}>
-                                <strong style={{ color: '#407ec9', fontSize: '14px' }}>{guideline?.heading}</strong> {guideline?.content}
+                                <strong style={{ color: '#407ec9', fontSize: '14px' }}>{toSentenceCase(guideline?.heading)}</strong> {toSentenceCase(guideline?.content)}
                             </Box>
                         ))}
                     </Box>

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
 import styles from './index.module.scss';
+import { toSentenceCase } from 'src/Utils/Helpers';
 
 
 const ERROR_CODES = ["Access Denied-403", "Error-401"]
@@ -60,8 +61,8 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
       <div className={styles.mainContainer}>
         <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
         <div className={styles.dialogContentBox}>
-          <p className={styles.dialogTitle}>Oh No!</p>
-          <p className={styles.dialogContent}>{errorMessage || 'something went wrong!'}</p>
+          <p className={styles.dialogTitle}>Oh no!</p>
+          <p className={styles.dialogContent}>{toSentenceCase(errorMessage) || 'something went wrong!'}</p>
           <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
         </div>
       </div>
