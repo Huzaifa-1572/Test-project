@@ -40,9 +40,7 @@ const DeviceLocation = ({
         description={"We need your location to provide a personalized and seamless experience."}
         heroImage={LOCATION_UNDRAW}
       >
-        <Box sx={{ position: 'relative', bottom: { xs: '-120px', sm: '0' } }}>
-          <CustomButton type="button" label={"Continue"} onClick={handleProceed} />
-        </Box>
+        <CustomButton type="button" label={"Continue"} onClick={handleProceed} />
       </WizardLayout>
     </>
   );
