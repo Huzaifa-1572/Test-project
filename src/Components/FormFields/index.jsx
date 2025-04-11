@@ -71,6 +71,7 @@ export const TextInputField = ({
               fontSize: "1.1rem",
               height: "70px",
               backgroundColor: "white",
+              fontWeight: 500,
               "&:hover": { backgroundColor: "white" },
               "&.Mui-focused": { backgroundColor: "white" },
             },
@@ -152,6 +153,7 @@ export const AlphaNumericInputField = ({
                 width: "100%",
                 fontSize: "1.1rem",
                 lineHeight: "15px",
+                fontWeight: 500,
                 height: "70px",
               },
               inputProps: {
@@ -195,6 +197,7 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
         sx={{
           maxWidth: "500px",
           width: "100%",
+          fontWeight: 500,
           "& .MuiFilledInput-root": {
             backgroundColor: "white",
             "&:hover": {
@@ -286,6 +289,7 @@ export const CustomInputField = ({
           border: "1px solid silver",
           borderRadius: "7px",
           fontSize: "1.1rem",
+          fontWeight: 500,
           height: "70px",
           backgroundColor: "white",
           "&:hover": {
@@ -433,6 +437,7 @@ export const NumberInputField = ({
                 maxWidth: "500px",
                 width: "100%",
                 fontSize: "1.1rem",
+                fontWeight: 500,
                 lineHeight: "15px",
                 height: "70px",
               },
@@ -481,6 +486,7 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                         border: "1px solid silver",
                         borderRadius: "7px",
                         fontSize: "1.1rem",
+                        fontWeight: 500,
                         height: "70px",
                         backgroundColor: disabled ? "#f0f0f0" : "white", // Conditional background color
                         cursor: disabled ? "not-allowed" : "text", // Show not-allowed cursor when disabled
@@ -505,6 +511,7 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                   width: "100%",
                   fontSize: "1.1rem",
                   height: "70px",
+                  fontWeight: 500,
                   "& .MuiIconButton-root": {
                     backgroundColor: disabled ? "#f0f0f0" : "white", // Icon button matches background
                     pointerEvents: disabled ? "none" : "auto", // Disable interactions on the icon button
@@ -590,6 +597,7 @@ export const SelectField = ({
               fontSize: "1.1rem",
               height: "70px",
               maxWidth: "500px",
+              fontWeight: 500,
               width: "100%",
               backgroundColor: "white",
               "&:hover": {
@@ -671,6 +679,7 @@ export const AutocompleteSelectField = ({ name, label, control, options, disable
                   width: '100%',
                   fontSize: '1.1rem',
                   height: '70px',
+                  fontWeight: 500,
                   boxShadow: 'none',
                 },
                 '& .MuiInputLabel-root': {
