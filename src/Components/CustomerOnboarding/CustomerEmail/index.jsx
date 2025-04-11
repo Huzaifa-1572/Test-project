@@ -26,9 +26,7 @@ const CustomerEmail = ({ control, errors }) => {
         />
         {errors?.customerEmail ? (<ValidationError message={errors?.customerEmail?.message} />) : null}
       </Box>
-      <Box sx={{ position: 'relative', bottom: { xs: '-60px', sm: '0' } }}>
-        <CustomButton label={"Continue"} />
-      </Box>
+      <CustomButton label={"Continue"} />
     </WizardLayout>
   );
 };

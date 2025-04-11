@@ -99,56 +99,58 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
 
     return (
         <Container maxWidth="lg" className={styles.paperContainer} sx={{ background: { xs: 'none', md: '#f6f6f6' }, borderRadius: { xs: '7px', sm: '20px' } }}>
-            <Box>
-                <img src={icon} alt="mobileOtpLogo" height={'100px'} width={'140px'} />
-            </Box>
-            <h2 className={styles.mainHeading}>{title}</h2>
-            <p className={styles.content}>
-                {content}
-            </p>
-            <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
-                <Box sx={{ marginRight: '20px' }}>{description}</Box>
-                {/* IF WE ARE NOT IN RESUME MODE THEN ONLY SHOW CHANGE OPTION */}
-                {
-                    (goBackContent && !isResume) ?
-                        <Box className={styles.goBack} sx={{ margin: { xs: '12px 0px', sm: 0 } }}>
-                            <span onClick={handleGoBack}>{goBackContent}</span>
-                        </Box> : null
-                }
-            </Box>
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+                <Box>
+                    <img src={icon} alt="mobileOtpLogo" height={'100px'} width={'140px'} />
+                </Box>
+                <h2 className={styles.mainHeading}>{title}</h2>
+                <p className={styles.content}>
+                    {content}
+                </p>
+                <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box sx={{ marginRight: '20px' }}>{description}</Box>
+                    {/* IF WE ARE NOT IN RESUME MODE THEN ONLY SHOW CHANGE OPTION */}
+                    {
+                        (goBackContent && !isResume) ?
+                            <Box className={styles.goBack} sx={{ margin: { xs: '12px 0px', sm: 0 } }}>
+                                <span onClick={handleGoBack}>{goBackContent}</span>
+                            </Box> : null
+                    }
+                </Box>
 
-            <div className={styles.resendOTP} >
-                {resendOTP === 0 ? (
-                    <Button type='button' variant='outlined' className={styles.countdownStyle} onClick={handleResendClick}>
-                        Resend OTP
-                    </Button>
-                ) : (
-                    formatCountdownString()
-                )}
-            </div>
-
-            <div className={styles.OptContainer}>
-                <OtpInput
-                    value={otp}
-                    onChange={handleOtpChange}
-                    numInputs={6}
-                    isInputNum={true}
-                    secret
-                    renderSeparator={<span></span>}
-                    renderInput={(props) => (
-                        <input
-                            {...props}
-                            style={{
-                                WebkitTextSecurity: "disc",
-                                MozTextSecurity: "disc",
-                                textSecurity: "disc",
-                            }}
-                        />
+                <div className={styles.resendOTP} >
+                    {resendOTP === 0 ? (
+                        <Button type='button' variant='outlined' className={styles.countdownStyle} onClick={handleResendClick}>
+                            Resend OTP
+                        </Button>
+                    ) : (
+                        formatCountdownString()
                     )}
-                    inputStyle={styles.inputStyle}
-                    shouldAutoFocus={true}
-                />
-            </div>
+                </div>
+
+                <div className={styles.OptContainer}>
+                    <OtpInput
+                        value={otp}
+                        onChange={handleOtpChange}
+                        numInputs={6}
+                        isInputNum={true}
+                        secret
+                        renderSeparator={<span></span>}
+                        renderInput={(props) => (
+                            <input
+                                {...props}
+                                style={{
+                                    WebkitTextSecurity: "disc",
+                                    MozTextSecurity: "disc",
+                                    textSecurity: "disc",
+                                }}
+                            />
+                        )}
+                        inputStyle={styles.inputStyle}
+                        shouldAutoFocus={true}
+                    />
+                </div>
+            </Box>
 
             <Box sx={{ width: { xs: '100%', md: '40%' } }}>
                 <CustomButton label='Verify' />
