@@ -29,7 +29,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
 
     useEffect(() => {
         window.handleDataFromApp = (data) => {
-            setOtp(data?.otp || '');
+            setOtp((data?.otp).toString() || '');
         }
 
 
@@ -48,6 +48,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     }, [resendOTP]);
 
     const handleOtpChange = (otpValue) => {
+        console.log(typeof otpValue)
         setOtp(otpValue);
         setValue('CUSTOMER_OTP', otpValue)
     };
