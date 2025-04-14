@@ -33,17 +33,21 @@ const generatePrompt = (prompt, blinkCount) => {
         case 'Detecting Face...':
             return (
                 <Alert className={styles.alert} variant="outlined" icon={<LuScanFace size='40px' color='#e8927c' />} severity="info">
-                    Please be patient while we detect your face.
+                    Please wait while we detect your face. Keep your face aligned and close to the camera.
                 </Alert>
             )
 
         case 'Face Detected! slowly blink your eyes.':
             return (
-                <Alert className={styles.alert} variant="outlined" icon={<img src={BLINK_DETECTION} height='65px' width='70px' />} severity="info">
-                    <strong style={{ color: '#407ec9' }}>Blink slowly</strong>, hold your eyes closed for 1-2 seconds.
-                    <br />
-                    <strong style={{ color: '#407ec9' }}>Close Eye Detection Count : {blinkCount}</strong>
-                </Alert>
+                <>
+                    <Alert className={styles.alert} variant="outlined" icon={<img src={BLINK_DETECTION} height='65px' width='70px' />} severity="info">
+                        <strong style={{ color: '#407ec9' }}>Blink slowly</strong>, hold your eyes closed for 1-2 seconds.
+                        <br />
+                        <strong style={{ color: '#407ec9' }}>Close Eye Detection Count: {blinkCount}</strong>
+                        <br />
+                        <p style={{ color: '#666666' }}>If wearing glasses, kindly remove them.</p>
+                    </Alert>
+                </>
             )
 
         case 'Look Left':
@@ -453,8 +457,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                         fontSize: '12px',
                                                         fontWeight: 'bold',
                                                         textAlign: 'center',
-                                                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                                                        padding: '3px 5px',
+                                                        background: 'rgba(220, 239, 255, 0.8)',
+                                                        color: '#407ec9',
+                                                        padding: '5px 5px',
                                                         width: '100%'
                                                     }}
                                                 >
@@ -475,6 +480,10 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                             </Box>
                                         </Box>
                                     </Container>
+
+                                    <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
+                                        Hold your postures longer if using an older /slower device.
+                                    </Alert>
                                 </>
                             )}
                             <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>

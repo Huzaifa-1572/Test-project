@@ -71,7 +71,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
             padding: { md: '10px 40px' },
             flex: 1,
             display: 'flex',
-            alignItems: 'center',
+            alignItems: { xs: 'stretch', sm: 'center' },
           }}>
           {children}
         </Container>

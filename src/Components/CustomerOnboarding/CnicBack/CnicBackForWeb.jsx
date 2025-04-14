@@ -18,8 +18,8 @@ const CnicBackForMobile = ({ control, getValues, errors, setValue }) => {
   return (
     <WizardLayout
       Icon={CARD_ICON}
-      title={TITLE}
-      description={DESCRIPTION}
+      title={"Upload CNIC Back" || TITLE}
+      description={"Kindly upload a clear image of the back side of your CNIC to proceed." || DESCRIPTION}
       heroImage={CARD_UNDRAW}
     >
       {
