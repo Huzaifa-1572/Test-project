@@ -453,7 +453,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                         top: 0,
                                                         left: '50%',
                                                         transform: 'translate(-50%, -0%)',
-                                                        color: 'white',
                                                         fontSize: '12px',
                                                         fontWeight: 'bold',
                                                         textAlign: 'center',
