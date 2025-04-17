@@ -140,15 +140,18 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         renderInput={(props) => (
                             <input
                                 {...props}
+                                disabled={true}
+                                autoComplete="one-time-code"
                                 style={{
                                     WebkitTextSecurity: "disc",
                                     MozTextSecurity: "disc",
                                     textSecurity: "disc",
+                                    cursor: 'not-allowed',
                                 }}
                             />
                         )}
                         inputStyle={styles.inputStyle}
-                        shouldAutoFocus={true}
+                        shouldAutoFocus={false}
                     />
                 </div>
             </Box>
