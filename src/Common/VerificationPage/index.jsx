@@ -140,18 +140,18 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         renderInput={(props) => (
                             <input
                                 {...props}
-                                disabled={true}
+                                disabled={PREVIOUS_SCREEN === 'scr_customerMobile' ? true : false}
                                 autoComplete="one-time-code"
                                 style={{
                                     WebkitTextSecurity: "disc",
                                     MozTextSecurity: "disc",
                                     textSecurity: "disc",
-                                    cursor: 'not-allowed',
+                                    cursor: PREVIOUS_SCREEN === 'scr_customerMobile' && 'not-allowed'
                                 }}
                             />
                         )}
                         inputStyle={styles.inputStyle}
-                        shouldAutoFocus={false}
+                        shouldAutoFocus={PREVIOUS_SCREEN === 'scr_customerMobile' ? false : true}
                     />
                 </div>
             </Box>
