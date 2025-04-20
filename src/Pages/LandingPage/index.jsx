@@ -45,7 +45,7 @@ const LandingPage = () => {
           <img src={Background} alt="" loading="lazy" />
         </Box>
 
-        <Container maxWidth="xl" className={styles.contentContainer} sx={{ padding: { xs: '30px', lg: 0 }, display: 'flex', alignItems: 'center', borderRadius: { lg: '15px' }, minHeight: '100%' }}>
+        <Container maxWidth="xl" className={styles.contentContainer} sx={{ padding: { xs: '10px', lg: 0 }, display: 'flex', alignItems: 'center', borderRadius: { lg: '15px' }, minHeight: '100%' }}>
           <Grid container spacing={2} sx={{ height: '100%', display: "flex", justifyContent: "center", alignItems: "center" }}>
 
             <Grid item xs={12} xl={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>

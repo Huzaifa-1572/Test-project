@@ -46,10 +46,10 @@
   }
 
   .inputStyle {
-    margin-top: clamp(10px, 2vw, 20px);
-    margin-bottom: clamp(10px, 2vw, 30px);
-    width: clamp(40px, 9vw, 65px) !important;
-    height: clamp(50px, 9vw, 77px) !important;
+    margin-top: clamp(15px, 2vw, 20px);
+    margin-bottom: clamp(15px, 2vw, 30px);
+    width: clamp(43px, 9vw, 65px) !important;
+    height: clamp(48px, 9vw, 77px) !important;
     border: solid 1px #1a1d21 !important;
     background: #252f37 !important;
     color: #ffffff !important;
@@ -66,6 +66,7 @@
   color: #e8927c;
   font-size: 14px;
   border: 1px solid #e8927c;
+  height: 35px !important;
 }
 .countdownStyle:hover {
   border: 1px solid #e8927c;

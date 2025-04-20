@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@mui/material';
+import { Alert, Box, Button, Container } from '@mui/material';
 import { useEffect, useState } from 'react';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -153,6 +153,15 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         inputStyle={styles.inputStyle}
                         shouldAutoFocus={PREVIOUS_SCREEN === 'scr_customerMobile' ? false : true}
                     />
+
+                    {
+                        PREVIOUS_SCREEN === 'scr_customerMobile' &&
+                        <Alert sx={{ borderRadius: '7px', }} severity='warning'>
+                            <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>  Manual OTP entry is not allowed.</Box>
+                            <Box sx={{ fontSize: '11px' }}> Please wait for the OTP to be auto-filled.</Box>
+                        </Alert>
+
+                    }
                 </div>
             </Box>
 
