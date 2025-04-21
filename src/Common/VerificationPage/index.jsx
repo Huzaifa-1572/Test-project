@@ -11,6 +11,8 @@ import { CUSTEMAIL_HANDLER, CUSTMOBILE_HANDLER } from 'src/Utils/CommonFunctions
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 import CustomButton from '../CustomButton';
 import styles from './index.module.scss';
+import { isMobile } from 'react-device-detect';
+
 
 
 
@@ -24,7 +26,8 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const PREVIOUS_SCREEN = useSelector(state => state?.prevScreenState)
     const { title: modalTitle, description: modalDescription, isDeviceDecisionModal } = useSelector(state => state.deviceDecisionModal)
     const isResume = localStorage.getItem('isResume')
-    const formRef = useRef();
+    const isWebview = JSON.parse(sessionStorage.getItem('device')).deviceId !== 'temp'
+
 
 
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
@@ -143,22 +146,22 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         renderInput={(props) => (
                             <input
                                 {...props}
-                                disabled={PREVIOUS_SCREEN === 'scr_customerMobile' ? true : false}
+                                disabled={(PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? true : false}
                                 autoComplete="one-time-code"
                                 style={{
                                     WebkitTextSecurity: "disc",
                                     MozTextSecurity: "disc",
                                     textSecurity: "disc",
-                                    cursor: PREVIOUS_SCREEN === 'scr_customerMobile' && 'not-allowed'
+                                    cursor: (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) && 'not-allowed'
                                 }}
                             />
                         )}
                         inputStyle={styles.inputStyle}
-                        shouldAutoFocus={PREVIOUS_SCREEN === 'scr_customerMobile' ? false : true}
+                        shouldAutoFocus={(PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? false : true}
                     />
 
                     {
-                        PREVIOUS_SCREEN === 'scr_customerMobile' &&
+                        (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) &&
                         <Alert sx={{ borderRadius: '7px', }} severity='warning'>
                             <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>  Manual OTP entry is not allowed.</Box>
                             <Box sx={{ fontSize: '11px' }}> Please wait for the OTP to be auto-filled.</Box>

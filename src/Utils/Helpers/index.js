@@ -278,3 +278,8 @@ export const isSmallScreen = () => {
   const theme = useTheme();
   return useMediaQuery(theme.breakpoints.down('md'))
 }
+
+export const createHash = ({ hashedOtp, entity }) => {
+  const dataToHash = `${hashedOtp}${entity}`;
+  return getSHA256Hash(dataToHash)
+}

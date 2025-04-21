@@ -7,12 +7,13 @@ import usePostDataToServer from "src/Hooks/usePostdataToServer";
 import CustomerOnboardingLayout from "src/Layout/CustomerOnboardingLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { showDeviceDecisionModal } from "src/Redux/Reducers/DeviceDecisionModalState";
+import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { CNICEXIST_HANDLER, COFormSubmission, CUSTMOBILE_HANDLER } from "src/Utils/CommonFunctions/COFormSubmission";
 import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { INITIAL_VALUES } from "src/Utils/Constants";
-import { getDataFromIndexDb, storeDataToIndexDb } from "src/Utils/Helpers";
+import { createHash, getDataFromIndexDb, getSHA256Hash, storeDataToIndexDb } from "src/Utils/Helpers";
 import { shape } from "src/Utils/ValidationSchema";
 import * as yup from "yup";
 
@@ -63,6 +64,7 @@ function WrapperForHookFormProps({ children }) {
     const TOKEN = response?.data?.data?.token;
     const DATA = response?.data?.data;
     const CUSTOMER_CNIC = getValues("customerCnic");
+    const { prev_screen_kuid } = DATA
 
     // FOR SECOND CALL ON CUSTOMER CNIC SCREEN
     if ((CURRENT_SCREEN === "scr_customerCnic" || CURRENT_SCREEN === "scr_customerCnicResume") && !!TOKEN) {
@@ -98,7 +100,33 @@ function WrapperForHookFormProps({ children }) {
       mutate({ BODY, API_URL, dispatch });
     }
 
-    postRequestSuccess({ response, dispatch, navigate, setValue });
+    // FOR OTP BYPASS TO CLEAR VAPT REPORT
+    if ((prev_screen_kuid === 'scr_mobileVerification') || (prev_screen_kuid === 'scr_emailVerification')) {
+      let entity = ''
+      const { CUSTOMER_OTP } = getValues()
+      const { election, mobileNumber, email } = DATA
+      const hashedOtp = getSHA256Hash(CUSTOMER_OTP)
+
+      if (prev_screen_kuid === 'scr_mobileVerification') {
+        entity = mobileNumber
+      }
+      else {
+        entity = email
+      }
+
+      const isValidHash = createHash({ hashedOtp, entity }) === election
+
+      if (isValidHash) postRequestSuccess({ response, dispatch, navigate, setValue });
+
+      else {
+        dispatch(showErrorModal({
+          errorCode: "Oh no!", errorMessage: "Something went wrong.Please Try Again Later.", isError: true,
+        }));
+      }
+    }
+    else {
+      postRequestSuccess({ response, dispatch, navigate, setValue });
+    }
   }
 
   const HOOK_FORM_PROPS = { control, errors, watch, setValue, trigger, getValues, reset, resetField, submitFormData, handleSubmit };
