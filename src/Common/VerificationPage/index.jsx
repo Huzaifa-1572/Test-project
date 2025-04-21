@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Container } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -24,12 +24,15 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const PREVIOUS_SCREEN = useSelector(state => state?.prevScreenState)
     const { title: modalTitle, description: modalDescription, isDeviceDecisionModal } = useSelector(state => state.deviceDecisionModal)
     const isResume = localStorage.getItem('isResume')
+    const formRef = useRef();
+
 
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
     useEffect(() => {
         window.handleDataFromApp = (data) => {
             setOtp((data?.otp).toString() || '');
+            setValue('CUSTOMER_OTP', data?.otp)
         }
 
 

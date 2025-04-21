@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
-import DEVICE_ICON from "src/Assets/images/locationIcon.png";
+import LOCATION_UNDRAW_XS from "src/Assets/images/deviceLocationundraw-sm.svg";
 import LOCATION_UNDRAW from "src/Assets/images/deviceLocationundraw.svg";
+import DEVICE_ICON from "src/Assets/images/locationIcon.png";
 import CustomButton from "src/Common/CustomButton";
 import Loader from "src/Common/Loader";
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
 import WizardLayout from "src/Layout/WizardLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
-import { Box } from "@mui/material";
+import { isSmallScreen } from "src/Utils/Helpers";
 
 
 const DeviceLocation = ({
@@ -16,6 +17,8 @@ const DeviceLocation = ({
 }) => {
   const dispatch = useDispatch()
   const { locationStatus, fetchLocation } = useGetGeoCoordinates({ setValue, getValues });
+
+
 
   const handleProceed = () => {
     const LOCATION = getValues("KEY_GEO_COORDINATES");
@@ -38,7 +41,7 @@ const DeviceLocation = ({
         Icon={DEVICE_ICON}
         title={"Device Location"}
         description={"We need your location to provide a personalized and seamless experience."}
-        heroImage={LOCATION_UNDRAW}
+        heroImage={isSmallScreen() ? LOCATION_UNDRAW_XS : LOCATION_UNDRAW}
       >
         <CustomButton type="button" label={"Continue"} onClick={handleProceed} />
       </WizardLayout>

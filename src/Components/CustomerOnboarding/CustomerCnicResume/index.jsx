@@ -2,12 +2,14 @@ import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import CNICICON from 'src/Assets/images/cnicIcon.png';
 import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg";
+import CNIC_UNDRAW_SM from "src/Assets/images/resumeUndraw-sm.svg";
 import CustomButton from "src/Common/CustomButton";
 import Loader from "src/Common/Loader";
 import { CaptchaField, CustomInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import useGetGeoCoordinates from "src/Hooks/useGetGeoCoordinates";
 import WizardLayout from "src/Layout/WizardLayout";
+import { isSmallScreen } from "src/Utils/Helpers";
 
 const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
     const { locationStatus, fetchLocation } = useGetGeoCoordinates({ setValue, getValues });
@@ -28,7 +30,7 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
                 Icon={CNICICON}
                 title={"Resume Application"}
                 description={"Enter your CNIC number to retrieve your application details and proceed from where you paused."}
-                heroImage={CNIC_UNDRAW}
+                heroImage={isSmallScreen() ? CNIC_UNDRAW_SM : CNIC_UNDRAW}
             >
                 <Grid container spacing={2}>
 

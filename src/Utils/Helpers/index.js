@@ -8,6 +8,7 @@ import { SCREENS_FOR_PROGRESS_BAR } from "src/Pages/CustomerOnboarding";
 import { v4 as uuidv4 } from "uuid";
 import { OPERATOR_MAP } from "../Constants";
 import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 
 export function maskEmail(email = "") {
@@ -271,3 +272,9 @@ export const getSHA256Hash = (data) => {
 export const toSentenceCase = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 };
+
+
+export const isSmallScreen = () => {
+  const theme = useTheme();
+  return useMediaQuery(theme.breakpoints.down('md'))
+}
