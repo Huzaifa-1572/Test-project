@@ -1,5 +1,6 @@
 import { Alert, Box, Button, Container } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,10 +12,6 @@ import { CUSTEMAIL_HANDLER, CUSTMOBILE_HANDLER } from 'src/Utils/CommonFunctions
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 import CustomButton from '../CustomButton';
 import styles from './index.module.scss';
-import { isMobile } from 'react-device-detect';
-
-
-
 
 
 function VerificationPage({ icon, title, content, description, goBackContent, setValue, getValues }) {
