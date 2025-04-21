@@ -16,28 +16,31 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                 </Box>
 
                 {/* FOR SMALL DEVICES */}
-                <Box sx={{ flex: 1, marginTop: '10px' }}>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
-                        <Box className={styles.smallDeviceIconContainer} >
-                            <img src={heroImage} height={'100%'} width={'100%'} />
-                        </Box>
-                    </Box>
+                <Fade in={true} timeout={2000}>
 
-                    <Fade in={true} timeout={800}>
-                        <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-                            {title}
+                    <Box sx={{ flex: 1, marginTop: '10px' }}>
+                        <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
+                            <Box className={styles.smallDeviceIconContainer} >
+                                <img src={heroImage} height={'100%'} width={'100%'} />
+                            </Box>
                         </Box>
-                    </Fade>
-                    {description && (
+
                         <Fade in={true} timeout={800}>
-                            <Box className={styles.content} sx={{
-                                textAlign: { xs: "center", sm: "left" }, margin: { xs: '10px 0px', sm: '25px 0px' }
-                            }}>
-                                {description}
+                            <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
+                                {title}
                             </Box>
                         </Fade>
-                    )}
-                </Box>
+                        {description && (
+                            <Fade in={true} timeout={800}>
+                                <Box className={styles.content} sx={{
+                                    textAlign: { xs: "center", sm: "left" }, margin: { xs: '10px 0px', sm: '25px 0px' }
+                                }}>
+                                    {description}
+                                </Box>
+                            </Fade>
+                        )}
+                    </Box>
+                </Fade>
                 {children}
             </Grid>
 

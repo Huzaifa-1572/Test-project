@@ -11,6 +11,8 @@ import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { clearAppData } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
+import Fade from '@mui/material/Fade';
+
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -49,43 +51,51 @@ const LandingPage = () => {
           <Grid container spacing={2} sx={{ height: '100%', display: "flex", justifyContent: "center", alignItems: "center" }}>
 
             <Grid item xs={12} xl={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-              <Box className={styles.textContainer}>
-                <span> Account for Your Needs</span>
-                <br />
-                Start Your Journey with Payvay!
-              </Box>
+              <Fade in={true} timeout={1000}>
+                <Box className={styles.textContainer}>
+                  <span> Account for Your Needs</span>
+                  <br />
+                  Start Your Journey with Payvay!
+                </Box>
+              </Fade>
 
-              <Box className={styles.descriptionText}>
-                Explore tailored features and benefits by selecting the account
-                <br />
-                type that aligns with your goals.
-              </Box>
+              <Fade in={true} timeout={1000}>
+                <Box className={styles.descriptionText}>
+                  Explore tailored features and benefits by selecting the account
+                  <br />
+                  type that aligns with your goals.
+                </Box>
+              </Fade>
 
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={1}></Grid>
                 <Grid item xs={12} sm={5}>
-                  <Box className={styles.card} onClick={handleNewAccount} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
-                    <img src={OpenNewAccount} alt="Open New Account" className={styles.cardImage} />
-                    <Box className={styles.cardTitle}>
-                      Start New Application
+                  <Fade in={true} timeout={1000}>
+                    <Box className={styles.card} onClick={handleNewAccount} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
+                      <img src={OpenNewAccount} alt="Open New Account" className={styles.cardImage} />
+                      <Box className={styles.cardTitle}>
+                        Start New Application
+                      </Box>
+                      <Box className={styles.cardDescription}>
+                        Begin a fresh journey from the start
+                      </Box>
                     </Box>
-                    <Box className={styles.cardDescription}>
-                      Begin a fresh journey from the start
-                    </Box>
-                  </Box>
+                  </Fade>
                 </Grid>
 
                 {/* RESUME */}
                 <Grid item xs={12} sm={5}>
-                  <Box className={styles.card} onClick={handleResumeApplication} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
-                    <img src={resumeAccount} alt="Resume Application" className={styles.cardImage} />
-                    <Box className={styles.cardTitle}>
-                      Resume Application
+                  <Fade in={true} timeout={1000}>
+                    <Box className={styles.card} onClick={handleResumeApplication} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
+                      <img src={resumeAccount} alt="Resume Application" className={styles.cardImage} />
+                      <Box className={styles.cardTitle}>
+                        Resume Application
+                      </Box>
+                      <Box className={styles.cardDescription}>
+                        Continue right where you left off
+                      </Box>
                     </Box>
-                    <Box className={styles.cardDescription}>
-                      Continue right where you left off
-                    </Box>
-                  </Box>
+                  </Fade>
                 </Grid>
                 <Grid item xs={12} sm={1}></Grid>
               </Grid>
