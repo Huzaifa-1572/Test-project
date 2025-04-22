@@ -17,6 +17,8 @@ import { createHash, getDataFromIndexDb, getSHA256Hash, storeDataToIndexDb } fro
 import { shape } from "src/Utils/ValidationSchema";
 import * as yup from "yup";
 
+const ELECTION_SCREENS = ['scr_mobileVerification', 'scr_emailVerification']
+
 function WrapperForHookFormProps({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -101,7 +103,7 @@ function WrapperForHookFormProps({ children }) {
     }
 
     // FOR OTP BYPASS TO CLEAR VAPT REPORT
-    if ((prev_screen_kuid === 'scr_mobileVerification') || (prev_screen_kuid === 'scr_emailVerification')) {
+    if (ELECTION_SCREENS?.includes(prev_screen_kuid)) {
       let entity = ''
       const { CUSTOMER_OTP } = getValues()
       const { election, mobileNumber, email } = DATA
@@ -115,6 +117,7 @@ function WrapperForHookFormProps({ children }) {
       }
 
       const isValidHash = createHash({ hashedOtp, entity }) === election
+      console.log('mdskdsc', createHash({ hashedOtp, entity }), election)
 
       if (isValidHash) postRequestSuccess({ response, dispatch, navigate, setValue });
 

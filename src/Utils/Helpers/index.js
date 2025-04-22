@@ -280,6 +280,6 @@ export const isSmallScreen = () => {
 }
 
 export const createHash = ({ hashedOtp, entity }) => {
-  const dataToHash = `${hashedOtp}${entity}`;
+  const dataToHash = `payvay${hashedOtp}${entity}dao`;
   return getSHA256Hash(dataToHash)
 }
