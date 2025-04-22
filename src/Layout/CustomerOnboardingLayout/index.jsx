@@ -68,7 +68,7 @@ function CustomerOnboardingLayout({ setValue, getValues, children }) {
         <Container
           maxWidth="xl"
           sx={{
-            padding: { md: '10px 40px' },
+            padding: { xs: '9px', md: '10px 40px' },
             flex: 1,
             display: 'flex',
             alignItems: { xs: 'stretch', sm: 'center' },
