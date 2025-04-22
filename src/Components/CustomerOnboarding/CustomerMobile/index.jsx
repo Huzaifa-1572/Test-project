@@ -6,7 +6,8 @@ import WizardLayout from "src/Layout/WizardLayout";
 import { OPERATOR_OPTION } from "src/Utils/Lovs";
 import MOBILE_ICON from 'src/Assets/images/mobileIcon.png'
 import MOBILE_UNDRAW from 'src/Assets/images/mobileUndraw.svg'
-
+import MOBILE_UNDRAW_SM from 'src/Assets/images/mobileUndraw_sm.svg'
+import { isSmallScreen } from "src/Utils/Helpers";
 
 
 const CustomerMobile = ({ control, errors }) => {
@@ -16,7 +17,7 @@ const CustomerMobile = ({ control, errors }) => {
       Icon={MOBILE_ICON}
       title={"Mobile Verification"}
       description={"Kindly enter your mobile number to continue your application."}
-      heroImage={MOBILE_UNDRAW}
+      heroImage={isSmallScreen() ? MOBILE_UNDRAW_SM : MOBILE_UNDRAW}
     >
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>

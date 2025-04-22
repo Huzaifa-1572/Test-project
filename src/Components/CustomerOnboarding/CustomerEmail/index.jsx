@@ -5,6 +5,8 @@ import { TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import EMAIL_UNDRAW from "src/Assets/images/emailUndraw.svg"
+import EMAIL_UNDRAW_SM from "src/Assets/images/emailUndraw_sm.svg"
+import { isSmallScreen } from "src/Utils/Helpers";
 
 
 const CustomerEmail = ({ control, errors }) => {
@@ -13,7 +15,7 @@ const CustomerEmail = ({ control, errors }) => {
       Icon={EMAIL_ICON}
       title={"Email Verification"}
       description={'Kindly provide a valid email address to proceed further.'}
-      heroImage={EMAIL_UNDRAW}
+      heroImage={isSmallScreen() ? EMAIL_UNDRAW_SM : EMAIL_UNDRAW}
     >
       <Box>
         <TextInputField

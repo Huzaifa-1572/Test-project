@@ -1,13 +1,13 @@
 import { Box, Container } from "@mui/material";
-import DECLARATION_UNDRAW from 'src/Assets/images/declarationUndraw.svg';
 import TERMS_AND_CONDITION_UNDRAW from 'src/Assets/images/termsAndConditionsUndraw.svg';
+import TERMS_AND_CONDITION_UNDRAW_SM from 'src/Assets/images/termsAndConditionsUndraw_sm.svg';
 import Accordion from "src/Common/Accordion";
 import CustomButton from "src/Common/CustomButton";
 import { CheckboxField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
-import { getUUID } from "src/Utils/Helpers";
+import { PayvayTerms } from 'src/Utils/Constants/PayvayTerms';
+import { getUUID, isSmallScreen } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
-import { PayvayTerms } from 'src/Utils/Constants/PayvayTerms'
 
 
 
@@ -29,7 +29,7 @@ const TermAndCondition = ({ control, errors }) => {
         <Box sx={{ margin: '20px 0px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <h1 className={styles.topHeading}>Terms & Conditions</h1>
-            <img src={TERMS_AND_CONDITION_UNDRAW} alt='' height='100px' width='100px' />
+            <img src={isSmallScreen() ? TERMS_AND_CONDITION_UNDRAW_SM : TERMS_AND_CONDITION_UNDRAW} alt='' height='100px' width='100px' />
           </Box>
 
           <Box className={styles.termContainer}>

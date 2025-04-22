@@ -2,12 +2,13 @@ import { Box } from "@mui/material";
 import { useMemo } from "react";
 import CARD_ICON from 'src/Assets/images/cardIcon.png';
 import CARD_UNDRAW from 'src/Assets/images/cardUndraw.svg';
+import CARD_UNDRAW_SM from 'src/Assets/images/cardUndraw_sm.svg';
 import CustomButton from "src/Common/CustomButton";
 import Guidelines from "src/Common/Guidelines";
 import { CNIC_UPLOAD_GUIDELINES } from "src/Common/Guidelines/guideline";
 import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
-import { getScreenData } from "src/Utils/Helpers";
+import { getScreenData, isSmallScreen } from "src/Utils/Helpers";
 
 
 const CnicBackForMobile = ({ control, getValues, errors, setValue }) => {
@@ -20,7 +21,7 @@ const CnicBackForMobile = ({ control, getValues, errors, setValue }) => {
       Icon={CARD_ICON}
       title={"Upload CNIC Back" || TITLE}
       description={"Kindly upload a clear image of the back side of your CNIC to proceed." || DESCRIPTION}
-      heroImage={CARD_UNDRAW}
+      heroImage={isSmallScreen() ? CARD_UNDRAW_SM : CARD_UNDRAW}
     >
       {
         FIELDS?.map(field => (

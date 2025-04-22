@@ -16,6 +16,7 @@ import LOOK_LEFT from 'src/Assets/images/look-left.gif';
 import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
+import SELFIE_UNDRAW_SM from 'src/Assets/images/selfie_sm.svg';
 import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
 import CustomButton from "src/Common/CustomButton";
 import GuidelinesModal from "src/Common/Modals/GuidelinesModal";
@@ -23,7 +24,7 @@ import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
-import { checkCameraPermission, getScreenData } from "src/Utils/Helpers";
+import { checkCameraPermission, getScreenData, isSmallScreen } from "src/Utils/Helpers";
 import styles from './index.module.scss';
 
 
@@ -394,7 +395,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                             <Box className={styles.cameraWrapper}>
                                 <img
                                     className={styles.camIconStyle}
-                                    src={SELFIE_UNDRAW}
+                                    src={isSmallScreen() ? SELFIE_UNDRAW_SM : SELFIE_UNDRAW}
                                     alt="Upload Selfie"
                                 />
                                 <Box className={styles.permissionText}>

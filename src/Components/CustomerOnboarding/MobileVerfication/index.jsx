@@ -1,6 +1,9 @@
 // import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobileVerificationIcon.png';
 import VerificationPage from 'src/Common/VerificationPage';
 import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobile-otp.svg';
+import MOBILE_VERIFICATION_LOGO_SM from 'src/Assets/images/mobile-otp_sm.svg';
+import { isSmallScreen } from 'src/Utils/Helpers';
+
 
 const MobileVerification = ({ setValue, getValues }) => {
     const CUSTOMER_MOBILE_NUMBER = getValues('customerMobile')
@@ -9,7 +12,7 @@ const MobileVerification = ({ setValue, getValues }) => {
 
     return (
         <VerificationPage
-            icon={MOBILE_VERIFICATION_LOGO}
+            icon={isSmallScreen() ? MOBILE_VERIFICATION_LOGO_SM : MOBILE_VERIFICATION_LOGO}
             title={'Mobile Verification'}
             content={"We have sent a verification code to verify your mobile number"}
             description={`sent to ${NUMBER_FOR_OTP}`}

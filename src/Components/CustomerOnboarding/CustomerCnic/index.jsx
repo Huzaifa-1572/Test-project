@@ -5,7 +5,9 @@ import { CaptchaField, CustomInputField, TextInputField } from "src/Components/F
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import CNIC_UNDRAW from "src/Assets/images/customerCnicUndraw.svg"
+import CNIC_UNDRAW_SM from "src/Assets/images/customerCnicUndraw_sm.svg"
 import { Box } from "@mui/material";
+import { isSmallScreen } from "src/Utils/Helpers";
 
 const CustomerCnic = ({ control, errors }) => {
   return (
@@ -13,7 +15,7 @@ const CustomerCnic = ({ control, errors }) => {
       Icon={CNICICON}
       title={"CNIC Verification"}
       description={"Please enter your CNIC to continue with your online onboarding."}
-      heroImage={CNIC_UNDRAW}
+      heroImage={isSmallScreen() ? CNIC_UNDRAW_SM : CNIC_UNDRAW}
     >
 
       <Grid container spacing={2}>

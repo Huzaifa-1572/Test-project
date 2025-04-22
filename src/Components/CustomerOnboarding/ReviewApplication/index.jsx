@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import CustomButton from 'src/Common/CustomButton'
 import { EDIT_HANDLER, GET_IMAGE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission'
-import { generateFieldValue, getReviewApplicationData, getUUID } from 'src/Utils/Helpers'
+import { generateFieldValue, getReviewApplicationData, getUUID, isSmallScreen } from 'src/Utils/Helpers'
 import styles from './index.module.scss'
 import { FaLock } from "react-icons/fa"
 import { HiViewfinderCircle } from "react-icons/hi2"
 import { IoMdWarning } from "react-icons/io"
 import REVIEW_UNDRAW from 'src/Assets/images/reviewUndraw.svg'
+import REVIEW_UNDRAW_SM from 'src/Assets/images/reviewUndraw_sm.svg'
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
@@ -69,7 +70,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
 
                 {/* FOR MOBILE */}
                 <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', alignItems: 'center' }}>
-                    <img src={REVIEW_UNDRAW} alt='review-application' height='70px' width='90' />
+                    <img src={isSmallScreen() ? REVIEW_UNDRAW_SM : REVIEW_UNDRAW} alt='review-application' height='70px' width='90' />
                     <h1 className={styles.topHeading}>
                         {TITLE || "Hey! Review Your Application"}
                     </h1>

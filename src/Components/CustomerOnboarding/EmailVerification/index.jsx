@@ -2,6 +2,9 @@ import React from 'react'
 import VerificationPage from 'src/Common/VerificationPage';
 // import EMAIL_VERIFICATION from 'src/Assets/images/emailVerificationIcon.png'
 import EMAIL_VERIFICATION from 'src/Assets/images/email-otp.svg'
+import EMAIL_VERIFICATION_SM from 'src/Assets/images/email-otp_sm.svg'
+import { isSmallScreen } from 'src/Utils/Helpers';
+
 
 
 const EmailVerification = ({ setValue, getValues }) => {
@@ -16,7 +19,7 @@ const EmailVerification = ({ setValue, getValues }) => {
 
     return (
         <VerificationPage
-            icon={EMAIL_VERIFICATION}
+            icon={isSmallScreen() ? EMAIL_VERIFICATION_SM : EMAIL_VERIFICATION}
             title={'Email Verification'}
             content={"Please enter the one time passcode which was sent to your email address"}
             goBackContent={"Change Email Address"}

@@ -2,8 +2,10 @@ import { Container, Typography } from '@mui/material';
 import { CiLogin } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import APPLICATION_SUBMITTED_UNDRAW from 'src/Assets/images/applicationSubmittedUndraw.svg';
-import { clearIndexDb, getScreenData } from 'src/Utils/Helpers';
+import APPLICATION_SUBMITTED_UNDRAW_SM from 'src/Assets/images/applicationSubmittedUndraw_sm.svg';
+import { clearIndexDb, getScreenData, isSmallScreen } from 'src/Utils/Helpers';
 import styles from './index.module.scss';
+
 
 
 const ApplicationComplete = ({ reset }) => {
@@ -31,7 +33,7 @@ const ApplicationComplete = ({ reset }) => {
 
     return (
         <div className={styles.topWrapper}>
-            <img src={APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={140} />
+            <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={140} />
             <h1 className={styles.mainHeading}>Thankyou!</h1>
             <h2 className={styles.titleWrapper}>Application submitted successfully.</h2>
             <p className={styles.descriptionWrapper}>

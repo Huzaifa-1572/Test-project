@@ -1,10 +1,11 @@
 import { Grid } from "@mui/material";
 import CARD_ICON from 'src/Assets/images/cardIcon.png';
 import CNIC_DETAIL_UNDRAW from 'src/Assets/images/cnicDetailUndraw.svg';
+import CNIC_DETAIL_UNDRAW_SM from 'src/Assets/images/cnicDetailUndraw_sm.svg';
 import CustomButton from "src/Common/CustomButton";
 import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
-import { getScreenData } from "src/Utils/Helpers";
+import { getScreenData, isSmallScreen } from "src/Utils/Helpers";
 
 
 const CnicDetail = ({ control, setValue, errors, watch }) => {
@@ -22,7 +23,7 @@ const CnicDetail = ({ control, setValue, errors, watch }) => {
       Icon={CARD_ICON}
       title={TITLE}
       description={'Kindly review and confirm the details of your CNIC to proceed with the process.'}
-      heroImage={CNIC_DETAIL_UNDRAW}
+      heroImage={isSmallScreen() ? CNIC_DETAIL_UNDRAW_SM : CNIC_DETAIL_UNDRAW}
     >
       <Grid container sx={{ gap: "24px" }}>
         {
