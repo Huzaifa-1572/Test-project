@@ -16,7 +16,6 @@ import LOOK_LEFT from 'src/Assets/images/look-left.gif';
 import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
-import SELFIE_UNDRAW_SM from 'src/Assets/images/selfie_sm.svg';
 import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
 import CustomButton from "src/Common/CustomButton";
 import GuidelinesModal from "src/Common/Modals/GuidelinesModal";
@@ -395,7 +394,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                             <Box className={styles.cameraWrapper}>
                                 <img
                                     className={styles.camIconStyle}
-                                    src={isSmallScreen() ? SELFIE_UNDRAW_SM : SELFIE_UNDRAW}
+                                    src={SELFIE_UNDRAW}
                                     alt="Upload Selfie"
                                 />
                                 <Box className={styles.permissionText}>
