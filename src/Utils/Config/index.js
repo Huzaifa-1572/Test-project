@@ -1,8 +1,6 @@
 // BASE URL
 export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
 
-// export const BASE_URL = "http://192.168.10.200:8089/";
-
 
 export const ENDPOINTS = {
   AUTHENTICATION: "api/dao/v1/authenticate",
