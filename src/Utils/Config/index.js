@@ -1,5 +1,5 @@
 // BASE URL
-export const BASE_URL = "https://dev-psouat.paysyslabs.com/";
+export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
 
 
 export const ENDPOINTS = {
