@@ -158,7 +158,7 @@ function WrapperForHookFormProps({ children }) {
       else {
         console.log('No stored data found.');
       }
-    });
+    }).catch((err) => console.log(err));
 
     // Update data on beforeunload
     const beforeUnloadHandler = async () => {
