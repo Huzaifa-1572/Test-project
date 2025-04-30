@@ -23,7 +23,7 @@ import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
-import { checkCameraPermission, getScreenData, isSmallScreen } from "src/Utils/Helpers";
+import { checkCameraPermission } from "src/Utils/Helpers";
 import styles from './index.module.scss';
 
 
@@ -93,7 +93,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const [faceDetected, setFaceDetected] = useState(false);
     const [blinkCount, setBlinkCount] = useState(0);
     const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
-    const { TITLE, DESCRIPTION } = getScreenData();
+    const [countDown, setCountdown] = useState(5)
     const dispatch = useDispatch();
     const livePhoto = watch("KEY_LIVE_PHOTO");
     const [showHelpModal, setshowHelpModal] = useState(false);
@@ -114,6 +114,8 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const headMovementStageCompletedRef = useRef(false);
     const isRestartingRef = useRef(false);
     const frameCounter = useRef(0);
+    const timeoutRef = useRef(null);
+
 
     const handleHelpModalClose = () => {
         setshowHelpModal(false);
@@ -141,6 +143,11 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     }, [dispatch]);
 
     const capturePhoto = useCallback(async () => {
+
+        setInterval(() => {
+            setCountdown(prevCountdown => prevCountdown - 1);
+        }, 1000);
+
         const imageSrc = webcamRef?.current?.getScreenshot();
         if (imageSrc) {
             setValue("KEY_LIVE_PHOTO", imageSrc);
@@ -240,6 +247,11 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                         if (currentPromptRef.current !== "Detecting Face..." && !isRestartingRef.current) {
                             isRestartingRef.current = true;
                             updatePrompt("Restarting");
+                            // Clear the timeout if it exists
+                            if (timeoutRef.current) {
+                                clearTimeout(timeoutRef.current);
+                                timeoutRef.current = null;
+                            }
                             setTimeout(() => {
                                 resetState();
                                 isRestartingRef.current = false;
@@ -362,7 +374,16 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     lookingRightRef.current = true;
                     updatePrompt("Look Straight");
                     headMovementStageCompletedRef.current = true;
-                    setTimeout(() => { capturePhoto() }, 3000)
+
+                    // Clear any existing timeout before setting a new one
+                    if (timeoutRef.current) {
+                        clearTimeout(timeoutRef.current);
+                    }
+
+                    // Set the new timeout and store its ID
+                    timeoutRef.current = setTimeout(() => {
+                        capturePhoto();
+                    }, 5000);
                 }
             }
         };
@@ -373,6 +394,11 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             if (detectionModel) detectionModel.dispose();
             if (landmarksModel) landmarksModel.dispose();
+
+            // Clear timeout on unmount
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
         };
     }, []);
 
@@ -428,6 +454,8 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
                                     {generatePrompt(prompt, blinkCount)}
 
+                                    <h1>{countDown} </h1>
+
                                     <Container maxWidth='lg'>
                                         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
                                             {/* WEBCAM CONTAINER */}
@@ -439,6 +467,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                     height={280}
                                                     screenshotFormat="image/jpeg"
                                                     mirrored={true}
+                                                    style={{ borderRadius: '10px' }}
                                                     onUserMediaError={handleInitError}
                                                     videoConstraints={{
                                                         facingMode: "user",
@@ -459,7 +488,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                         background: 'rgba(220, 239, 255, 0.8)',
                                                         color: '#407ec9',
                                                         padding: '5px 5px',
-                                                        width: '100%'
+                                                        width: '100%',
+                                                        borderTopLeftRadius: '7px',
+                                                        borderTopRightRadius: '10px',
                                                     }}
                                                 >
                                                     {prompt}
