@@ -9,6 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 import { OPERATOR_MAP } from "../Constants";
 import { LIST_OF_POB, LIST_OF_PROVINCES } from "../Lovs";
 import { useMediaQuery, useTheme } from "@mui/material";
+import * as tf from '@tensorflow/tfjs-core';
+import * as faceDetection from '@tensorflow-models/face-detection';
+import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import "@tensorflow/tfjs-backend-webgl";
 
 
 export function maskEmail(email = "") {
@@ -282,4 +286,54 @@ export const isSmallScreen = () => {
 export const createHash = ({ hashedOtp, entity }) => {
   const dataToHash = `payvay${hashedOtp}${entity}dao`;
   return getSHA256Hash(dataToHash)
+}
+
+
+// faceModels
+let detectionModelPromise = null;
+let landmarksModelPromise = null;
+
+export async function preloadModels() {
+  if (!detectionModelPromise || !landmarksModelPromise) {
+    detectionModelPromise = (async () => {
+      try {
+        await tf.setBackend('webgl');
+        await tf.ready();
+      } catch (error) {
+        alert('WebGL backend failed, falling back to CPU:', error);
+        try {
+          await tf.setBackend('cpu');
+          await tf.ready();
+          alert('CPU backend set successfully.');
+        } catch (cpuError) {
+          alert('CPU backend also failed:', cpuError);
+          throw new Error('No supported TensorFlow backend found.');
+        }
+      }
+
+      // Load detection model after backend is ready
+      return faceDetection.createDetector(faceDetection.SupportedModels.MediaPipeFaceDetector, {
+        runtime: 'tfjs',
+        modelType: 'short',
+      });
+    })();
+
+    landmarksModelPromise = (async () => {
+      // We assume backend is ready because detectionModelPromise ensures it
+      try {
+        return faceLandmarksDetection.createDetector(faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh, {
+          runtime: 'tfjs',
+          refineLandmarks: false,
+        });
+      } catch (err) {
+        console.error('Failed to load landmarks model:', err);
+        throw err;
+      }
+    })();
+  }
+  return Promise.all([detectionModelPromise, landmarksModelPromise]);
+}
+
+export function getModels() {
+  return Promise.all([detectionModelPromise, landmarksModelPromise]);
 }

@@ -1,8 +1,5 @@
 import { Alert, Box, Button, Container } from "@mui/material";
-import * as faceDetection from "@tensorflow-models/face-detection";
-import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
 import "@tensorflow/tfjs-backend-webgl";
-import * as tf from "@tensorflow/tfjs-core";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
@@ -10,7 +7,6 @@ import { LuScanFace } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
 import BLINK_DETECTION from 'src/Assets/images/blink-detect.gif';
-import LIVE_IMAGE_ICON from 'src/Assets/images/liveImageIcon.png';
 import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
 import LOOK_LEFT from 'src/Assets/images/look-left.gif';
 import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
@@ -20,12 +16,10 @@ import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
 import CustomButton from "src/Common/CustomButton";
 import GuidelinesModal from "src/Common/Modals/GuidelinesModal";
 import ValidationError from "src/Components/ValidationError";
-import WizardLayout from "src/Layout/WizardLayout";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
-import { checkCameraPermission } from "src/Utils/Helpers";
+import { checkCameraPermission, getModels } from "src/Utils/Helpers";
 import styles from './index.module.scss';
-
 
 
 const generatePrompt = (prompt, blinkCount) => {
@@ -93,7 +87,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const [faceDetected, setFaceDetected] = useState(false);
     const [blinkCount, setBlinkCount] = useState(0);
     const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
-    const [countDown, setCountdown] = useState(5)
     const dispatch = useDispatch();
     const livePhoto = watch("KEY_LIVE_PHOTO");
     const [showHelpModal, setshowHelpModal] = useState(false);
@@ -144,10 +137,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
     const capturePhoto = useCallback(async () => {
 
-        setInterval(() => {
-            setCountdown(prevCountdown => prevCountdown - 1);
-        }, 1000);
-
         const imageSrc = webcamRef?.current?.getScreenshot();
         if (imageSrc) {
             setValue("KEY_LIVE_PHOTO", imageSrc);
@@ -189,20 +178,11 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         let detectionModel, landmarksModel;
         let animationFrameId;
 
-        const loadModels = async () => {
-            await tf.setBackend("webgl");
-            detectionModel = await faceDetection.createDetector(
-                faceDetection.SupportedModels.MediaPipeFaceDetector,
-                { runtime: "tfjs", modelType: "short" }
-            );
-            landmarksModel = await faceLandmarksDetection.createDetector(
-                faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
-                { runtime: "tfjs", refineLandmarks: false } // Use lite model
-            );
-            detectFaces(detectionModel, landmarksModel);
-        };
-
         const detectFaces = async (detector, meshDetector) => {
+            if (!detector || !meshDetector) {
+                console.error("Models not loaded!");
+                return;
+            }
             if (isRestartingRef.current) {
                 animationFrameId = requestAnimationFrame(() =>
                     detectFaces(detector, meshDetector)
@@ -383,12 +363,14 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     // Set the new timeout and store its ID
                     timeoutRef.current = setTimeout(() => {
                         capturePhoto();
-                    }, 5000);
+                    }, 3500);
                 }
             }
         };
 
-        loadModels();
+        getModels().then(([detector, meshDetector]) => {
+            detectFaces(detector, meshDetector);
+        });
 
         return () => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -408,15 +390,30 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
     return (
         <>
-            <WizardLayout
-                Icon={LIVE_IMAGE_ICON}
-                title={'Hey! its time for a selfie'}
-                description={'Please capture your live photo now to proceed with the verification process.'}
-                heroImage={LIVE_IMAGE_UNDRAW}
-            >
+            <Container maxWidth="lg" sx={{ padding: '4px' }}>
+                {/* NEED HELP */}
+                <Box sx={{ justifyContent: 'flex-end', marginTop: '-25px', marginBottom: '5px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ cursor: 'pointer' }} onClick={handleHelp}>
+                        Need Help?
+                    </span>
+                </Box >
+
+                {/* ICON */}
+                <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <Box sx={{ height: '60px', width: '200px' }} >
+                        <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} height={'100%'} width={'100%'} />
+                    </Box>
+                </Box>
+
                 <Box>
+                    {
+                        !!livePhoto ? null :
+                            <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(20px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
+                                Hey! Its Time For A Selfie
+                            </Box>
+                    }
                     {!isCameraAccessAllowed && (
-                        <>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                             <Box className={styles.cameraWrapper}>
                                 <img
                                     className={styles.camIconStyle}
@@ -428,13 +425,13 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                     <br />Allow camera permission to capture live photo.
                                 </Box>
                             </Box>
-                        </>
+                        </Box>
                     )}
                     {isCameraAccessAllowed && (
                         <>
                             {!!livePhoto ? (
                                 <>
-                                    <Alert sx={{ background: '#dceeff', color: '#407ec9', margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="info">
+                                    <Alert sx={{ display: 'flex', alignItems: 'center', background: '#dceeff', color: '#407ec9', margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="info">
                                         <strong>Selfie captured successfully!</strong> You can now proceed.
                                     </Alert>
                                     <img
@@ -446,21 +443,14 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
                             ) : (
                                 <>
-                                    <Box sx={{ justifyContent: 'flex-end', marginBottom: '10px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
-                                        <span style={{ cursor: 'pointer' }} onClick={handleHelp}>
-                                            Get Help
-                                        </span>
-                                    </Box>
-
-                                    {generatePrompt(prompt, blinkCount)}
-
-                                    <h1>{countDown} </h1>
-
                                     <Container maxWidth='lg'>
-                                        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
-                                            {/* WEBCAM CONTAINER */}
-                                            <Box sx={{ position: 'relative' }}>
+                                        <Box sx={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', color: '#407ec9', padding: '5px 0px' }}>
+                                            {prompt}
+                                        </Box>
 
+                                        {/* WEBCAM CONTAINER */}
+                                        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
+                                            <Box sx={{ position: 'relative' }}>
                                                 <Webcam
                                                     ref={webcamRef}
                                                     width={320}
@@ -476,26 +466,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                     }}
                                                 />
 
-                                                <Box
-                                                    sx={{
-                                                        position: 'absolute',
-                                                        top: 0,
-                                                        left: '50%',
-                                                        transform: 'translate(-50%, -0%)',
-                                                        fontSize: '12px',
-                                                        fontWeight: 'bold',
-                                                        textAlign: 'center',
-                                                        background: 'rgba(220, 239, 255, 0.8)',
-                                                        color: '#407ec9',
-                                                        padding: '5px 5px',
-                                                        width: '100%',
-                                                        borderTopLeftRadius: '7px',
-                                                        borderTopRightRadius: '10px',
-                                                    }}
-                                                >
-                                                    {prompt}
-                                                </Box>
-
                                                 <div className={styles.scannerImageContainer}>
                                                     <img src={SCANNER} alt="Scanner" height="100%" width="100%" />
                                                 </div>
@@ -504,12 +474,13 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                     ref={canvasRef}
                                                     width={320}
                                                     height={280}
-                                                    style={{ borderRadius: '12px', position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                                                    style={{ borderRadius: '12px', border: '3px solid #f4f4f4', position: "absolute", top: 0, left: 0, zIndex: 1 }}
                                                 />
-
                                             </Box>
                                         </Box>
                                     </Container>
+
+                                    {generatePrompt(prompt, blinkCount)}
 
                                     <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
                                         Hold your postures longer if using an older /slower device.
@@ -537,15 +508,15 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     </Box>
                 </Box>
                 {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
-            </WizardLayout >
+            </Container >
 
-            <GuidelinesModal
+            {/* <GuidelinesModal
                 showHelp={showHelpModal}
                 handleClose={handleHelpModalClose}
                 icon={GUIDELINE_UNDRAW}
                 title={'Face Detection Guidelines'}
                 guidelines={guidelines}
-            />
+            /> */}
         </>
     );
 };

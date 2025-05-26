@@ -20,15 +20,22 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
 
                     <Box sx={{ flex: 1, marginTop: '10px' }}>
                         <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
-                            <Box className={styles.smallDeviceIconContainer} >
-                                <img src={heroImage} height={'100%'} width={'100%'} />
-                            </Box>
+                            {
+                                heroImage &&
+                                <Box className={styles.smallDeviceIconContainer} >
+                                    <img src={heroImage} height={'100%'} width={'100%'} />
+                                </Box>
+                            }
                         </Box>
 
                         <Fade in={true} timeout={800}>
-                            <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
-                                {title}
-                            </Box>
+                            {
+                                title &&
+                                <Box className={styles.heading} sx={{ textAlign: { xs: "center", sm: "left" } }}>
+                                    {title}
+                                </Box>
+                            }
+
                         </Fade>
                         {description && (
                             <Fade in={true} timeout={800}>

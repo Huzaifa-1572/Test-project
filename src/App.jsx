@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "src/Common/Loader";
 import ErrorModal from "src/Common/Modals/ErrorModal";
-import { setupRequestInterceptor, setupResponseInterceptor } from "src/Utils/Helpers";
+import { preloadModels, setupRequestInterceptor, setupResponseInterceptor } from "src/Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "src/Utils/Settings";
 import './App.scss';
 
@@ -39,6 +39,8 @@ const App = () => {
       deviceVersion: deviceVersion,
       rooted: rooted,
     }))
+    // PRE LOADING FACE DETECTION MODELS
+    preloadModels()
   }, []);
 
   return (
