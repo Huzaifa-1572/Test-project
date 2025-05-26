@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Container } from "@mui/material";
+import { Alert, Box, Button, Container, Fade, Slide } from "@mui/material";
 import "@tensorflow/tfjs-backend-webgl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
@@ -6,6 +6,8 @@ import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import { LuScanFace } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
+import detectingFace from 'src/Assets/detectingFace.mp3';
+import eyeBlink from 'src/Assets/eyeBlink.mp3';
 import BLINK_DETECTION from 'src/Assets/images/blink-detect.gif';
 import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
 import LOOK_LEFT from 'src/Assets/images/look-left.gif';
@@ -13,12 +15,17 @@ import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
 import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
+import lookLeft from 'src/Assets/lookLeft.mp3';
+import lookRight from 'src/Assets/lookRight.mp3';
+import lookStraight from 'src/Assets/lookStraight.mp3';
+import MODEL_LOADER from 'src/Assets/modelLoader.gif';
 import CustomButton from "src/Common/CustomButton";
 import GuidelinesModal from "src/Common/Modals/GuidelinesModal";
 import ValidationError from "src/Components/ValidationError";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
 import { checkCameraPermission, getModels } from "src/Utils/Helpers";
+import useSound from "use-sound";
 import styles from './index.module.scss';
 
 
@@ -66,7 +73,52 @@ const generatePrompt = (prompt, blinkCount) => {
             )
 
         default:
-            break;
+            return (
+                <Alert className={styles.alert} variant="outlined" icon={<LuScanFace size='40px' color='#e8927c' />} severity="info">
+                    Please wait while we detect your face. Keep your face aligned and close to the camera.
+                </Alert>
+            )
+    }
+}
+
+const generatePromptMessages = (prompt) => {
+    switch (prompt) {
+        case "Restarting":
+            return (
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    Restarting <img src={MODEL_LOADER} style={{ marginLeft: '5px', marginTop: '5px' }} height={'20px'} width={'20px'} alt="..." />
+                </Box>
+            )
+
+        case 'Detecting Face...':
+            return (
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    Detecting Face <img src={MODEL_LOADER} style={{ marginLeft: '5px', marginTop: '5px' }} height={'20px'} width={'20px'} alt="..." />
+                </Box>
+            )
+        case 'Face Detected! slowly blink your eyes.':
+            return (
+                <Slide direction="right" in={true} timeout={500}>
+                    <Box>Face Detected! slowly blink your eyes.</Box>
+                </Slide>
+            )
+        case 'Look Left':
+            return (
+                <Slide direction="up" in={true} timeout={1000}>
+                    <Box>Look Left</Box>
+                </Slide>
+
+            )
+        case 'Now Look Right':
+            return (
+                <Box>Now Look Right</Box>
+            )
+        case 'Look Straight':
+            return (
+                <Box>Look Straight</Box>
+            )
+        default:
+            break
     }
 }
 
@@ -81,7 +133,12 @@ const FRAME_SKIP = 5; // Process every 5th frame
 const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
-
+    // Sound hooks
+    const [playDetectingFace, { stop: stopDetectingFace }] = useSound(detectingFace, { volume: 0.7 });
+    const [playEyeBlink, { stop: stopEyeBlink }] = useSound(eyeBlink, { volume: 0.7 });
+    const [playLookLeft, { stop: stopLookLeft }] = useSound(lookLeft, { volume: 0.7 });
+    const [playLookRight, { stop: stopLookRight }] = useSound(lookRight, { volume: 0.7 });
+    const [playLookStraight, { stop: stopLookStraight }] = useSound(lookStraight, { volume: 0.7 });
     // UI state
     const [prompt, setPrompt] = useState("Detecting Face...");
     const [faceDetected, setFaceDetected] = useState(false);
@@ -388,6 +445,41 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         setshowHelpModal(true)
     }
 
+    // FOR PROMPT SOUND
+    useEffect(() => {
+        stopDetectingFace();
+        stopEyeBlink();
+        stopLookLeft();
+        stopLookRight();
+        stopLookStraight();
+        switch (prompt) {
+            case 'Detecting Face...':
+                playDetectingFace();
+                break;
+            case 'Face Detected! slowly blink your eyes.':
+                playEyeBlink();
+                break;
+            case 'Look Left':
+                playLookLeft();
+                break;
+            case 'Now Look Right':
+                playLookRight();
+                break;
+            case 'Look Straight':
+                playLookStraight();
+                break;
+            default:
+                break;
+        }
+        return () => {
+            stopDetectingFace();
+            stopEyeBlink();
+            stopLookLeft();
+            stopLookRight();
+            stopLookStraight();
+        };
+    }, [prompt]);
+
     return (
         <>
             <Container maxWidth="lg" sx={{ padding: '4px' }}>
@@ -400,18 +492,23 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
                 {/* ICON */}
                 <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <Box sx={{ height: '60px', width: '200px' }} >
-                        <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} height={'100%'} width={'100%'} />
-                    </Box>
+                    <Fade in={true} timeout={2000}>
+                        <Box sx={{ height: '60px', width: '200px' }} >
+                            <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} height={'100%'} width={'100%'} />
+                        </Box>
+                    </Fade>
                 </Box>
 
                 <Box>
                     {
                         !!livePhoto ? null :
-                            <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(20px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
-                                Hey! Its Time For A Selfie
-                            </Box>
+                            <Fade in={true} timeout={2000}>
+                                <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(20px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
+                                    Hey! Its Time For A Selfie
+                                </Box>
+                            </Fade>
                     }
+
                     {!isCameraAccessAllowed && (
                         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                             <Box className={styles.cameraWrapper}>
@@ -444,8 +541,10 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                             ) : (
                                 <>
                                     <Container maxWidth='lg'>
+                                        {generatePrompt(prompt, blinkCount)}
+
                                         <Box sx={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', color: '#407ec9', padding: '5px 0px' }}>
-                                            {prompt}
+                                            {generatePromptMessages(prompt)}
                                         </Box>
 
                                         {/* WEBCAM CONTAINER */}
@@ -480,7 +579,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                         </Box>
                                     </Container>
 
-                                    {generatePrompt(prompt, blinkCount)}
 
                                     <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
                                         Hold your postures longer if using an older /slower device.
@@ -510,13 +608,13 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
             </Container >
 
-            {/* <GuidelinesModal
+            <GuidelinesModal
                 showHelp={showHelpModal}
                 handleClose={handleHelpModalClose}
                 icon={GUIDELINE_UNDRAW}
                 title={'Face Detection Guidelines'}
                 guidelines={guidelines}
-            /> */}
+            />
         </>
     );
 };
