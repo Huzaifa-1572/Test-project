@@ -559,10 +559,13 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                     style={{ borderRadius: '10px' }}
                                                     onUserMediaError={handleInitError}
                                                     videoConstraints={{
-                                                        facingMode: "user",
+                                                        facingMode: { exact: "user" },
                                                         width: 320,
                                                         height: 280,
                                                     }}
+                                                    playsInline={true}
+                                                    muted={true}
+                                                    autoPlay={true}
                                                 />
 
                                                 <div className={styles.scannerImageContainer}>

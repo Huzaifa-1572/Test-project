@@ -24,6 +24,8 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const { title: modalTitle, description: modalDescription, isDeviceDecisionModal } = useSelector(state => state.deviceDecisionModal)
     const isResume = localStorage.getItem('isResume')
     const isWebview = JSON.parse(sessionStorage.getItem('device')).deviceId !== 'temp'
+    const isIosDevice = JSON.parse(sessionStorage.getItem('device')).deviceType === 'ios'
+
 
 
 
@@ -143,13 +145,13 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         renderInput={(props) => (
                             <input
                                 {...props}
-                                disabled={(PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? true : false}
+                                disabled={isIosDevice ? false : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? true : false}
                                 autoComplete="one-time-code"
                                 style={{
                                     WebkitTextSecurity: "disc",
                                     MozTextSecurity: "disc",
                                     textSecurity: "disc",
-                                    cursor: (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) && 'not-allowed'
+                                    cursor: (isIosDevice ? 'pointer' : PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) && 'not-allowed'
                                 }}
                             />
                         )}
