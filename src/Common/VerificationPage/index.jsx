@@ -160,11 +160,11 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                     />
 
                     {
-                        (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) &&
-                        <Alert sx={{ borderRadius: '7px', }} severity='warning'>
-                            <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>  Manual OTP entry is not allowed.</Box>
-                            <Box sx={{ fontSize: '11px' }}> Please wait for the OTP to be auto-filled.</Box>
-                        </Alert>
+                        isIosDevice ? null : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) &&
+                            <Alert sx={{ borderRadius: '7px', }} severity='warning'>
+                                <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>  Manual OTP entry is not allowed.</Box>
+                                <Box sx={{ fontSize: '11px' }}> Please wait for the OTP to be auto-filled.</Box>
+                            </Alert>
 
                     }
                 </div>

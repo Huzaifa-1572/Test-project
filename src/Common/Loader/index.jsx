@@ -14,12 +14,12 @@ const Loader = () => {
       {
         CURRENT_SCREEN === 'scr_uploadCnicBack' ?
           <Backdrop
-            sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+            sx={(theme) => ({ backgroundColor: 'rgba(0, 0, 0, 0.6)', color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
             open={true}
           >
-            <Box sx={{ fontWeight: 'bold', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <Box sx={{ padding: '15px', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
               <img src={OCR_LOADER} alt='Loader' />
-              <Box sx={{ fontSize: '14px', textAlign: 'center', margin: '30px 0px' }}>
+              <Box sx={{ fontSize: '16px', textAlign: 'center', margin: '30px 0px' }}>
                 Please wait while we fetch your CNIC details. This might take a little time—we appreciate your patience!
               </Box>
               <div className={styles.barIndicator}>

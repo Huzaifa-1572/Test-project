@@ -75,30 +75,36 @@ export const dateFormats = [
 
 export const LIVENESS_GUIDELINES = [
   {
-    heading: 'No Glasses:',
-    content: 'Strictly don’t wear glasses. If wearing, please remove them.'
+    heading: 'Volume Up 🔊',
+    content: 'Keep your device’s sound on to catch all audio cues.'
   },
   {
-    heading: 'Face Detection:',
-    content: 'Keep your face well-lit, centered, and fully visible.'
+    heading: 'No Glasses 🚫👓',
+    content: 'Remove glasses before starting.'
   },
   {
-    heading: 'Eye Blinking:',
-    content: 'When blinking, kindly Pause/close your eyes for at least 1–2 seconds.'
+    heading: 'Face Detection 👤',
+    content: 'Ensure your face is centered, well-lit, and fully visible.'
   },
   {
-    heading: 'Head Movement:',
-    content: 'Move your head slowly in the asked direction, and pause your posture for at least 1–2 seconds.'
+    heading: 'Eye Blinking 👁️‍🗨️',
+    content: 'Close your eyes slowly for 1–2 seconds when blinking.'
   },
   {
-    heading: 'Good Lighting:',
-    content: 'Ensure you’re in a well-lit environment with no strong backlight or shadows.'
+    heading: 'Head Movement ↩️↪️',
+    content: 'Turn your head slowly as instructed, holding the position for 1–2 seconds.'
   },
   {
-    heading: 'Avoid Blurriness:',
-    content: 'Keep the camera focused and the image sharp.'
-  }
+    heading: 'Good Lighting 💡',
+    content: 'Be in a bright environment without strong backlight or shadows.'
+  },
+  {
+    heading: 'Avoid Blurriness 🔍',
+    content: 'Keep the camera focused for a sharp image.'
+  },
 ];
+
+
 
 export const CNIC_UPLOAD_GUIDELINES = [
   "Keep image clear and centered.",

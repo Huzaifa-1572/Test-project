@@ -1,6 +1,6 @@
 import { Alert, Box, Button, Container, Fade, Slide } from "@mui/material";
 import "@tensorflow/tfjs-backend-webgl";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { FaRegFaceSmileBeam } from "react-icons/fa6";
 import { LuScanFace } from "react-icons/lu";
@@ -14,19 +14,17 @@ import LOOK_LEFT from 'src/Assets/images/look-left.gif';
 import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
-import GUIDELINE_UNDRAW from 'src/Assets/images/userFace.png';
 import lookLeft from 'src/Assets/lookLeft.mp3';
 import lookRight from 'src/Assets/lookRight.mp3';
 import lookStraight from 'src/Assets/lookStraight.mp3';
 import MODEL_LOADER from 'src/Assets/modelLoader.gif';
 import CustomButton from "src/Common/CustomButton";
-import GuidelinesModal from "src/Common/Modals/GuidelinesModal";
 import ValidationError from "src/Components/ValidationError";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
-import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
 import { checkCameraPermission, getModels } from "src/Utils/Helpers";
 import useSound from "use-sound";
 import styles from './index.module.scss';
+import LivePhotoGuidelinesForMobile from "./LivePhotoGuidelinesForMobile";
 
 
 const generatePrompt = (prompt, blinkCount) => {
@@ -146,8 +144,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const [isCameraAccessAllowed, setisCameraAccessAllowed] = useState(false);
     const dispatch = useDispatch();
     const livePhoto = watch("KEY_LIVE_PHOTO");
-    const [showHelpModal, setshowHelpModal] = useState(false);
-    const guidelines = useMemo(() => LIVENESS_GUIDELINES, [])
+    const [showGuidelines, setshowGuidelines] = useState(true);
 
     // Refs for live values and flags
     const currentPromptRef = useRef("Detecting Face...");
@@ -166,14 +163,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const frameCounter = useRef(0);
     const timeoutRef = useRef(null);
 
-
-    const handleHelpModalClose = () => {
-        setshowHelpModal(false);
-    };
-
     // To check whether the camera access permission is allowed or not
     useEffect(() => {
-        !livePhoto && setshowHelpModal(true);
+        !!livePhoto && setshowGuidelines(false);
         checkCameraPermission()
             .then((permissionStatus) => {
                 console.log(permissionStatus); // Camera permission granted
@@ -441,9 +433,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         };
     }, []);
 
-    const handleHelp = () => {
-        setshowHelpModal(true)
-    }
 
     // FOR PROMPT SOUND
     useEffect(() => {
@@ -480,144 +469,156 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         };
     }, [prompt]);
 
+    // SPLASH SCREEN HANDLERS
+    const handleSplashScreenClose = () => {
+        setshowGuidelines(false);
+    }
+
+    const handleSplashScreenOpen = () => {
+        setshowGuidelines(true);
+    }
+
     return (
         <>
-            <Container maxWidth="lg" sx={{ padding: '4px' }}>
-                {/* NEED HELP */}
-                <Box sx={{ justifyContent: 'flex-end', marginTop: '-25px', marginBottom: '5px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
-                    <span style={{ cursor: 'pointer' }} onClick={handleHelp}>
-                        Need Help?
-                    </span>
-                </Box >
+            {
+                showGuidelines ?
+                    <LivePhotoGuidelinesForMobile
+                        closeSplashScreenHandler={handleSplashScreenClose}
+                    />
+                    :
+                    <Container maxWidth="lg" sx={{ padding: '4px' }}>
+                        {/* NEED HELP */}
+                        <Box sx={{ justifyContent: 'flex-end', marginTop: '-25px', marginBottom: '5px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
+                            <span style={{ cursor: 'pointer' }} onClick={handleSplashScreenOpen}>
+                                Need Help?
+                            </span>
+                        </Box >
 
-                {/* ICON */}
-                <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                    <Fade in={true} timeout={2000}>
-                        <Box sx={{ height: '60px', width: '200px' }} >
-                            <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} height={'100%'} width={'100%'} />
-                        </Box>
-                    </Fade>
-                </Box>
-
-                <Box>
-                    {
-                        !!livePhoto ? null :
+                        {/* ICON */}
+                        <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
                             <Fade in={true} timeout={2000}>
-                                <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(20px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
-                                    Hey! Its Time For A Selfie
+                                <Box sx={{ height: '60px', width: '200px' }} >
+                                    <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} height={'100%'} width={'100%'} />
                                 </Box>
                             </Fade>
-                    }
-
-                    {!isCameraAccessAllowed && (
-                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                            <Box className={styles.cameraWrapper}>
-                                <img
-                                    className={styles.camIconStyle}
-                                    src={SELFIE_UNDRAW}
-                                    alt="Upload Selfie"
-                                />
-                                <Box className={styles.permissionText}>
-                                    Searching camera...
-                                    <br />Allow camera permission to capture live photo.
-                                </Box>
-                            </Box>
                         </Box>
-                    )}
-                    {isCameraAccessAllowed && (
-                        <>
-                            {!!livePhoto ? (
-                                <>
-                                    <Alert sx={{ display: 'flex', alignItems: 'center', background: '#dceeff', color: '#407ec9', margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="info">
-                                        <strong>Selfie captured successfully!</strong> You can now proceed.
-                                    </Alert>
-                                    <img
-                                        className={styles.webcamStyles}
-                                        src={livePhoto}
-                                        alt="Uploaded Selfie"
-                                    />
-                                </>
 
-                            ) : (
-                                <>
-                                    <Container maxWidth='lg'>
-                                        {generatePrompt(prompt, blinkCount)}
-
-                                        <Box sx={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', color: '#407ec9', padding: '5px 0px' }}>
-                                            {generatePromptMessages(prompt)}
+                        <Box>
+                            {
+                                !!livePhoto ? null :
+                                    <Fade in={true} timeout={2000}>
+                                        <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(20px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
+                                            Hey! Its Time For A Selfie
                                         </Box>
+                                    </Fade>
+                            }
 
-                                        {/* WEBCAM CONTAINER */}
-                                        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
-                                            <Box sx={{ position: 'relative' }}>
-                                                <Webcam
-                                                    ref={webcamRef}
-                                                    width={320}
-                                                    height={280}
-                                                    screenshotFormat="image/jpeg"
-                                                    mirrored={true}
-                                                    style={{ borderRadius: '10px' }}
-                                                    onUserMediaError={handleInitError}
-                                                    videoConstraints={{
-                                                        facingMode: { exact: "user" },
-                                                        width: 320,
-                                                        height: 280,
-                                                    }}
-                                                    playsInline={true}
-                                                    muted={true}
-                                                    autoPlay={true}
-                                                />
+                            {!isCameraAccessAllowed && (
+                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Box className={styles.cameraWrapper}>
+                                        <img
+                                            className={styles.camIconStyle}
+                                            src={SELFIE_UNDRAW}
+                                            alt="Upload Selfie"
+                                        />
+                                        <Box className={styles.permissionText}>
+                                            Searching camera...
+                                            <br />Allow camera permission to capture live photo.
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            )}
+                            {isCameraAccessAllowed && (
+                                <>
+                                    {!!livePhoto ? (
+                                        <>
+                                            <Alert sx={{ display: 'flex', alignItems: 'center', background: '#dceeff', color: '#407ec9', margin: '20px 0px' }} variant="outlined" icon={<LuScanFace size='40px' />} severity="info">
+                                                <strong>Selfie captured successfully!</strong> You can now proceed.
+                                            </Alert>
+                                            <img
+                                                className={styles.webcamStyles}
+                                                src={livePhoto}
+                                                alt="Uploaded Selfie"
+                                            />
+                                        </>
 
-                                                <div className={styles.scannerImageContainer}>
-                                                    <img src={SCANNER} alt="Scanner" height="100%" width="100%" />
-                                                </div>
+                                    ) : (
+                                        <>
+                                            <Container maxWidth='lg'>
+                                                {generatePrompt(prompt, blinkCount)}
 
-                                                <canvas
-                                                    ref={canvasRef}
-                                                    width={320}
-                                                    height={280}
-                                                    style={{ borderRadius: '12px', border: '3px solid #f4f4f4', position: "absolute", top: 0, left: 0, zIndex: 1 }}
-                                                />
+                                                <Box sx={{ fontSize: '16px', fontWeight: 'bold', textAlign: 'center', color: '#407ec9', padding: '5px 0px' }}>
+                                                    {generatePromptMessages(prompt)}
+                                                </Box>
+
+                                                {/* WEBCAM CONTAINER */}
+                                                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: "relative" }}>
+                                                    <Box sx={{ position: 'relative' }}>
+                                                        <Webcam
+                                                            ref={webcamRef}
+                                                            width={320}
+                                                            height={280}
+                                                            screenshotFormat="image/jpeg"
+                                                            mirrored={true}
+                                                            style={{ borderRadius: '10px' }}
+                                                            onUserMediaError={handleInitError}
+                                                            videoConstraints={{
+                                                                facingMode: { exact: "user" },
+                                                                width: 320,
+                                                                height: 280,
+                                                            }}
+                                                            playsInline={true}
+                                                            muted={true}
+                                                            autoPlay={true}
+                                                        />
+
+                                                        <div className={styles.scannerImageContainer}>
+                                                            <img src={SCANNER} alt="Scanner" height="100%" width="100%" />
+                                                        </div>
+
+                                                        <canvas
+                                                            ref={canvasRef}
+                                                            width={320}
+                                                            height={280}
+                                                            style={{ borderRadius: '12px', border: '3px solid #f4f4f4', position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                                                        />
+                                                    </Box>
+                                                </Box>
+                                            </Container>
+
+                                            <Box sx={{ textAlign: 'center', marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }}>
+                                                🔊 Keep your volume on to catch all audio cues.
                                             </Box>
-                                        </Box>
-                                    </Container>
 
 
-                                    <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
-                                        Hold your postures longer if using an older /slower device.
-                                    </Alert>
+                                            <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
+                                                Hold your postures longer if using an older /slower device.
+                                            </Alert>
+                                        </>
+                                    )}
+                                    <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                                        {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
+                                            <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
+                                        ) : null}
+                                    </Box>
                                 </>
                             )}
-                            <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-                                {!!errors?.KEY_LIVE_PHOTO?.message && !livePhoto ? (
-                                    <ValidationError message={errors?.KEY_LIVE_PHOTO?.message} />
+                            <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, marginTop: "20px" }}>
+                                {!!livePhoto ? (
+                                    <Button
+                                        className={styles.captureButton}
+                                        type="button"
+                                        onClick={retake}
+                                        endIcon={<FaCamera />}
+                                    >
+                                        Take a new picture
+                                    </Button>
                                 ) : null}
                             </Box>
-                        </>
-                    )}
-                    <Box sx={{ textAlign: { xs: 'center', sm: 'left' }, marginTop: "20px" }}>
-                        {!!livePhoto ? (
-                            <Button
-                                className={styles.captureButton}
-                                type="button"
-                                onClick={retake}
-                                endIcon={<FaCamera />}
-                            >
-                                Take a new picture
-                            </Button>
-                        ) : null}
-                    </Box>
-                </Box>
-                {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
-            </Container >
-
-            <GuidelinesModal
-                showHelp={showHelpModal}
-                handleClose={handleHelpModalClose}
-                icon={GUIDELINE_UNDRAW}
-                title={'Face Detection Guidelines'}
-                guidelines={guidelines}
-            />
+                        </Box>
+                        {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
+                    </Container >
+            }
         </>
     );
 };
