@@ -120,8 +120,8 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
                                 borderRadius: '15px'
                             }}>
                                 <iframe
-                                    src="https://www.youtube-nocookie.com/embed/WcL2VqD-NRU?autoplay=1&enablejsapi=0&mute=1"
-                                    title="YouTube Short"
+                                    src="https://www.youtube-nocookie.com/embed/NvLZGzyxtQA?autoplay=1&enablejsapi=0&mute=0"
+                                    title="Liveness Guidelines"
                                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
                                     referrerpolicy="strict-origin-when-cross-origin"

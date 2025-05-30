@@ -145,27 +145,29 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         renderInput={(props) => (
                             <input
                                 {...props}
-                                disabled={isIosDevice ? false : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? true : false}
+                                // disabled={isIosDevice ? false : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? true : false}
+                                disabled={false}
                                 autoComplete="one-time-code"
                                 style={{
                                     WebkitTextSecurity: "disc",
                                     MozTextSecurity: "disc",
                                     textSecurity: "disc",
-                                    cursor: (isIosDevice ? 'pointer' : PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) && 'not-allowed'
+                                    // cursor: (isIosDevice ? 'pointer' : PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) && 'not-allowed'
                                 }}
                             />
                         )}
                         inputStyle={styles.inputStyle}
-                        shouldAutoFocus={(PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? false : true}
+                        // shouldAutoFocus={(PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? false : true}
+                        shouldAutoFocus={true}
+
                     />
 
                     {
-                        isIosDevice ? null : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) &&
-                            <Alert sx={{ borderRadius: '7px', }} severity='warning'>
-                                <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>  Manual OTP entry is not allowed.</Box>
-                                <Box sx={{ fontSize: '11px' }}> Please wait for the OTP to be auto-filled.</Box>
-                            </Alert>
-
+                        // isIosDevice ? null : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) &&
+                        //     <Alert sx={{ borderRadius: '7px', }} severity='warning'>
+                        //         {/* <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>Manual OTP entry is not allowed.</Box> */}
+                        //         <Box sx={{ fontSize: '11px' }}>Please wait for the OTP to be auto-filled.</Box>
+                        //     </Alert>
                     }
                 </div>
             </Box>

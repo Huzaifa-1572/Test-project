@@ -13,6 +13,9 @@ import './App.scss';
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));
 const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
 
+console.log = function () { };
+
+
 const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
   const { errorCode, errorMessage, isError } = useSelector((state) => state?.errorState);
