@@ -6,7 +6,7 @@ import App from "./App.jsx";
 import "./index.css";
 
 // DISABLING ALL CONSOLE IN APP
-// console.log = () => { }
+console.log = () => { }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

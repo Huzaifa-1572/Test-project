@@ -29,7 +29,11 @@ const GoBack = ({ setValue, getValues }) => {
             dispatch(updateCurrentScreen(NEXT_SCREEN));
             return
         }
-
+        // wanted to show different loader for cnic back screen proceed because OCR takes time
+        // but on go back it was also showing the same loader to tackle this we are setting a flag in local storage
+        if (CURRENT_SCREEN === 'scr_uploadCnicBack') {
+            localStorage.setItem('GOING_BACK_FROM_CNIC_BACK', true);
+        }
         const customerCnic = getValues('customerCnic')
         const { BODY, API_URL } = GO_BACK_HANDLER({ PREV_SCREEN, customerCnic, dispatch });
         mutate({ BODY, API_URL, dispatch });

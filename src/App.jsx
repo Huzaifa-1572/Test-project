@@ -13,7 +13,7 @@ import './App.scss';
 const LandingPage = lazy(() => import("src/Pages/LandingPage"));
 const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
 
-console.log = function () { };
+// console.log = function () { };
 
 
 const App = () => {

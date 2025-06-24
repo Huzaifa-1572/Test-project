@@ -1,4 +1,5 @@
 import { Alert, Box, Button, Container, Fade, Slide } from "@mui/material";
+import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
@@ -26,7 +27,6 @@ import useSound from "use-sound";
 import styles from './index.module.scss';
 import LivePhotoGuidelinesForMobile from "./LivePhotoGuidelinesForMobile";
 
-
 const generatePrompt = (prompt, blinkCount) => {
     switch (prompt) {
         case 'Detecting Face...':
@@ -35,7 +35,6 @@ const generatePrompt = (prompt, blinkCount) => {
                     Please wait while we detect your face. Keep your face aligned and close to the camera.
                 </Alert>
             )
-
         case 'Face Detected! slowly blink your eyes.':
             return (
                 <>
@@ -48,28 +47,24 @@ const generatePrompt = (prompt, blinkCount) => {
                     </Alert>
                 </>
             )
-
         case 'Look Left':
             return (
                 <Alert className={styles.alert} variant="outlined" icon={<img src={LOOK_LEFT} height='60px' width='70px' />} severity="info">
                     <strong style={{ color: '#407ec9' }}> Perfect!</strong> Now slowly <strong style={{ color: '#407ec9' }}>turn your head left</strong > and hold your posture for 1-2 seconds.
                 </Alert>
             )
-
         case 'Now Look Right':
             return (
                 <Alert className={styles.alert} variant="outlined" icon={<img src={LOOK_RIGHT} height='60px' width='70px' />} severity="info">
                     <strong style={{ color: '#407ec9' }}>Great!</strong> Now slowly <strong style={{ color: '#407ec9' }}>turn your head right</strong> and hold your posture for 1-2 seconds.
                 </Alert>
             )
-
         case 'Look Straight':
             return (
                 <Alert className={styles.alert} variant="outlined" icon={<FaRegFaceSmileBeam size='40px' color='#e8927c' />} severity="info">
                     Now, look straight & don't close your eyes.
                 </Alert>
             )
-
         default:
             return (
                 <Alert className={styles.alert} variant="outlined" icon={<LuScanFace size='40px' color='#e8927c' />} severity="info">
@@ -87,7 +82,6 @@ const generatePromptMessages = (prompt) => {
                     Restarting <img src={MODEL_LOADER} style={{ marginLeft: '5px', marginTop: '5px' }} height={'20px'} width={'20px'} alt="..." />
                 </Box>
             )
-
         case 'Detecting Face...':
             return (
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -105,7 +99,6 @@ const generatePromptMessages = (prompt) => {
                 <Slide direction="up" in={true} timeout={1000}>
                     <Box>Look Left</Box>
                 </Slide>
-
             )
         case 'Now Look Right':
             return (
@@ -126,7 +119,8 @@ const blinkThreshold = 0.15; // Adjusted for smaller devices
 const requiredBlinkFrames = 2; // Require 2 consecutive frames for blink
 const yawThreshold = 0.3; // Threshold for normalized head displacement for a full turn
 const requiredYawFrames = 3; // Require 2 consecutive frames for head turn
-const FRAME_SKIP = 5; // Process every 5th frame
+const FRAME_SKIP = 10; // Process every 10th frame for better performance
+const MAX_RETRIES = 3; // Maximum number of restart attempts
 
 const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const webcamRef = useRef(null);
@@ -162,17 +156,18 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const isRestartingRef = useRef(false);
     const frameCounter = useRef(0);
     const timeoutRef = useRef(null);
+    const retryCountRef = useRef(0);
 
     // To check whether the camera access permission is allowed or not
     useEffect(() => {
         !!livePhoto && setshowGuidelines(false);
         checkCameraPermission()
-            .then((permissionStatus) => {
-                console.log(permissionStatus); // Camera permission granted
+            .then(() => {
+                console.log("Camera permission granted");
                 setisCameraAccessAllowed(true);
             })
             .catch((errorMessage) => {
-                console.error(errorMessage); // Camera permission denied or error: ...
+                console.error(errorMessage);
                 setisCameraAccessAllowed(false);
                 dispatch(
                     showErrorModal({
@@ -182,10 +177,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     })
                 );
             });
-    }, [dispatch]);
+    }, [dispatch, livePhoto]);
 
     const capturePhoto = useCallback(async () => {
-
         const imageSrc = webcamRef?.current?.getScreenshot();
         if (imageSrc) {
             setValue("KEY_LIVE_PHOTO", imageSrc);
@@ -195,11 +189,23 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const retake = () => {
         setValue("KEY_LIVE_PHOTO", null);
         resetState();
-
     };
 
     const handleInitError = (error) => {
         console.error("Webcam initialization error:", error);
+        dispatch(
+            showErrorModal({
+                errorCode: "Webcam Error",
+                errorMessage: "Failed to initialize webcam. Please ensure your camera is enabled and try again.",
+                isError: true,
+            })
+        );
+        // Retry camera permission check
+        setTimeout(() => {
+            checkCameraPermission()
+                .then(() => setisCameraAccessAllowed(true))
+                .catch(() => setisCameraAccessAllowed(false));
+        }, 2000);
     };
 
     // LIVENESS DETECTION
@@ -221,6 +227,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
         leftFrameCounter.current = 0;
         rightFrameCounter.current = 0;
         blinkFrameCounter.current = 0;
+        retryCountRef.current = 0;
     };
 
     useEffect(() => {
@@ -239,12 +246,14 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 return;
             }
             if (!webcamRef.current || !webcamRef.current.video) {
+                console.log("Webcam not available");
                 animationFrameId = requestAnimationFrame(() =>
                     detectFaces(detector, meshDetector)
                 );
                 return;
             }
             const video = webcamRef.current.video;
+            console.log('video', video)
             if (video.readyState === 4) {
                 try {
                     frameCounter.current++;
@@ -254,10 +263,17 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                         );
                         return;
                     }
+                    const faces = await detector.estimateFaces(video, {
+                        flipHorizontal: false,
+                        inputSize: 128, // Reduced resolution for performance
+                    });
 
-                    const faces = await detector.estimateFaces(video, { flipHorizontal: false });
+                    console.log('faces', faces)
+
+
                     if (faces.length > 0) {
                         isRestartingRef.current = false;
+                        retryCountRef.current = 0;
                         if (!faceDetectedRef.current) {
                             faceDetectedRef.current = true;
                             setFaceDetected(true);
@@ -268,15 +284,27 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                             rightFrameCounter.current = 0;
                             blinkFrameCounter.current = 0;
                         }
-                        const meshResults = await meshDetector.estimateFaces(video, { flipHorizontal: false });
+                        const meshResults = await meshDetector.estimateFaces(video, {
+                            flipHorizontal: false,
+                            inputSize: 128,
+                        });
                         if (meshResults.length > 0) {
                             processFaceLandmarks(meshResults[0].keypoints);
                         }
                     } else {
                         if (currentPromptRef.current !== "Detecting Face..." && !isRestartingRef.current) {
+                            if (retryCountRef.current >= MAX_RETRIES) {
+                                dispatch(
+                                    showErrorModal({
+                                        errorCode: "Face Detection Failure",
+                                        errorMessage: "Unable to detect face after multiple attempts. Please ensure proper lighting and try again.",
+                                        isError: true,
+                                    })
+                                );
+                                return;
+                            }
                             isRestartingRef.current = true;
                             updatePrompt("Restarting");
-                            // Clear the timeout if it exists
                             if (timeoutRef.current) {
                                 clearTimeout(timeoutRef.current);
                                 timeoutRef.current = null;
@@ -284,6 +312,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                             setTimeout(() => {
                                 resetState();
                                 isRestartingRef.current = false;
+                                retryCountRef.current++;
                             }, 3000);
                         } else {
                             resetState();
@@ -292,6 +321,8 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 } catch (error) {
                     console.error("Face detection error:", error);
                 }
+            } else {
+                console.log("Video not ready, retrying...");
             }
             animationFrameId = requestAnimationFrame(() =>
                 detectFaces(detector, meshDetector)
@@ -404,12 +435,10 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     updatePrompt("Look Straight");
                     headMovementStageCompletedRef.current = true;
 
-                    // Clear any existing timeout before setting a new one
                     if (timeoutRef.current) {
                         clearTimeout(timeoutRef.current);
                     }
 
-                    // Set the new timeout and store its ID
                     timeoutRef.current = setTimeout(() => {
                         capturePhoto();
                     }, 3500);
@@ -417,22 +446,57 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
             }
         };
 
-        getModels().then(([detector, meshDetector]) => {
-            detectFaces(detector, meshDetector);
-        });
+        // Try WebGL backend, fallback to CPU if it fails
+        tf.setBackend('webgl')
+            .then(() => {
+                console.log('Using WebGL backend');
+                getModels()
+                    .then(([detector, meshDetector]) => {
+                        console.log('Models loaded successfully');
+                        detectFaces(detector, meshDetector);
+                    })
+                    .catch(err => {
+                        console.error('Failed to load models:', err);
+                        dispatch(
+                            showErrorModal({
+                                errorCode: "Model Loading Error",
+                                errorMessage: "Failed to load face detection models. Please try again later.",
+                                isError: true,
+                            })
+                        );
+                    });
+            })
+            .catch(err => {
+                console.error('WebGL backend failed, falling back to CPU:', err);
+                tf.setBackend('cpu').then(() => {
+                    console.log('Using CPU backend');
+                    getModels()
+                        .then(([detector, meshDetector]) => {
+                            console.log('Models loaded successfully');
+                            detectFaces(detector, meshDetector);
+                        })
+                        .catch(err => {
+                            console.error('Failed to load models:', err);
+                            dispatch(
+                                showErrorModal({
+                                    errorCode: "Model Loading Error",
+                                    errorMessage: "Failed to load face detection models. Please try again later.",
+                                    isError: true,
+                                })
+                            );
+                        });
+                });
+            });
 
         return () => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             if (detectionModel) detectionModel.dispose();
             if (landmarksModel) landmarksModel.dispose();
-
-            // Clear timeout on unmount
             if (timeoutRef.current) {
                 clearTimeout(timeoutRef.current);
             }
         };
-    }, []);
-
+    }, [capturePhoto]);
 
     // FOR PROMPT SOUND
     useEffect(() => {
@@ -467,7 +531,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
             stopLookRight();
             stopLookStraight();
         };
-    }, [prompt]);
+    }, [prompt, playDetectingFace, playEyeBlink, playLookLeft, playLookRight, playLookStraight, stopDetectingFace, stopEyeBlink, stopLookLeft, stopLookRight, stopLookStraight]);
 
     // SPLASH SCREEN HANDLERS
     const handleSplashScreenClose = () => {
@@ -541,7 +605,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                 alt="Uploaded Selfie"
                                             />
                                         </>
-
                                     ) : (
                                         <>
                                             <Container maxWidth='lg'>
@@ -563,9 +626,9 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                             style={{ borderRadius: '10px' }}
                                                             onUserMediaError={handleInitError}
                                                             videoConstraints={{
-                                                                facingMode: { exact: "user" },
-                                                                width: 320,
-                                                                height: 280,
+                                                                facingMode: "user",
+                                                                width: { ideal: 320 },
+                                                                height: { ideal: 280 },
                                                             }}
                                                             playsInline={true}
                                                             muted={true}
@@ -584,12 +647,13 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                                         />
                                                     </Box>
                                                 </Box>
+
+
                                             </Container>
 
                                             <Box sx={{ textAlign: 'center', marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }}>
                                                 🔊 Keep your volume on to catch all audio cues.
                                             </Box>
-
 
                                             <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
                                                 Hold your postures longer if using an older /slower device.

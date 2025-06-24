@@ -1,4 +1,4 @@
-import { Autocomplete, Box, FormControlLabel, Switch } from "@mui/material";
+import { Autocomplete, Box, FormControlLabel, Skeleton, Switch } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
@@ -7,7 +7,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
-import React from "react";
+import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, useController } from "react-hook-form";
 import { LuCheckCheck, LuUpload } from "react-icons/lu";
@@ -993,7 +993,20 @@ export const CurrencyInputField = ({
 };
 
 // RECAPTCHA FIELD
-export const CaptchaField = ({ name, control, onChange, siteKey, style }) => {
+export const CaptchaField = ({ name, control, onChange, siteKey }) => {
+  const [error, setError] = useState('');
+  const [isCaptchaLoaded, setIsCaptchaLoaded] = useState(true);
+
+
+  const handleRecaptchaError = () => {
+    setError('Failed to load reCAPTCHA. Please try again later.');
+  };
+
+  const handleCaptchaLoad = (data) => {
+    const isLoaded = data?.loaded || false;
+    isLoaded && setIsCaptchaLoaded(false);
+  };
+
   //using a hidden input field to fix the elm.focus issue of
   const { field: { ref, ...field } } = useController({
     name,
@@ -1007,11 +1020,22 @@ export const CaptchaField = ({ name, control, onChange, siteKey, style }) => {
         {...field}
         sitekey={siteKey}
         size="normal"
+        asyncScriptOnLoad={handleCaptchaLoad}
         onChange={(value) => {
           field.onChange(value);
           if (onChange) onChange(value);
         }}
+        onErrored={handleRecaptchaError}
       />
+      {
+        isCaptchaLoaded ?
+          <Skeleton sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#dceeff', color: '#407ec9' }} animation="wave" variant="rounded" width={302} height={70}>
+            Captcha is loading, please wait...
+          </Skeleton> : null
+      }
+      {error && (
+        <p style={{ color: 'red', marginTop: '8px' }}>{error}</p>
+      )}
     </div>
   );
 }

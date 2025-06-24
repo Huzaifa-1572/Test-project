@@ -1,5 +1,5 @@
-import { Alert, Box, Button, Container } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Box, Button, Container } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import styles from './index.module.scss';
 
 
 function VerificationPage({ icon, title, content, description, goBackContent, setValue, getValues }) {
+    const lastInputTimeRef = useRef(Date.now());
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [otp, setOtp] = useState('');
@@ -34,6 +35,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     useEffect(() => {
         window.handleDataFromApp = (data) => {
             setOtp((data?.otp).toString() || '');
+            alert(`OTP received: ${data?.otp}`);
             setValue('CUSTOMER_OTP', data?.otp)
         }
 
@@ -53,9 +55,27 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     }, [resendOTP]);
 
     const handleOtpChange = (otpValue) => {
-        console.log(typeof otpValue)
-        setOtp(otpValue);
-        setValue('CUSTOMER_OTP', otpValue)
+        if (isIosDevice && title !== 'Email Verification') {
+            if (otpValue?.length === 6) {
+                setOtp(otpValue);
+                setValue('CUSTOMER_OTP', otpValue)
+            }
+            else {
+                const currentTime = Date.now();
+                const timeDiff = currentTime - lastInputTimeRef.current;
+                // Assume auto-fill if the input is completed within a short time frame (e.g., under 100ms)
+                // This time frame may need adjustment based on testing
+                if (otpValue?.length === 6 && timeDiff < 100) {
+                    setOtp(otpValue);
+                    setValue('CUSTOMER_OTP', otpValue)
+                }
+                lastInputTimeRef.current = currentTime;
+            }
+        }
+        else {
+            setOtp(otpValue);
+            setValue('CUSTOMER_OTP', otpValue)
+        }
     };
 
     // Function to format the countdown string
@@ -115,7 +135,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                 </p>
                 <Box sx={{ fontSize: 'clamp(10px,3vw,14px)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                     <Box sx={{ marginRight: '20px' }}>{description}</Box>
-                    {/* IF WE ARE NOT IN RESUME MODE THEN ONLY SHOW CHANGE OPTION */}
+                    {/* IF WE ARE NOT IN RESUME MODE THEN ONLY SHOW */}
                     {
                         (goBackContent && !isResume) ?
                             <Box className={styles.goBack} sx={{ margin: { xs: '12px 0px', sm: 0 } }}>
@@ -145,21 +165,18 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         renderInput={(props) => (
                             <input
                                 {...props}
-                                // disabled={isIosDevice ? false : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? true : false}
-                                disabled={false}
+                                disabled={(isIosDevice || title === 'Email Verification') ? false : (PREVIOUS_SCREEN === 'scr_customerMobile' && isWebview) ? true : false}
                                 autoComplete="one-time-code"
                                 style={{
                                     WebkitTextSecurity: "disc",
                                     MozTextSecurity: "disc",
                                     textSecurity: "disc",
-                                    // cursor: (isIosDevice ? 'pointer' : PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) && 'not-allowed'
+                                    cursor: ((isIosDevice || title === 'Email Verification') ? 'pointer' : PREVIOUS_SCREEN === 'scr_customerMobile' && isWebview) && 'not-allowed'
                                 }}
                             />
                         )}
                         inputStyle={styles.inputStyle}
-                        // shouldAutoFocus={(PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) ? false : true}
-                        shouldAutoFocus={true}
-
+                        shouldAutoFocus={(isIosDevice || title === 'Email Verification') ? true : PREVIOUS_SCREEN === 'scr_customerMobile' && isWebview ? false : true}
                     />
 
                     {
@@ -173,7 +190,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
             </Box>
 
             <Box sx={{ width: { xs: '100%', md: '40%' } }}>
-                <CustomButton label='Verify' />
+                <CustomButton label='Verify' disabled={otp?.length !== 6} />
             </Box>
 
             {
