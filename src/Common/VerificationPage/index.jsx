@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@mui/material';
+import { Alert, Box, Button, Container } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import OtpInput from 'react-otp-input';
@@ -26,9 +26,6 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     const isResume = localStorage.getItem('isResume')
     const isWebview = JSON.parse(sessionStorage.getItem('device')).deviceId !== 'temp'
     const isIosDevice = JSON.parse(sessionStorage.getItem('device')).deviceType === 'ios'
-
-
-
 
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullFormDataSubmission, dispatch });
 
@@ -180,17 +177,34 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                     />
 
                     {
-                        // isIosDevice ? null : (PREVIOUS_SCREEN === 'scr_customerMobile' && (isMobile || isWebview)) &&
-                        //     <Alert sx={{ borderRadius: '7px', }} severity='warning'>
-                        //         {/* <Box sx={{ fontSize: '13px', fontWeight: 'bold' }}>Manual OTP entry is not allowed.</Box> */}
-                        //         <Box sx={{ fontSize: '11px' }}>Please wait for the OTP to be auto-filled.</Box>
-                        //     </Alert>
+                        (title !== 'Email Verification' && isWebview) ?
+                            otp?.length !== 6 ?
+                                <Alert sx={{ borderRadius: '7px' }} severity='info'>
+                                    <Box sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                        Manual entry of the OTP is not permitted!
+                                    </Box>
+                                    <Box sx={{ fontSize: '12px' }}>
+                                        {isIosDevice
+                                            ? 'You can use auto-fill to enter the OTP as soon as it is received.'
+                                            : 'Please wait while we automatically fetch your OTP.'}
+                                    </Box>
+                                </Alert>
+                                :
+                                <Alert sx={{ borderRadius: '7px' }} severity='success'>
+                                    <Box sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                        OTP populated successfully!
+                                    </Box>
+                                    <Box sx={{ fontSize: '12px' }}>
+                                        You can now proceed.
+                                    </Box>
+                                </Alert>
+                            : null
                     }
                 </div>
             </Box>
 
             <Box sx={{ width: { xs: '100%', md: '40%' } }}>
-                <CustomButton label='Verify' disabled={otp?.length !== 6} />
+                <CustomButton label='Proceed' disabled={otp?.length !== 6} />
             </Box>
 
             {
