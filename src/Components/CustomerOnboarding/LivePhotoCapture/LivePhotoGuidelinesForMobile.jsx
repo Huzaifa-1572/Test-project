@@ -11,7 +11,7 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
 
     return (
         <Box sx={{
-            background: '#dceeff',
+            background: '#e0e7ee',
             position: 'absolute',
             zIndex: '1000',
             top: 0,
@@ -41,10 +41,9 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
                                 onClick={() => setShowVideo(true)}
                                 sx={{
                                     textDecoration: 'underline',
-                                    color: '#e8927c',
+                                    color: '#424242',
                                     textTransform: 'none',
                                     fontSize: '16px',
-
                                 }}
                             >
                                 Watch Video Tutorial
