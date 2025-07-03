@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Background from "src/Assets/images/background.png";
-import OpenNewAccount from "src/Assets/images/openAccount.png";
-import resumeAccount from "src/Assets/images/resumeAccount.png";
+import OpenNewAccount from "src/Assets/images/openAccount1.svg";
+import resumeAccount from "src/Assets/images/resumeAccount1.svg";
 import heroImage from "src/Assets/images/wallet.png";
 import HomePageLayout from "src/Layout/HomePageLayout";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
@@ -51,19 +51,18 @@ const LandingPage = () => {
           <Grid container spacing={2} sx={{ height: '100%', display: "flex", justifyContent: "center", alignItems: "center" }}>
 
             <Grid item xs={12} xl={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-              <Fade in={true} timeout={1000}>
+              <Fade in={true} timeout={1500}>
                 <Box className={styles.textContainer}>
-                  <span> Account for Your Needs</span>
-                  <br />
-                  Start Your Journey with Payvay!
+                  <Box sx={{ fontSize: 'clamp(20px,3vw,20px)', color: '#407ec9' }}>Start Your Journey with
+                    <Box component={'span'} sx={{ fontWeight: '900', marginLeft: '5px' }}>Payvay</Box>
+                  </Box>
+                  <Box sx={{ fontSize: 'clamp(18px,3vw,20px)', color: '#404040' }}>Account for Your Needs!</Box>
                 </Box>
               </Fade>
 
-              <Fade in={true} timeout={1000}>
+              <Fade in={true} timeout={2000}>
                 <Box className={styles.descriptionText}>
-                  Explore tailored features and benefits by selecting the account
-                  <br />
-                  type that aligns with your goals.
+                  Open a new account or resume your application — experience seamless, secure, and convenient digital onboarding tailored to your lifestyle.
                 </Box>
               </Fade>
 
@@ -89,7 +88,7 @@ const LandingPage = () => {
                     <Box className={styles.card} onClick={handleResumeApplication} sx={{ minHeight: { xs: '180px', md: '270px' } }}>
                       <img src={resumeAccount} alt="Resume Application" className={styles.cardImage} />
                       <Box className={styles.cardTitle}>
-                        Resume Application
+                        Resume Your Application
                       </Box>
                       <Box className={styles.cardDescription}>
                         Continue right where you left off

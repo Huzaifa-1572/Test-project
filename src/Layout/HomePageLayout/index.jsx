@@ -8,8 +8,10 @@ const HomePageLayout = ({ children }) => {
     <>
       <div className={styles.container}>
         <div className={styles.content}>
-          <Header />
-          <Box sx={{ height: 'calc(100vh - 65px)', width: "100%" }}>
+          <Header
+            SHOW_BACK_BUTTON={true}
+          />
+          <Box sx={{ height: 'calc(100dvh - 65px)', width: "100%" }}>
             {children}
           </Box>
         </div>

@@ -1,11 +1,12 @@
 @use "../../styles/_variables" as *;
 
 .container {
-  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   position: relative;
+  padding: 7px;
 }
 
 .content {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
