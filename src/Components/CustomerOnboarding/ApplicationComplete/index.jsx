@@ -3,7 +3,7 @@ import { CiLogin } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import APPLICATION_SUBMITTED_UNDRAW from 'src/Assets/images/applicationSubmittedUndraw.svg';
 import APPLICATION_SUBMITTED_UNDRAW_SM from 'src/Assets/images/applicationSubmittedUndraw_sm.svg';
-import { clearIndexDb, getScreenData, isSmallScreen } from 'src/Utils/Helpers';
+import { clearIndexDb, getScreenData, isSmallScreen, redirectToMobileApp } from 'src/Utils/Helpers';
 import styles from './index.module.scss';
 
 
@@ -25,8 +25,7 @@ const ApplicationComplete = ({ reset }) => {
         }
         else {
             // FOR MOBILE APP
-            const data = { event: "buttonClicked", message: "buttonClicked" };
-            window.ReactNativeWebView.postMessage(JSON.stringify(data));
+            redirectToMobileApp()
         }
 
     }

@@ -8,6 +8,7 @@ import postRequestSuccess from "src/Utils/CommonFunctions/postRequestSuccess";
 import { IoChevronBack } from "react-icons/io5";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { isWebview, redirectToMobileApp } from "src/Utils/Helpers";
 
 
 const GoBack = ({ setValue, getValues }) => {
@@ -16,9 +17,14 @@ const GoBack = ({ setValue, getValues }) => {
     const PREV_SCREEN = useSelector((state) => state?.prevScreenState);
     const CURRENT_SCREEN = useSelector((state) => state?.currentScreenState);
 
+
     const { mutate } = usePostDataToServer({ onPostReqSuccess: onSuccessfullSubmission, dispatch });
 
     const handleBack = () => {
+        if (isWebview() && window.location.pathname === '/') {
+            redirectToMobileApp();
+            return;
+        }
         if (CURRENT_SCREEN === 'scr_deviceLocation' || CURRENT_SCREEN === 'scr_customerCnicResume') {
             navigate('/')
             return

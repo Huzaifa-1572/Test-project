@@ -337,3 +337,15 @@ export async function preloadModels() {
 export function getModels() {
   return Promise.all([detectionModelPromise, landmarksModelPromise]);
 }
+
+// CHECK WEBVIEW
+export const isWebview = () => {
+  const device = JSON.parse(sessionStorage.getItem('device')).deviceId !== 'temp'
+  return device;
+}
+
+// handler for mobile app redirection
+export const redirectToMobileApp = () => {
+  const data = { event: "buttonClicked", message: "buttonClicked" };
+  window.ReactNativeWebView.postMessage(JSON.stringify(data));
+}
