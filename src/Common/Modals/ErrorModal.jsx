@@ -7,13 +7,25 @@ import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
 import styles from './index.module.scss';
 import { toSentenceCase } from 'src/Utils/Helpers';
+import axios from 'axios';
+import { BASE_URL } from 'src/Utils/Config';
+import { useFormContext } from 'react-hook-form';
+import { UPDATE_CNIC_INITIATE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
+import usePostDataToServer from 'src/Hooks/usePostdataToServer';
+import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 
 
 const ERROR_CODES = ["Access Denied-403", "Error-401"]
 
-const ErrorModal = ({ errorCode, errorMessage, isError }) => {
+const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => {
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { mutate: mutateEdit } = usePostDataToServer({ onPostReqSuccess: onSuccessfullEdit, dispatch });
+
+
 
   const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -25,6 +37,17 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
       navigate('/');
     }
   };
+
+  const handleUpdate = () => {
+    const CUSTOMER_CNIC = localStorage.getItem('customer_reference_key') || '';
+    const { BODY, API_URL } = UPDATE_CNIC_INITIATE_HANDLER({ customerCnic: CUSTOMER_CNIC });
+    mutateEdit({ BODY, API_URL, dispatch });
+  };
+
+  function onSuccessfullEdit(response) {
+    postRequestSuccess({ response, dispatch, navigate })
+    handleClose();
+  }
 
   return (
     <Dialog
@@ -63,7 +86,11 @@ const ErrorModal = ({ errorCode, errorMessage, isError }) => {
         <div className={styles.dialogContentBox}>
           <p className={styles.dialogTitle}>Oh no!</p>
           <p className={styles.dialogContent}>{toSentenceCase(errorMessage) || 'something went wrong!'}</p>
-          <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
+          {errorCode === 'Error-103' ? (
+            <Button className={styles.dialogButton} type='button' onClick={handleUpdate}>Update</Button>
+          ) : (
+            <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
+          )}
         </div>
       </div>
     </Dialog >

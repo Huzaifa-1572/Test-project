@@ -4,6 +4,7 @@ import Loader from "src/Common/Loader";
 import { useLocation } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { isMobile } from 'react-device-detect';
+import UpdateCnic from "src/Components/CustomerOnboarding/UpdateCnic";
 
 
 const WrapperForHookFormProps = lazy(() => import("src/Layout/WrapperForHookFromProps"));
@@ -49,7 +50,8 @@ export const SCREENS_FOR_PROGRESS_BAR = [
   'scr_addressDetail',
   'scr_reviewApplication',
   'scr_termsAndConditions',
-  'scr_applicationComplete'
+  'scr_applicationComplete',
+  'src_updateCnicNumber'
 ]
 
 export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
@@ -75,6 +77,7 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
     scr_reviewApplication: <ReviewApplication />,
     scr_termsAndConditions: <TermAndCondition />,
     scr_applicationComplete: <ApplicationComplete />,
+    src_updateCnicNumber: <UpdateCnic />
   }
   return SCREEN_DICTIONARY[CURRENT_SCREEN]
 }

@@ -202,11 +202,14 @@ export const MULTIPLE_KYC_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
 };
 
 export const DOCUMENT_HANDLER = ({ CURRENT_SCREEN, data, kuid }) => {
+  const CUSTOMER_CNIC = retrieveCNIC(data.customerCnic);
+  // Store the manually entered CNIC for use in the CNIC Update modal flow
+  localStorage.setItem("customer_reference_key", CUSTOMER_CNIC);
   const BODY = {
     documentType: PAYLOAD_KEYS[kuid],
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(data.customerCnic),
+    custIdentityValue: CUSTOMER_CNIC,
     screenKuid: CURRENT_SCREEN,
     imageBase64: data[kuid],
     requestDate: getCurrentDate(),
@@ -290,6 +293,39 @@ export const EDIT_HANDLER = ({ CURRENT_SCREEN, customerCnic }) => {
 
   return {
     API_URL: `${BASE_URL}${ENDPOINTS.EDIT_HANDLER}`,
+    BODY,
+  };
+};
+
+
+export const UPDATE_CNIC_INITIATE_HANDLER = ({ customerCnic }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: retrieveCNIC(customerCnic),
+    screenKuid: 'src_updateCnicNumber',
+    requestDate: getCurrentDate(),
+  };
+
+  return {
+    API_URL: `${BASE_URL}api/dao/v1/customer/getKYCDetail`,
+    BODY,
+  };
+};
+
+export const UPDATE_CNIC_HANDLER = ({ customerCnic }) => {
+  const BODY = {
+    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+    custIdentityValue: '1010101010101',
+    screenKuid: 'src_updateCnicNumber',
+    requestDate: getCurrentDate(),
+    "newCustIdentityValue": "4229159450212"
+
+  };
+
+  return {
+    API_URL: `${BASE_URL}api/dao/v1/customer/updateCustomerCNIC`,
     BODY,
   };
 };
@@ -404,4 +440,11 @@ export const COFormSubmission = {
       data,
     });
   },
+  src_updateCnicNumber: ({ CURRENT_SCREEN, data }) => {
+    return UPDATE_CNIC_HANDLER({
+      CURRENT_SCREEN,
+      data,
+    });
+  },
+
 };
