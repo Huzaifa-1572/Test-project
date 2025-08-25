@@ -313,15 +313,14 @@ export const UPDATE_CNIC_INITIATE_HANDLER = ({ customerCnic }) => {
   };
 };
 
-export const UPDATE_CNIC_HANDLER = ({ customerCnic }) => {
+export const UPDATE_CNIC_HANDLER = ({ data }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: '1010101010101',
+    custIdentityValue: retrieveCNIC(data?.customerCnic),
     screenKuid: 'src_updateCnicNumber',
     requestDate: getCurrentDate(),
-    "newCustIdentityValue": "4229159450212"
-
+    newCustIdentityValue: retrieveCNIC(data?.updateCustomerCnic)
   };
 
   return {

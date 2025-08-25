@@ -152,5 +152,11 @@ export const shape = {
       .boolean()
       .oneOf([true], 'You must accept the terms and conditions to proceed.')
       .required('You must accept the terms and conditions to continue.')
+  },
+  "src_updateCnicNumber": {
+    updateCustomerCnic: yup
+      .string()
+      .required("New CNIC is required.")
+      .matches(/^\d{5}-\d{7}-\d{1}$/, "Please enter a valid CNIC in the format XXXXX-XXXXXXX-X."),
   }
 };

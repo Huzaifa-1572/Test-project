@@ -19,14 +19,14 @@ const HasValidEmail = ({ setValue }) => {
         <WizardLayout
             Icon={EMAIL_ICON}
             title={"Do You Have a Valid Email Address?"}
-            description={"Please ensure that the email address you provide is valid and active."}
+            description={"Providing a valid email ensures you stay updated with essential notifications."}
             heroImage={HAS_VALID_EMAIL_UNDRAW}
         >
             <Grid container sx={{ gap: "24px" }}>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} sm={4}>
                     <CustomButton label="YES" onClick={handleYes} Icon={<IoMdCheckmark />} />
                 </Grid>
-                <Grid item xs={12} md={6} lg={4}>
+                <Grid item xs={12} sm={4}>
                     <CustomButton label="NO" onClick={handleNo} Icon={<IoMdClose />} />
                 </Grid>
             </Grid>

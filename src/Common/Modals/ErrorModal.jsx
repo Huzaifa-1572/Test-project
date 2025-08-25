@@ -1,24 +1,21 @@
-import { Button, Dialog } from '@mui/material';
+import { Box, Button, Dialog } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
-import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
-import styles from './index.module.scss';
-import { toSentenceCase } from 'src/Utils/Helpers';
-import axios from 'axios';
-import { BASE_URL } from 'src/Utils/Config';
-import { useFormContext } from 'react-hook-form';
-import { UPDATE_CNIC_INITIATE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
 import usePostDataToServer from 'src/Hooks/usePostdataToServer';
+import { updateCurrentScreen } from 'src/Redux/Reducers/CurrentScreenState';
+import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
+import { UPDATE_CNIC_INITIATE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
+import { toSentenceCase } from 'src/Utils/Helpers';
+import styles from './index.module.scss';
 
 
 const ERROR_CODES = ["Access Denied-403", "Error-401"]
 
 const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => {
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,12 +39,47 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
     const CUSTOMER_CNIC = localStorage.getItem('customer_reference_key') || '';
     const { BODY, API_URL } = UPDATE_CNIC_INITIATE_HANDLER({ customerCnic: CUSTOMER_CNIC });
     mutateEdit({ BODY, API_URL, dispatch });
+    handleClose();
   };
 
   function onSuccessfullEdit(response) {
     postRequestSuccess({ response, dispatch, navigate })
     handleClose();
   }
+
+  const handleYes = () => {
+    dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
+    dispatch(updateCurrentScreen('scr_customerCnic'));
+
+  };
+
+  const handleNo = () => {
+    dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
+    navigate('/');
+  };
+
+  // Helper to render action buttons based on errorCode
+  const renderActionButtons = () => {
+    switch (errorCode) {
+      // FOR CNIC UPDATE FLOW
+      case 'Error-103':
+        return (
+          <Button className={styles.dialogButton} type='button' onClick={handleUpdate}>Update</Button>
+        );
+      // FOR SOMEONE INITIATING NEW ACCOUNT FLOW FROM RESUME FLOW
+      case 'Error-104':
+        return (
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
+            <Button sx={{ padding: '10px !important' }} className={styles.dialogButton} onClick={handleYes}>Yes</Button>
+            <Button sx={{ padding: '10px !important' }} className={styles.dialogButton} onClick={handleNo}>No</Button>
+          </Box>
+        );
+      default:
+        return (
+          <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
+        );
+    }
+  };
 
   return (
     <Dialog
@@ -86,11 +118,7 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
         <div className={styles.dialogContentBox}>
           <p className={styles.dialogTitle}>Oh no!</p>
           <p className={styles.dialogContent}>{toSentenceCase(errorMessage) || 'something went wrong!'}</p>
-          {errorCode === 'Error-103' ? (
-            <Button className={styles.dialogButton} type='button' onClick={handleUpdate}>Update</Button>
-          ) : (
-            <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
-          )}
+          {renderActionButtons()}
         </div>
       </div>
     </Dialog >

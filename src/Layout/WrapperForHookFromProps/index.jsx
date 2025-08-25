@@ -128,7 +128,7 @@ function WrapperForHookFormProps({ children }) {
       }
     }
     else {
-      postRequestSuccess({ response, dispatch, navigate, setValue });
+      postRequestSuccess({ response, dispatch, navigate, setValue, getValues });
     }
   }
 

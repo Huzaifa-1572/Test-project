@@ -11,10 +11,7 @@ import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 import { isSmallScreen } from "src/Utils/Helpers";
 
 
-const DeviceLocation = ({
-  getValues,
-  setValue,
-}) => {
+const DeviceLocation = ({ getValues, setValue }) => {
   const dispatch = useDispatch()
   const { locationStatus, fetchLocation } = useGetGeoCoordinates({ setValue, getValues });
 

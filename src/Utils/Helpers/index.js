@@ -123,11 +123,18 @@ export const setupRequestInterceptor = () => {
 export const setupResponseInterceptor = () => {
   Axios.interceptors.response.use(
     function (response) {
-      const authorizationHeader = response?.config?.headers?.Authorization;
-      if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
-        // Remove the 'Bearer ' prefix from the token
-        const token = authorizationHeader.replace("Bearer ", "");
-        localStorage.setItem("referenceKey", token);
+
+      // FOR CNIC UPDATE FLOW
+      if (response.headers.get('x-token')) {
+        localStorage.setItem("referenceKey", response.headers.get('x-token'));
+      }
+      else {
+        const authorizationHeader = response?.config?.headers?.Authorization;
+        if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
+          // Remove the 'Bearer ' prefix from the token
+          const token = authorizationHeader.replace("Bearer ", "");
+          localStorage.setItem("referenceKey", token);
+        }
       }
       return response; // Always return the response or modify it
     },

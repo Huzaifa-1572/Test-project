@@ -1,16 +1,12 @@
 import { Box, Container } from "@mui/material";
 import TERMS_AND_CONDITION_UNDRAW from 'src/Assets/images/termsAndConditionsUndraw.svg';
 import TERMS_AND_CONDITION_UNDRAW_SM from 'src/Assets/images/termsAndConditionsUndraw_sm.svg';
-import Accordion from "src/Common/Accordion";
 import CustomButton from "src/Common/CustomButton";
 import { CheckboxField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import { PayvayTerms } from 'src/Utils/Constants/PayvayTerms';
 import { getUUID, isSmallScreen } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
-
-
-
 
 const TermAndCondition = ({ control, errors }) => {
 
@@ -56,13 +52,16 @@ const TermAndCondition = ({ control, errors }) => {
         <Box sx={{ margin: '20px 0px' }}>
           <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }} className={styles.topHeading}>Terms & Conditions</Box>
         </Box>
-        {
-          PayvayTerms?.map((data) => (
-            <Box key={getUUID()}>
-              <Accordion summary={data?.title} detail={data?.content} />
-            </Box>
-          ))
-        }
+        <Box className={styles.termContainer}>
+          <ol className={styles.list}>
+            {PayvayTerms?.map((item, index) => (
+              <li key={index}>
+                <h4 className={styles.listItemTitle}>{item.title}:</h4>
+                {item.content && <span className={styles.content}>{renderDetail(item.content)}</span>}
+              </li>
+            ))}
+          </ol>
+        </Box>
         <Box sx={{ marginTop: '16px' }}>
           <CheckboxField name={"isAccepted"} label={"I acknowledge and accept the Terms and Conditions."} control={control} />
           {errors?.isAccepted && (<ValidationError message={errors?.isAccepted?.message} />)}

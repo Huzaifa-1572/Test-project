@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
 import { updateCurrentScreen } from "src/Redux/Reducers/CurrentScreenState";
-import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { updatePrevScreen } from "src/Redux/Reducers/PrevScreenState";
 import { UpdateScreenData } from "src/Redux/Reducers/ScreenDataState";
 import { clearIndexDb, formatCNIC, getPrevScreen, getScreen } from "src/Utils/Helpers";
 import { FIELD_MANIFEST } from "../Constants";
 
 
-const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
+const postRequestSuccess = ({ response, dispatch, navigate, setValue = () => { }, getValues = () => { } }) => {
   const DATA = response?.data?.data;
   const IS_DATA_AVAILABLE = Object.keys(DATA)?.length > 0;
 
@@ -34,6 +33,12 @@ const postRequestSuccess = ({ response, dispatch, navigate, setValue }) => {
     // ------------------FOR SCREEN DATA
     const NEXT_SCREEN_DATA = DATA?.nextScreenPayload || {};
     dispatch(UpdateScreenData(NEXT_SCREEN_DATA));
+
+    // FOR CNIC UPDATE
+    if (PREV_SCREEN === "src_updateCnicNumber") {
+      setValue('customerCnic', getValues('updateCustomerCnic'));
+    }
+
 
     // ------------------FOR RESUME SCREENS
     const FIELDS = DATA?.nextScreenPayload?.content_group[0]?.fields || [];

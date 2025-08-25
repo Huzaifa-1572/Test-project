@@ -8,9 +8,15 @@ import MOBILE_ICON from 'src/Assets/images/mobileIcon.png'
 import MOBILE_UNDRAW from 'src/Assets/images/mobileUndraw.svg'
 import MOBILE_UNDRAW_SM from 'src/Assets/images/mobileUndraw_sm.svg'
 import { isSmallScreen } from "src/Utils/Helpers";
+import { useEffect } from "react";
 
 
-const UpdateCnic = ({ control, errors, }) => {
+const UpdateCnic = ({ control, errors, setValue }) => {
+
+    useEffect(() => {
+        const CNIC_FROM_OCR_SERVICE = localStorage.getItem('customer_reference_key_ocr') || '';
+        setValue('cnicExtractedFromOCR', CNIC_FROM_OCR_SERVICE);
+    }, []);
 
 
 
@@ -33,7 +39,6 @@ const UpdateCnic = ({ control, errors, }) => {
                         type="tel"
                         disabled={true}
                     />
-                    {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
@@ -47,7 +52,6 @@ const UpdateCnic = ({ control, errors, }) => {
                         type="tel"
                         disabled={true}
                     />
-                    {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
                 </Grid>
 
                 <Grid item xs={12} lg={6}>
@@ -60,7 +64,7 @@ const UpdateCnic = ({ control, errors, }) => {
                         inputMode="numeric"
                         type="tel"
                     />
-                    {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
+                    {errors?.updateCustomerCnic ? (<ValidationError message={errors?.updateCustomerCnic?.message} />) : null}
                 </Grid>
 
                 <Grid item xs={12} lg={6}>

@@ -16,6 +16,7 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
       onPostReqSuccess(data);
     },
     onError: (error) => {
+      console.log('error', error)
       let code = ''
       let message = ''
 
@@ -24,6 +25,13 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
         message = "Your session has expired due to inactivity.You do not have permission to access this resource."
         localStorage.clear();
         clearIndexDb();
+      }
+      // FOR CNIC UPDATE FLOW
+      else if (error?.response?.data?.code === 103) {
+        const CNIC_FROM_OCR_SERVICE = error?.response?.data?.data?.detectedCnic || ''
+        localStorage.setItem('customer_reference_key_ocr', CNIC_FROM_OCR_SERVICE)
+        code = (error?.response?.data?.code && `Error-${error?.response?.data?.code}`) || "Error";
+        message = error?.response?.data?.message || "Something went wrong, try again later.";
       }
       else {
         code = (error?.response?.data?.code && `Error-${error?.response?.data?.code}`) || "Error";

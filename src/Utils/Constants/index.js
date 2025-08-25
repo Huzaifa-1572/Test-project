@@ -25,7 +25,8 @@ export const INITIAL_VALUES = {
   KEY_CNIC_ISSUANCE_DATE: null,
   KEY_CNIC_EXPIRY_DATE: null,
   KEY_CNIC_LIFETIME: false,
-  isAccepted: false
+  isAccepted: false,
+  updateCustomerCnic: ""
 };
 
 export const OPERATOR_MAP = {
