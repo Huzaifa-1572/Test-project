@@ -1,11 +1,19 @@
 import { Box, Button, Container, IconButton } from '@mui/material';
+import { Switch } from "@mui/material";
 import { useMemo, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import GUIDELINE_UNDRAW from 'src/Assets/images/faceDetectionIcon.png';
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
+
 import { getUUID, isSmallScreen, toSentenceCase } from 'src/Utils/Helpers';
 
-const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
+const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en', onAudioLangChange }) => {
+    const [audioLang, setAudioLang] = useState(language);
+    // Notify parent on change
+    const handleAudioLangChange = (lang) => {
+        setAudioLang(lang);
+        if (onAudioLangChange) onAudioLangChange(lang);
+    };
     const guidelines = useMemo(() => LIVENESS_GUIDELINES, []);
     const [showVideo, setShowVideo] = useState(false);
 
@@ -26,12 +34,33 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
         }}>
             <Container maxWidth="lg" sx={{ padding: '20px', textAlign: { xs: 'center', sm: 'left' } }}>
                 <Box sx={{ width: '100%', textAlign: { xs: 'center', sm: 'left' } }}>
-                    <img src={GUIDELINE_UNDRAW} alt='Guidelines' height={'80px'} width={'100px'} />
+                    <img src={GUIDELINE_UNDRAW} alt='Guidelines' height={'70px'} width={'100px'} />
                 </Box>
 
                 <Box>
-                    <Box sx={{ marginTop: '20px', textAlign: { xs: 'center', sm: 'left' }, color: '#424242', fontSize: 'clamp(24px,2vw,30px)', fontWeight: 'bolder' }}>
-                        Face Detection Guidelines
+                    <Box sx={{ marginTop: '20px', textAlign: { xs: 'center', sm: 'left' }, color: '#407ec9', fontSize: 'clamp(24px,2vw,30px)', fontWeight: 'bolder' }}>
+                        {'Face Detection Guidelines'}
+                    </Box>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+                        <span style={{
+                            fontSize: '12px',
+                            fontWeight: audioLang === 'en' ? 'bold' : 'normal',
+                            color: audioLang === 'en' ? '#e8927c' : 'inherit',
+                            textDecoration: audioLang === 'en' ? 'underline' : 'none'
+                        }}>English Voice</span>
+                        <Switch
+                            checked={audioLang === 'ur'}
+                            onChange={e => handleAudioLangChange(e.target.checked ? 'ur' : 'en')}
+                            color="primary"
+                            inputProps={{ 'aria-label': 'audio language toggle' }}
+                        />
+                        <span style={{
+                            fontSize: '12px',
+                            fontWeight: audioLang === 'ur' ? 'bold' : 'normal',
+                            color: audioLang === 'ur' ? '#e8927c' : 'inherit',
+                            textDecoration: audioLang === 'ur' ? 'underline' : 'none'
+                        }}>Urdu Voice</span>
                     </Box>
 
                     {isSmallScreen() && (
@@ -41,7 +70,6 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
                                 onClick={() => setShowVideo(true)}
                                 sx={{
                                     textDecoration: 'underline',
-                                    color: '#424242',
                                     textTransform: 'none',
                                     fontSize: '16px',
                                 }}
@@ -51,6 +79,9 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler }) => {
                         </Box>
                     )}
 
+                    <Box sx={{ display: 'flex', alignItems: 'center', margin: '10px 0' }}>
+
+                    </Box>
                     <Box sx={{ textAlign: 'left', marginBottom: '35px' }}>
                         {guidelines?.map((guideline) => (
                             <Box key={getUUID()} sx={{ margin: '12px 0px', color: 'white' }}>

@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Container, Fade, Slide } from "@mui/material";
+import { Alert, Box, Button, Container, Fade, Slide, Switch } from "@mui/material";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -8,7 +8,9 @@ import { LuScanFace } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import Webcam from "react-webcam";
 import detectingFace from 'src/Assets/detectingFace.mp3';
+import detectingFaceUrdu from 'src/Assets/detectingFaceUrdu.mp3';
 import eyeBlink from 'src/Assets/eyeBlink.mp3';
+import eyeBlinkUrdu from 'src/Assets/eyeBlinkUrdu.mp3';
 import BLINK_DETECTION from 'src/Assets/images/blink-detect.gif';
 import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
 import LOOK_LEFT from 'src/Assets/images/look-left.gif';
@@ -16,8 +18,11 @@ import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
 import SELFIE_UNDRAW from 'src/Assets/images/selfie.svg';
 import lookLeft from 'src/Assets/lookLeft.mp3';
+import lookLeftUrdu from 'src/Assets/lookLeftUrdu.mp3';
 import lookRight from 'src/Assets/lookRight.mp3';
+import lookRightUrdu from 'src/Assets/lookRightUrdu.mp3';
 import lookStraight from 'src/Assets/lookStraight.mp3';
+import lookStraightUrdu from 'src/Assets/lookStraightUrdu.mp3';
 import MODEL_LOADER from 'src/Assets/modelLoader.gif';
 import CustomButton from "src/Common/CustomButton";
 import ValidationError from "src/Components/ValidationError";
@@ -125,12 +130,13 @@ const MAX_RETRIES = 3; // Maximum number of restart attempts
 const LivePhotoForMobile = ({ errors, setValue, watch }) => {
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
-    // Sound hooks
-    const [playDetectingFace, { stop: stopDetectingFace }] = useSound(detectingFace, { volume: 0.7 });
-    const [playEyeBlink, { stop: stopEyeBlink }] = useSound(eyeBlink, { volume: 0.7 });
-    const [playLookLeft, { stop: stopLookLeft }] = useSound(lookLeft, { volume: 0.7 });
-    const [playLookRight, { stop: stopLookRight }] = useSound(lookRight, { volume: 0.7 });
-    const [playLookStraight, { stop: stopLookStraight }] = useSound(lookStraight, { volume: 0.7 });
+    const [audioLang, setAudioLang] = useState('en');
+    // Sound hooks (English/Urdu)
+    const [playDetectingFace, { stop: stopDetectingFace }] = useSound(audioLang === 'en' ? detectingFace : detectingFaceUrdu, { volume: 0.7 });
+    const [playEyeBlink, { stop: stopEyeBlink }] = useSound(audioLang === 'en' ? eyeBlink : eyeBlinkUrdu, { volume: 0.7 });
+    const [playLookLeft, { stop: stopLookLeft }] = useSound(audioLang === 'en' ? lookLeft : lookLeftUrdu, { volume: 0.7 });
+    const [playLookRight, { stop: stopLookRight }] = useSound(audioLang === 'en' ? lookRight : lookRightUrdu, { volume: 0.7 });
+    const [playLookStraight, { stop: stopLookStraight }] = useSound(audioLang === 'en' ? lookStraight : lookStraightUrdu, { volume: 0.7 });
     // UI state
     const [prompt, setPrompt] = useState("Detecting Face...");
     const [faceDetected, setFaceDetected] = useState(false);
@@ -253,7 +259,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 return;
             }
             const video = webcamRef.current.video;
-            console.log('video', video)
             if (video.readyState === 4) {
                 try {
                     frameCounter.current++;
@@ -267,9 +272,6 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                         flipHorizontal: false,
                         inputSize: 128, // Reduced resolution for performance
                     });
-
-                    console.log('faces', faces)
-
 
                     if (faces.length > 0) {
                         isRestartingRef.current = false;
@@ -548,17 +550,39 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                 showGuidelines ?
                     <LivePhotoGuidelinesForMobile
                         closeSplashScreenHandler={handleSplashScreenClose}
+                        language={audioLang}
+                        onAudioLangChange={setAudioLang}
                     />
                     :
                     <Container maxWidth="lg" sx={{ padding: '4px' }}>
-                        {/* NEED HELP */}
-                        <Box sx={{ justifyContent: 'flex-end', marginTop: '-25px', marginBottom: '5px', textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center' }}>
-                            <span style={{ cursor: 'pointer' }} onClick={handleSplashScreenOpen}>
-                                Need Help?
-                            </span>
-                        </Box >
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '10px 0', marginBottom: '35px' }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: '-25px' }}>
+                                <span style={{
+                                    fontSize: '12px',
+                                    fontWeight: audioLang === 'en' ? 'bold' : 'normal',
+                                    color: audioLang === 'en' ? '#e8927c' : 'inherit',
+                                    textDecoration: audioLang === 'en' ? 'underline' : 'none'
+                                }}>English Voice</span>
+                                <Switch
+                                    checked={audioLang === 'ur'}
+                                    onChange={e => setAudioLang(e.target.checked ? 'ur' : 'en')}
+                                    color="primary"
+                                    inputProps={{ 'aria-label': 'audio language toggle' }}
+                                />
+                                <span style={{
+                                    fontSize: '12px',
+                                    fontWeight: audioLang === 'ur' ? 'bold' : 'normal',
+                                    color: audioLang === 'ur' ? '#e8927c' : 'inherit',
+                                    textDecoration: audioLang === 'ur' ? 'underline' : 'none'
+                                }}>Urdu Voice</span>
+                            </Box>
+                            <Box sx={{ textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center', marginTop: '-25px', marginBottom: '5px' }}>
+                                <span style={{ cursor: 'pointer' }} onClick={handleSplashScreenOpen}>
+                                    Need Help?
+                                </span>
+                            </Box>
+                        </Box>
 
-                        {/* ICON */}
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
                             <Fade in={true} timeout={2000}>
                                 <Box sx={{ height: '60px', width: '200px' }} >
@@ -652,7 +676,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                             </Container>
 
                                             <Box sx={{ textAlign: 'center', marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }}>
-                                                🔊 Keep your volume on to catch all audio cues.
+                                                🔊 Keep your volume on to follow the audio instructions.
                                             </Box>
 
                                             <Alert severity="warning" sx={{ marginTop: '15px', color: '#3b3b3b', fontSize: '12px' }} >
