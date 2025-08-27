@@ -37,6 +37,13 @@ export const shape = {
       .required("CNIC is required.")
       .matches(/^\d{5}-\d{7}-\d{1}$/, "Please enter a valid CNIC in the format XXXXX-XXXXXXX-X."),
     googleCaptcha: yup.string().required("Please complete the CAPTCHA to proceed."),
+    referrerReferralCode: yup
+      .string()
+      .nullable()
+      .test('is-six-digits', 'Referral code must be 6 digits.', function (value) {
+        if (!value || value.trim() === '') return true;
+        return /^\d{6}$/.test(value);
+      }),
   },
 
   "scr_customerCnicResume": {

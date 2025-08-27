@@ -71,7 +71,8 @@ function WrapperForHookFormProps({ children }) {
     // FOR SECOND CALL ON CUSTOMER CNIC SCREEN
     if ((CURRENT_SCREEN === "scr_customerCnic" || CURRENT_SCREEN === "scr_customerCnicResume") && !!TOKEN) {
       localStorage.setItem("referenceKey", TOKEN);
-      const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, CUSTOMER_CNIC, dispatch });
+      const ReferralCode = watch("referrerReferralCode") || '';
+      const { BODY, API_URL } = CNICEXIST_HANDLER({ CURRENT_SCREEN, CUSTOMER_CNIC, dispatch, ReferralCode });
       mutate({ BODY, API_URL, dispatch });
     }
 

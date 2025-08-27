@@ -1,3 +1,4 @@
+import { useFormContext } from "react-hook-form";
 import { BASE_URL, ENDPOINTS } from "src/Utils/Config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
 import {
@@ -25,13 +26,14 @@ export const AUTHENTICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC }) => {
+export const CNICEXIST_HANDLER = ({ CURRENT_SCREEN, CUSTOMER_CNIC, ReferralCode }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(CUSTOMER_CNIC),
     screenKuid: CURRENT_SCREEN === "scr_customerCnicResume" ? 'scr_customerCnic' : CURRENT_SCREEN,
     requestDate: getCurrentDate(),
+    referrerReferralCode: ReferralCode || ''
   };
 
   return {
@@ -84,7 +86,8 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
     token: data.OTP_VERIFICATION_TOKEN,
     otp: getSHA256Hash(data.CUSTOMER_OTP),
     requestDate: getCurrentDate(),
-    isUserContinue: data.CUSTOMER_CONTINUE_WITH_NEW_DEVICE
+    isUserContinue: data.CUSTOMER_CONTINUE_WITH_NEW_DEVICE,
+    referrerReferralCode: data?.referrerReferralCode || ''
   };
 
   return {

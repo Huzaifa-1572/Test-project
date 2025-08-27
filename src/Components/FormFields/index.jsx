@@ -391,7 +391,9 @@ export const NumberInputField = ({
         };
 
         const handleKeyDown = (event) => {
-          // Allow backspace key
+          // Allow paste
+          if (event.ctrlKey && event.key === 'v') return;
+          // Allow backspace, enter, tab
           if (
             event.keyCode === 8 ||
             event.keyCode === 13 ||
@@ -414,40 +416,45 @@ export const NumberInputField = ({
             inputMode="numeric"
             inputProps={{
               inputMode: "numeric",
-              autoComplete: "off",  // Disable autocomplete
-              autoCorrect: "off",   // Disable autocorrect
+              autoComplete: "off",
+              autoCorrect: "off",
               maxLength: maxLength,
-            }}
-            sx={{
-              "& .MuiFilledInput-root": {
-                backgroundColor: "white",
-              },
-              "& .MuiTextField-root": {
-                backgroundColor: "white",
-              },
             }}
             fullWidth
             placeholder={placeholder}
             InputProps={{
               disableUnderline: true,
-              style: {
-                background: "white",
-                border: "1px solid #eaeaea",
-                borderRadius: "3px",
-                maxWidth: "500px",
-                width: "100%",
+              sx: {
+                border: "1px solid silver",
+                borderRadius: "7px",
                 fontSize: "1.1rem",
-                fontWeight: 500,
-                lineHeight: "15px",
                 height: "70px",
+                maxWidth: "500px",
+                fontWeight: 500,
+                width: "100%",
+                backgroundColor: "white",
+                "&:hover": {
+                  backgroundColor: "white",
+                },
+                "&.Mui-focused": {
+                  backgroundColor: "white",
+                },
               },
             }}
             InputLabelProps={{
-              style: {
+              sx: {
                 fontSize: "0.85rem",
                 color: "#666666",
                 marginTop: "5px",
-                fontFamily: "ArticulatCF-Regular",
+              },
+            }}
+            sx={{
+              maxWidth: "500px",
+              width: "100%",
+              "& .MuiFilledInput-root": {
+                backgroundColor: "white",
+                "&:hover": { backgroundColor: "white" },
+                "&.Mui-focused": { backgroundColor: "white" },
               },
             }}
           />

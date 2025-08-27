@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import CNICICON from 'src/Assets/Icons/customerCnicIcon.png';
 import CNIC_UNDRAW from "src/Assets/images/customerCnicUndraw.svg";
 import CustomButton from "src/Common/CustomButton";
-import { CaptchaField, CustomInputField, TextInputField } from "src/Components/FormFields";
+import { CaptchaField, CustomInputField, NumberInputField, TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { isSmallScreen } from "src/Utils/Helpers";
@@ -42,6 +42,18 @@ const CustomerCnic = ({ control, errors }) => {
             type="tel"
           />
           {errors?.customerCnic ? (<ValidationError message={errors?.customerCnic?.message} />) : null}
+        </Grid>
+
+        <Grid item xs={12} lg={6}>
+          <NumberInputField
+            name={"referrerReferralCode"}
+            control={control}
+            label={"Referral Code (if any)"}
+            maxLength={6}
+            inputMode="numeric"
+            type="tel"
+          />
+          {errors?.referrerReferralCode ? (<ValidationError message={errors?.referrerReferralCode?.message} />) : null}
         </Grid>
 
         <Grid item xs={12}>
