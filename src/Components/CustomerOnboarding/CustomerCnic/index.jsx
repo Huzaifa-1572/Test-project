@@ -1,8 +1,7 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import CNICICON from 'src/Assets/images/cnicIcon.png';
+import CNICICON from 'src/Assets/Icons/customerCnicIcon.png';
 import CNIC_UNDRAW from "src/Assets/images/customerCnicUndraw.svg";
-import CNIC_UNDRAW_SM from "src/Assets/images/customerCnicUndraw_sm.svg";
 import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField, TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
@@ -17,7 +16,7 @@ const CustomerCnic = ({ control, errors }) => {
       Icon={CNICICON}
       title={"CNIC Verification"}
       description={"Please enter your CNIC to continue with your online onboarding."}
-      heroImage={isSmallScreen() ? CNIC_UNDRAW_SM : CNIC_UNDRAW}
+      heroImage={isSmallScreen() ? CNICICON : CNIC_UNDRAW}
     >
 
       <Grid container spacing={2}>

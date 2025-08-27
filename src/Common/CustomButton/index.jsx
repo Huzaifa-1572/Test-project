@@ -9,7 +9,9 @@ const CustomButton = ({ label, disabled, onClick, Icon, type = "submit" }) => {
       <Button
         type={type}
         variant="contained"
+        disableElevation
         className={styles.button}
+        sx={{ borderRadius: '999px' }}
         disabled={disabled}
         onClick={onClick}
         endIcon={Icon || <IoMdArrowRoundForward />}

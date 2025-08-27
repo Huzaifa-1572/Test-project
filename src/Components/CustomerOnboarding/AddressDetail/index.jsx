@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import ADDRESS_DETAIL_UNDRAW from "src/Assets/images/addressDetailUndraw.svg";
 import ADDRESS_DETAIL_UNDRAW_SM from "src/Assets/images/addressDetailUndraw_sm.svg";
-import LOCATION_ICON from "src/Assets/images/locationIcon.png";
+import LOCATION_ICON from "src/Assets/Icons/deviceLocationIcon.png";
 import CustomButton from "src/Common/CustomButton";
 import { FormBuilder } from "src/Components/FormBuilder";
 import WizardLayout from "src/Layout/WizardLayout";
@@ -16,7 +16,7 @@ const AddressDetail = ({ control, errors, watch }) => {
       Icon={LOCATION_ICON}
       title={TITLE}
       description={DESCRIPTION}
-      heroImage={isSmallScreen() ? ADDRESS_DETAIL_UNDRAW_SM : ADDRESS_DETAIL_UNDRAW}
+      heroImage={isSmallScreen() ? LOCATION_ICON : ADDRESS_DETAIL_UNDRAW}
     >
       <Grid container spacing={2}>
         {

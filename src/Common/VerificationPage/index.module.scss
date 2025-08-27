@@ -48,14 +48,14 @@
   .inputStyle {
     margin-top: clamp(15px, 2vw, 20px);
     margin-bottom: clamp(15px, 2vw, 30px);
-    width: clamp(43px, 9vw, 65px) !important;
+    width: clamp(45px, 9vw, 65px) !important;
     height: clamp(48px, 9vw, 77px) !important;
-    border: solid 1px #1a1d21 !important;
-    background: #252f37 !important;
-    color: #ffffff !important;
+    border: solid 2px #dddddd !important;
+    // background: #252f37 !important;
+    color: #407ec9 !important;
     border-radius: 7px;
     text-align: center;
-    font-size: clamp(24px, 6vw, 32px);
+    font-size: clamp(26px, 6vw, 36px);
     margin-right: clamp(3px, 2vw, 10px);
   }
 }

@@ -1,9 +1,10 @@
 import { Grid } from '@mui/material';
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
-import EMAIL_ICON from 'src/Assets/images/emailIcon.png';
+import EMAIL_ICON from 'src/Assets/Icons/emailIcon.png';
 import HAS_VALID_EMAIL_UNDRAW from 'src/Assets/images/validEmailUndraw.svg';
 import CustomButton from 'src/Common/CustomButton';
 import WizardLayout from 'src/Layout/WizardLayout';
+import { isSmallScreen } from 'src/Utils/Helpers';
 
 const HasValidEmail = ({ setValue }) => {
 
@@ -20,7 +21,7 @@ const HasValidEmail = ({ setValue }) => {
             Icon={EMAIL_ICON}
             title={"Do You Have a Valid Email Address?"}
             description={"Providing a valid email ensures you stay updated with essential notifications."}
-            heroImage={HAS_VALID_EMAIL_UNDRAW}
+            heroImage={isSmallScreen() ? EMAIL_ICON : HAS_VALID_EMAIL_UNDRAW}
         >
             <Grid container sx={{ gap: "24px" }}>
                 <Grid item xs={12} sm={4}>

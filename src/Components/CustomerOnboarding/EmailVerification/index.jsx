@@ -2,7 +2,7 @@ import React from 'react'
 import VerificationPage from 'src/Common/VerificationPage';
 // import EMAIL_VERIFICATION from 'src/Assets/images/emailVerificationIcon.png'
 import EMAIL_VERIFICATION from 'src/Assets/images/email-otp.svg'
-import EMAIL_VERIFICATION_SM from 'src/Assets/images/email-otp_sm.svg'
+import EMAIL_VERIFICATION_SM from 'src/Assets/Icons/emailVerificationIcon.png'
 import { isSmallScreen } from 'src/Utils/Helpers';
 
 

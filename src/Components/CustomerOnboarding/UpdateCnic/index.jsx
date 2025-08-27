@@ -4,7 +4,7 @@ import { CustomInputField, SelectField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
 import WizardLayout from "src/Layout/WizardLayout";
 import { OPERATOR_OPTION } from "src/Utils/Lovs";
-import MOBILE_ICON from 'src/Assets/images/mobileIcon.png'
+import MOBILE_ICON from 'src/Assets/Icons/customerCnicIcon.png'
 import MOBILE_UNDRAW from 'src/Assets/images/mobileUndraw.svg'
 import MOBILE_UNDRAW_SM from 'src/Assets/images/mobileUndraw_sm.svg'
 import { isSmallScreen } from "src/Utils/Helpers";
@@ -25,7 +25,7 @@ const UpdateCnic = ({ control, errors, setValue }) => {
             Icon={MOBILE_ICON}
             title={"Update CNIC"}
             description={"Please provide your new CNIC number to update your account information."}
-            heroImage={isSmallScreen() ? MOBILE_UNDRAW_SM : MOBILE_UNDRAW}
+            heroImage={isSmallScreen() ? MOBILE_ICON : MOBILE_UNDRAW}
         >
             <Grid container spacing={2}>
                 <Grid item xs={12} lg={6}>

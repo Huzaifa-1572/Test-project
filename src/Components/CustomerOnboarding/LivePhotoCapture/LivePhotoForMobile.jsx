@@ -12,7 +12,7 @@ import detectingFaceUrdu from 'src/Assets/detectingFaceUrdu.mp3';
 import eyeBlink from 'src/Assets/eyeBlink.mp3';
 import eyeBlinkUrdu from 'src/Assets/eyeBlinkUrdu.mp3';
 import BLINK_DETECTION from 'src/Assets/images/blink-detect.gif';
-import LIVE_IMAGE_UNDRAW from 'src/Assets/images/liveImageUndraw.svg';
+import LIVE_IMAGE_UNDRAW from 'src/Assets/Icons/selfieIcon.png';
 import LOOK_LEFT from 'src/Assets/images/look-left.gif';
 import LOOK_RIGHT from 'src/Assets/images/look-right.gif';
 import SCANNER from 'src/Assets/images/scan.png';
@@ -555,28 +555,38 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     />
                     :
                     <Container maxWidth="lg" sx={{ padding: '4px' }}>
+                        {/* SWITCH & NEED HELP */}
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '10px 0', marginBottom: '35px' }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: '-25px' }}>
                                 <span style={{
                                     fontSize: '12px',
                                     fontWeight: audioLang === 'en' ? 'bold' : 'normal',
-                                    color: audioLang === 'en' ? '#e8927c' : 'inherit',
+                                    color: audioLang === 'en' ? '#407ec9' : 'inherit',
                                     textDecoration: audioLang === 'en' ? 'underline' : 'none'
-                                }}>English Voice</span>
+                                }}>English🔊</span>
                                 <Switch
                                     checked={audioLang === 'ur'}
                                     onChange={e => setAudioLang(e.target.checked ? 'ur' : 'en')}
                                     color="primary"
                                     inputProps={{ 'aria-label': 'audio language toggle' }}
+                                    sx={{
+                                        margin: 0,
+                                        '& .MuiSwitch-track': {
+                                            backgroundColor: '#407ec9',
+                                        },
+                                        '& .Mui-checked + .MuiSwitch-track': {
+                                            backgroundColor: '#407ec9',
+                                        }
+                                    }}
                                 />
                                 <span style={{
                                     fontSize: '12px',
                                     fontWeight: audioLang === 'ur' ? 'bold' : 'normal',
-                                    color: audioLang === 'ur' ? '#e8927c' : 'inherit',
+                                    color: audioLang === 'ur' ? '#407ec9' : 'inherit',
                                     textDecoration: audioLang === 'ur' ? 'underline' : 'none'
-                                }}>Urdu Voice</span>
+                                }}>🔊Urdu</span>
                             </Box>
-                            <Box sx={{ textDecoration: 'underline', color: '#e8927c', display: 'flex', alignItems: 'center', marginTop: '-25px', marginBottom: '5px' }}>
+                            <Box sx={{ textDecoration: 'underline', color: '#0d1821', display: 'flex', alignItems: 'center', marginTop: '-25px', marginBottom: '5px' }}>
                                 <span style={{ cursor: 'pointer' }} onClick={handleSplashScreenOpen}>
                                     Need Help?
                                 </span>
@@ -585,8 +595,8 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
                             <Fade in={true} timeout={2000}>
-                                <Box sx={{ height: '60px', width: '200px' }} >
-                                    <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} height={'100%'} width={'100%'} />
+                                <Box sx={{ height: '60px' }} >
+                                    <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} />
                                 </Box>
                             </Fade>
                         </Box>
@@ -698,6 +708,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                         type="button"
                                         onClick={retake}
                                         endIcon={<FaCamera />}
+                                        sx={{ borderRadius: '999px' }}
                                     >
                                         Take a new picture
                                     </Button>

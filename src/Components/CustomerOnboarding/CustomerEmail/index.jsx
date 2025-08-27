@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import EMAIL_ICON from "src/Assets/images/emailIcon.png";
+import EMAIL_ICON from "src/Assets/Icons/emailInputIcon.png";
 import CustomButton from "src/Common/CustomButton";
 import { TextInputField } from "src/Components/FormFields";
 import ValidationError from "src/Components/ValidationError";
@@ -15,7 +15,7 @@ const CustomerEmail = ({ control, errors }) => {
       Icon={EMAIL_ICON}
       title={"Email Verification"}
       description={'Kindly provide a valid email address to proceed further.'}
-      heroImage={isSmallScreen() ? EMAIL_UNDRAW_SM : EMAIL_UNDRAW}
+      heroImage={isSmallScreen() ? EMAIL_ICON : EMAIL_UNDRAW}
     >
       <Box>
         <TextInputField

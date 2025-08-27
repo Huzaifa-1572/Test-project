@@ -36,10 +36,10 @@ const ProgressBar = () => {
 
             {/* FOR SMALL SCREENS */}
             <Box sx={{ display: { xs: 'block', sm: 'none' }, width: '95%' }}>
-                <Box sx={{ fontWeight: 600, marginBottom: '10px', color: '#407ec9', fontSize: 'clamp(12px,2.5vw,14px)' }}>
+                {/* <Box sx={{ fontWeight: 600, marginBottom: '10px', color: '#407ec9', fontSize: 'clamp(12px,2.5vw,14px)' }}>
                     Application Progress...
                     <strong style={{ marginLeft: '7px', color: '#407ec9' }}>{progress.toFixed(0)}%</strong>
-                </Box>
+                </Box> */}
                 <LinearProgress
                     variant="determinate"
                     value={progress}

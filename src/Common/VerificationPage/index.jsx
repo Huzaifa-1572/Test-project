@@ -124,7 +124,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
         <Container maxWidth="lg" className={styles.paperContainer} sx={{ background: { xs: 'none', md: '#f6f6f6' }, borderRadius: { xs: '7px', sm: '20px' } }}>
             <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                 <Box>
-                    <img src={icon} alt="mobileOtpLogo" height={'100px'} width={'140px'} />
+                    <img src={icon} alt="mobileOtpLogo" />
                 </Box>
                 <h2 className={styles.mainHeading}>{title}</h2>
                 <p className={styles.content}>

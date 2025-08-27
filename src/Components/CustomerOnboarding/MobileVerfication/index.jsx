@@ -1,7 +1,7 @@
 // import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobileVerificationIcon.png';
 import VerificationPage from 'src/Common/VerificationPage';
 import MOBILE_VERIFICATION_LOGO from 'src/Assets/images/mobile-otp.svg';
-import MOBILE_VERIFICATION_LOGO_SM from 'src/Assets/images/mobile-otp_sm.svg';
+import MOBILE_VERIFICATION_LOGO_SM from 'src/Assets/Icons/mobileIcon.png';
 import { isSmallScreen } from 'src/Utils/Helpers';
 
 
