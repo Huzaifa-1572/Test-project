@@ -23,3013 +23,1693 @@ export const LIST_OF_PROVINCES = [
 export const LIST_OF_CITIES =
 {
   "6": [
-    {
-      "label": "ABBASPUR",
-      "value": "7146"
-    },
-    {
-      "label": "ATHMUQAM",
-      "value": "7138"
-    },
-    {
-      "label": "BAGH",
-      "value": "7140"
-    },
-    {
-      "label": "BALOCH",
-      "value": "7150"
-    },
-    {
-      "label": "BARNALA",
-      "value": "7125"
-    },
-    {
-      "label": "BHIMBER",
-      "value": "7124"
-    },
-    {
-      "label": "CHAROI",
-      "value": "7131"
-    },
-    {
-      "label": "CHIKKAR",
-      "value": "7134"
-    },
-    {
-      "label": "DHIRKOT",
-      "value": "7141"
-    },
-    {
-      "label": "DULIAHJATTAN",
-      "value": "7132"
-    },
-    {
-      "label": "FATEHPUR",
-      "value": "7129"
-    },
-    {
-      "label": "HAJIRA",
-      "value": "7147"
-    },
-    {
-      "label": "HARIGHEL",
-      "value": "7142"
-    },
-    {
-      "label": "HATTIANBALA",
-      "value": "7133"
-    },
-    {
-      "label": "HAVELI",
-      "value": "7143"
-    },
-    {
-      "label": "KHUIRATTA",
-      "value": "7128"
-    },
-    {
-      "label": "KHURSHIDABAD",
-      "value": "7144"
-    },
-    {
-      "label": "KOTLI",
-      "value": "7127"
-    },
-    {
-      "label": "LEEPA",
-      "value": "7135"
-    },
-    {
-      "label": "MANG",
-      "value": "7151"
-    },
-    {
-      "label": "MIRPUR",
-      "value": "7222"
-    },
-    {
-      "label": "MUMTAZABAD",
-      "value": "7145"
-    },
-    {
-      "label": "MUZAFFARABAD",
-      "value": "7136"
-    },
-    {
-      "label": "NASIRABAD",
-      "value": "7137"
-    },
-    {
-      "label": "PALLANDRI",
-      "value": "7152"
-    },
-    {
-      "label": "RAWALAKOT",
-      "value": "7148"
-    },
-    {
-      "label": "SAMAHNI",
-      "value": "7126"
-    },
-    {
-      "label": "SEHNSA",
-      "value": "7130"
-    },
-    {
-      "label": "SHARDA",
-      "value": "7139"
-    },
-    {
-      "label": "TARARKHEL",
-      "value": "7153"
-    },
-    {
-      "label": "THORAR",
-      "value": "7149"
-    }
+    { "label": "Abbaspur", "value": "7146" },
+    { "label": "Athmuqam", "value": "7138" },
+    { "label": "Bagh", "value": "7140" },
+    { "label": "Baloch", "value": "7150" },
+    { "label": "Barnala", "value": "7125" },
+    { "label": "Bhimber", "value": "7124" },
+    { "label": "Charoi", "value": "7131" },
+    { "label": "Chikkar", "value": "7134" },
+    { "label": "Dhirkot", "value": "7141" },
+    { "label": "Duliah Jattan", "value": "7132" },
+    { "label": "Fatehpur", "value": "7129" },
+    { "label": "Hajira", "value": "7147" },
+    { "label": "Harighel", "value": "7142" },
+    { "label": "Hattian Bala", "value": "7133" },
+    { "label": "Haveli", "value": "7143" },
+    { "label": "Khuiratta", "value": "7128" },
+    { "label": "Khurshidabad", "value": "7144" },
+    { "label": "Kotli", "value": "7127" },
+    { "label": "Leepa", "value": "7135" },
+    { "label": "Mang", "value": "7151" },
+    { "label": "Mirpur", "value": "7222" },
+    { "label": "Mumtazabad", "value": "7145" },
+    { "label": "Muzaffarabad", "value": "7136" },
+    { "label": "Nasirabad", "value": "7137" },
+    { "label": "Pallandri", "value": "7152" },
+    { "label": "Rawalakot", "value": "7148" },
+    { "label": "Samahni", "value": "7126" },
+    { "label": "Sehnsa", "value": "7130" },
+    { "label": "Sharda", "value": "7139" },
+    { "label": "Tararkhel", "value": "7153" },
+    { "label": "Thorar", "value": "7149" }
   ],
   "4": [
-    {
-      "label": "ABBOTTABAD",
-      "value": "008"
-    },
-    {
-      "label": "AKORA",
-      "value": "6068"
-    },
-    {
-      "label": "ALPURI",
-      "value": "0996"
-    },
-    {
-      "label": "AMANGARH",
-      "value": "7070"
-    },
-    {
-      "label": "BAHRAIN",
-      "value": "6050"
-    },
-    {
-      "label": "BAJAUR",
-      "value": "7255"
-    },
-    {
-      "label": "BANNU",
-      "value": "6054"
-    },
-    {
-      "label": "BARIKOT",
-      "value": "6043"
-    },
-    {
-      "label": "BATAGRAM",
-      "value": "7243"
-    },
-    {
-      "label": "BATKHELA",
-      "value": "6048"
-    },
-    {
-      "label": "CHARBAGH",
-      "value": "7889"
-    },
-    {
-      "label": "CHARSADDA",
-      "value": "6041"
-    },
-    {
-      "label": "CHITRAL",
-      "value": "6055"
-    },
-    {
-      "label": "D.I.KHAN",
-      "value": "014"
-    },
-    {
-      "label": "DAGGAR",
-      "value": "0939"
-    },
-    {
-      "label": "DIR",
-      "value": "7068"
-    },
-    {
-      "label": "EKKAGUND",
-      "value": "7249"
-    },
-    {
-      "label": "GHAZI",
-      "value": "7240"
-    },
-    {
-      "label": "HANGU",
-      "value": "6056"
-    },
-    {
-      "label": "HARIPUR",
-      "value": "6045"
-    },
-    {
-      "label": "HAVELIAN",
-      "value": "6057"
-    },
-    {
-      "label": "JAMRUD",
-      "value": "6049"
-    },
-    {
-      "label": "JEHANGIRA",
-      "value": "6053"
-    },
-    {
-      "label": "KABAL",
-      "value": "7067"
-    },
-    {
-      "label": "KHALABAT",
-      "value": "7063"
-    },
-    {
-      "label": "KHWAZAKHELA",
-      "value": "6058"
-    },
-    {
-      "label": "KOHAT",
-      "value": "6037"
-    },
-    {
-      "label": "KRK",
-      "value": "7005"
-    },
-    {
-      "label": "LAKKI",
-      "value": "6051"
-    },
-    {
-      "label": "LAKKIMARWAT",
-      "value": "7061"
-    },
-    {
-      "label": "LANDI",
-      "value": "6066"
-    },
-    {
-      "label": "MAKIN",
-      "value": "7263"
-    },
-    {
-      "label": "MANSEHRA",
-      "value": "6038"
-    },
-    {
-      "label": "MARDAN",
-      "value": "937"
-    },
-    {
-      "label": "MATTA",
-      "value": "6061"
-    },
-    {
-      "label": "MINGORA",
-      "value": "6036"
-    },
-    {
-      "label": "NAWANSHEHR",
-      "value": "6065"
-    },
-    {
-      "label": "NORTHWAZIRISTAN",
-      "value": "7253"
-    },
-    {
-      "label": "NOWSHERA",
-      "value": "6042"
-    },
-    {
-      "label": "ORAKZAI",
-      "value": "7242"
-    },
-    {
-      "label": "PABBI",
-      "value": "6052"
-    },
-    {
-      "label": "PAHARPUR",
-      "value": "6047"
-    },
-    {
-      "label": "PARACHINAR",
-      "value": "7062"
-    },
-    {
-      "label": "PARANGHAR",
-      "value": "7246"
-    },
-    {
-      "label": "PAROA",
-      "value": "6064"
-    },
-    {
-      "label": "PESHAWAR",
-      "value": "091"
-    },
-    {
-      "label": "PINDIALI",
-      "value": "7245"
-    },
-    {
-      "label": "RISALPUR",
-      "value": "7071"
-    },
-    {
-      "label": "SADDA",
-      "value": "7064"
-    },
-    {
-      "label": "SAFI",
-      "value": "7247"
-    },
-    {
-      "label": "SHABQADAR",
-      "value": "6044"
-    },
-    {
-      "label": "SOUTHWAZIRISTAN",
-      "value": "7254"
-    },
-    {
-      "label": "SWABI",
-      "value": "6039"
-    },
-    {
-      "label": "TAKHT-I-BAHI",
-      "value": "6046"
-    },
-    {
-      "label": "TALL",
-      "value": "6069"
-    },
-    {
-      "label": "TANGI",
-      "value": "6067"
-    },
-    {
-      "label": "TANK",
-      "value": "6060"
-    },
-    {
-      "label": "TIMARGAR",
-      "value": "6063"
-    },
-    {
-      "label": "TIMARGARA",
-      "value": "7065"
-    },
-    {
-      "label": "TOPI",
-      "value": "7069"
-    },
-    {
-      "label": "TORDHER",
-      "value": "6062"
-    },
-    {
-      "label": "UTMANZAI",
-      "value": "6071"
-    },
-    {
-      "label": "ZAIDA",
-      "value": "6070"
-    },
-    {
-      "label": "ZALIMZAI",
-      "value": "7244"
-    }
+    { "label": "Abbottabad", "value": "008" },
+    { "label": "Akora", "value": "6068" },
+    { "label": "Alpuri", "value": "0996" },
+    { "label": "Amangarh", "value": "7070" },
+    { "label": "Bahrain", "value": "6050" },
+    { "label": "Bajaur", "value": "7255" },
+    { "label": "Bannu", "value": "6054" },
+    { "label": "Barikot", "value": "6043" },
+    { "label": "Batagram", "value": "7243" },
+    { "label": "Batkhela", "value": "6048" },
+    { "label": "Charbagh", "value": "7889" },
+    { "label": "Charsadda", "value": "6041" },
+    { "label": "Chitral", "value": "6055" },
+    { "label": "D.I. Khan", "value": "014" },
+    { "label": "Daggar", "value": "0939" },
+    { "label": "Dir", "value": "7068" },
+    { "label": "Ekka Gund", "value": "7249" },
+    { "label": "Ghazi", "value": "7240" },
+    { "label": "Hangu", "value": "6056" },
+    { "label": "Haripur", "value": "6045" },
+    { "label": "Havelian", "value": "6057" },
+    { "label": "Jamrud", "value": "6049" },
+    { "label": "Jehangira", "value": "6053" },
+    { "label": "Kabal", "value": "7067" },
+    { "label": "Khalabat", "value": "7063" },
+    { "label": "Khwazakhela", "value": "6058" },
+    { "label": "Kohat", "value": "6037" },
+    { "label": "Krk", "value": "7005" },
+    { "label": "Lakki", "value": "6051" },
+    { "label": "Lakki Marwat", "value": "7061" },
+    { "label": "Landi", "value": "6066" },
+    { "label": "Makin", "value": "7263" },
+    { "label": "Mansehra", "value": "6038" },
+    { "label": "Mardan", "value": "937" },
+    { "label": "Matta", "value": "6061" },
+    { "label": "Mingora", "value": "6036" },
+    { "label": "Nawanshehr", "value": "6065" },
+    { "label": "North Waziristan", "value": "7253" },
+    { "label": "Nowshera", "value": "6042" },
+    { "label": "Orakzai", "value": "7242" },
+    { "label": "Pabbi", "value": "6052" },
+    { "label": "Paharpur", "value": "6047" },
+    { "label": "Parachinar", "value": "7062" },
+    { "label": "Paran Ghar", "value": "7246" },
+    { "label": "Paroa", "value": "6064" },
+    { "label": "Peshawar", "value": "091" },
+    { "label": "Pindiali", "value": "7245" },
+    { "label": "Risalpur", "value": "7071" },
+    { "label": "Sadda", "value": "7064" },
+    { "label": "Safi", "value": "7247" },
+    { "label": "Shabqadar", "value": "6044" },
+    { "label": "South Waziristan", "value": "7254" },
+    { "label": "Swabi", "value": "6039" },
+    { "label": "Takht-i-Bahi", "value": "6046" },
+    { "label": "Tall", "value": "6069" },
+    { "label": "Tangi", "value": "6067" },
+    { "label": "Tank", "value": "6060" },
+    { "label": "Timargar", "value": "6063" },
+    { "label": "Timargara", "value": "7065" },
+    { "label": "Topi", "value": "7069" },
+    { "label": "Tordher", "value": "6062" },
+    { "label": "Utmanzai", "value": "6071" },
+    { "label": "Zaida", "value": "6070" },
+    { "label": "Zalimzai", "value": "7244" }
   ],
   "2": [
-    {
-      "label": "AHMADPUREAST",
-      "value": "7041"
-    },
-    {
-      "label": "AHMADPURSIAL",
-      "value": "7059"
-    },
-    {
-      "label": "AHMEDNAGERCHATHA",
-      "value": "5028"
-    },
-    {
-      "label": "ALIKHANABAD",
-      "value": "5029"
-    },
-    {
-      "label": "ALIPUR",
-      "value": "5030"
-    },
-    {
-      "label": "ARIFWALA",
-      "value": "5031"
-    },
-    {
-      "label": "ATTOCK",
-      "value": "5032"
-    },
-    {
-      "label": "BAHAWALNAGAR",
-      "value": "5035"
-    },
-    {
-      "label": "BAHAWALPUR",
-      "value": "010"
-    },
-    {
-      "label": "BAHAWALPURCITY",
-      "value": "7040"
-    },
-    {
-      "label": "BHAKKAR",
-      "value": "5036"
-    },
-    {
-      "label": "BHALWAL",
-      "value": "7116"
-    },
-    {
-      "label": "BHAWANA",
-      "value": "7052"
-    },
-    {
-      "label": "BHERA",
-      "value": "7117"
-    },
-    {
-      "label": "BUREWALA",
-      "value": "5037"
-    },
-    {
-      "label": "CHAKJHUMRA",
-      "value": "7055"
-    },
-    {
-      "label": "CHAKWAL",
-      "value": "1303"
-    },
-    {
-      "label": "CHAUBARA",
-      "value": "7048"
-    },
-    {
-      "label": "CHICHAWATNI",
-      "value": "5039"
-    },
-    {
-      "label": "CHILLIANWALA",
-      "value": "5038"
-    },
-    {
-      "label": "CHINIOT",
-      "value": "5040"
-    },
-    {
-      "label": "CHISHTIAN",
-      "value": "5041"
-    },
-    {
-      "label": "CHOASAIDANSHAH",
-      "value": "7101"
-    },
-    {
-      "label": "CHUNIAN",
-      "value": "7080"
-    },
-    {
-      "label": "D.G.KHAN",
-      "value": "7045"
-    },
-    {
-      "label": "DARYAKHAN",
-      "value": "5043"
-    },
-    {
-      "label": "DASKA",
-      "value": "5042"
-    },
-    {
-      "label": "DE-EXRAJANPUR",
-      "value": "7050"
-    },
-    {
-      "label": "DERAGHAZIKHAN",
-      "value": "5044"
-    },
-    {
-      "label": "DHAULAR",
-      "value": "5045"
-    },
-    {
-      "label": "DINA",
-      "value": "1307"
-    },
-    {
-      "label": "DINGA",
-      "value": "5046"
-    },
-    {
-      "label": "DIPALPUR",
-      "value": "5047"
-    },
-    {
-      "label": "DUNYAPUR",
-      "value": "7093"
-    },
-    {
-      "label": "FAISALABAD",
-      "value": "003"
-    },
-    {
-      "label": "FAISALABADSADDAR",
-      "value": "7054"
-    },
-    {
-      "label": "FATEHJANG",
-      "value": "1309"
-    },
-    {
-      "label": "FIROZEWALA",
-      "value": "7089"
-    },
-    {
-      "label": "FORTABBAS",
-      "value": "7038"
-    },
-    {
-      "label": "GHAKHARMANDI",
-      "value": "5048"
-    },
-    {
-      "label": "GOJRA",
-      "value": "5049"
-    },
-    {
-      "label": "GUJRANWALA",
-      "value": "009"
-    },
-    {
-      "label": "GUJRANWALASADDAR",
-      "value": "7072"
-    },
-    {
-      "label": "GUJRAT",
-      "value": "5050"
-    },
-    {
-      "label": "HAROONABAD",
-      "value": "5051"
-    },
-    {
-      "label": "HASANABDAL",
-      "value": "7097"
-    },
-    {
-      "label": "HASILPUR",
-      "value": "5052"
-    },
-    {
-      "label": "HAVELILAKHA",
-      "value": "5053"
-    },
-    {
-      "label": "HAZRO",
-      "value": "7098"
-    },
-    {
-      "label": "ISAKHEL",
-      "value": "7114"
-    },
-    {
-      "label": "JAHANIAN",
-      "value": "7091"
-    },
-    {
-      "label": "JALALPURJATTAN",
-      "value": "5054"
-    },
-    {
-      "label": "JALALPURPIRWALA",
-      "value": "7095"
-    },
-    {
-      "label": "JAMPUR",
-      "value": "5055"
-    },
-    {
-      "label": "JAND",
-      "value": "7099"
-    },
-    {
-      "label": "JARANWALA",
-      "value": "5056"
-    },
-    {
-      "label": "JATOI",
-      "value": "7049"
-    },
-    {
-      "label": "JAUHARABAD",
-      "value": "5068"
-    },
-    {
-      "label": "JHANG",
-      "value": "5057"
-    },
-    {
-      "label": "JHELUM",
-      "value": "1314"
-    },
-    {
-      "label": "KABIRWALA",
-      "value": "7090"
-    },
-    {
-      "label": "KAHRORPACCA",
-      "value": "7092"
-    },
-    {
-      "label": "KAHUTA",
-      "value": "1315"
-    },
-    {
-      "label": "KALABAGH",
-      "value": "5058"
-    },
-    {
-      "label": "KALLARKAHAR",
-      "value": "7102"
-    },
-    {
-      "label": "KALURKOT",
-      "value": "7110"
-    },
-    {
-      "label": "KAMALIA",
-      "value": "5061"
-    },
-    {
-      "label": "KAMOKE",
-      "value": "5062"
-    },
-    {
-      "label": "KARORLALESAN",
-      "value": "5059"
-    },
-    {
-      "label": "KASUR",
-      "value": "5060"
-    },
-    {
-      "label": "KHAIRPURTAMIWALI",
-      "value": "7043"
-    },
-    {
-      "label": "KHANEWAL",
-      "value": "5063"
-    },
-    {
-      "label": "KHANPUR",
-      "value": "5064"
-    },
-    {
-      "label": "KHARIAN",
-      "value": "5065"
-    },
-    {
-      "label": "KHUSHAB",
-      "value": "5066"
-    },
-    {
-      "label": "KOTADU",
-      "value": "5067"
-    },
-    {
-      "label": "KOTCHUTTA",
-      "value": "7046"
-    },
-    {
-      "label": "KOTLISATTIAN",
-      "value": "7108"
-    },
-    {
-      "label": "KOTMOMIN",
-      "value": "7118"
-    },
-    {
-      "label": "KOTRADHAKISHAN",
-      "value": "7081"
-    },
-    {
-      "label": "LAHORE",
-      "value": "002"
-    },
-    {
-      "label": "LAHORECANTT",
-      "value": "7082"
-    },
-    {
-      "label": "LALAMUSA",
-      "value": "5069"
-    },
-    {
-      "label": "LALIAN",
-      "value": "7053"
-    },
-    {
-      "label": "LAWA",
-      "value": "7103"
-    },
-    {
-      "label": "LAYYAH",
-      "value": "5070"
-    },
-    {
-      "label": "LIAQUATPUR",
-      "value": "5071"
-    },
-    {
-      "label": "LODHRAN",
-      "value": "5072"
-    },
-    {
-      "label": "MAILSI",
-      "value": "5075"
-    },
-    {
-      "label": "MALAKWAL",
-      "value": "5073"
-    },
-    {
-      "label": "MAMOORI",
-      "value": "5074"
-    },
-    {
-      "label": "MANDIBAHAUDDIN",
-      "value": "5076"
-    },
-    {
-      "label": "MANKERA",
-      "value": "7111"
-    },
-    {
-      "label": "MIANCHANNU",
-      "value": "5077"
-    },
-    {
-      "label": "MIANWALI",
-      "value": "5078"
-    },
-    {
-      "label": "MIANWALIBANGLA",
-      "value": "5079"
-    },
-    {
-      "label": "MINCHINABAD",
-      "value": "7039"
-    },
-    {
-      "label": "MODELTOWN",
-      "value": "7083"
-    },
-    {
-      "label": "MULTAN",
-      "value": "006"
-    },
-    {
-      "label": "MULTANSADDAR",
-      "value": "7094"
-    },
-    {
-      "label": "MURIDKE",
-      "value": "7088"
-    },
-    {
-      "label": "MURREE",
-      "value": "1322"
-    },
-    {
-      "label": "MUZAFFARGARH",
-      "value": "5080"
-    },
-    {
-      "label": "NANKANASAHIB",
-      "value": "7085"
-    },
-    {
-      "label": "NAROWAL",
-      "value": "5081"
-    },
-    {
-      "label": "NURPURTHAL",
-      "value": "7112"
-    },
-    {
-      "label": "OKARA",
-      "value": "7107"
-    },
-    {
-      "label": "PAKPATTAN",
-      "value": "5083"
-    },
-    {
-      "label": "PATTOKI",
-      "value": "5084"
-    },
-    {
-      "label": "PHALIA",
-      "value": "7076"
-    },
-    {
-      "label": "PINDDADANKHAN",
-      "value": "1324"
-    },
-    {
-      "label": "PINDIBHATTIAN",
-      "value": "7075"
-    },
-    {
-      "label": "PINDIGHEB",
-      "value": "7100"
-    },
-    {
-      "label": "PIPLAN",
-      "value": "7115"
-    },
-    {
-      "label": "PIRMAHAL",
-      "value": "5085"
-    },
-    {
-      "label": "POTOHARTOWN",
-      "value": "7105"
-    },
-    {
-      "label": "QAIMPUR",
-      "value": "5086"
-    },
-    {
-      "label": "QILADIDARSINGH",
-      "value": "5087"
-    },
-    {
-      "label": "QUAIDABAD",
-      "value": "7113"
-    },
-    {
-      "label": "RABWAH",
-      "value": "5088"
-    },
-    {
-      "label": "RAHIMYARKHAN",
-      "value": "5091"
-    },
-    {
-      "label": "RAIWIND",
-      "value": "5089"
-    },
-    {
-      "label": "RAJANPUR",
-      "value": "5090"
-    },
-    {
-      "label": "RAWAL",
-      "value": "7106"
-    },
-    {
-      "label": "RAWALPINDI",
-      "value": "005"
-    },
-    {
-      "label": "RENALAKHURD",
-      "value": "5082"
-    },
-    {
-      "label": "ROJHAN",
-      "value": "7051"
-    },
-    {
-      "label": "SADIQABAD",
-      "value": "5092"
-    },
-    {
-      "label": "SAFDARABAD",
-      "value": "5093"
-    },
-    {
-      "label": "SAHIWAL",
-      "value": "5094"
-    },
-    {
-      "label": "SAMMUNDRI",
-      "value": "7056"
-    },
-    {
-      "label": "SANGLAHILL",
-      "value": "5095"
-    },
-    {
-      "label": "SARAIALAMGIR",
-      "value": "5096"
-    },
-    {
-      "label": "SARGODHA",
-      "value": "048"
-    },
-    {
-      "label": "SHAHKOT",
-      "value": "7086"
-    },
-    {
-      "label": "SHAHPUR",
-      "value": "7119"
-    },
-    {
-      "label": "SHAKARGARH",
-      "value": "5097"
-    },
-    {
-      "label": "SHALIMAR",
-      "value": "7084"
-    },
-    {
-      "label": "SHARAKPUR",
-      "value": "7087"
-    },
-    {
-      "label": "SHEIKHUPURA",
-      "value": "5098"
-    },
-    {
-      "label": "SHORKOT",
-      "value": "7058"
-    },
-    {
-      "label": "SHUJABAD",
-      "value": "7096"
-    },
-    {
-      "label": "SIALKOT",
-      "value": "015"
-    },
-    {
-      "label": "SILLANWALI",
-      "value": "7120"
-    },
-    {
-      "label": "SIRANWALI",
-      "value": "6001"
-    },
-    {
-      "label": "SOHAWA",
-      "value": "7104"
-    },
-    {
-      "label": "TALAGANG",
-      "value": "6002"
-    },
-    {
-      "label": "TANDLIANWALA",
-      "value": "7057"
-    },
-    {
-      "label": "TAUNSA",
-      "value": "7047"
-    },
-    {
-      "label": "TAXILA",
-      "value": "7109"
-    },
-    {
-      "label": "TOBATEKSINGH",
-      "value": "6003"
-    },
-    {
-      "label": "TUNSA",
-      "value": "7241"
-    },
-    {
-      "label": "VEHARI",
-      "value": "6004"
-    },
-    {
-      "label": "VIRKANTEHSIL",
-      "value": "7073"
-    },
-    {
-      "label": "WAZIRABAD",
-      "value": "6005"
-    },
-    {
-      "label": "YAZMAN",
-      "value": "7044"
-    }
+    { "label": "Ahmadpur East", "value": "7041" },
+    { "label": "Ahmadpur Sial", "value": "7059" },
+    { "label": "Ahmednager Chatha", "value": "5028" },
+    { "label": "Ali Khan Abad", "value": "5029" },
+    { "label": "Alipur", "value": "5030" },
+    { "label": "Arifwala", "value": "5031" },
+    { "label": "Attock", "value": "5032" },
+    { "label": "Bahawalnagar", "value": "5035" },
+    { "label": "Bahawalpur", "value": "010" },
+    { "label": "Bahawalpur City", "value": "7040" },
+    { "label": "Bhakkar", "value": "5036" },
+    { "label": "Bhalwal", "value": "7116" },
+    { "label": "Bhawana", "value": "7052" },
+    { "label": "Bhera", "value": "7117" },
+    { "label": "Burewala", "value": "5037" },
+    { "label": "Chak Jhumra", "value": "7055" },
+    { "label": "Chakwal", "value": "1303" },
+    { "label": "Chaubara", "value": "7048" },
+    { "label": "Chichawatni", "value": "5039" },
+    { "label": "Chillianwala", "value": "5038" },
+    { "label": "Chiniot", "value": "5040" },
+    { "label": "Chishtian", "value": "5041" },
+    { "label": "Choa Saidan Shah", "value": "7101" },
+    { "label": "Chunian", "value": "7080" },
+    { "label": "D.G. Khan", "value": "7045" },
+    { "label": "Darya Khan", "value": "5043" },
+    { "label": "Daska", "value": "5042" },
+    { "label": "De-Ex Rajanpur", "value": "7050" },
+    { "label": "Dera Ghazi Khan", "value": "5044" },
+    { "label": "Dhaular", "value": "5045" },
+    { "label": "Dina", "value": "1307" },
+    { "label": "Dinga", "value": "5046" },
+    { "label": "Dipalpure", "value": "5047" },
+    { "label": "Dunyapur", "value": "7093" },
+    { "label": "Faisalabad", "value": "003" },
+    { "label": "Faisalabad Saddar", "value": "7054" },
+    { "label": "Fatehjang", "value": "1309" },
+    { "label": "Firozewala", "value": "7089" },
+    { "label": "Fort Abbas", "value": "7038" },
+    { "label": "Ghakkhar Mandi", "value": "5048" },
+    { "label": "Gojra", "value": "5049" },
+    { "label": "Gujranwala", "value": "009" },
+    { "label": "Gujranwala Saddar", "value": "7072" },
+    { "label": "Gujrat", "value": "5050" },
+    { "label": "Haroonabad", "value": "5051" },
+    { "label": "Hasan Abdal", "value": "7097" },
+    { "label": "Hasilpur", "value": "5052" },
+    { "label": "Haveli Lakha", "value": "5053" },
+    { "label": "Hazro", "value": "7098" },
+    { "label": "Isakhel", "value": "7114" },
+    { "label": "Jahanian", "value": "7091" },
+    { "label": "Jalalpur Jattan", "value": "5054" },
+    { "label": "Jalalpur Pirwala", "value": "7095" },
+    { "label": "Jampur", "value": "5055" },
+    { "label": "Jand", "value": "7099" },
+    { "label": "Jaranwala", "value": "5056" },
+    { "label": "Jatoi", "value": "7049" },
+    { "label": "Jauharabad", "value": "5068" },
+    { "label": "Jhang", "value": "5057" },
+    { "label": "Jhelum", "value": "1314" },
+    { "label": "Kabirwala", "value": "7090" },
+    { "label": "Kahror Pacca", "value": "7092" },
+    { "label": "Kahuta", "value": "1315" },
+    { "label": "Kalabagh", "value": "5058" },
+    { "label": "Kallar Kahar", "value": "7102" },
+    { "label": "Kalurkot", "value": "7110" },
+    { "label": "Kamalia", "value": "5061" },
+    { "label": "Kamoke", "value": "5062" },
+    { "label": "Karor Lal Esan", "value": "5059" },
+    { "label": "Kasur", "value": "5060" },
+    { "label": "Khairpur Tamiwali", "value": "7043" },
+    { "label": "Khanewal", "value": "5063" },
+    { "label": "Khanpur", "value": "5064" },
+    { "label": "Kharian", "value": "5065" },
+    { "label": "Khushab", "value": "5066" },
+    { "label": "Kot Adu", "value": "5067" },
+    { "label": "Kot Chutta", "value": "7046" },
+    { "label": "Kotli Sattian", "value": "7108" },
+    { "label": "Kot Momin", "value": "7118" },
+    { "label": "Kot Radha Kishan", "value": "7081" },
+    { "label": "Lahore", "value": "002" },
+    { "label": "Lahore Cantt", "value": "7082" },
+    { "label": "Lalamusa", "value": "5069" },
+    { "label": "Lalian", "value": "7053" },
+    { "label": "Lawa", "value": "7103" },
+    { "label": "Layyah", "value": "5070" },
+    { "label": "Liaquatpur", "value": "5071" },
+    { "label": "Lodhran", "value": "5072" },
+    { "label": "Mailsi", "value": "5075" },
+    { "label": "Malakwal", "value": "5073" },
+    { "label": "Mamoori", "value": "5074" },
+    { "label": "Mandi Bahauddin", "value": "5076" },
+    { "label": "Mankera", "value": "7111" },
+    { "label": "Mian Channu", "value": "5077" },
+    { "label": "Mianwali", "value": "5078" },
+    { "label": "Mianwali Bangla", "value": "5079" },
+    { "label": "Minchinabad", "value": "7039" },
+    { "label": "Model Town", "value": "7083" },
+    { "label": "Multan", "value": "006" },
+    { "label": "Multan Saddar", "value": "7094" },
+    { "label": "Muridke", "value": "7088" },
+    { "label": "Murree", "value": "1322" },
+    { "label": "Muzaffargarh", "value": "5080" },
+    { "label": "Nankana Sahib", "value": "7085" },
+    { "label": "Narowal", "value": "5081" },
+    { "label": "Nurpur Thal", "value": "7112" },
+    { "label": "Okara", "value": "7107" },
+    { "label": "Pakpattan", "value": "5083" },
+    { "label": "Pattoki", "value": "5084" },
+    { "label": "Phalia", "value": "7076" },
+    { "label": "Pind Dadan Khan", "value": "1324" },
+    { "label": "Pindi Bhattian", "value": "7075" },
+    { "label": "Pindi Gheb", "value": "7100" },
+    { "label": "Piplan", "value": "7115" },
+    { "label": "Pir Mahal", "value": "5085" },
+    { "label": "Potohar Town", "value": "7105" },
+    { "label": "Qaimpur", "value": "5086" },
+    { "label": "Qila Didar Singh", "value": "5087" },
+    { "label": "Quaidabad", "value": "7113" },
+    { "label": "Rabwah", "value": "5088" },
+    { "label": "Rahim Yar Khan", "value": "5091" },
+    { "label": "Raiwind", "value": "5089" },
+    { "label": "Rajanpur", "value": "5090" },
+    { "label": "Rawal", "value": "7106" },
+    { "label": "Rawalpindi", "value": "005" },
+    { "label": "Renala Khurd", "value": "5082" },
+    { "label": "Rojhan", "value": "7051" },
+    { "label": "Sadiqabad", "value": "5092" },
+    { "label": "Safdarabad", "value": "5093" },
+    { "label": "Sahiwal", "value": "5094" },
+    { "label": "Samundri", "value": "7056" },
+    { "label": "Sangla Hill", "value": "5095" },
+    { "label": "Sarai Alamgir", "value": "5096" },
+    { "label": "Sargodha", "value": "048" },
+    { "label": "Shahkot", "value": "7086" },
+    { "label": "Shahpur", "value": "7119" },
+    { "label": "Shakargarh", "value": "5097" },
+    { "label": "Shalimar", "value": "7084" },
+    { "label": "Sharakpur", "value": "7087" },
+    { "label": "Sheikhupura", "value": "5098" },
+    { "label": "Shorkot", "value": "7058" },
+    { "label": "Shujabad", "value": "7096" },
+    { "label": "Sialkot", "value": "015" },
+    { "label": "Sillanwali", "value": "7120" },
+    { "label": "Siranwali", "value": "6001" },
+    { "label": "Sohawa", "value": "7104" },
+    { "label": "Talagang", "value": "6002" },
+    { "label": "Tandlianwala", "value": "7057" },
+    { "label": "Taunsa", "value": "7047" },
+    { "label": "Taxila", "value": "7109" },
+    { "label": "Toba Tek Singh", "value": "6003" },
+    { "label": "Tunsa", "value": "7241" },
+    { "label": "Vehari", "value": "6004" },
+    { "label": "Virka Tehsil", "value": "7073" },
+    { "label": "Wazirabad", "value": "6005" },
+    { "label": "Yazman", "value": "7044" }
   ],
   "5": [
-    {
-      "label": "ALIABAD",
-      "value": "6084"
-    },
-    {
-      "label": "Astore",
-      "value": "7233"
-    },
-    {
-      "label": "CHILAS",
-      "value": "6085"
-    },
-    {
-      "label": "DAMBUDAS",
-      "value": "6075"
-    },
-    {
-      "label": "DANYOR",
-      "value": "6082"
-    },
-    {
-      "label": "Diamer",
-      "value": "7232"
-    },
-    {
-      "label": "EIDGHAH",
-      "value": "6077"
-    },
-    {
-      "label": "GAHKUCH",
-      "value": "6086"
-    },
-    {
-      "label": "Ghanche",
-      "value": "7228"
-    },
-    {
-      "label": "Ghizer",
-      "value": "7229"
-    },
-    {
-      "label": "GILGIT",
-      "value": "6072"
-    },
-    {
-      "label": "Hunza",
-      "value": "7230"
-    },
-    {
-      "label": "ISHKOMAN",
-      "value": "6080"
-    },
-    {
-      "label": "JUGLOT",
-      "value": "6081"
-    },
-    {
-      "label": "KARIMABAD",
-      "value": "6083"
-    },
-    {
-      "label": "KHAPLU",
-      "value": "6074"
-    },
-    {
-      "label": "Kharmang",
-      "value": "7226"
-    },
-    {
-      "label": "Nagar",
-      "value": "7231"
-    },
-    {
-      "label": "NAGARKHAS",
-      "value": "6079"
-    },
-    {
-      "label": "Rondu",
-      "value": "7227"
-    },
-    {
-      "label": "SHIGAR",
-      "value": "6078"
-    },
-    {
-      "label": "Shigar",
-      "value": "7225"
-    },
-    {
-      "label": "SKARDU",
-      "value": "6073"
-    },
-    {
-      "label": "TANGIR",
-      "value": "6087"
-    },
-    {
-      "label": "TOLTI",
-      "value": "6076"
-    }
+    { "label": "Aliabad", "value": "6084" },
+    { "label": "Astore", "value": "7233" },
+    { "label": "Chilas", "value": "6085" },
+    { "label": "Dambudas", "value": "6075" },
+    { "label": "Danyor", "value": "6082" },
+    { "label": "Diamer", "value": "7232" },
+    { "label": "Eidgah", "value": "6077" },
+    { "label": "Gahkuch", "value": "6086" },
+    { "label": "Ghanche", "value": "7228" },
+    { "label": "Ghizer", "value": "7229" },
+    { "label": "Gilgit", "value": "6072" },
+    { "label": "Hunza", "value": "7230" },
+    { "label": "Ishkoman", "value": "6080" },
+    { "label": "Juglot", "value": "6081" },
+    { "label": "Karimabad", "value": "6083" },
+    { "label": "Khaplu", "value": "6074" },
+    { "label": "Kharmang", "value": "7226" },
+    { "label": "Nagar", "value": "7231" },
+    { "label": "Nagar Khas", "value": "6079" },
+    { "label": "Rondu", "value": "7227" },
+    { "label": "Shigar", "value": "6078" },
+    { "label": "Shigar", "value": "7225" },
+    { "label": "Skardu", "value": "6073" },
+    { "label": "Tangir", "value": "6087" },
+    { "label": "Tolti", "value": "6076" }
   ],
   "1": [
-    {
-      "label": "AWARAN",
-      "value": "7009"
-    },
-    {
-      "label": "BADIN",
-      "value": "5012"
-    },
-    {
-      "label": "BAKRANI",
-      "value": "7201"
-    },
-    {
-      "label": "BARKHAN",
-      "value": "7011"
-    },
-    {
-      "label": "BELA",
-      "value": "7025"
-    },
-    {
-      "label": "BHIRIA",
-      "value": "7191"
-    },
-    {
-      "label": "BULRISHAHKARIM",
-      "value": "7165"
-    },
-    {
-      "label": "CHACHRO",
-      "value": "7175"
-    },
-    {
-      "label": "CHAKSAWARI",
-      "value": "7123"
-    },
-    {
-      "label": "CHAMBAR",
-      "value": "7162"
-    },
-    {
-      "label": "CHUHARHARPAL",
-      "value": "1304"
-    },
-    {
-      "label": "DADU",
-      "value": "5008"
-    },
-    {
-      "label": "DADYAL",
-      "value": "7122"
-    },
-    {
-      "label": "DAHARKI",
-      "value": "5014"
-    },
-    {
-      "label": "DAHLI",
-      "value": "7176"
-    },
-    {
-      "label": "DHADAR",
-      "value": "7019"
-    },
-    {
-      "label": "DHOKRATTA",
-      "value": "1306"
-    },
-    {
-      "label": "DIGRI",
-      "value": "7166"
-    },
-    {
-      "label": "DIPLO",
-      "value": "7173"
-    },
-    {
-      "label": "DOKRI",
-      "value": "7200"
-    },
-    {
-      "label": "DUREJI",
-      "value": "7026"
-    },
-    {
-      "label": "FAIZGUNJ",
-      "value": "7212"
-    },
-    {
-      "label": "GAJJARMASHKAY",
-      "value": "7010"
-    },
-    {
-      "label": "GAMBAT",
-      "value": "7213"
-    },
-    {
-      "label": "GARHIKHAIRO",
-      "value": "7211"
-    },
-    {
-      "label": "GARHIYASIN",
-      "value": "7198"
-    },
-    {
-      "label": "GHOTKI",
-      "value": "5013"
-    },
-    {
-      "label": "GUJARKHAN",
-      "value": "1312"
-    },
-    {
-      "label": "HAHDADPUR",
-      "value": "7190"
-    },
-    {
-      "label": "HALA",
-      "value": "5025"
-    },
-    {
-      "label": "HARNAI",
-      "value": "7016"
-    },
-    {
-      "label": "HURAMZAI",
-      "value": "7030"
-    },
-    {
-      "label": "HUSSAINBUXMARI",
-      "value": "7170"
-    },
-    {
-      "label": "HYDERABAD",
-      "value": "012"
-    },
-    {
-      "label": "ISLAMKOT",
-      "value": "7174"
-    },
-    {
-      "label": "JACOBABAD",
-      "value": "5007"
-    },
-    {
-      "label": "JHANDOMARI",
-      "value": "7163"
-    },
-    {
-      "label": "JHUDDO",
-      "value": "7168"
-    },
-    {
-      "label": "JOHI",
-      "value": "7154"
-    },
-    {
-      "label": "KALLARSEDAN",
-      "value": "1316"
-    },
-    {
-      "label": "KALOI",
-      "value": "7178"
-    },
-    {
-      "label": "KAMBERALIKHAN",
-      "value": "5016"
-    },
-    {
-      "label": "KANDHKOT",
-      "value": "7208"
-    },
-    {
-      "label": "KANDIARO",
-      "value": "7184"
-    },
-    {
-      "label": "KARACHI",
-      "value": "001"
-    },
-    {
-      "label": "KASHMORE",
-      "value": "7209"
-    },
-    {
-      "label": "KHAIRPUR",
-      "value": "3010"
-    },
-    {
-      "label": "KINGRI",
-      "value": "7214"
-    },
-    {
-      "label": "KOTDIJI",
-      "value": "7215"
-    },
-    {
-      "label": "KOTGHULAMMUHAMMAD",
-      "value": "7167"
-    },
-    {
-      "label": "KOTRI",
-      "value": "5005"
-    },
-    {
-      "label": "KUNRI",
-      "value": "7179"
-    },
-    {
-      "label": "LAKHIGHULAMSHAH",
-      "value": "7197"
-    },
-    {
-      "label": "LARAKANA",
-      "value": "5003"
-    },
-    {
-      "label": "LATIFABAD",
-      "value": "7156"
-    },
-    {
-      "label": "MACHH",
-      "value": "7018"
-    },
-    {
-      "label": "MAKKRAN",
-      "value": "7020"
-    },
-    {
-      "label": "MANJHAND",
-      "value": "7159"
-    },
-    {
-      "label": "MATIARI",
-      "value": "7160"
-    },
-    {
-      "label": "MEHAR",
-      "value": "7155"
-    },
-    {
-      "label": "MEHRABPUR",
-      "value": "5026"
-    },
-    {
-      "label": "MIROKHAN",
-      "value": "7205"
-    },
-    {
-      "label": "MIrpurKhas",
-      "value": "5002"
-    },
-    {
-      "label": "MIRPURMATHELO",
-      "value": "5017"
-    },
-    {
-      "label": "MITHI",
-      "value": "7172"
-    },
-    {
-      "label": "MORO",
-      "value": "5019"
-    },
-    {
-      "label": "MUSAKHEL",
-      "value": "7027"
-    },
-    {
-      "label": "MUSLIMBAGH",
-      "value": "7033"
-    },
-    {
-      "label": "NAGARPARKAR",
-      "value": "7177"
-    },
-    {
-      "label": "NAL",
-      "value": "7021"
-    },
-    {
-      "label": "NARA",
-      "value": "7216"
-    },
-    {
-      "label": "NASIRABAD",
-      "value": "7206"
-    },
-    {
-      "label": "NAUDERO",
-      "value": "7203"
-    },
-    {
-      "label": "NAUSHAHROFEROZE",
-      "value": "3013"
-    },
-    {
-      "label": "NAUSHEROFEROZE",
-      "value": "7185"
-    },
-    {
-      "label": "NAWABSHAH",
-      "value": "5004"
-    },
-    {
-      "label": "OLDSUKKUR",
-      "value": "7220"
-    },
-    {
-      "label": "PANOAKIL",
-      "value": "5021"
-    },
-    {
-      "label": "PISHIN",
-      "value": "7029"
-    },
-    {
-      "label": "PITHORO",
-      "value": "7180"
-    },
-    {
-      "label": "QAMBAR",
-      "value": "7204"
-    },
-    {
-      "label": "QASIMABAD",
-      "value": "7157"
-    },
-    {
-      "label": "QILLAABDULLAH",
-      "value": "7031"
-    },
-    {
-      "label": "QILLASAIFULLAH",
-      "value": "7032"
-    },
-    {
-      "label": "RATODERO",
-      "value": "7202"
-    },
-    {
-      "label": "REHMANABAD",
-      "value": "1329"
-    },
-    {
-      "label": "ROHRI",
-      "value": "5023"
-    },
-    {
-      "label": "SAEEDABAD",
-      "value": "7161"
-    },
-    {
-      "label": "SAKRAND",
-      "value": "7187"
-    },
-    {
-      "label": "SALEHPAT",
-      "value": "7221"
-    },
-    {
-      "label": "SAMARO",
-      "value": "7181"
-    },
-    {
-      "label": "SANGHAR",
-      "value": "5022"
-    },
-    {
-      "label": "SEHWANSHARIF",
-      "value": "5024"
-    },
-    {
-      "label": "SHAHDADKOT",
-      "value": "5011"
-    },
-    {
-      "label": "SHAHDADPUR",
-      "value": "5018"
-    },
-    {
-      "label": "SHAHRUG",
-      "value": "7017"
-    },
-    {
-      "label": "SHIKARPUR",
-      "value": "5006"
-    },
-    {
-      "label": "SHUJABAD",
-      "value": "7171"
-    },
-    {
-      "label": "SINDHRI",
-      "value": "7169"
-    },
-    {
-      "label": "SINJHORO",
-      "value": "7189"
-    },
-    {
-      "label": "SOBHODERO",
-      "value": "7217"
-    },
-    {
-      "label": "SOHBATPUR",
-      "value": "7036"
-    },
-    {
-      "label": "SUKKUR",
-      "value": "011"
-    },
-    {
-      "label": "TANDOADAMKHAN",
-      "value": "5010"
-    },
-    {
-      "label": "TANDOALLAHYAR",
-      "value": "5009"
-    },
-    {
-      "label": "TANDOGHULAMHYDER",
-      "value": "7164"
-    },
-    {
-      "label": "TANDOJAM",
-      "value": "5020"
-    },
-    {
-      "label": "TANDOMUHAMMADKHAN",
-      "value": "5015"
-    },
-    {
-      "label": "TASP",
-      "value": "7028"
-    },
-    {
-      "label": "THANABULLAKHAN",
-      "value": "7158"
-    },
-    {
-      "label": "THARIMIRWAH",
-      "value": "7218"
-    },
-    {
-      "label": "THATTA",
-      "value": "3022"
-    },
-    {
-      "label": "THUL",
-      "value": "7210"
-    },
-    {
-      "label": "UBARO",
-      "value": "7219"
-    },
-    {
-      "label": "UMARKOT",
-      "value": "7182"
-    },
-    {
-      "label": "UTHAL",
-      "value": "7024"
-    },
-    {
-      "label": "UTHMANKOT",
-      "value": "7183"
-    },
-    {
-      "label": "WADH",
-      "value": "7022"
-    },
-    {
-      "label": "WAHCANTT",
-      "value": "1338"
-    },
-    {
-      "label": "WARAH",
-      "value": "7207"
-    },
-    {
-      "label": "WASHUK",
-      "value": "7037"
-    },
-    {
-      "label": "WINDER",
-      "value": "7023"
-    }
+    { "label": "Awaran", "value": "7009" },
+    { "label": "Badin", "value": "5012" },
+    { "label": "Bakrani", "value": "7201" },
+    { "label": "Barkhan", "value": "7011" },
+    { "label": "Bela", "value": "7025" },
+    { "label": "Bhiria", "value": "7191" },
+    { "label": "Bulri Shah Karim", "value": "7165" },
+    { "label": "Chachro", "value": "7175" },
+    { "label": "Chaksawari", "value": "7123" },
+    { "label": "Chambar", "value": "7162" },
+    { "label": "Chuharharpal", "value": "1304" },
+    { "label": "Dadu", "value": "5008" },
+    { "label": "Dadyal", "value": "7122" },
+    { "label": "Daharki", "value": "5014" },
+    { "label": "Dahli", "value": "7176" },
+    { "label": "Dhadar", "value": "7019" },
+    { "label": "Dhokratta", "value": "1306" },
+    { "label": "Digri", "value": "7166" },
+    { "label": "Diplo", "value": "7173" },
+    { "label": "Dokri", "value": "7200" },
+    { "label": "Dureji", "value": "7026" },
+    { "label": "Faizgunj", "value": "7212" },
+    { "label": "Gajjar Mashkay", "value": "7010" },
+    { "label": "Gambat", "value": "7213" },
+    { "label": "Garhi Khairo", "value": "7211" },
+    { "label": "Garhi Yasin", "value": "7198" },
+    { "label": "Ghotki", "value": "5013" },
+    { "label": "Gujarkhan", "value": "1312" },
+    { "label": "Hahdadpur", "value": "7190" },
+    { "label": "Hala", "value": "5025" },
+    { "label": "Harnai", "value": "7016" },
+    { "label": "Huramzai", "value": "7030" },
+    { "label": "Hussain Bux Mari", "value": "7170" },
+    { "label": "Hyderabad", "value": "012" },
+    { "label": "Islamkot", "value": "7174" },
+    { "label": "Jacobabad", "value": "5007" },
+    { "label": "Jhandomari", "value": "7163" },
+    { "label": "Jhuddo", "value": "7168" },
+    { "label": "Johi", "value": "7154" },
+    { "label": "Kallar Sedan", "value": "1316" },
+    { "label": "Kaloi", "value": "7178" },
+    { "label": "Kamber Ali Khan", "value": "5016" },
+    { "label": "Kandhkot", "value": "7208" },
+    { "label": "Kandiaro", "value": "7184" },
+    { "label": "Karachi", "value": "001" },
+    { "label": "Kashmore", "value": "7209" },
+    { "label": "Khairpur", "value": "3010" },
+    { "label": "Kingri", "value": "7214" },
+    { "label": "Kot Diji", "value": "7215" },
+    { "label": "Kot Ghulam Muhammad", "value": "7167" },
+    { "label": "Kotri", "value": "5005" },
+    { "label": "Kunri", "value": "7179" },
+    { "label": "Lakhi Ghulam Shah", "value": "7197" },
+    { "label": "Larakana", "value": "5003" },
+    { "label": "Latifabad", "value": "7156" },
+    { "label": "Machh", "value": "7018" },
+    { "label": "Makkran", "value": "7020" },
+    { "label": "Manjhand", "value": "7159" },
+    { "label": "Matiari", "value": "7160" },
+    { "label": "Mehar", "value": "7155" },
+    { "label": "Mehrabpur", "value": "5026" },
+    { "label": "Mirokhan", "value": "7205" },
+    { "label": "Mirpur Khas", "value": "5002" },
+    { "label": "Mirpur Mathelo", "value": "5017" },
+    { "label": "Mithi", "value": "7172" },
+    { "label": "Moro", "value": "5019" },
+    { "label": "Musakhel", "value": "7027" },
+    { "label": "Muslim Bagh", "value": "7033" },
+    { "label": "Nagarparkar", "value": "7177" },
+    { "label": "Nal", "value": "7021" },
+    { "label": "Nara", "value": "7216" },
+    { "label": "Nasirabad", "value": "7206" },
+    { "label": "Naudero", "value": "7203" },
+    { "label": "Naushahro Feroze", "value": "3013" },
+    { "label": "Naushero Feroze", "value": "7185" },
+    { "label": "Nawabshah", "value": "5004" },
+    { "label": "Old Sukkur", "value": "7220" },
+    { "label": "Pano Akil", "value": "5021" },
+    { "label": "Pishin", "value": "7029" },
+    { "label": "Pithoro", "value": "7180" },
+    { "label": "Qambar", "value": "7204" },
+    { "label": "Qasimabad", "value": "7157" },
+    { "label": "Qilla Abdullah", "value": "7031" },
+    { "label": "Qilla Saifullah", "value": "7032" },
+    { "label": "Ratodero", "value": "7202" },
+    { "label": "Rehmanabad", "value": "1329" },
+    { "label": "Rohri", "value": "5023" },
+    { "label": "Saeedabad", "value": "7161" },
+    { "label": "Sakrand", "value": "7187" },
+    { "label": "Salehpat", "value": "7221" },
+    { "label": "Samaro", "value": "7181" },
+    { "label": "Sanghar", "value": "5022" },
+    { "label": "Sehwan Sharif", "value": "5024" },
+    { "label": "Shahdadkot", "value": "5011" },
+    { "label": "Shahdadpur", "value": "5018" },
+    { "label": "Shahrug", "value": "7017" },
+    { "label": "Shikarpur", "value": "5006" },
+    { "label": "Shujabad", "value": "7171" },
+    { "label": "Sindhri", "value": "7169" },
+    { "label": "Sinjhoro", "value": "7189" },
+    { "label": "Sobhodero", "value": "7217" },
+    { "label": "Sohbatpur", "value": "7036" },
+    { "label": "Sukkur", "value": "011" },
+    { "label": "Tando Adam Khan", "value": "5010" },
+    { "label": "Tando Allahyar", "value": "5009" },
+    { "label": "Tando Ghulam Hyder", "value": "7164" },
+    { "label": "Tando Jam", "value": "5020" },
+    { "label": "Tando Muhammad Khan", "value": "5015" },
+    { "label": "Tasp", "value": "7028" },
+    { "label": "Thana Bullakhan", "value": "7158" },
+    { "label": "Thari Mirwah", "value": "7218" },
+    { "label": "Thatta", "value": "3022" },
+    { "label": "Thul", "value": "7210" },
+    { "label": "Ubaro", "value": "7219" },
+    { "label": "Umarkot", "value": "7182" },
+    { "label": "Uthal", "value": "7024" },
+    { "label": "Uthmankot", "value": "7183" },
+    { "label": "Wadh", "value": "7022" },
+    { "label": "Wah Cantt", "value": "1338" },
+    { "label": "Warah", "value": "7207" },
+    { "label": "Washuk", "value": "7037" },
+    { "label": "Winder", "value": "7023" }
   ],
   "3": [
-    {
-      "label": "BHAG",
-      "value": "6031"
-    },
-    {
-      "label": "BULEDA",
-      "value": "6022"
-    },
-    {
-      "label": "CHAMAN",
-      "value": "6009"
-    },
-    {
-      "label": "CHITKAN",
-      "value": "6020"
-    },
-    {
-      "label": "DALBANDIN",
-      "value": "6032"
-    },
-    {
-      "label": "DERAALLAHYAR",
-      "value": "6012"
-    },
-    {
-      "label": "DERABUGTI",
-      "value": "6027"
-    },
-    {
-      "label": "DERAMURADJAMALI",
-      "value": "6010"
-    },
-    {
-      "label": "DUKI",
-      "value": "6035"
-    },
-    {
-      "label": "GWADAR",
-      "value": "6011"
-    },
-    {
-      "label": "HALIMZAI",
-      "value": "7250"
-    },
-    {
-      "label": "HUB",
-      "value": "6008"
-    },
-    {
-      "label": "JIWANI",
-      "value": "7014"
-    },
-    {
-      "label": "KHANOZAI",
-      "value": "6021"
-    },
-    {
-      "label": "KHARAN",
-      "value": "6019"
-    },
-    {
-      "label": "KHOTMAGSI",
-      "value": "81100"
-    },
-    {
-      "label": "KHUZDAR",
-      "value": "6007"
-    },
-    {
-      "label": "KOHLU",
-      "value": "6030"
-    },
-    {
-      "label": "LORALAI",
-      "value": "6016"
-    },
-    {
-      "label": "MASTUNG",
-      "value": "7034"
-    },
-    {
-      "label": "NUSHKI",
-      "value": "6017"
-    },
-    {
-      "label": "ORMARA",
-      "value": "7015"
-    },
-    {
-      "label": "ParanGhar",
-      "value": "7236"
-    },
-    {
-      "label": "PASNI",
-      "value": "7013"
-    },
-    {
-      "label": "PATAN",
-      "value": "7252"
-    },
-    {
-      "label": "Pis",
-      "value": "7008"
-    },
-    {
-      "label": "QALAT",
-      "value": "6025"
-    },
-    {
-      "label": "QUETTA",
-      "value": "013"
-    },
-    {
-      "label": "RASHARAM",
-      "value": "7251"
-    },
-    {
-      "label": "SARANAN",
-      "value": "6023"
-    },
-    {
-      "label": "SIBI",
-      "value": "6015"
-    },
-    {
-      "label": "SINJAVI",
-      "value": "7223"
-    },
-    {
-      "label": "SUITOWN",
-      "value": "6014"
-    },
-    {
-      "label": "SURAB",
-      "value": "6026"
-    },
-    {
-      "label": "TMP",
-      "value": "7006"
-    },
-    {
-      "label": "Tsp",
-      "value": "7007"
-    },
-    {
-      "label": "TURBAT",
-      "value": "6006"
-    },
-    {
-      "label": "UpeerMohmand",
-      "value": "7238"
-    },
-    {
-      "label": "USTAMOHAMMAD",
-      "value": "6013"
-    },
-    {
-      "label": "ZEHRI",
-      "value": "6024"
-    },
-    {
-      "label": "ZHOB",
-      "value": "6018"
-    }
+    { "label": "Bhag", "value": "6031" },
+    { "label": "Buleda", "value": "6022" },
+    { "label": "Chaman", "value": "6009" },
+    { "label": "Chitkan", "value": "6020" },
+    { "label": "Dalbandin", "value": "6032" },
+    { "label": "Dera Allah Yar", "value": "6012" },
+    { "label": "Dera Bugti", "value": "6027" },
+    { "label": "Dera Murad Jamali", "value": "6010" },
+    { "label": "Duki", "value": "6035" },
+    { "label": "Gwadar", "value": "6011" },
+    { "label": "Halimzai", "value": "7250" },
+    { "label": "Hub", "value": "6008" },
+    { "label": "Jiwani", "value": "7014" },
+    { "label": "Khanozai", "value": "6021" },
+    { "label": "Kharan", "value": "6019" },
+    { "label": "Khot Magsi", "value": "81100" },
+    { "label": "Khuzdar", "value": "6007" },
+    { "label": "Kohlu", "value": "6030" },
+    { "label": "Loralai", "value": "6016" },
+    { "label": "Mastung", "value": "7034" },
+    { "label": "Nushki", "value": "6017" },
+    { "label": "Ormara", "value": "7015" },
+    { "label": "Paran Ghar", "value": "7236" },
+    { "label": "Pasni", "value": "7013" },
+    { "label": "Patan", "value": "7252" },
+    { "label": "Pis", "value": "7008" },
+    { "label": "Qalat", "value": "6025" },
+    { "label": "Quetta", "value": "013" },
+    { "label": "Rasharam", "value": "7251" },
+    { "label": "Saranan", "value": "6023" },
+    { "label": "Sibi", "value": "6015" },
+    { "label": "Sinjavi", "value": "7223" },
+    { "label": "Sui Town", "value": "6014" },
+    { "label": "Surab", "value": "6026" },
+    { "label": "Tmp", "value": "7006" },
+    { "label": "Tsp", "value": "7007" },
+    { "label": "Turbat", "value": "6006" },
+    { "label": "Upeer Mohmand", "value": "7238" },
+    { "label": "Usta Mohammad", "value": "6013" },
+    { "label": "Zehri", "value": "6024" },
+    { "label": "Zhob", "value": "6018" }
   ],
   "7": [
-    {
-      "label": "ISLAMABAD",
-      "value": "004"
-    }
+    { "label": "Islamabad", "value": "004" }
   ]
 }
 
 // PLACE OF BIRTH
 export const LIST_OF_POB = [
   {
-    label: "KARACHI",
+    label: "Karachi",
     value: "001",
   },
   {
-    label: "SUKKUR",
+    label: "Sukkur",
     value: "011",
   },
   {
-    label: "HYDERABAD",
+    label: "Hyderabad",
     value: "012",
   },
   {
-    label: "CHUHARHARPAL",
+    label: "Chuharharpal",
     value: "1304",
   },
   {
-    label: "DHOKRATTA",
+    label: "Dhokratta",
     value: "1306",
   },
   {
-    label: "GUJARKHAN",
+    label: "Gujarkhan",
     value: "1312",
   },
   {
-    label: "KALLARSEDAN",
+    label: "Kallar Sedan",
     value: "1316",
   },
   {
-    label: "MURREE",
+    label: "Murree",
     value: "1322",
   },
   {
-    label: "RAWALAKOT",
+    label: "Rawalakot",
     value: "1328",
   },
   {
-    label: "REHMANABAD",
+    label: "Rehmanabad",
     value: "1329",
   },
   {
-    label: "WAHCANTT",
+    label: "Wah Cantt",
     value: "1338",
   },
   {
-    label: "KHAIRPUR",
+    label: "Khairpur",
     value: "3010",
   },
   {
-    label: "NAUSHAHROFEROZE",
+    label: "Naushahro Feroze",
     value: "3013",
   },
   {
-    label: "THATTA",
+    label: "Thatta",
     value: "3022",
   },
   {
-    label: "MIrpurKhas",
+    label: "Mirpur Khas",
     value: "5002",
   },
   {
-    label: "LARAKANA",
+    label: "Larakana",
     value: "5003",
   },
   {
-    label: "NAWABSHAH",
+    label: "Nawabshah",
     value: "5004",
   },
   {
-    label: "KOTRI",
+    label: "Kotri",
     value: "5005",
   },
   {
-    label: "SHIKARPUR",
+    label: "Shikarpur",
     value: "5006",
   },
   {
-    label: "JACOBABAD",
+    label: "Jacobabad",
     value: "5007",
   },
   {
-    label: "DADU",
+    label: "Dadu",
     value: "5008",
   },
   {
-    label: "TANDOALLAHYAR",
+    label: "Tando Allahyar",
     value: "5009",
   },
   {
-    label: "TANDOADAMKHAN",
+    label: "Tando Adam Khan",
     value: "5010",
   },
   {
-    label: "SHAHDADKOT",
+    label: "Shahdadkot",
     value: "5011",
   },
   {
-    label: "BADIN",
+    label: "Badin",
     value: "5012",
   },
   {
-    label: "GHOTKI",
+    label: "Ghotki",
     value: "5013",
   },
   {
-    label: "DAHARKI",
+    label: "Daharki",
     value: "5014",
   },
   {
-    label: "TANDOMUHAMMADKHAN",
+    label: "Tando Muhammad Khan",
     value: "5015",
   },
   {
-    label: "KAMBERALIKHAN",
+    label: "Kamber Ali Khan",
     value: "5016",
   },
   {
-    label: "MIRPURMATHELO",
+    label: "Mirpur Mathelo",
     value: "5017",
   },
   {
-    label: "SHAHDADPUR",
+    label: "Shahdadpur",
     value: "5018",
   },
   {
-    label: "MORO",
+    label: "Moro",
     value: "5019",
   },
   {
-    label: "TANDOJAM",
+    label: "Tando Jam",
     value: "5020",
   },
   {
-    label: "PANOAKIL",
+    label: "Pano Akil",
     value: "5021",
   },
   {
-    label: "SANGHAR",
+    label: "Sanghar",
     value: "5022",
   },
   {
-    label: "ROHRI",
+    label: "Rohri",
     value: "5023",
   },
   {
-    label: "SEHWANSHARIF",
+    label: "Sehwan Sharif",
     value: "5024",
   },
   {
-    label: "HALA",
+    label: "Hala",
     value: "5025",
   },
   {
-    label: "MEHRABPUR",
+    label: "Mehrabpur",
     value: "5026",
   },
   {
-    label: "AWARAN",
+    label: "Awaran",
     value: "7009",
   },
   {
-    label: "GAJJARMASHKAY",
+    label: "Gajjar Mashkay",
     value: "7010",
   },
   {
-    label: "BARKHAN",
+    label: "Barkhan",
     value: "7011",
   },
   {
-    label: "HARNAI",
+    label: "Harnai",
     value: "7016",
   },
   {
-    label: "SHAHRUG",
+    label: "Shahrug",
     value: "7017",
   },
   {
-    label: "MACHH",
+    label: "Machh",
     value: "7018",
   },
   {
-    label: "DHADAR",
+    label: "Dhadar",
     value: "7019",
   },
   {
-    label: "MAKKRAN",
+    label: "Makkran",
     value: "7020",
   },
   {
-    label: "NAL",
+    label: "Nal",
     value: "7021",
   },
   {
-    label: "WADH",
+    label: "Wadh",
     value: "7022",
   },
   {
-    label: "WINDER",
+    label: "Winder",
     value: "7023",
   },
   {
-    label: "UTHAL",
+    label: "Uthal",
     value: "7024",
   },
   {
-    label: "BELA",
+    label: "Bela",
     value: "7025",
   },
   {
-    label: "DUREJI",
+    label: "Dureji",
     value: "7026",
   },
   {
-    label: "MUSAKHEL",
+    label: "Musakhel",
     value: "7027",
   },
   {
-    label: "TASP",
+    label: "Tasp",
     value: "7028",
   },
   {
-    label: "PISHIN",
+    label: "Pishin",
     value: "7029",
   },
   {
-    label: "HURAMZAI",
+    label: "Huramzai",
     value: "7030",
   },
   {
-    label: "QILLAABDULLAH",
+    label: "Qilla Abdullah",
     value: "7031",
   },
   {
-    label: "QILLASAIFULLAH",
+    label: "Qilla Saifullah",
     value: "7032",
   },
   {
-    label: "MUSLIMBAGH",
+    label: "Muslim Bagh",
     value: "7033",
   },
   {
-    label: "SOHBATPUR",
+    label: "Sohbatpur",
     value: "7036",
   },
   {
-    label: "WASHUK",
+    label: "Washuk",
     value: "7037",
   },
   {
-    label: "DADYAL",
+    label: "Dadyal",
     value: "7122",
   },
   {
-    label: "CHAKSAWARI",
+    label: "Chaksawari",
     value: "7123",
   },
   {
-    label: "JOHI",
+    label: "Johi",
     value: "7154",
   },
   {
-    label: "MEHAR",
+    label: "Mehar",
     value: "7155",
   },
   {
-    label: "LATIFABAD",
+    label: "Latifabad",
     value: "7156",
   },
   {
-    label: "QASIMABAD",
+    label: "Qasimabad",
     value: "7157",
   },
   {
-    label: "THANABULLAKHAN",
+    label: "Thana Bullakhan",
     value: "7158",
   },
   {
-    label: "MANJHAND",
+    label: "Manjhand",
     value: "7159",
   },
   {
-    label: "MATIARI",
+    label: "Matiari",
     value: "7160",
   },
   {
-    label: "SAEEDABAD",
+    label: "Saeedabad",
     value: "7161",
   },
   {
-    label: "CHAMBAR",
+    label: "Chambar",
     value: "7162",
   },
   {
-    label: "JHANDOMARI",
+    label: "Jhandomari",
     value: "7163",
   },
   {
-    label: "TANDOGHULAMHYDER",
+    label: "Tando Ghulam Hyder",
     value: "7164",
   },
   {
-    label: "BULRISHAHKARIM",
+    label: "Bulri Shah Karim",
     value: "7165",
   },
   {
-    label: "DIGRI",
+    label: "Digri",
     value: "7166",
   },
   {
-    label: "KOTGHULAMMUHAMMAD",
+    label: "Kot Ghulam Muhammad",
     value: "7167",
   },
   {
-    label: "JHUDDO",
+    label: "Jhuddo",
     value: "7168",
   },
   {
-    label: "SINDHRI",
+    label: "Sindhri",
     value: "7169",
   },
   {
-    label: "HUSSAINBUXMARI",
+    label: "Hussain Bux Mari",
     value: "7170",
   },
   {
-    label: "SHUJABAD",
+    label: "Shujabad",
     value: "7171",
   },
   {
-    label: "MITHI",
+    label: "Mithi",
     value: "7172",
   },
   {
-    label: "DIPLO",
+    label: "Diplo",
     value: "7173",
   },
   {
-    label: "ISLAMKOT",
+    label: "Islamkot",
     value: "7174",
   },
   {
-    label: "CHACHRO",
+    label: "Chachro",
     value: "7175",
   },
   {
-    label: "DAHLI",
+    label: "Dahli",
     value: "7176",
   },
   {
-    label: "NAGARPARKAR",
+    label: "Nagarparkar",
     value: "7177",
   },
   {
-    label: "KALOI",
+    label: "Kaloi",
     value: "7178",
   },
   {
-    label: "KUNRI",
+    label: "Kunri",
     value: "7179",
   },
   {
-    label: "PITHORO",
+    label: "Pithoro",
     value: "7180",
   },
   {
-    label: "SAMARO",
+    label: "Samaro",
     value: "7181",
   },
   {
-    label: "UMARKOT",
+    label: "Umarkot",
     value: "7182",
   },
   {
-    label: "UTHMANKOT",
+    label: "Uthmankot",
     value: "7183",
   },
   {
-    label: "KANDIARO",
+    label: "Kandiaro",
     value: "7184",
   },
   {
-    label: "NAUSHEROFEROZE",
+    label: "Naushero Feroze",
     value: "7185",
   },
   {
-    label: "SAKRAND",
+    label: "Sakrand",
     value: "7187",
   },
   {
-    label: "SINJHORO",
+    label: "Sinjhoro",
     value: "7189",
   },
   {
-    label: "HAHDADPUR",
+    label: "Hahdadpur",
     value: "7190",
   },
   {
-    label: "BHIRIA",
+    label: "Bhiria",
     value: "7191",
   },
   {
-    label: "LAKHIGHULAMSHAH",
+    label: "Lakhi Ghulam Shah",
     value: "7197",
   },
   {
-    label: "GARHIYASIN",
+    label: "Garhi Yasin",
     value: "7198",
   },
   {
-    label: "DOKRI",
+    label: "Dokri",
     value: "7200",
   },
   {
-    label: "BAKRANI",
+    label: "Bakrani",
     value: "7201",
   },
   {
-    label: "RATODERO",
+    label: "Ratodero",
     value: "7202",
   },
   {
-    label: "NAUDERO",
+    label: "Naudero",
     value: "7203",
   },
   {
-    label: "QAMBAR",
+    label: "Qambar",
     value: "7204",
   },
   {
-    label: "MIROKHAN",
+    label: "Mirokhan",
     value: "7205",
   },
   {
-    label: "NASIRABAD",
+    label: "Nasirabad",
     value: "7206",
   },
   {
-    label: "WARAH",
+    label: "Warah",
     value: "7207",
   },
   {
-    label: "KANDHKOT",
+    label: "Kandhkot",
     value: "7208",
   },
   {
-    label: "KASHMORE",
+    label: "Kashmore",
     value: "7209",
   },
   {
-    label: "THUL",
+    label: "Thul",
     value: "7210",
   },
   {
-    label: "GARHIKHAIRO",
+    label: "Garhi Khairo",
     value: "7211",
   },
   {
-    label: "FAIZGUNJ",
+    label: "Faizgunj",
     value: "7212",
   },
   {
-    label: "GAMBAT",
+    label: "Gambat",
     value: "7213",
   },
   {
-    label: "KINGRI",
+    label: "Kingri",
     value: "7214",
   },
   {
-    label: "KOTDIJI",
+    label: "Kot Diji",
     value: "7215",
   },
   {
-    label: "NARA",
+    label: "Nara",
     value: "7216",
   },
   {
-    label: "SOBHODERO",
+    label: "Sobhodero",
     value: "7217",
   },
   {
-    label: "THARIMIRWAH",
+    label: "Thari Mirwah",
     value: "7218",
   },
   {
-    label: "UBARO",
+    label: "Ubaro",
     value: "7219",
   },
   {
-    label: "OLDSUKKUR",
+    label: "Old Sukkur",
     value: "7220",
   },
   {
-    label: "SALEHPAT",
+    label: "Salehpat",
     value: "7221",
   },
   {
-    label: "LAHORE",
+    label: "Lahore",
     value: "002",
   },
   {
-    label: "FAISALABAD",
+    label: "Faisalabad",
     value: "003",
   },
   {
-    label: "RAWALPINDI",
+    label: "Rawalpindi",
     value: "005",
   },
   {
-    label: "MULTAN",
+    label: "Multan",
     value: "006",
   },
   {
-    label: "GUJRANWALA",
+    label: "Gujranwala",
     value: "009",
   },
   {
-    label: "BAHAWALPUR",
+    label: "Bahawalpur",
     value: "010",
   },
   {
-    label: "SIALKOT",
+    label: "Sialkot",
     value: "015",
   },
   {
-    label: "SARGODHA",
+    label: "Sargodha",
     value: "048",
   },
   {
-    label: "CHAKWAL",
+    label: "Chakwal",
     value: "1303",
   },
   {
-    label: "DINA",
+    label: "Dina",
     value: "1307",
   },
   {
-    label: "FATEHJANG",
+    label: "Fatehjang",
     value: "1309",
   },
   {
-    label: "JHELUM",
+    label: "Jhelum",
     value: "1314",
   },
   {
-    label: "KAHUTA",
+    label: "Kahuta",
     value: "1315",
   },
   {
-    label: "PINDDADANKHAN",
+    label: "Pind Dadan Khan",
     value: "1324",
   },
   {
-    label: "AHMEDNAGERCHATHA",
+    label: "Ahmednager Chatha",
     value: "5028",
   },
   {
-    label: "ALIKHANABAD",
+    label: "Ali Khan Abad",
     value: "5029",
   },
   {
-    label: "ALIPUR",
+    label: "Alipur",
     value: "5030",
   },
   {
-    label: "ARIFWALA",
+    label: "Arifwala",
     value: "5031",
   },
   {
-    label: "ATTOCK",
+    label: "Attock",
     value: "5032",
   },
   {
-    label: "BAHAWALNAGAR",
+    label: "Bahawalnagar",
     value: "5035",
   },
   {
-    label: "BHAKKAR",
+    label: "Bhakkar",
     value: "5036",
   },
   {
-    label: "BUREWALA",
+    label: "Burewala",
     value: "5037",
   },
   {
-    label: "CHILLIANWALA",
+    label: "Chillianwala",
     value: "5038",
   },
   {
-    label: "CHICHAWATNI",
+    label: "Chichawatni",
     value: "5039",
   },
   {
-    label: "CHINIOT",
+    label: "Chiniot",
     value: "5040",
   },
   {
-    label: "CHISHTIAN",
+    label: "Chishtian",
     value: "5041",
   },
   {
-    label: "DASKA",
+    label: "Daska",
     value: "5042",
   },
   {
-    label: "DARYAKHAN",
+    label: "Darya Khan",
     value: "5043",
   },
   {
-    label: "DERAGHAZIKHAN",
+    label: "Dera Ghazi Khan",
     value: "5044",
   },
   {
-    label: "DHAULAR",
+    label: "Dhaular",
     value: "5045",
   },
   {
-    label: "DINGA",
+    label: "Dinga",
     value: "5046",
   },
   {
-    label: "DIPALPUR",
+    label: "Dipalpure",
     value: "5047",
   },
   {
-    label: "GHAKHARMANDI",
+    label: "Ghakkhar Mandi",
     value: "5048",
   },
   {
-    label: "GOJRA",
+    label: "Gojra",
     value: "5049",
   },
   {
-    label: "GUJRAT",
+    label: "Gujrat",
     value: "5050",
   },
   {
-    label: "HAROONABAD",
+    label: "Haroonabad",
     value: "5051",
   },
   {
-    label: "HASILPUR",
+    label: "Hasilpur",
     value: "5052",
   },
   {
-    label: "HAVELILAKHA",
+    label: "Haveli Lakha",
     value: "5053",
   },
   {
-    label: "JALALPURJATTAN",
+    label: "Jalalpur Jattan",
     value: "5054",
   },
   {
-    label: "JAMPUR",
+    label: "Jampur",
     value: "5055",
   },
   {
-    label: "JARANWALA",
+    label: "Jaranwala",
     value: "5056",
   },
   {
-    label: "JHANG",
+    label: "Jhang",
     value: "5057",
   },
   {
-    label: "KALABAGH",
+    label: "Kalabagh",
     value: "5058",
   },
   {
-    label: "KARORLALESAN",
+    label: "Karor Lal Esan",
     value: "5059",
   },
   {
-    label: "KASUR",
+    label: "Kasur",
     value: "5060",
   },
   {
-    label: "KAMALIA",
+    label: "Kamalia",
     value: "5061",
   },
   {
-    label: "KAMOKE",
+    label: "Kamoke",
     value: "5062",
   },
   {
-    label: "KHANEWAL",
+    label: "Khanewal",
     value: "5063",
   },
   {
-    label: "KHANPUR",
+    label: "Khanpur",
     value: "5064",
   },
   {
-    label: "KHARIAN",
+    label: "Kharian",
     value: "5065",
   },
   {
-    label: "KHUSHAB",
+    label: "Khushab",
     value: "5066",
   },
   {
-    label: "KOTADU",
+    label: "Kot Adu",
     value: "5067",
   },
   {
-    label: "JAUHARABAD",
+    label: "Jauharabad",
     value: "5068",
   },
   {
-    label: "LALAMUSA",
+    label: "Lalamusa",
     value: "5069",
   },
   {
-    label: "LAYYAH",
+    label: "Layyah",
     value: "5070",
   },
   {
-    label: "LIAQUATPUR",
+    label: "Liaquatpur",
     value: "5071",
   },
   {
-    label: "LODHRAN",
+    label: "Lodhran",
     value: "5072",
   },
   {
-    label: "MALAKWAL",
+    label: "Malakwal",
     value: "5073",
   },
   {
-    label: "MAMOORI",
+    label: "Mamoori",
     value: "5074",
   },
   {
-    label: "MAILSI",
+    label: "Mailsi",
     value: "5075",
   },
   {
-    label: "MANDIBAHAUDDIN",
+    label: "Mandi Bahauddin",
     value: "5076",
   },
   {
-    label: "MIANCHANNU",
+    label: "Mian Channu",
     value: "5077",
   },
   {
-    label: "MIANWALI",
+    label: "Mianwali",
     value: "5078",
   },
   {
-    label: "MIANWALIBANGLA",
+    label: "Mianwali Bangla",
     value: "5079",
   },
   {
-    label: "MUZAFFARGARH",
+    label: "Muzaffargarh",
     value: "5080",
   },
   {
-    label: "NAROWAL",
+    label: "Narowal",
     value: "5081",
   },
   {
-    label: "RENALAKHURD",
+    label: "Renala Khurd",
     value: "5082",
   },
   {
-    label: "PAKPATTAN",
+    label: "Pakpattan",
     value: "5083",
   },
   {
-    label: "PATTOKI",
+    label: "Pattoki",
     value: "5084",
   },
   {
-    label: "PIRMAHAL",
+    label: "Pir Mahal",
     value: "5085",
   },
   {
-    label: "QAIMPUR",
+    label: "Qaimpur",
     value: "5086",
   },
   {
-    label: "QILADIDARSINGH",
+    label: "Qila Didar Singh",
     value: "5087",
   },
   {
-    label: "RABWAH",
+    label: "Rabwah",
     value: "5088",
   },
   {
-    label: "RAIWIND",
+    label: "Raiwind",
     value: "5089",
   },
   {
-    label: "RAJANPUR",
+    label: "Rajanpur",
     value: "5090",
   },
   {
-    label: "RAHIMYARKHAN",
+    label: "Rahim Yar Khan",
     value: "5091",
   },
   {
-    label: "SADIQABAD",
+    label: "Sadiqabad",
     value: "5092",
   },
   {
-    label: "SAFDARABAD",
+    label: "Safdarabad",
     value: "5093",
   },
   {
-    label: "SAHIWAL",
+    label: "Sahiwal",
     value: "5094",
   },
   {
-    label: "SANGLAHILL",
+    label: "Sangla Hill",
     value: "5095",
   },
   {
-    label: "SARAIALAMGIR",
+    label: "Sarai Alamgir",
     value: "5096",
   },
   {
-    label: "SHAKARGARH",
+    label: "Shakargarh",
     value: "5097",
   },
   {
-    label: "SHEIKHUPURA",
+    label: "Sheikhupura",
     value: "5098",
   },
   {
-    label: "SIRANWALI",
+    label: "Siranwali",
     value: "6001",
   },
   {
-    label: "TALAGANG",
+    label: "Talagang",
     value: "6002",
   },
   {
-    label: "TOBATEKSINGH",
+    label: "Toba Tek Singh",
     value: "6003",
   },
   {
-    label: "VEHARI",
+    label: "Vehari",
     value: "6004",
   },
   {
-    label: "WAZIRABAD",
+    label: "Wazirabad",
     value: "6005",
   },
   {
-    label: "FORTABBAS",
+    label: "Fort Abbas",
     value: "7038",
   },
   {
-    label: "MINCHINABAD",
+    label: "Minchinabad",
     value: "7039",
   },
   {
-    label: "BAHAWALPURCITY",
+    label: "Bahawalpur City",
     value: "7040",
   },
   {
-    label: "AHMADPUREAST",
+    label: "Ahmadpur East",
     value: "7041",
   },
   {
-    label: "KHAIRPURTAMIWALI",
+    label: "Khairpur Tamiwali",
     value: "7043",
   },
   {
-    label: "YAZMAN",
+    label: "Yazman",
     value: "7044",
   },
   {
-    label: "D.G.KHAN",
+    label: "D.G. Khan",
     value: "7045",
   },
   {
-    label: "KOTCHUTTA",
+    label: "Kot Chutta",
     value: "7046",
   },
   {
-    label: "TAUNSA",
+    label: "Taunsa",
     value: "7047",
   },
   {
-    label: "CHAUBARA",
+    label: "Chaubara",
     value: "7048",
   },
   {
-    label: "JATOI",
+    label: "Jatoi",
     value: "7049",
   },
   {
-    label: "DE-EXRAJANPUR",
+    label: "De-Ex Rajanpur",
     value: "7050",
   },
   {
-    label: "ROJHAN",
+    label: "Rojhan",
     value: "7051",
   },
   {
-    label: "BHAWANA",
+    label: "Bhawana",
     value: "7052",
   },
   {
-    label: "LALIAN",
+    label: "Lalian",
     value: "7053",
   },
   {
-    label: "FAISALABADSADDAR",
+    label: "Faisalabad Saddar",
     value: "7054",
   },
   {
-    label: "CHAKJHUMRA",
+    label: "Chak Jhumra",
     value: "7055",
   },
   {
-    label: "SAMMUNDRI",
+    label: "Samundri",
     value: "7056",
   },
   {
-    label: "TANDLIANWALA",
+    label: "Tandlianwala",
     value: "7057",
   },
   {
-    label: "SHORKOT",
+    label: "Shorkot",
     value: "7058",
   },
   {
-    label: "AHMADPURSIAL",
+    label: "Ahmadpur Sial",
     value: "7059",
   },
   {
-    label: "GUJRANWALASADDAR",
+    label: "Gujranwala Saddar",
     value: "7072",
   },
   {
-    label: "VIRKANTEHSIL",
+    label: "Virka Tehsil",
     value: "7073",
   },
   {
-    label: "PINDIBHATTIAN",
+    label: "Pindi Bhattian",
     value: "7075",
   },
   {
-    label: "PHALIA",
+    label: "Phalia",
     value: "7076",
   },
   {
-    label: "CHUNIAN",
+    label: "Chunian",
     value: "7080",
   },
   {
-    label: "KOTRADHAKISHAN",
+    label: "Kot Radha Kishan",
     value: "7081",
   },
   {
-    label: "LAHORECANTT",
+    label: "Lahore Cantt",
     value: "7082",
   },
   {
-    label: "MODELTOWN",
+    label: "Model Town",
     value: "7083",
   },
   {
-    label: "SHALIMAR",
+    label: "Shalimar",
     value: "7084",
   },
   {
-    label: "NANKANASAHIB",
+    label: "Nankana Sahib",
     value: "7085",
   },
   {
-    label: "SHAHKOT",
+    label: "Shahkot",
     value: "7086",
   },
   {
-    label: "SHARAKPUR",
+    label: "Sharakpur",
     value: "7087",
   },
   {
-    label: "MURIDKE",
+    label: "Muridke",
     value: "7088",
   },
   {
-    label: "FIROZEWALA",
+    label: "Firozewala",
     value: "7089",
   },
   {
-    label: "KABIRWALA",
+    label: "Kabirwala",
     value: "7090",
   },
   {
-    label: "JAHANIAN",
+    label: "Jahanian",
     value: "7091",
   },
   {
-    label: "KAHRORPACCA",
+    label: "Kahror Pacca",
     value: "7092",
   },
   {
-    label: "DUNYAPUR",
+    label: "Dunyapur",
     value: "7093",
   },
   {
-    label: "MULTANSADDAR",
+    label: "Multan Saddar",
     value: "7094",
   },
   {
-    label: "JALALPURPIRWALA",
+    label: "Jalalpur Pirwala",
     value: "7095",
   },
   {
-    label: "SHUJABAD",
+    label: "Shujabad",
     value: "7096",
   },
   {
-    label: "HASANABDAL",
+    label: "Hasan Abdal",
     value: "7097",
   },
   {
-    label: "HAZRO",
+    label: "Hazro",
     value: "7098",
   },
   {
-    label: "JAND",
+    label: "Jand",
     value: "7099",
   },
   {
-    label: "PINDIGHEB",
+    label: "Pindi Gheb",
     value: "7100",
   },
   {
-    label: "CHOASAIDANSHAH",
+    label: "Choa Saidan Shah",
     value: "7101",
   },
   {
-    label: "KALLARKAHAR",
+    label: "Kallar Kahar",
     value: "7102",
   },
   {
-    label: "LAWA",
+    label: "Lawa",
     value: "7103",
   },
   {
-    label: "SOHAWA",
+    label: "Sohawa",
     value: "7104",
   },
   {
-    label: "POTOHARTOWN",
+    label: "Potohar Town",
     value: "7105",
   },
   {
-    label: "RAWAL",
+    label: "Rawal",
     value: "7106",
   },
   {
-    label: "OKARA",
+    label: "Okara",
     value: "7107",
   },
   {
-    label: "KOTLISATTIAN",
+    label: "Kotli Sattian",
     value: "7108",
   },
   {
-    label: "TAXILA",
+    label: "Taxila",
     value: "7109",
   },
   {
-    label: "KALURKOT",
+    label: "Kalurkot",
     value: "7110",
   },
   {
-    label: "MANKERA",
+    label: "Mankera",
     value: "7111",
   },
   {
-    label: "NURPURTHAL",
+    label: "Nurpur Thal",
     value: "7112",
   },
   {
-    label: "QUAIDABAD",
+    label: "Quaidabad",
     value: "7113",
   },
   {
-    label: "ISAKHEL",
+    label: "Isakhel",
     value: "7114",
   },
   {
-    label: "PIPLAN",
+    label: "Piplan",
     value: "7115",
   },
   {
-    label: "BHALWAL",
+    label: "Bhalwal",
     value: "7116",
   },
   {
-    label: "BHERA",
+    label: "Bhera",
     value: "7117",
   },
   {
-    label: "KOTMOMIN",
+    label: "Kot Momin",
     value: "7118",
   },
   {
-    label: "SHAHPUR",
+    label: "Shahpur",
     value: "7119",
   },
   {
-    label: "SILLANWALI",
+    label: "Sillanwali",
     value: "7120",
   },
   {
-    label: "SAHIWAL",
+    label: "Sahiwal",
     value: "7121",
   },
   {
-    label: "TUNSA",
+    label: "Tunsa",
     value: "7241",
   },
   {
-    label: "QUETTA",
+    label: "Quetta",
     value: "013",
   },
   {
-    label: "TURBAT",
+    label: "Turbat",
     value: "6006",
   },
   {
-    label: "KHUZDAR",
+    label: "Khuzdar",
     value: "6007",
   },
   {
-    label: "HUB",
+    label: "Hub",
     value: "6008",
   },
   {
-    label: "CHAMAN",
+    label: "Chaman",
     value: "6009",
   },
   {
-    label: "DERAMURADJAMALI",
+    label: "Dera Murad Jamali",
     value: "6010",
   },
   {
-    label: "GWADAR",
+    label: "Gwadar",
     value: "6011",
   },
   {
-    label: "DERAALLAHYAR",
+    label: "Dera Allah Yar",
     value: "6012",
   },
   {
-    label: "USTAMOHAMMAD",
+    label: "Usta Mohammad",
     value: "6013",
   },
   {
-    label: "SUITOWN",
+    label: "Sui Town",
     value: "6014",
   },
   {
-    label: "SIBI",
+    label: "Sibi",
     value: "6015",
   },
   {
-    label: "LORALAI",
+    label: "Loralai",
     value: "6016",
   },
   {
-    label: "NUSHKI",
+    label: "Nushki",
     value: "6017",
   },
   {
-    label: "ZHOB",
+    label: "Zhob",
     value: "6018",
   },
   {
-    label: "KHARAN",
+    label: "Kharan",
     value: "6019",
   },
   {
-    label: "CHITKAN",
+    label: "Chitkan",
     value: "6020",
   },
   {
-    label: "KHANOZAI",
+    label: "Khanozai",
     value: "6021",
   },
   {
-    label: "BULEDA",
+    label: "Buleda",
     value: "6022",
   },
   {
-    label: "SARANAN",
+    label: "Saranan",
     value: "6023",
   },
   {
-    label: "ZEHRI",
+    label: "Zehri",
     value: "6024",
   },
   {
-    label: "QALAT",
+    label: "Qalat",
     value: "6025",
   },
   {
-    label: "SURAB",
+    label: "Surab",
     value: "6026",
   },
   {
-    label: "DERABUGTI",
+    label: "Dera Bugti",
     value: "6027",
   },
   {
-    label: "KOHLU",
+    label: "Kohlu",
     value: "6030",
   },
   {
-    label: "BHAG",
+    label: "Bhag",
     value: "6031",
   },
   {
-    label: "DALBANDIN",
+    label: "Dalbandin",
     value: "6032",
   },
   {
-    label: "DUKI",
+    label: "Duki",
     value: "6035",
   },
   {
-    label: "TMP",
+    label: "Tmp",
     value: "7006",
   },
   {
@@ -3041,371 +1721,371 @@ export const LIST_OF_POB = [
     value: "7008",
   },
   {
-    label: "PASNI",
+    label: "Pasni",
     value: "7013",
   },
   {
-    label: "JIWANI",
+    label: "Jiwani",
     value: "7014",
   },
   {
-    label: "ORMARA",
+    label: "Ormara",
     value: "7015",
   },
   {
-    label: "MASTUNG",
+    label: "Mastung",
     value: "7034",
   },
   {
-    label: "SINJAVI",
+    label: "Sinjavi",
     value: "7223",
   },
   {
-    label: "ParanGhar",
+    label: "Paran Ghar",
     value: "7236",
   },
   {
-    label: "UpeerMohmand",
+    label: "Upeer Mohmand",
     value: "7238",
   },
   {
-    label: "EkkaGhund",
+    label: "Ekka Ghund",
     value: "7239",
   },
   {
-    label: "HALIMZAI",
+    label: "Halimzai",
     value: "7250",
   },
   {
-    label: "RASHARAM",
+    label: "Rasharam",
     value: "7251",
   },
   {
-    label: "PATAN",
+    label: "Patan",
     value: "7252",
   },
   {
-    label: "KHOTMAGSI",
+    label: "Khot Magsi",
     value: "81100",
   },
   {
-    label: "ABBOTTABAD",
+    label: "Abbottabad",
     value: "008",
   },
   {
-    label: "D.I.KHAN",
+    label: "D.I. Khan",
     value: "014",
   },
   {
-    label: "PESHAWAR",
+    label: "Peshawar",
     value: "091",
   },
   {
-    label: "DAGGAR",
+    label: "Daggar",
     value: "0939",
   },
   {
-    label: "ALPURI",
+    label: "Alpuri",
     value: "0996",
   },
   {
-    label: "MINGORA",
+    label: "Mingora",
     value: "6036",
   },
   {
-    label: "KOHAT",
+    label: "Kohat",
     value: "6037",
   },
   {
-    label: "MANSEHRA",
+    label: "Mansehra",
     value: "6038",
   },
   {
-    label: "SWABI",
+    label: "Swabi",
     value: "6039",
   },
   {
-    label: "CHARSADDA",
+    label: "Charsadda",
     value: "6041",
   },
   {
-    label: "NOWSHERA",
+    label: "Nowshera",
     value: "6042",
   },
   {
-    label: "BARIKOT",
+    label: "Barikot",
     value: "6043",
   },
   {
-    label: "SHABQADAR",
+    label: "Shabqadar",
     value: "6044",
   },
   {
-    label: "HARIPUR",
+    label: "Haripur",
     value: "6045",
   },
   {
-    label: "TAKHT-I-BAHI",
+    label: "Takht-i-Bahi",
     value: "6046",
   },
   {
-    label: "PAHARPUR",
+    label: "Paharpur",
     value: "6047",
   },
   {
-    label: "BATKHELA",
+    label: "Batkhela",
     value: "6048",
   },
   {
-    label: "JAMRUD",
+    label: "Jamrud",
     value: "6049",
   },
   {
-    label: "BAHRAIN",
+    label: "Bahrain",
     value: "6050",
   },
   {
-    label: "LAKKI",
+    label: "Lakki",
     value: "6051",
   },
   {
-    label: "PABBI",
+    label: "Pabbi",
     value: "6052",
   },
   {
-    label: "JEHANGIRA",
+    label: "Jehangira",
     value: "6053",
   },
   {
-    label: "BANNU",
+    label: "Bannu",
     value: "6054",
   },
   {
-    label: "CHITRAL",
+    label: "Chitral",
     value: "6055",
   },
   {
-    label: "HANGU",
+    label: "Hangu",
     value: "6056",
   },
   {
-    label: "HAVELIAN",
+    label: "Havelian",
     value: "6057",
   },
   {
-    label: "KHWAZAKHELA",
+    label: "Khwazakhela",
     value: "6058",
   },
   {
-    label: "TANK",
+    label: "Tank",
     value: "6060",
   },
   {
-    label: "MATTA",
+    label: "Matta",
     value: "6061",
   },
   {
-    label: "TORDHER",
+    label: "Tordher",
     value: "6062",
   },
   {
-    label: "TIMARGAR",
+    label: "Timargar",
     value: "6063",
   },
   {
-    label: "PAROA",
+    label: "Paroa",
     value: "6064",
   },
   {
-    label: "NAWANSHEHR",
+    label: "Nawanshehr",
     value: "6065",
   },
   {
-    label: "LANDI",
+    label: "Landi",
     value: "6066",
   },
   {
-    label: "TANGI",
+    label: "Tangi",
     value: "6067",
   },
   {
-    label: "AKORA",
+    label: "Akora",
     value: "6068",
   },
   {
-    label: "TALL",
+    label: "Tall",
     value: "6069",
   },
   {
-    label: "ZAIDA",
+    label: "Zaida",
     value: "6070",
   },
   {
-    label: "UTMANZAI",
+    label: "Utmanzai",
     value: "6071",
   },
   {
-    label: "KRK",
+    label: "Krk",
     value: "7005",
   },
   {
-    label: "LAKKIMARWAT",
+    label: "Lakki Marwat",
     value: "7061",
   },
   {
-    label: "PARACHINAR",
+    label: "Parachinar",
     value: "7062",
   },
   {
-    label: "KHALABAT",
+    label: "Khalabat",
     value: "7063",
   },
   {
-    label: "SADDA",
+    label: "Sadda",
     value: "7064",
   },
   {
-    label: "TIMARGARA",
+    label: "Timargara",
     value: "7065",
   },
   {
-    label: "KABAL",
+    label: "Kabal",
     value: "7067",
   },
   {
-    label: "DIR",
+    label: "Dir",
     value: "7068",
   },
   {
-    label: "TOPI",
+    label: "Topi",
     value: "7069",
   },
   {
-    label: "AMANGARH",
+    label: "Amangarh",
     value: "7070",
   },
   {
-    label: "RISALPUR",
+    label: "Risalpur",
     value: "7071",
   },
   {
-    label: "GHAZI",
+    label: "Ghazi",
     value: "7240",
   },
   {
-    label: "ORAKZAI",
+    label: "Orakzai",
     value: "7242",
   },
   {
-    label: "BATAGRAM",
+    label: "Batagram",
     value: "7243",
   },
   {
-    label: "ZALIMZAI",
+    label: "Zalimzai",
     value: "7244",
   },
   {
-    label: "PINDIALI",
+    label: "Pindiali",
     value: "7245",
   },
   {
-    label: "PARANGHAR",
+    label: "Paran Ghar",
     value: "7246",
   },
   {
-    label: "SAFI",
+    label: "Safi",
     value: "7247",
   },
   {
-    label: "EKKAGUND",
+    label: "Ekka Gund",
     value: "7249",
   },
   {
-    label: "NORTHWAZIRISTAN",
+    label: "North Waziristan",
     value: "7253",
   },
   {
-    label: "SOUTHWAZIRISTAN",
+    label: "South Waziristan",
     value: "7254",
   },
   {
-    label: "BAJAUR",
+    label: "Bajaur",
     value: "7255",
   },
   {
-    label: "MAKIN",
+    label: "Makin",
     value: "7263",
   },
   {
-    label: "CHARBAGH",
+    label: "Charbagh",
     value: "7889",
   },
   {
-    label: "MARDAN",
+    label: "Mardan",
     value: "937",
   },
   {
-    label: "GILGIT",
+    label: "Gilgit",
     value: "6072",
   },
   {
-    label: "SKARDU",
+    label: "Skardu",
     value: "6073",
   },
   {
-    label: "KHAPLU",
+    label: "Khaplu",
     value: "6074",
   },
   {
-    label: "DAMBUDAS",
+    label: "Dambudas",
     value: "6075",
   },
   {
-    label: "TOLTI",
+    label: "Tolti",
     value: "6076",
   },
   {
-    label: "EIDGHAH",
+    label: "Eidgah",
     value: "6077",
   },
   {
-    label: "SHIGAR",
+    label: "Shigar",
     value: "6078",
   },
   {
-    label: "NAGARKHAS",
+    label: "Nagar Khas",
     value: "6079",
   },
   {
-    label: "ISHKOMAN",
+    label: "Ishkoman",
     value: "6080",
   },
   {
-    label: "JUGLOT",
+    label: "Juglot",
     value: "6081",
   },
   {
-    label: "DANYOR",
+    label: "Danyor",
     value: "6082",
   },
   {
-    label: "KARIMABAD",
+    label: "Karimabad",
     value: "6083",
   },
   {
-    label: "ALIABAD",
+    label: "Aliabad",
     value: "6084",
   },
   {
-    label: "CHILAS",
+    label: "Chilas",
     value: "6085",
   },
   {
-    label: "GAHKUCH",
+    label: "Gahkuch",
     value: "6086",
   },
   {
-    label: "TANGIR",
+    label: "Tangir",
     value: "6087",
   },
   {
@@ -3445,135 +2125,135 @@ export const LIST_OF_POB = [
     value: "7233",
   },
   {
-    label: "MIRPUR(AK)",
+    label: "Mirpur (AK)",
     value: "1321",
   },
   {
-    label: "BHIMBER",
+    label: "Bhimber",
     value: "7124",
   },
   {
-    label: "BARNALA",
+    label: "Barnala",
     value: "7125",
   },
   {
-    label: "SAMAHNI",
+    label: "Samahni",
     value: "7126",
   },
   {
-    label: "KOTLI",
+    label: "Kotli",
     value: "7127",
   },
   {
-    label: "KHUIRATTA",
+    label: "Khuiratta",
     value: "7128",
   },
   {
-    label: "FATEHPUR",
+    label: "Fatehpur",
     value: "7129",
   },
   {
-    label: "SEHNSA",
+    label: "Sehnsa",
     value: "7130",
   },
   {
-    label: "CHAROI",
+    label: "Charoi",
     value: "7131",
   },
   {
-    label: "DULIAHJATTAN",
+    label: "Duliah Jattan",
     value: "7132",
   },
   {
-    label: "HATTIANBALA",
+    label: "Hattian Bala",
     value: "7133",
   },
   {
-    label: "CHIKKAR",
+    label: "Chikkar",
     value: "7134",
   },
   {
-    label: "LEEPA",
+    label: "Leepa",
     value: "7135",
   },
   {
-    label: "MUZAFFARABAD",
+    label: "Muzaffarabad",
     value: "7136",
   },
   {
-    label: "NASIRABAD",
+    label: "Nasirabad",
     value: "7137",
   },
   {
-    label: "ATHMUQAM",
+    label: "Athmuqam",
     value: "7138",
   },
   {
-    label: "SHARDA",
+    label: "Sharda",
     value: "7139",
   },
   {
-    label: "BAGH",
+    label: "Bagh",
     value: "7140",
   },
   {
-    label: "DHIRKOT",
+    label: "Dhir Kot",
     value: "7141",
   },
   {
-    label: "HARIGHEL",
+    label: "Harighel",
     value: "7142",
   },
   {
-    label: "HAVELI",
+    label: "Haveli",
     value: "7143",
   },
   {
-    label: "KHURSHIDABAD",
+    label: "Khurshidabad",
     value: "7144",
   },
   {
-    label: "MUMTAZABAD",
+    label: "Mumtazabad",
     value: "7145",
   },
   {
-    label: "ABBASPUR",
+    label: "Abbaspur",
     value: "7146",
   },
   {
-    label: "HAJIRA",
+    label: "Hajira",
     value: "7147",
   },
   {
-    label: "RAWALAKOT",
+    label: "Rawalakot",
     value: "7148",
   },
   {
-    label: "THORAR",
+    label: "Thorar",
     value: "7149",
   },
   {
-    label: "BALOCH",
+    label: "Baloch",
     value: "7150",
   },
   {
-    label: "MANG",
+    label: "Mang",
     value: "7151",
   },
   {
-    label: "PALLANDRI",
+    label: "Pallandri",
     value: "7152",
   },
   {
-    label: "TARARKHEL",
+    label: "Tararkhel",
     value: "7153",
   },
   {
-    label: "MIRPUR",
+    label: "Mirpur",
     value: "7222",
   },
   {
-    label: "ISLAMABAD",
+    label: "Islamabad",
     value: "004",
   },
 ];

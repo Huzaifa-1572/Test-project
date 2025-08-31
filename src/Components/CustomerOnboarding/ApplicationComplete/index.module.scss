@@ -9,16 +9,16 @@
   overflow-y: auto;
 
   .mainHeading {
-    color: #e8927c;
+    // color: #e8927c;
     margin: 15px 0px;
     letter-spacing: 2px;
   }
 
   .backButtonWrapper {
-    width: 200px;
-    height: 50px;
+    width: 230px;
+    height: 70px;
     border-radius: 22px;
-    background-color: #363636;
+    background-color: #5a95de;
     color: white;
     gap: 5px;
     margin: 20px 0px;
@@ -43,14 +43,14 @@
 
   .titleWrapper {
     margin-top: 5px;
-    font-size: clamp(18px, 4vw, 40px);
-    color: #5a95de;
+    font-size: clamp(12px, 3vw, 40px);
+    color: gray;
   }
 
   .descriptionWrapper {
     margin: 15px;
     font-size: clamp(12px, 2.5vw, 18px);
-    color: gray;
+    // color: gray;
   }
 
   .boxWrapper {

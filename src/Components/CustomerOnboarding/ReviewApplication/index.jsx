@@ -10,7 +10,7 @@ import { FaLock } from "react-icons/fa"
 import { HiViewfinderCircle } from "react-icons/hi2"
 import { IoMdWarning } from "react-icons/io"
 import REVIEW_UNDRAW from 'src/Assets/images/reviewUndraw.svg'
-import REVIEW_UNDRAW_SM from 'src/Assets/images/reviewUndraw_sm.svg'
+import REVIEW_UNDRAW_SM from 'src/Assets/Icons/reviewIcon.png'
 import ImageDailog from 'src/Common/ImageDialog'
 import usePostDataToServer from 'src/Hooks/usePostdataToServer'
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess'
@@ -70,7 +70,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
 
                 {/* FOR MOBILE */}
                 <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', alignItems: 'center' }}>
-                    <img src={isSmallScreen() ? REVIEW_UNDRAW_SM : REVIEW_UNDRAW} alt='review-application' height='70px' width='90' />
+                    <img src={isSmallScreen() ? REVIEW_UNDRAW_SM : REVIEW_UNDRAW} alt='review-application' />
                     <h1 className={styles.topHeading}>
                         {TITLE || "Hey! Review Your Application"}
                     </h1>

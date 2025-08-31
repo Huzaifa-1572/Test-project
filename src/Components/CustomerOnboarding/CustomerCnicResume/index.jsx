@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import CNICICON from 'src/Assets/images/cnicIcon.png';
+import CNICICON from 'src/Assets/Icons/resumeAccountIcon.png';
 import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg";
 import CNIC_UNDRAW_SM from "src/Assets/images/resumeUndraw-sm.svg";
 import CustomButton from "src/Common/CustomButton";
@@ -30,7 +30,7 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
                 Icon={CNICICON}
                 title={"Resume Application"}
                 description={"Enter your CNIC number to retrieve your application details and proceed from where you paused."}
-                heroImage={isSmallScreen() ? CNIC_UNDRAW_SM : CNIC_UNDRAW}
+                heroImage={isSmallScreen() ? CNICICON : CNIC_UNDRAW}
             >
                 <Grid container spacing={2}>
 

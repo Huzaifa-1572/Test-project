@@ -23,7 +23,7 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                             {
                                 heroImage &&
                                 <Box className={styles.smallDeviceIconContainer} >
-                                    <img src={heroImage} />
+                                    <img src={heroImage} height="100px" />
                                 </Box>
                             }
                         </Box>
