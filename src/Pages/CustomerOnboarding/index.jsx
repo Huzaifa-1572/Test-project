@@ -44,6 +44,7 @@ export const SCREENS_FOR_PROGRESS_BAR = [
   'scr_emailVerification',
   'scr_livePhotoCapture',
   'scr_uploadCnicFront',
+  'src_updateCnicNumber',
   'scr_uploadCnicBack',
   'scr_cnicDetail',
   'scr_additionalInformation',
@@ -51,7 +52,6 @@ export const SCREENS_FOR_PROGRESS_BAR = [
   'scr_reviewApplication',
   'scr_termsAndConditions',
   'scr_applicationComplete',
-  'src_updateCnicNumber'
 ]
 
 export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
@@ -70,6 +70,7 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
     // scr_uploadCnicFront: (isMobile || isWebview) ? <CnicFrontForMobile /> : <CnicFrontForWeb />,
     scr_uploadCnicFront: <CnicFrontForWeb />,
     // scr_uploadCnicBack: (isMobile || isWebview) ? <CnicBackForMobile /> : <CnicBackForWeb />,
+    src_updateCnicNumber: <UpdateCnic />,
     scr_uploadCnicBack: <CnicBackForWeb />,
     scr_cnicDetail: <CnicDetail />,
     scr_additionalInformation: <AdditionalInformation />,
@@ -77,7 +78,6 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
     scr_reviewApplication: <ReviewApplication />,
     scr_termsAndConditions: <TermAndCondition />,
     scr_applicationComplete: <ApplicationComplete />,
-    src_updateCnicNumber: <UpdateCnic />
   }
   return SCREEN_DICTIONARY[CURRENT_SCREEN]
 }

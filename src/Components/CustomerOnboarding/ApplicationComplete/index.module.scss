@@ -9,16 +9,18 @@
   overflow-y: auto;
 
   .mainHeading {
-    // color: #e8927c;
+    color: #5a95de;
     margin: 15px 0px;
-    letter-spacing: 2px;
+    // letter-spacing: 2px;
+    font-size: clamp(28px, 5vw, 40px);
   }
 
   .backButtonWrapper {
     width: 230px;
     height: 70px;
     border-radius: 22px;
-    background-color: #5a95de;
+    // background-color: #5a95de;
+    background: linear-gradient(82deg, #2c74bb -2.19%, #ed2227 100.2%);
     color: white;
     gap: 5px;
     margin: 20px 0px;
@@ -43,13 +45,14 @@
 
   .titleWrapper {
     margin-top: 5px;
-    font-size: clamp(12px, 3vw, 40px);
-    color: gray;
+    font-size: clamp(13px, 3vw, 40px);
+    color: #252f37;
+    // color: black;
   }
 
   .descriptionWrapper {
     margin: 15px;
-    font-size: clamp(12px, 2.5vw, 18px);
+    font-size: clamp(19px, 2.5vw, 18px);
     // color: gray;
   }
 

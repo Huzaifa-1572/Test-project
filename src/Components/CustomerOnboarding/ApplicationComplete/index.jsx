@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Fade, Typography } from '@mui/material';
 import { CiLogin } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import APPLICATION_SUBMITTED_UNDRAW from 'src/Assets/images/applicationSubmittedUndraw.svg';
@@ -33,10 +33,12 @@ const ApplicationComplete = ({ reset }) => {
     return (
         <div className={styles.topWrapper}>
             <h3 className={styles.mainHeading}>Application Submitted</h3>
-            <h2 className={styles.titleWrapper}>Congratulation your application submitted successfully.</h2>
-            <Box className={styles.imageBox} sx={{ marginTop: '25px' }}>
-                <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={140} />
-            </Box>
+            <h2 className={styles.titleWrapper}>Congratulation! your application submitted successfully</h2>
+            <Fade in={true} timeout={2000}>
+                <Box className={styles.imageBox} sx={{ marginTop: '25px' }}>
+                    <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={100} />
+                </Box>
+            </Fade>
             <p className={styles.descriptionWrapper}>
                 <strong>Your account verification is pending</strong>. Our team is reviewing your application. You'll be notified once it's approved. Thank you for choosing us!
             </p>
