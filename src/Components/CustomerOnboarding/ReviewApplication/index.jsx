@@ -70,7 +70,7 @@ const ReviewApplication = ({ setValue, getValues }) => {
 
                 {/* FOR MOBILE */}
                 <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', alignItems: 'center' }}>
-                    <img src={isSmallScreen() ? REVIEW_UNDRAW_SM : REVIEW_UNDRAW} alt='review-application' />
+                    <img src={isSmallScreen() ? REVIEW_UNDRAW_SM : REVIEW_UNDRAW} alt='review-application' height='80px' width='80' />
                     <h1 className={styles.topHeading}>
                         {TITLE || "Hey! Review Your Application"}
                     </h1>

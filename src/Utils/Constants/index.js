@@ -77,32 +77,32 @@ export const dateFormats = [
 
 export const LIVENESS_GUIDELINES = [
   {
-    heading: 'Volume Up 🔊',
-    content: 'Keep your device’s sound on to catch all audio cues.'
+    heading: 'Volume up:',
+    content: 'Keep your device sound on to catch important audio cues'
   },
   {
-    heading: 'No Glasses 🚫👓',
-    content: 'Remove glasses before starting.'
+    heading: 'Take Off Glasses',
+    content: 'Please remove your glasses'
   },
   {
-    heading: 'Face Detection 👤',
-    content: 'Ensure your face is centered, well-lit, and fully visible.'
+    heading: 'Face detection',
+    content: 'Make sure your face is fully visible in the frame'
   },
   {
-    heading: 'Eye Blinking 👁️‍🗨️',
-    content: 'Close your eyes slowly for 1–2 seconds when blinking.'
+    heading: 'Eye blinking',
+    content: 'Please blink your eyes naturally when prompted to verify liveness.'
   },
   {
-    heading: 'Head Movement ↩️↪️',
-    content: 'Turn your head slowly as instructed, holding the position for 1–2 seconds.'
+    heading: 'Head Movement',
+    content: 'Turn your head slowly as guided, pausing for 1–2 seconds in each position.'
   },
   {
-    heading: 'Good Lighting 💡',
-    content: 'Be in a bright environment without strong backlight or shadows.'
+    heading: 'Clear Lighting',
+    content: 'Make sure you’re in a well-lit space, without strong backlight or shadows.'
   },
   {
-    heading: 'Avoid Blurriness 🔍',
-    content: 'Keep the camera focused for a sharp image.'
+    heading: 'Steady Shot',
+    content: 'Keep the camera steady and focused for a sharp image'
   },
 ];
 

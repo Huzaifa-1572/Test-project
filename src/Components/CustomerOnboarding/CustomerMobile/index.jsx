@@ -15,8 +15,8 @@ const CustomerMobile = ({ control, errors }) => {
   return (
     <WizardLayout
       Icon={MOBILE_ICON}
-      title={"Mobile Verification"}
-      description={"Kindly enter your mobile number to continue your application."}
+      title={"Mobile Number Verification"}
+      description={"Please enter your mobile number to continue your application."}
       heroImage={isSmallScreen() ? MOBILE_ICON : MOBILE_UNDRAW}
     >
       <Grid container spacing={2}>
@@ -25,7 +25,7 @@ const CustomerMobile = ({ control, errors }) => {
             name={"customerMobile"}
             control={control}
             format={"####-#######"}
-            label="Mobile Number"
+            label="Please Enter Your Mobile Number"
             placeholder="03##-#######"
             inputMode="numeric"
             type="tel"
@@ -37,8 +37,7 @@ const CustomerMobile = ({ control, errors }) => {
           <SelectField
             name={"customerOperator"}
             control={control}
-            label={"Operator"}
-            placeholder="Select Operator"
+            label={"Select Mobile Operator"}
             options={OPERATOR_OPTION}
           />
           {errors?.customerOperator ? (<ValidationError message={errors?.customerOperator?.message} />) : null}

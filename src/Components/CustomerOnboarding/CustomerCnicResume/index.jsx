@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import CNICICON from 'src/Assets/Icons/resumeAccountIcon.png';
+import CNICICON from 'src/Assets/Icons/resumeIcon.png';
 import CNIC_UNDRAW from "src/Assets/images/resumeUndraw.svg";
 import CNIC_UNDRAW_SM from "src/Assets/images/resumeUndraw-sm.svg";
 import CustomButton from "src/Common/CustomButton";

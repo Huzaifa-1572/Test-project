@@ -22,7 +22,7 @@ const CnicDetail = ({ control, setValue, errors, watch }) => {
     <WizardLayout
       Icon={CARD_ICON}
       title={TITLE}
-      description={'Kindly review and confirm the details of your CNIC to proceed with the process.'}
+      description={'Please review your CNIC details to continue.'}
       heroImage={isSmallScreen() ? CARD_ICON : CNIC_DETAIL_UNDRAW}
     >
       <Grid container sx={{ gap: "24px" }}>

@@ -1,8 +1,9 @@
 import { Box, Button, Container, IconButton } from '@mui/material';
+import CustomButton from 'src/Common/CustomButton';
 import { Switch } from "@mui/material";
 import { useMemo, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import GUIDELINE_UNDRAW from 'src/Assets/images/faceDetectionIcon.png';
+import GUIDELINE_UNDRAW from 'src/Assets/Icons/faceGuidelineIcon.png';
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
 
 import { getUUID, isSmallScreen, toSentenceCase } from 'src/Utils/Helpers';
@@ -19,7 +20,7 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
 
     return (
         <Box sx={{
-            background: '#e0e7ee',
+            background: 'white',
             position: 'absolute',
             zIndex: '1000',
             top: 0,
@@ -34,7 +35,7 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
         }}>
             <Container maxWidth="lg" sx={{ padding: '20px', textAlign: { xs: 'center', sm: 'left' } }}>
                 <Box sx={{ width: '100%', textAlign: { xs: 'center', sm: 'left' } }}>
-                    <img src={GUIDELINE_UNDRAW} alt='Guidelines' height={'70px'} width={'100px'} />
+                    <img src={GUIDELINE_UNDRAW} alt='Guidelines' height={'70px'} width={'80px'} />
                 </Box>
 
                 <Box>
@@ -97,16 +98,7 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
                 </Box>
 
                 <Box sx={{ width: '100%' }}>
-                    <Button sx={{
-                        background: '#407ec9',
-                        color: 'white',
-                        width: '100%',
-                        maxWidth: '500px',
-                        '&:hover': {
-                            backgroundColor: '#407ec9',
-                            boxShadow: 'none',
-                        },
-                    }} onClick={closeSplashScreenHandler}>Let's Face It</Button>
+                    <CustomButton label="Begin Verification" onClick={closeSplashScreenHandler} />
                 </Box>
 
                 {/* Video Modal */}
@@ -154,7 +146,7 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
                                     title="Liveness Guidelines"
                                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     sandbox="allow-same-origin allow-scripts allow-popups allow-presentation"
-                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    referrerPolicy="strict-origin-when-cross-origin"
                                     loading="lazy"
                                     style={{
                                         position: 'absolute',

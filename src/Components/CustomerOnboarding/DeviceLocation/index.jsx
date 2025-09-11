@@ -36,7 +36,7 @@ const DeviceLocation = ({ getValues, setValue }) => {
       <WizardLayout
         Icon={DEVICE_ICON}
         title={"Device Location"}
-        description={"We need your location to provide a personalized and seamless experience."}
+        description={"We need your location for a seamless, personalized experience. Rest assured your data is fully secure."}
         heroImage={isSmallScreen() ? DEVICE_ICON : LOCATION_UNDRAW}
       >
         <CustomButton type="button" label={"Continue"} onClick={handleProceed} />

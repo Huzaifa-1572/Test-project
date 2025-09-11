@@ -55,16 +55,17 @@ const LandingPage = () => {
             <Grid item xs={12} xl={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
               <Fade in={true} timeout={1500}>
                 <Box className={styles.textContainer}>
-                  <Box sx={{ fontSize: 'clamp(20px,3vw,20px)', color: '#407ec9' }}>Start Your Journey with
+                  <Box sx={{ fontSize: 'clamp(21px,3vw,24px)', color: '#407ec9' }}>Begin your journey with
                     <Box component={'span'} sx={{ fontWeight: '900', marginLeft: '5px' }}>Payvay</Box>
                   </Box>
-                  <Box sx={{ fontSize: 'clamp(18px,3vw,20px)', color: '#404040' }}>Account for Your Needs!</Box>
+                  <Box sx={{ fontSize: 'clamp(12px,3vw,20px)', color: '#404040' }}>seamless, secure, and tailored to your lifestyle.</Box>
                 </Box>
               </Fade>
 
               <Fade in={true} timeout={2000}>
                 <Box className={styles.descriptionText}>
-                  Open a new account or resume your application — experience seamless, secure, and convenient digital onboarding tailored to your lifestyle.
+                  {/* Open a new account or resume your application — experience seamless, secure, and convenient digital onboarding tailored to your lifestyle. */}
+                  Open a new account or pick up where you left off
                 </Box>
               </Fade>
 
@@ -77,9 +78,9 @@ const LandingPage = () => {
                       <Box className={styles.cardTitle}>
                         Start New Application
                       </Box>
-                      <Box className={styles.cardDescription}>
+                      {/* <Box className={styles.cardDescription}>
                         Begin a fresh journey from the start
-                      </Box>
+                      </Box> */}
                     </Box>
                   </Fade>
                 </Grid>
@@ -92,9 +93,9 @@ const LandingPage = () => {
                       <Box className={styles.cardTitle}>
                         Resume Your Application
                       </Box>
-                      <Box className={styles.cardDescription}>
+                      {/* <Box className={styles.cardDescription}>
                         Continue right where you left off
-                      </Box>
+                      </Box> */}
                     </Box>
                   </Fade>
                 </Grid>

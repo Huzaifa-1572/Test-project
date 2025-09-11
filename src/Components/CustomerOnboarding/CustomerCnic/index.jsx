@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import CNICICON from 'src/Assets/Icons/customerCnicIcon.png';
+import CNICICON from 'src/Assets/Icons/PersonalInfo.png';
 import CNIC_UNDRAW from "src/Assets/images/customerCnicUndraw.svg";
 import CustomButton from "src/Common/CustomButton";
 import { CaptchaField, CustomInputField, NumberInputField, TextInputField } from "src/Components/FormFields";
@@ -14,8 +14,8 @@ const CustomerCnic = ({ control, errors }) => {
   return (
     <WizardLayout
       Icon={CNICICON}
-      title={"CNIC Verification"}
-      description={"Please enter your CNIC to continue with your online onboarding."}
+      title={"Personal Information"}
+      // description={"Please enter your CNIC to continue with your online onboarding."}
       heroImage={isSmallScreen() ? CNICICON : CNIC_UNDRAW}
     >
 
@@ -25,7 +25,7 @@ const CustomerCnic = ({ control, errors }) => {
           <TextInputField
             name={"KEY_NAME"}
             control={control}
-            label="Name As Per CNIC"
+            label="Please enter your name as per CNIC"
             input_type="text"
           />
           {errors?.KEY_NAME ? (<ValidationError message={errors?.KEY_NAME?.message} />) : null}
@@ -36,7 +36,7 @@ const CustomerCnic = ({ control, errors }) => {
             name={"customerCnic"}
             control={control}
             format={"#####-#######-#"}
-            label="Please Enter Your CNIC"
+            label="Please enter your CNIC Number"
             placeholder="#####-########-#"
             inputMode="numeric"
             type="tel"
@@ -48,10 +48,11 @@ const CustomerCnic = ({ control, errors }) => {
           <NumberInputField
             name={"referrerReferralCode"}
             control={control}
-            label={"Referral Code (if any)"}
+            label={"Enter your referral code (optional)"}
             maxLength={6}
             inputMode="numeric"
             type="tel"
+            placeholder={"if you have been referred by someone."}
           />
           {errors?.referrerReferralCode ? (<ValidationError message={errors?.referrerReferralCode?.message} />) : null}
         </Grid>
@@ -64,7 +65,9 @@ const CustomerCnic = ({ control, errors }) => {
               siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
             />
           </Box>
-          {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+          <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+            {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+          </Box>
         </Grid>
 
         <Grid item xs={12} lg={6}>

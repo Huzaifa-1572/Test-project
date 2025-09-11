@@ -80,7 +80,7 @@ export const TextInputField = ({
             inputProps: { maxLength: maxLength },
           }}
           InputLabelProps={{
-            sx: { fontSize: "0.85rem", color: "#666666", marginTop: "5px" },
+            sx: { fontSize: "0.95rem", color: "#666666", marginTop: "5px" },
           }}
           sx={{
             maxWidth: "500px",
@@ -165,7 +165,7 @@ export const AlphaNumericInputField = ({
             }}
             InputLabelProps={{
               style: {
-                fontSize: "0.85rem",
+                fontSize: "0.95rem",
                 color: "#666666",
                 marginTop: "5px",
                 fontFamily: "ArticulatCF-Regular",
@@ -227,7 +227,7 @@ export const MultiLineTextInputField = ({ name, label, control, placeholder, max
         }}
         InputLabelProps={{
           sx: {
-            fontSize: "0.85rem",
+            fontSize: "0.95rem",
             color: "#666666",
             marginTop: "5px",
           },
@@ -306,7 +306,7 @@ export const CustomInputField = ({
       },
       InputLabelProps: {
         sx: {
-          fontSize: "0.85rem",
+          fontSize: "0.95rem",
           color: "#666666",
           marginTop: "5px",
         },
@@ -443,7 +443,7 @@ export const NumberInputField = ({
             }}
             InputLabelProps={{
               sx: {
-                fontSize: "0.85rem",
+                fontSize: "0.95rem",
                 color: "#666666",
                 marginTop: "5px",
               },
@@ -501,7 +501,7 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                     },
                     InputLabelProps: {
                       style: {
-                        fontSize: "0.85rem",
+                        fontSize: "0.95rem",
                         color: disabled ? "#aaaaaa" : "#666666", // Dim the label color when disabled
                         marginTop: "5px",
                         backgroundColor: "transparent",
@@ -546,7 +546,7 @@ export const DateInputField = ({ name, label, control, disabled, maxDate }) => {
                     placeholder="Select Date"
                     InputLabelProps={{
                       style: {
-                        fontSize: "0.85rem",
+                        fontSize: "0.95rem",
                         color: disabled ? "#aaaaaa" : "#666666", // Dim the placeholder color when disabled
                         marginTop: "5px",
                         fontFamily: "ArticulatCF-Regular",
@@ -617,7 +617,7 @@ export const SelectField = ({
           }}
           InputLabelProps={{
             sx: {
-              fontSize: "0.85rem",
+              fontSize: "0.95rem",
               color: "#666666",
               marginTop: "10px",
               top: "-5px",
@@ -969,7 +969,7 @@ export const CurrencyInputField = ({
       },
       InputLabelProps: {
         style: {
-          fontSize: "0.85rem",
+          fontSize: "0.95rem",
           color: "#666666",
           marginTop: "5px",
           fontFamily: "ArticulatCF-Regular",

@@ -124,7 +124,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
         <Container maxWidth="lg" className={styles.paperContainer} sx={{ background: { xs: 'none', md: '#f6f6f6' }, borderRadius: { xs: '7px', sm: '20px' } }}>
             <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                 <Box>
-                    <img src={icon} alt="mobileOtpLogo" />
+                    <img src={icon} alt="mobileOtpLogo" height={'100px'} />
                 </Box>
                 <h2 className={styles.mainHeading}>{title}</h2>
                 <p className={styles.content}>
@@ -180,13 +180,13 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                         (title !== 'Email Verification' && isWebview) ?
                             otp?.length !== 6 ?
                                 <Alert sx={{ borderRadius: '7px' }} severity='info'>
-                                    <Box sx={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                    {/* <Box sx={{ fontSize: '14px', fontWeight: 'bold' }}>
                                         Manual entry of the OTP is not permitted!
-                                    </Box>
+                                    </Box> */}
                                     <Box sx={{ fontSize: '12px' }}>
                                         {isIosDevice
                                             ? 'You can use auto-fill to enter the OTP as soon as it is received.'
-                                            : 'Please wait while we automatically fetch your OTP.'}
+                                            : 'Please wait while your OTP is fetched — manual entry is not permitted.'}
                                     </Box>
                                 </Alert>
                                 :

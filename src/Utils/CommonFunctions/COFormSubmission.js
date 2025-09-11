@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import HasValidEmail from "src/Components/CustomerOnboarding/HasValidEmail";
 import { BASE_URL, ENDPOINTS } from "src/Utils/Config";
 import { PAYLOAD_KEYS } from "src/Utils/Constants";
 import {
@@ -96,33 +97,34 @@ export const CUSTMOBILE_VERIFICATION_HANDLER = ({ CURRENT_SCREEN, data }) => {
   };
 };
 
-export const CUST_HASVALIDEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
-  const BODY = {
-    custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
-    channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
-    custIdentityValue: retrieveCNIC(data.customerCnic),
-    screenKuid: CURRENT_SCREEN,
-    requestDate: getCurrentDate(),
-    content: {
-      KEY_HAS_VALID_EMAIL: data.isValidEmail,
-    },
-  };
+// export const CUST_HASVALIDEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
+//   const BODY = {
+//     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
+//     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
+//     custIdentityValue: retrieveCNIC(data.customerCnic),
+//     screenKuid: CURRENT_SCREEN,
+//     requestDate: getCurrentDate(),
+//     content: {
+//       KEY_HAS_VALID_EMAIL: data.isValidEmail,
+//     },
+//   };
 
-  return {
-    API_URL: `${BASE_URL}${ENDPOINTS.GENERIC_HANDLER}`,
-    BODY,
-  };
-};
+//   return {
+//     API_URL: `${BASE_URL}${ENDPOINTS.GENERIC_HANDLER}`,
+//     BODY,
+//   };
+// };
 
 export const CUSTEMAIL_HANDLER = ({ CURRENT_SCREEN, data }) => {
   const BODY = {
     custIdentityKey: PAYLOAD_KEYS.CUST_IDENTIFICATION_KEY,
     channelCode: PAYLOAD_KEYS.CHANNEL_CODE,
     custIdentityValue: retrieveCNIC(data.customerCnic),
-    email: data.customerEmail,
+    email: data.isValidEmail ? data.customerEmail : '',
     screenKuid: CURRENT_SCREEN,
     isResumeApplication: false,
     requestDate: getCurrentDate(),
+    hasValidEmail: data.isValidEmail,
   };
 
   return {

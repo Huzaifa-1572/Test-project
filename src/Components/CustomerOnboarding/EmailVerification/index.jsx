@@ -21,7 +21,7 @@ const EmailVerification = ({ setValue, getValues }) => {
         <VerificationPage
             icon={isSmallScreen() ? EMAIL_VERIFICATION_SM : EMAIL_VERIFICATION}
             title={'Email Verification'}
-            content={"Please enter the one time passcode which was sent to your email address"}
+            content={"Please enter OTP sent to your email ID"}
             goBackContent={"Change Email Address"}
             description={SENT_TO_CONTENT()}
             setValue={setValue}

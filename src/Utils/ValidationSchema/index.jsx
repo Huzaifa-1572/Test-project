@@ -77,15 +77,22 @@ export const shape = {
   },
 
   "scr_customerEmail": {
+    isValidEmail: yup.boolean(),
     customerEmail: yup
       .string()
-      .required("Email address is required.")
-      .matches(
-        /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
-        "Please enter a valid email address."
-      )
-      .email("Please enter a valid email address.")
-      .max(50, "Email address must not exceed 50 characters."),
+      .when('isValidEmail', {
+        is: true,
+        then: (schema) =>
+          schema
+            .required("Email address is required.")
+            .matches(
+              /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+              "Please enter a valid email address."
+            )
+            .email("Please enter a valid email address.")
+            .max(50, "Email address must not exceed 50 characters."),
+        otherwise: (schema) => schema.notRequired(),
+      }),
   },
 
   "scr_additionalInformation": {

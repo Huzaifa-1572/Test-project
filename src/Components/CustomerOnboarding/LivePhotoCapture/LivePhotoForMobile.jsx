@@ -595,7 +595,7 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
 
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px', width: '100%', display: 'flex', justifyContent: 'center' }}>
                             <Fade in={true} timeout={2000}>
-                                <Box sx={{ height: '60px' }} >
+                                <Box sx={{ height: '50px', marginBottom: '20px' }} >
                                     <img style={{ display: 'inline-block' }} src={LIVE_IMAGE_UNDRAW} />
                                 </Box>
                             </Fade>
@@ -605,8 +605,8 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                             {
                                 !!livePhoto ? null :
                                     <Fade in={true} timeout={2000}>
-                                        <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(20px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
-                                            Hey! Its Time For A Selfie
+                                        <Box sx={{ paddingTop: '-35px', paddingBottom: '7px', textAlign: 'center', fontSize: 'clamp(22px, 3vw, 35px)', letterSpacing: '0.5px', fontWeight: 700 }}>
+                                            Capture your Selfie
                                         </Box>
                                     </Fade>
                             }

@@ -20,7 +20,7 @@ const CnicFrontForWeb = ({ control, getValues, errors, setValue }) => {
     <WizardLayout
       Icon={CARD_ICON}
       title={"Upload CNIC Front" || TITLE}
-      description={"Kindly upload a clear image of the front side of your CNIC to proceed." || DESCRIPTION}
+      description={"Upload a clear image of the front of your CNIC to proceed" || DESCRIPTION}
       heroImage={isSmallScreen() ? CARD_ICON : CARD_UNDRAW}
     >
       {

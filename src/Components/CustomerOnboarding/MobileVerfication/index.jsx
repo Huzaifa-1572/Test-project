@@ -13,8 +13,8 @@ const MobileVerification = ({ setValue, getValues }) => {
     return (
         <VerificationPage
             icon={isSmallScreen() ? MOBILE_VERIFICATION_LOGO_SM : MOBILE_VERIFICATION_LOGO}
-            title={'Mobile Verification'}
-            content={"We have sent a verification code to verify your mobile number"}
+            title={'Mobile Number Verification'}
+            content={"An OTP has been sent on your mobile number for verification."}
             description={`sent to ${NUMBER_FOR_OTP}`}
             goBackContent={"Change Mobile Number"}
             setValue={setValue}
