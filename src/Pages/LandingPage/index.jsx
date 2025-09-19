@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Background from "src/Assets/images/background.png";
 // import OpenNewAccount from "src/Assets/images/openAccount1.svg";
 // import resumeAccount from "src/Assets/images/resumeAccount1.svg";
-import OpenNewAccount from "src/Assets/Icons/newAccountIcon.png";
+import OpenNewAccount from "src/Assets/images/NewApplication.png";
 import resumeAccount from "src/Assets/Icons/resumeAccountIcon.png";
 import heroImage from "src/Assets/images/wallet.png";
 import HomePageLayout from "src/Layout/HomePageLayout";

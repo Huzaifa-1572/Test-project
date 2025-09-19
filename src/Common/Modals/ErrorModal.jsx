@@ -3,7 +3,9 @@ import Slide from '@mui/material/Slide';
 import { forwardRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import WARNING_UNDRAW from 'src/Assets/images/bulb.png';
+import { IoMdCheckmark, IoMdClose } from 'react-icons/io';
+import WARNING_UNDRAW from 'src/Assets/Icons/sessionTimeOut.png';
+import CustomButton from 'src/Common/CustomButton';
 import usePostDataToServer from 'src/Hooks/usePostdataToServer';
 import { updateCurrentScreen } from 'src/Redux/Reducers/CurrentScreenState';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
@@ -64,19 +66,31 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
       // FOR CNIC UPDATE FLOW
       case 'Error-103':
         return (
-          <Button className={styles.dialogButton} type='button' onClick={handleUpdate}>Update</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ width: '100%', textAlign: 'center' }}>
+              <CustomButton label="Update" type="button" onClick={handleUpdate} />
+            </Box>
+          </Box>
         );
       // FOR SOMEONE INITIATING NEW ACCOUNT FLOW FROM RESUME FLOW
       case 'Error-104':
         return (
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-            <Button sx={{ padding: '10px !important' }} className={styles.dialogButton} onClick={handleYes}>Yes</Button>
-            <Button sx={{ padding: '10px !important' }} className={styles.dialogButton} onClick={handleNo}>No</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+            <Box sx={{ width: '120px' }}>
+              <CustomButton label="Yes" onClick={handleYes} Icon={<IoMdCheckmark />} />
+            </Box>
+            <Box sx={{ width: '120px' }}>
+              <CustomButton label="No" onClick={handleNo} Icon={<IoMdClose />} />
+            </Box>
           </Box>
         );
       default:
         return (
-          <Button className={styles.dialogButton} onClick={handleClose}>OK</Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ width: '100%', textAlign: 'center' }}>
+              <CustomButton label="OK" onClick={handleClose} />
+            </Box>
+          </Box>
         );
     }
   };
@@ -116,7 +130,7 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
       <div className={styles.mainContainer}>
         <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
         <div className={styles.dialogContentBox}>
-          <p className={styles.dialogTitle}>Oh no!</p>
+          {/* <p className={styles.dialogTitle}>Oh no!</p> */}
           <p className={styles.dialogContent}>{toSentenceCase(errorMessage) || 'something went wrong!'}</p>
           {renderActionButtons()}
         </div>

@@ -2,7 +2,7 @@ import { Box, Container, Fade, Typography } from '@mui/material';
 import { CiLogin } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import APPLICATION_SUBMITTED_UNDRAW from 'src/Assets/images/applicationSubmittedUndraw.svg';
-import APPLICATION_SUBMITTED_UNDRAW_SM from 'src/Assets/Icons/successIcon.png';
+import APPLICATION_SUBMITTED_UNDRAW_SM from 'src/Assets/Icons/successIcon.gif';
 import { clearIndexDb, getScreenData, isSmallScreen, redirectToMobileApp } from 'src/Utils/Helpers';
 import styles from './index.module.scss';
 
@@ -36,7 +36,7 @@ const ApplicationComplete = ({ reset }) => {
             <h2 className={styles.titleWrapper}>Congratulation! your application submitted successfully</h2>
             <Fade in={true} timeout={2000}>
                 <Box className={styles.imageBox} sx={{ marginTop: '25px' }}>
-                    <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={100} />
+                    <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={120} />
                 </Box>
             </Fade>
             <p className={styles.descriptionWrapper}>

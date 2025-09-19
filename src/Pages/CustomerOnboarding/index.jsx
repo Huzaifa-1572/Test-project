@@ -36,10 +36,10 @@ const ApplicationComplete = lazy(() => import("src/Components/CustomerOnboarding
 export const SCREENS_FOR_PROGRESS_BAR = [
   'scr_deviceLocation',
   'scr_customerCnic',
-  'scr_customerCnicResume',
+  // 'scr_customerCnicResume',
   'scr_customerMobile',
   'scr_mobileVerification',
-  'scr_hasValidEmail',
+  // 'scr_hasValidEmail',
   'scr_customerEmail',
   'scr_emailVerification',
   'scr_livePhotoCapture',
@@ -51,7 +51,7 @@ export const SCREENS_FOR_PROGRESS_BAR = [
   'scr_addressDetail',
   'scr_reviewApplication',
   'scr_termsAndConditions',
-  'scr_applicationComplete',
+  // 'scr_applicationComplete',
 ]
 
 export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
