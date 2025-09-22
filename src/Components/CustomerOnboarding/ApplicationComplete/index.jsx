@@ -33,14 +33,16 @@ const ApplicationComplete = ({ reset }) => {
     return (
         <div className={styles.topWrapper}>
             <h3 className={styles.mainHeading}>Application Submitted</h3>
-            <h2 className={styles.titleWrapper}>Congratulation! your application submitted successfully</h2>
+            <h2 className={styles.titleWrapper}>Congratulation! your application submitted successfully!</h2>
             <Fade in={true} timeout={2000}>
                 <Box className={styles.imageBox} sx={{ marginTop: '25px' }}>
                     <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={120} />
                 </Box>
             </Fade>
             <p className={styles.descriptionWrapper}>
-                <strong>Your account verification is pending</strong>. Our team is reviewing your application. You'll be notified once it's approved. Thank you for choosing us!
+                <strong>Your account verification is pending.</strong>
+                <br />
+                Our team is reviewing your application. You'll be notified once it's approved. Thank you for choosing us!
             </p>
 
 

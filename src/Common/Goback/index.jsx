@@ -69,7 +69,7 @@ const GoBack = ({ setValue, getValues }) => {
                 <IoMdArrowRoundBack
                     style={{ cursor: 'pointer' }}
                     onClick={handleBack}
-                    size={'35px'}
+                    size={'25px'}
                     color='black'
                 />
             </Box>
