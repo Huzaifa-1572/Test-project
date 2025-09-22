@@ -7,6 +7,8 @@ import ValidationError from "src/Components/ValidationError";
 import { PayvayTerms } from 'src/Utils/Constants/PayvayTerms';
 import { getUUID, isSmallScreen } from "src/Utils/Helpers";
 import styles from "./index.module.scss";
+import Accordion from "src/Common/Accordion";
+
 
 const TermAndCondition = ({ control, errors }) => {
 
@@ -52,14 +54,25 @@ const TermAndCondition = ({ control, errors }) => {
           <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }} className={styles.topHeading}>Terms & Conditions</Box>
         </Box>
         <Box className={styles.termContainer} sx={{ pb: 20 }}>
-          <ol className={styles.list}>
+          {/* <ol className={styles.list}>
             {PayvayTerms?.map((item, index) => (
               <li key={index}>
                 <h4 className={styles.listItemTitle}>{item.title}:</h4>
                 {item.content && <span className={styles.content}>{renderDetail(item.content)}</span>}
               </li>
             ))}
-          </ol>
+          </ol> */}
+
+          {
+            PayvayTerms?.map((data, index) => (
+              <Accordion
+                key={getUUID()}
+                summary={data?.title}
+                detail={data?.content}
+                isFirstItem={index === 0}
+              />
+            ))
+          }
         </Box>
         <Box sx={{ position: 'fixed', left: 0, bottom: 0, width: '100%', background: '#fff', p: 2, boxShadow: 3, zIndex: 999, opacity: 0.98, backdropFilter: 'blur(2px)' }}>
           <CheckboxField name={"isAccepted"} label={"I acknowledge and accept the Terms and Conditions."} control={control} />

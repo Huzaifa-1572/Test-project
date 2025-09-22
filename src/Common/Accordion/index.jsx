@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { MdExpandMore } from "react-icons/md";
 
-export default function AccordionTransition({ summary, detail }) {
-    const [expanded, setExpanded] = React.useState(false);
+export default function AccordionTransition({ summary, detail, isFirstItem = false }) {
+    const [expanded, setExpanded] = React.useState(isFirstItem);
 
     const handleExpansion = () => {
         setExpanded((prevExpanded) => !prevExpanded);
@@ -47,7 +47,7 @@ export default function AccordionTransition({ summary, detail }) {
                     },
                 {
                     boxShadow: 'none',
-                    margin: '20px 0px',
+                    margin: '4px 0px',
                     '&::before': {
                         display: 'none',
                     },
@@ -59,7 +59,7 @@ export default function AccordionTransition({ summary, detail }) {
                 aria-controls="panel1-content"
                 id="panel1-header"
                 sx={{
-                    background: '#DCEEFF',
+                    background: '#f6f6f6',
                     borderRadius: '5px',
                     padding: '5px 10px',
                     color: '#2C74BB',

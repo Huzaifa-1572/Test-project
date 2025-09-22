@@ -11,7 +11,7 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                 {/* FOR LARGE DEVICES */}
                 <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: { xs: 'center', sm: 'flex-start' } }}>
                     <Box className={styles.iconBox} >
-                        <img src={Icon} className={styles.icon} height="100px" />
+                        <img src={Icon} className={styles.icon} height="80px" />
                     </Box>
                 </Box>
 
@@ -23,7 +23,7 @@ const WizardLayout = ({ Icon, title, description, heroImage, children }) => {
                             {
                                 heroImage &&
                                 <Box className={styles.smallDeviceIconContainer} >
-                                    <img src={heroImage} height="100px" />
+                                    <img src={heroImage} height="80px" />
                                 </Box>
                             }
                         </Box>
