@@ -10,7 +10,6 @@ import { isSmallScreen } from "src/Utils/Helpers";
 
 const CustomerCnic = ({ control, errors }) => {
 
-
   return (
     <WizardLayout
       Icon={CNICICON}

@@ -4,6 +4,7 @@ import DeviceDecisionModalState from "src/Redux/Reducers/DeviceDecisionModalStat
 import ErrorState from "src/Redux/Reducers/ErrorState";
 import LoaderState from "src/Redux/Reducers/LoaderState";
 import PrevScreenState from "src/Redux/Reducers/PrevScreenState";
+import RecaptchaState from "src/Redux/Reducers/RecaptchaState";
 import ScreenDataState from "src/Redux/Reducers/ScreenDataState";
 
 export const store = configureStore({
@@ -14,5 +15,6 @@ export const store = configureStore({
     prevScreenState: PrevScreenState,
     screenDataState: ScreenDataState,
     deviceDecisionModal: DeviceDecisionModalState,
+    recaptchaState: RecaptchaState,
   },
 });

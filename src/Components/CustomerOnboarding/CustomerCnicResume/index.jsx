@@ -55,7 +55,10 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
                                 siteKey={import.meta.env.VITE_REACT_APP_GOOGLE_CAPTCHA_KEY}
                             />
                         </Box>
-                        {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+                        <Box sx={{ color: 'white', padding: '5px', textAlign: { xs: 'center', sm: 'left' } }}>
+                            {errors?.googleCaptcha ? (<ValidationError message={errors?.googleCaptcha?.message} />) : null}
+                        </Box>
+
                     </Grid>
 
 

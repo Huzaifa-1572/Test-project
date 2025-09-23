@@ -7,14 +7,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, useController } from "react-hook-form";
 import { LuCheckCheck, LuUpload } from "react-icons/lu";
 import { NumericFormat, PatternFormat } from "react-number-format";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
-import { validateFileSize } from "src/Utils/Helpers";
+import { validateFileSize, isSmallScreen } from "src/Utils/Helpers";
 
 const PatternFormatRef = React.forwardRef((props, ref) => (
   <PatternFormat {...props} getInputRef={ref} />
@@ -573,6 +573,8 @@ export const SelectField = ({
   options,
   disabled,
 }) => {
+  const isSmall = isSmallScreen();
+
   return (
     <Controller
       name={name}
@@ -587,6 +589,35 @@ export const SelectField = ({
           fullWidth
           disabled={disabled}
           placeholder={placeholder}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: isSmall ? {
+                  maxWidth: "500px",
+                  width: "100%",
+                  minWidth: "100%",
+                } : {},
+              },
+              anchorOrigin: {
+                vertical: "bottom",
+                horizontal: "left",
+              },
+              transformOrigin: {
+                vertical: "top",
+                horizontal: "left",
+              },
+              sx: isSmall ? {
+                "& .MuiPaper-root": {
+                  maxWidth: "500px !important",
+                  width: "100% !important",
+                  minWidth: "100% !important",
+                  marginLeft: "0px !important",
+                  marginRight: "0px !important",
+                  left: "0px !important",
+                },
+              } : {},
+            },
+          }}
           sx={{
             "& .MuiFilledInput-root": {
               background: "white",
@@ -1003,7 +1034,27 @@ export const CurrencyInputField = ({
 export const CaptchaField = ({ name, control, onChange, siteKey }) => {
   const [error, setError] = useState('');
   const [isCaptchaLoaded, setIsCaptchaLoaded] = useState(true);
+  const recaptchaRef = useRef(null);
+  // Listen for recaptcha reset signals from Redux
+  const { resetTimestamp } = useSelector(state => state.recaptchaState);
+  const [lastResetTimestamp, setLastResetTimestamp] = useState(null);
 
+  //using a hidden input field to fix the elm.focus issue of
+  const { field: { ref, ...field } } = useController({
+    name,
+    control,
+    rules: { required: true },
+  });
+
+  // Effect to handle recaptcha reset when resetTimestamp changes
+  useEffect(() => {
+    if (resetTimestamp && resetTimestamp !== lastResetTimestamp && recaptchaRef.current) {
+      console.log('Resetting recaptcha...');
+      recaptchaRef.current.reset();
+      field.onChange(null);
+      setLastResetTimestamp(resetTimestamp);
+    }
+  }, [resetTimestamp, lastResetTimestamp, field]);
 
   const handleRecaptchaError = () => {
     setError('Failed to load reCAPTCHA. Please try again later.');
@@ -1014,17 +1065,12 @@ export const CaptchaField = ({ name, control, onChange, siteKey }) => {
     isLoaded && setIsCaptchaLoaded(false);
   };
 
-  //using a hidden input field to fix the elm.focus issue of
-  const { field: { ref, ...field } } = useController({
-    name,
-    control,
-    rules: { required: true },
-  });
   return (
     <div>
       <input ref={ref} type="hidden" />
       <ReCAPTCHA
         {...field}
+        ref={recaptchaRef}
         sitekey={siteKey}
         size="normal"
         asyncScriptOnLoad={handleCaptchaLoad}

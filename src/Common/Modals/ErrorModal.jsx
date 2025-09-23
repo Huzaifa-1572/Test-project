@@ -1,14 +1,15 @@
-import { Box, Button, Dialog } from '@mui/material';
+import { Box, Dialog } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import { forwardRef } from 'react';
+import { IoMdCheckmark, IoMdClose } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { IoMdCheckmark, IoMdClose } from 'react-icons/io';
 import WARNING_UNDRAW from 'src/Assets/Icons/sessionTimeOut.png';
 import CustomButton from 'src/Common/CustomButton';
 import usePostDataToServer from 'src/Hooks/usePostdataToServer';
 import { updateCurrentScreen } from 'src/Redux/Reducers/CurrentScreenState';
 import { closeErrorModal } from 'src/Redux/Reducers/ErrorState';
+import { triggerRecaptchaReset } from 'src/Redux/Reducers/RecaptchaState';
 import { UPDATE_CNIC_INITIATE_HANDLER } from 'src/Utils/CommonFunctions/COFormSubmission';
 import postRequestSuccess from 'src/Utils/CommonFunctions/postRequestSuccess';
 import { toSentenceCase } from 'src/Utils/Helpers';
@@ -32,6 +33,7 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
 
   const handleClose = () => {
     dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
+    dispatch(triggerRecaptchaReset()); // Reset recaptcha when error modal is closed
     if (ERROR_CODES.includes(errorCode)) {
       navigate('/');
     }
@@ -51,12 +53,13 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
 
   const handleYes = () => {
     dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
+    dispatch(triggerRecaptchaReset()); // Reset recaptcha when proceeding with new account flow
     dispatch(updateCurrentScreen('scr_customerCnic'));
-
   };
 
   const handleNo = () => {
     dispatch(closeErrorModal({ errorCode: '', errorMessage: '', isError: false }));
+    dispatch(triggerRecaptchaReset()); // Reset recaptcha when navigating home
     navigate('/');
   };
 

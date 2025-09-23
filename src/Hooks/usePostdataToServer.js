@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { showErrorModal } from "src/Redux/Reducers/ErrorState";
 import { closeLoader, showLoader } from "src/Redux/Reducers/LoaderState";
+import { triggerRecaptchaReset } from "src/Redux/Reducers/RecaptchaState";
 import { clearIndexDb } from "src/Utils/Helpers";
 
 const POST_REQUEST = async ({ BODY, API_URL, HEADERS, dispatch }) => {
@@ -16,7 +17,6 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
       onPostReqSuccess(data);
     },
     onError: (error) => {
-      console.log('error', error)
       let code = ''
       let message = ''
 
@@ -38,8 +38,8 @@ const usePostDataToServer = ({ onPostReqSuccess, dispatch }) => {
         message = error?.response?.data?.message || "Something went wrong, try again later.";
       }
 
-      dispatch(showErrorModal({ errorCode: code, errorMessage: message, isError: true })
-      );
+      dispatch(showErrorModal({ errorCode: code, errorMessage: message, isError: true }));
+      dispatch(triggerRecaptchaReset())
     },
     onSettled: () => {
       dispatch(closeLoader());
