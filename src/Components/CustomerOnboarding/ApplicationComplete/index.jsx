@@ -32,8 +32,8 @@ const ApplicationComplete = ({ reset }) => {
 
     return (
         <div className={styles.topWrapper}>
-            <h3 className={styles.mainHeading}>Application Submitted</h3>
-            <h2 className={styles.titleWrapper}>Congratulation! your application submitted successfully!</h2>
+            <h3 className={styles.mainHeading}>Congratulations!</h3>
+            <h2 className={styles.titleWrapper}>Your application submitted successfully</h2>
             <Fade in={true} timeout={2000}>
                 <Box className={styles.imageBox} sx={{ marginTop: '25px' }}>
                     <img src={isSmallScreen() ? APPLICATION_SUBMITTED_UNDRAW_SM : APPLICATION_SUBMITTED_UNDRAW} alt='Success' height={120} />
@@ -60,8 +60,8 @@ const ApplicationComplete = ({ reset }) => {
             </Container> */}
             <Box onClick={handleClick} className={styles.backButtonWrapper}>
                 {/* <CiLogin style={{ color: '#e8927c', fontSize: '24px' }} /> */}
-                <Typography sx={{ fontSize: { xs: '14px', sm: '14px', lg: '16px', xl: '16px' } }} component='span'>
-                    {deviceId === 'temp' ? 'Done' : 'Done'}
+                <Typography sx={{ fontSize: { xs: '20px', fontWeight: 'bolder' } }} component='span'>
+                    {deviceId === 'temp' ? 'Done' : 'Login'}
                 </Typography>
             </Box>
         </div>

@@ -33,7 +33,7 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
             justifyContent: 'center',
             overflow: 'auto',
         }}>
-            <Container maxWidth="lg" sx={{ padding: '20px', textAlign: { xs: 'center', sm: 'left' } }}>
+            <Container maxWidth="lg" sx={{ padding: '20px', paddingBottom: '120px', textAlign: { xs: 'center', sm: 'left' } }}>
                 <Box sx={{ width: '100%', textAlign: { xs: 'center', sm: 'left' } }}>
                     <img src={GUIDELINE_UNDRAW} alt='Guidelines' height={'70px'} width={'80px'} />
                 </Box>
@@ -97,7 +97,18 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
                     </Box>
                 </Box>
 
-                <Box sx={{ width: '100%' }}>
+                <Box sx={{
+                    position: 'fixed',
+                    left: 0,
+                    bottom: 0,
+                    width: '100%',
+                    background: '#fff',
+                    p: 2,
+                    boxShadow: 3,
+                    zIndex: 999,
+                    opacity: 0.98,
+                    backdropFilter: 'blur(2px)'
+                }}>
                     <CustomButton label="Begin Verification" onClick={closeSplashScreenHandler} />
                 </Box>
 

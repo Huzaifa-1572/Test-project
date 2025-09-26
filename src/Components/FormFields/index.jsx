@@ -439,6 +439,9 @@ export const NumberInputField = ({
                 "&.Mui-focused": {
                   backgroundColor: "white",
                 },
+                "& input::placeholder": {
+                  fontSize: "0.8rem",
+                },
               },
             }}
             InputLabelProps={{

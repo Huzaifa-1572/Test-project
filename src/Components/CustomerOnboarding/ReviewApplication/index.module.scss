@@ -1,6 +1,6 @@
 .topWrapper {
   scroll-behavior: smooth;
-  padding-bottom: 80px;
+  padding-bottom: 10px;
   width: 100%;
 }
 
@@ -67,7 +67,7 @@
     font-size: clamp(12px, 2.5vw, 20px);
     margin: 15px 0px;
     font-weight: normal;
-    text-align: left;
+    text-align: center;
     color: #707070;
   }
 }
@@ -123,7 +123,7 @@
   }
 
   .contentRow {
-    height: 4.375rem;
+    min-height: 4.375rem;
     background-color: #f2f2f2;
     border: 1px solid #dcdcdc;
     display: flex;
@@ -141,21 +141,14 @@
       align-items: center;
       align-content: center;
       display: flex;
-      font-size: clamp(12px, 2.5vw, 20px);
+      font-size: clamp(10px, 2.5vw, 20px);
     }
 
     .value {
       font-weight: bold;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: clamp(12px, 2.5vw, 20px);
+      font-size: clamp(10px, 2.5vw, 20px);
       color: #6c6c6b;
-
-      @media (max-width: 500px) {
-        // adjust this value to the breakpoint you want
-        white-space: normal;
-      }
+      word-break: break-all;
     }
 
     .locked {

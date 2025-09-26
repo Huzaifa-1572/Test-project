@@ -36,7 +36,7 @@ const CustomerCnic = ({ control, errors }) => {
             control={control}
             format={"#####-#######-#"}
             label="Please enter your CNIC Number"
-            placeholder="#####-########-#"
+            placeholder="xxxxx-xxxxxxx-x"
             inputMode="numeric"
             type="tel"
           />

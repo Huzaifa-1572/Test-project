@@ -66,7 +66,7 @@ export const showScreen = ({ CURRENT_SCREEN, isWebview }) => {
     scr_hasValidEmail: <HasValidEmail />,
     scr_customerEmail: <CustomerEmail />,
     scr_emailVerification: <EmailVerification />,
-    scr_livePhotoCapture: (isMobile || isWebview) ? <LivePhotoForMobile /> : <LivePhotoForWeb />,
+    scr_livePhotoCapture: (isMobile || isWebview) ? <LivePhotoForMobile /> : <LivePhotoForMobile />,
     // scr_uploadCnicFront: (isMobile || isWebview) ? <CnicFrontForMobile /> : <CnicFrontForWeb />,
     scr_uploadCnicFront: <CnicFrontForWeb />,
     // scr_uploadCnicBack: (isMobile || isWebview) ? <CnicBackForMobile /> : <CnicBackForWeb />,

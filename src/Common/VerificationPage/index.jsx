@@ -192,7 +192,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
                                 :
                                 <Alert sx={{ borderRadius: '7px' }} severity='success'>
                                     <Box sx={{ fontSize: '14px', fontWeight: 'bold' }}>
-                                        OTP populated successfully!
+                                        OTP fetched successfully!
                                     </Box>
                                     <Box sx={{ fontSize: '12px' }}>
                                         You can now proceed.

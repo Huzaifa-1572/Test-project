@@ -708,14 +708,23 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                                         type="button"
                                         onClick={retake}
                                         endIcon={<FaCamera />}
-                                        sx={{ borderRadius: '999px' }}
+                                        sx={{
+                                            borderRadius: '999px',
+                                            background: 'linear-gradient(82deg, #2c74bb -2.19%, #ed2227 100.2%)',
+                                            color: 'white',
+                                            fontSize: 'clamp(18px, 2.5vw, 20px)',
+                                            height: '47px',
+                                            maxWidth: '500px',
+                                            width: '100%',
+                                            transition: 'all 0.3s ease-in-out',
+                                        }}
                                     >
                                         Take a new picture
                                     </Button>
                                 ) : null}
                             </Box>
                         </Box>
-                        {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Picture is clear, Proceed"} /> : null}
+                        {(isCameraAccessAllowed && !!livePhoto) ? <CustomButton label={"Proceed"} /> : null}
                     </Container >
             }
         </>

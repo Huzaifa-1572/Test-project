@@ -14,7 +14,7 @@ const CustomButton = ({ label, disabled, onClick, Icon, type = "submit" }) => {
         sx={{ borderRadius: '999px' }}
         disabled={disabled}
         onClick={onClick}
-        endIcon={Icon || <IoMdArrowRoundForward />}
+      // endIcon={Icon || <IoMdArrowRoundForward />}
       >
         {label}
       </Button>
