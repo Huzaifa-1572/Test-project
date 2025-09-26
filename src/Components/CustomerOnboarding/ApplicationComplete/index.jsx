@@ -61,7 +61,7 @@ const ApplicationComplete = ({ reset }) => {
             <Box onClick={handleClick} className={styles.backButtonWrapper}>
                 {/* <CiLogin style={{ color: '#e8927c', fontSize: '24px' }} /> */}
                 <Typography sx={{ fontSize: { xs: '20px', fontWeight: 'bolder' } }} component='span'>
-                    {deviceId === 'temp' ? 'Done' : 'Login'}
+                    {deviceId === 'temp' ? 'DONE' : 'LOGIN'}
                 </Typography>
             </Box>
         </div>

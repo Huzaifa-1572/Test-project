@@ -51,7 +51,7 @@ const CustomerCnic = ({ control, errors }) => {
             maxLength={6}
             inputMode="numeric"
             type="tel"
-            placeholder={"if you have been referred by someone."}
+            placeholder={"If you have been referred by someone."}
           />
           {errors?.referrerReferralCode ? (<ValidationError message={errors?.referrerReferralCode?.message} />) : null}
         </Grid>

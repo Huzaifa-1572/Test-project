@@ -26,7 +26,7 @@ const CustomerMobile = ({ control, errors }) => {
             control={control}
             format={"####-#######"}
             label="Please Enter Your Mobile Number"
-            placeholder="03##-#######"
+            placeholder="03xx-xxxxxxx"
             inputMode="numeric"
             type="tel"
           />

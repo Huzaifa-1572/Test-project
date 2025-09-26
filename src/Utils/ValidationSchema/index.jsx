@@ -65,7 +65,7 @@ export const shape = {
   },
 
   "scr_customerMobile": {
-    customerMobile: yup.string().test('e__NokMobile', 'Please enter a valid mobile number starting with 03##-#######.', function (value) {
+    customerMobile: yup.string().test('e__NokMobile', 'Please enter a valid mobile number starting with 03xx-xxxxxxx.', function (value) {
       if (value.length === 11) {
         value = retrieveMobileNumber(value);
       }
