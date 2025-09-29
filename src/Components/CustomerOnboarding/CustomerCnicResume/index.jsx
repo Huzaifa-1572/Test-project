@@ -29,7 +29,7 @@ const CustomerCnicResume = ({ control, setValue, getValues, errors }) => {
             <WizardLayout
                 Icon={CNICICON}
                 title={"Resume Application"}
-                description={"Enter your CNIC number to retrieve your application details and proceed from where you left."}
+                description={"Enter your CNIC number to retrieve your application details and proceed from where you paused."}
                 heroImage={isSmallScreen() ? CNICICON : CNIC_UNDRAW}
             >
                 <Grid container spacing={2}>

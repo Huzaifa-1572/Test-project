@@ -55,7 +55,7 @@ const DeviceDecisionModal = ({ title, description, isDeviceDecisionModal, setVal
                 <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
                 <div className={styles.dialogContentBox}>
                     <p className={styles.dialogTitle}>{toSentenceCase(title) || 'Error!'}</p>
-                    <p className={styles.dialogContent}>{toSentenceCase(description) || 'something went wrong!'}</p>
+                    <p className={styles.dialogContent}>{toSentenceCase(description) || 'Unable to process at this time. Please try again later.'}</p>
                     {/* DECISION BUTTON */}
                     <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                         <Button variant="outlined" sx={{ marginRight: '15px' }} onClick={handleAbort}> Abort</Button>

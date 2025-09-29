@@ -124,7 +124,7 @@ function WrapperForHookFormProps({ children }) {
 
       else {
         dispatch(showErrorModal({
-          errorCode: "Oh no!", errorMessage: "Something went wrong.Please Try Again Later.", isError: true,
+          errorCode: "Oh no!", errorMessage: 'Unable to process at this time. Please try again later.', isError: true,
         }));
       }
     }

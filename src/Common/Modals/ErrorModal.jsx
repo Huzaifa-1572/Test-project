@@ -134,7 +134,7 @@ const ErrorModal = ({ errorCode, errorMessage, isError, custIdentityValue }) => 
         <img src={WARNING_UNDRAW} alt='Warning' className={styles.bulb} />
         <div className={styles.dialogContentBox}>
           {/* <p className={styles.dialogTitle}>Oh no!</p> */}
-          <p className={styles.dialogContent}>{toSentenceCase(errorMessage) || 'something went wrong!'}</p>
+          <p className={styles.dialogContent}>{toSentenceCase(errorMessage) || 'Unable to process at this time. Please try again later.'}</p>
           {renderActionButtons()}
         </div>
       </div>
