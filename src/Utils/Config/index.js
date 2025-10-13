@@ -1,7 +1,10 @@
 // BASE URL
-export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
+// export const BASE_URL = "https://mobile-psouat.paysyslabs.com/";
 
 // export const BASE_URL = "http://10.6.60.6:8090/";
+
+export const BASE_URL = "https://dao-service.payvay-app.net/";
+
 
 
 
