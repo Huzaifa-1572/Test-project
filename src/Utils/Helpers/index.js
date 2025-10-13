@@ -307,13 +307,13 @@ export async function preloadModels() {
         await tf.setBackend('webgl');
         await tf.ready();
       } catch (error) {
-        alert('WebGL backend failed, falling back to CPU:', error);
+        console.log('WebGL backend failed, falling back to CPU:', error);
         try {
           await tf.setBackend('cpu');
           await tf.ready();
-          alert('CPU backend set successfully.');
+          console.log('CPU backend set successfully.');
         } catch (cpuError) {
-          alert('CPU backend also failed:', cpuError);
+          console.log('CPU backend also failed:', cpuError);
           throw new Error('No supported TensorFlow backend found.');
         }
       }

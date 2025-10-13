@@ -32,7 +32,7 @@ function VerificationPage({ icon, title, content, description, goBackContent, se
     useEffect(() => {
         window.handleDataFromApp = (data) => {
             setOtp((data?.otp).toString() || '');
-            alert(`OTP received: ${data?.otp}`);
+            console.log(`OTP received: ${data?.otp}`);
             setValue('CUSTOMER_OTP', data?.otp)
         }
 

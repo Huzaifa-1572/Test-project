@@ -1,0 +1,1 @@
+const e="/assets/selfie-BqXGGv5U.svg",r={cameraWrapper:"_cameraWrapper_rjf3x_1",camIconStyle:"_camIconStyle_rjf3x_14",permissionText:"_permissionText_rjf3x_19",webcamStyles:"_webcamStyles_rjf3x_26",captureButton:"_captureButton_rjf3x_40",scannerImageContainer:"_scannerImageContainer_rjf3x_80",alert:"_alert_rjf3x_88"};export{e as S,r as s};
