@@ -31,6 +31,8 @@ import { checkCameraPermission, getModels } from "src/Utils/Helpers";
 import useSound from "use-sound";
 import styles from './index.module.scss';
 import LivePhotoGuidelinesForMobile from "./LivePhotoGuidelinesForMobile";
+import PAYSYS_LOGO from 'src/Assets/Icons/PaysysLogo.png';
+import { HmacSHA224 } from "crypto-js";
 
 const generatePrompt = (prompt, blinkCount) => {
     switch (prompt) {
@@ -555,6 +557,16 @@ const LivePhotoForMobile = ({ errors, setValue, watch }) => {
                     />
                     :
                     <Container maxWidth="lg" sx={{ padding: '4px' }}>
+                        <Box sx={{display:'flex',alignItems:'center',justifyContent:'flex-start'}}>
+                         <Box sx={{ width: '35%', textAlign: { xs: 'center', sm: 'left' } }}>
+                    <img src={PAYSYS_LOGO} alt='Guidelines' height={'150px'} width={'150px'} />
+                </Box>
+                <Box sx={{ textAlign: { xs: 'center', sm: 'center' }, color: '#407ec9', fontSize: 'clamp(24px,2vw,30px)', fontWeight: 'bolder' }}>
+                    <h2>
+                        {'Interview Task'}
+                    </h2>
+                </Box>
+                </Box>
                         {/* SWITCH & NEED HELP */}
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '10px 0', marginBottom: '35px' }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginTop: '-25px' }}>

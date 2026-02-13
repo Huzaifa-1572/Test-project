@@ -1,29 +1,23 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { lazy, Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Loader from "src/Common/Loader";
 import ErrorModal from "src/Common/Modals/ErrorModal";
-import { preloadModels, setupRequestInterceptor, setupResponseInterceptor } from "src/Utils/Helpers";
+import LivePhotoForMobile from "src/Components/CustomerOnboarding/LivePhotoCapture/LivePhotoForMobile";
+import { preloadModels } from "src/Utils/Helpers";
 import { QUERY_CLIENT, THEME } from "src/Utils/Settings";
 import './App.scss';
 
-// LAZY LOADING
-const LandingPage = lazy(() => import("src/Pages/LandingPage"));
-const CustomerOnboarding = lazy(() => import("src/Pages/CustomerOnboarding"));
-
 console.log = function () { };
-
 
 const App = () => {
   const isLoading = useSelector((state) => state.loaderState);
   const { errorCode, errorMessage, isError } = useSelector((state) => state?.errorState);
+  const [livePhoto, setLivePhoto] = useState(null);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    setupRequestInterceptor();
-    setupResponseInterceptor();
-
     // Get the current URL's query string
     const searchParams = new URLSearchParams(window.location.search);
 
@@ -46,20 +40,31 @@ const App = () => {
     preloadModels()
   }, []);
 
+  const setValue = (key, value) => {
+    if (key === "KEY_LIVE_PHOTO") {
+      setLivePhoto(value);
+    }
+  };
+
+  const watch = (key) => {
+    if (key === "KEY_LIVE_PHOTO") {
+      return livePhoto;
+    }
+    return null;
+  };
+
   return (
     <>
       <Suspense fallback={<Loader />}>
         <QueryClientProvider client={QUERY_CLIENT}>
           <ThemeProvider theme={THEME}>
-            <Router>
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/customer-onboarding" element={<CustomerOnboarding />} />
-                <Route path="*" element={<Navigate to="/" />} />
-              </Routes>
-              {/* GENERIC ERROR MODAL */}
-              {!!isError && <ErrorModal errorCode={errorCode} errorMessage={errorMessage} isError={isError} />}
-            </Router>
+            <LivePhotoForMobile 
+              errors={errors} 
+              setValue={setValue} 
+              watch={watch} 
+            />
+            {/* GENERIC ERROR MODAL */}
+            {!!isError && <ErrorModal errorCode={errorCode} errorMessage={errorMessage} isError={isError} />}
           </ThemeProvider>
         </QueryClientProvider>
 

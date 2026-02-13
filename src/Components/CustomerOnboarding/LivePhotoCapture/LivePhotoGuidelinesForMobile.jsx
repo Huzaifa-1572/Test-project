@@ -4,6 +4,7 @@ import { Switch } from "@mui/material";
 import { useMemo, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import GUIDELINE_UNDRAW from 'src/Assets/Icons/faceGuidelineIcon.png';
+import PAYSYS_LOGO from 'src/Assets/Icons/PaysysLogo.png';
 import { LIVENESS_GUIDELINES } from "src/Utils/Constants";
 
 import { getUUID, isSmallScreen, toSentenceCase } from 'src/Utils/Helpers';
@@ -34,6 +35,16 @@ const LivePhotoGuidelinesForMobile = ({ closeSplashScreenHandler, language = 'en
             overflow: 'auto',
         }}>
             <Container maxWidth="lg" sx={{ padding: '20px', paddingBottom: '120px', textAlign: { xs: 'center', sm: 'left' } }}>
+                 <Box sx={{display:'flex',alignItems:'center',justifyContent:'flex-start'}}>
+                  <Box sx={{ width: '35%', textAlign: { xs: 'center', sm: 'left' } }}>
+                    <img src={PAYSYS_LOGO} alt='Guidelines' height={'150px'} width={'150px'} />
+                </Box>
+                <Box sx={{ textAlign: { xs: 'center', sm: 'center' }, color: '#407ec9', fontSize: 'clamp(24px,2vw,30px)', fontWeight: 'bolder' }}>
+                    <h2>
+                        {'Interview Task'}
+                    </h2>
+                </Box>
+                </Box>
                 <Box sx={{ width: '100%', textAlign: { xs: 'center', sm: 'left' } }}>
                     <img src={GUIDELINE_UNDRAW} alt='Guidelines' height={'70px'} width={'80px'} />
                 </Box>
